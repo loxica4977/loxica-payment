@@ -1,83 +1,192 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LOXICA Payment</title>
+<title>LOXICA Secure Payment</title>
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
 body{
-font-family:Arial,sans-serif;
-background:#f4f4f4;
-text-align:center;
-padding:30px;
+background:#f5f5f5;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
 }
 
-.box{
-background:white;
-max-width:500px;
-margin:auto;
+.container{
+width:100%;
+max-width:420px;
+background:#fff;
+border-radius:18px;
 padding:25px;
-border-radius:15px;
-box-shadow:0 0 15px rgba(0,0,0,.15);
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+text-align:center;
 }
 
-h1{
-color:#111;
+.logo{
+font-size:32px;
+font-weight:bold;
+letter-spacing:2px;
+margin-bottom:10px;
+}
+
+.secure{
+color:#0a8f3d;
+font-size:14px;
+margin-bottom:20px;
+}
+
+.productImage{
+width:100%;
+border-radius:15px;
+margin-bottom:20px;
+}
+
+.productName{
+font-size:24px;
+font-weight:bold;
+margin-bottom:10px;
 }
 
 .price{
-font-size:28px;
-font-weight:bold;
+font-size:30px;
 color:#0a8f3d;
-margin:15px 0;
+font-weight:bold;
+margin-bottom:20px;
 }
 
-img{
-width:250px;
+.qr{
+width:230px;
 border-radius:10px;
-margin:15px 0;
+margin:15px auto;
+display:block;
+}
+
+.upi{
+margin-top:10px;
+font-size:17px;
+font-weight:bold;
 }
 
 .btn{
 display:block;
+width:100%;
 padding:15px;
-background:#000;
-color:#fff;
-text-decoration:none;
-border-radius:8px;
 margin-top:15px;
+border-radius:10px;
+text-decoration:none;
 font-size:18px;
+font-weight:bold;
+transition:.3s;
 }
-</style>
 
+.payBtn{
+background:#111;
+color:white;
+}
+
+.payBtn:hover{
+background:#333;
+}
+
+.formBtn{
+background:#0a8f3d;
+color:white;
+}
+
+.formBtn:hover{
+background:#087032;
+}
+
+.note{
+margin-top:20px;
+font-size:14px;
+color:#555;
+}
+
+</style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
 
-<h1>LOXICA</h1>
+<div class="logo">LOXICA</div>
 
-<h2>Complete Your Payment</h2>
+<div class="secure">
+🔒 Secure Checkout
+</div>
 
-<p class="price">Pay the Amount</p>
+<img class="productImage"
+src="https://via.placeholder.com/400x250?text=LOXICA+PRODUCT">
 
-<img src="Screenshot_20260801_004011.jpg">
+<div class="productName" id="productName">
+Loading Product...
+</div>
 
-<p><b>UPI ID:</b> 8714917161@fam</p>
+<div class="price" id="price">
+₹0
+</div>
 
-<p>Choose any payment method below.</p>
+<img class="qr"
+src="Screenshot_20260801_004011.jpg">
 
-<a class="btn" href="upi://pay?pa=8714917161@fam&pn=LOXICA&cu=INR">
+<div class="upi">
+UPI ID : 8714917161@fam
+</div>
+  <p class="note">
+Scan the QR code or tap the button below to pay using any UPI app.
+</p>
+
+<a id="payBtn" class="btn payBtn" href="#">
 💳 Pay Now
 </a>
 
-<a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSe7Bbt5hdu9qdOzSf6O50Fam3L7pzAXZYkBpz7_1ppYCinJiw/viewform?usp=pp_url&entry.1171881271=JBL+SPEAKER">
+<a id="formBtn" class="btn formBtn" href="#">
 ✅ I Have Paid
 </a>
 
+<p class="note">
+After completing the payment, tap <b>I Have Paid</b> and submit your order details.
+</p>
+
 </div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const product =
+params.get("product") || "JBL Speaker";
+
+const price =
+params.get("price") || "999";
+
+document.getElementById("productName").innerText = product;
+
+document.getElementById("price").innerText = "₹" + price;
+
+const upi =
+`upi://pay?pa=8714917161@fam&pn=LOXICA&am=${price}&cu=INR`;
+
+document.getElementById("payBtn").href = upi;
+
+const formBase =
+"https://docs.google.com/forms/d/e/1FAIpQLSe7Bbt5hdu9qdOzSf6O50Fam3L7pzAXZYkBpz7_1ppYCinJiw/viewform?usp=pp_url&entry.1171881271=";
+
+document.getElementById("formBtn").href =
+formBase + encodeURIComponent(product);
+  </script>
 
 </body>
 </html>
