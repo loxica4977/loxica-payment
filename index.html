@@ -46,18 +46,6 @@ font-size:14px;
 margin-bottom:20px;
 }
 
-.productImage{
-width:100%;
-border-radius:15px;
-margin-bottom:20px;
-}
-
-.productName{
-font-size:24px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
 .price{
 font-size:30px;
 color:#0a8f3d;
@@ -113,8 +101,7 @@ margin-top:20px;
 font-size:14px;
 color:#555;
 }
-
-</style>
+  </style>
 </head>
 
 <body>
@@ -127,15 +114,8 @@ color:#555;
 🔒 Secure Checkout
 </div>
 
-<img class="productImage"
-src="https://via.placeholder.com/400x250?text=LOXICA+PRODUCT">
-
-<div class="productName" id="productName">
-Loading Product...
-</div>
-
 <div class="price" id="price">
-₹0
+Pay the Exact Amount
 </div>
 
 <img class="qr"
@@ -144,7 +124,8 @@ src="IMG_20260801_220400.jpg">
 <div class="upi">
 UPI ID : 8714917161@fam
 </div>
-  <p class="note">
+
+<p class="note">
 Scan the QR code or tap the button below to pay using any UPI app.
 </p>
 
@@ -161,32 +142,26 @@ After completing the payment, tap <b>I Have Paid</b> and submit your order detai
 </p>
 
 </div>
-
 <script>
 
 const params = new URLSearchParams(window.location.search);
 
-const product =
-params.get("product") || "JBL Speaker";
-
 const price =
-params.get("price") || "999";
+params.get("price") || "";
 
-document.getElementById("productName").innerText = product;
-
+if(price){
 document.getElementById("price").innerText = "₹" + price;
+}
 
 const upi =
-`upi://pay?pa=8714917161@fam&pn=LOXICA&am=${price}&cu=INR`;
+`upi://pay?pa=8714917161@fam&pn=LOXICA${price ? `&am=${price}` : ""}&cu=INR`;
 
 document.getElementById("payBtn").href = upi;
 
-const formBase =
-"https://docs.google.com/forms/d/e/1FAIpQLSe7Bbt5hdu9qdOzSf6O50Fam3L7pzAXZYkBpz7_1ppYCinJiw/viewform?usp=pp_url&entry.1171881271=";
-
 document.getElementById("formBtn").href =
-formBase + encodeURIComponent(product);
-  </script>
+"https://docs.google.com/forms/d/e/1FAIpQLSe7Bbt5hdu9qdOzSf6O50Fam3L7pzAXZYkBpz7_1ppYCinJiw/viewform";
+
+</script>
 
 </body>
 </html>
