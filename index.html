@@ -146,22 +146,42 @@ After completing the payment, tap <b>I Have Paid</b> and submit your order detai
 
 const params = new URLSearchParams(window.location.search);
 
-const price =
-params.get("price") || "";
+const price = params.get("price") || "";
 
 if(price){
-document.getElementById("price").innerText = "₹" + price;
+    document.getElementById("price").innerText = "₹" + price;
 }
 
 const upi =
 `upi://pay?pa=8714917161@fam&pn=LOXICA${price ? `&am=${price}` : ""}&cu=INR`;
 
-document.getElementById("payBtn").href = upi;
+const payBtn = document.getElementById("payBtn");
+const formBtn = document.getElementById("formBtn");
 
-document.getElementById("formBtn").href =
+// Google Form Link
+formBtn.href =
 "https://docs.google.com/forms/d/e/1FAIpQLSe7Bbt5hdu9qdOzSf6O50Fam3L7pzAXZYkBpz7_1ppYCinJiw/viewform";
 
-</script>
+// ആദ്യം I Have Paid button disabled
+formBtn.style.pointerEvents = "none";
+formBtn.style.opacity = "0.5";
+formBtn.innerHTML = "⏳ Complete Payment First";
 
-</body>
-</html>
+// Pay Now button click
+payBtn.addEventListener("click", function(){
+
+    // ആദ്യം UPI app തുറക്കുക
+    window.location.href = upi;
+
+    // 5 seconds കഴിഞ്ഞ് button enable
+    setTimeout(function(){
+
+        formBtn.style.pointerEvents = "auto";
+        formBtn.style.opacity = "1";
+        formBtn.innerHTML = "✅ I Have Paid";
+
+    },5000);
+
+});
+
+</script>
