@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LOXICA Secure Payment</title>
+
+<title>LOXICA Secure Checkout</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -26,82 +26,77 @@ padding:20px;
 .container{
 width:100%;
 max-width:420px;
-background:#fff;
+background:white;
 border-radius:18px;
 padding:25px;
 box-shadow:0 10px 30px rgba(0,0,0,.15);
-text-align:center;
 }
 
 .logo{
+text-align:center;
 font-size:32px;
 font-weight:bold;
 letter-spacing:2px;
-margin-bottom:10px;
 }
 
 .secure{
+text-align:center;
 color:#0a8f3d;
-font-size:14px;
-margin-bottom:20px;
+margin:10px 0 20px;
+}
+
+.product{
+text-align:center;
+font-size:20px;
+font-weight:bold;
 }
 
 .price{
-font-size:30px;
+text-align:center;
+font-size:28px;
 color:#0a8f3d;
 font-weight:bold;
-margin-bottom:20px;
+margin:10px 0 20px;
 }
 
-.qr{
-width:230px;
-border-radius:10px;
-margin:15px auto;
-display:block;
+input,textarea{
+width:100%;
+padding:13px;
+margin-bottom:12px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:15px;
 }
 
-.upi{
-margin-top:10px;
-font-size:17px;
-font-weight:bold;
+textarea{
+height:80px;
+resize:none;
 }
 
-.btn{
-display:block;
+button{
 width:100%;
 padding:15px;
-margin-top:15px;
+border:none;
 border-radius:10px;
-text-decoration:none;
-font-size:18px;
-font-weight:bold;
-transition:.3s;
-}
-
-.payBtn{
 background:#111;
 color:white;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
 }
 
-.payBtn:hover{
+button:hover{
 background:#333;
 }
 
-.formBtn{
-background:#0a8f3d;
-color:white;
-}
-
-.formBtn:hover{
-background:#087032;
-}
-
 .note{
-margin-top:20px;
-font-size:14px;
+text-align:center;
+font-size:13px;
 color:#555;
+margin-top:15px;
 }
-  </style>
+</style>
+
 </head>
 
 <body>
@@ -114,74 +109,134 @@ color:#555;
 🔒 Secure Checkout
 </div>
 
+<div class="product" id="product">
+Product
+</div>
+
 <div class="price" id="price">
-Pay the Exact Amount
+₹0
 </div>
 
-<img class="qr"
-src="ChatGPT Image Aug 2, 2026, 09_21_20 PM.png">
 
-<div class="upi">
-UPI ID : 8714917161@fam
-</div>
+<form id="orderForm">
+
+<input id="name" placeholder="Full Name" required>
+
+<input id="phone" placeholder="Phone Number" required>
+
+<textarea id="address" placeholder="Full Address" required></textarea>
+
+<input id="landmark" placeholder="Landmark" required>
+
+<input id="city" placeholder="City" required>
+
+<input id="state" placeholder="State" required>
+
+<input id="pincode" placeholder="Pincode" required>
+
+
+<button type="submit">
+Continue To Payment 💳
+</button>
+
+</form>
+
 
 <p class="note">
-Scan the QR code or tap the button below to pay using any UPI app.
+Fill details first. After submitting, UPI payment will open.
 </p>
 
-<a id="payBtn" class="btn payBtn" href="#">
-💳 Pay Now
-</a>
-
-<a id="formBtn" class="btn formBtn" href="#">
-✅ I Have Paid
-</a>
-
-<p class="note">
-After completing the payment, tap <b>I Have Paid</b> and submit your order details.
-</p>
 
 </div>
+
+
+
 <script>
+
+const scriptURL =
+"https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
+
 
 const params = new URLSearchParams(window.location.search);
 
-const price = params.get("price") || "";
 
-if(price){
-    document.getElementById("price").innerText = "₹" + price;
-}
+const product =
+params.get("product") || "LOXICA Product";
+
+
+const price =
+params.get("price") || "0";
+
+
+document.getElementById("product").innerText = product;
+
+document.getElementById("price").innerText = "₹" + price;
+
+
+
+document.getElementById("orderForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+
+const data={
+
+product:product,
+
+price:price,
+
+name:document.getElementById("name").value,
+
+phone:document.getElementById("phone").value,
+
+address:document.getElementById("address").value,
+
+landmark:document.getElementById("landmark").value,
+
+city:document.getElementById("city").value,
+
+state:document.getElementById("state").value,
+
+pincode:document.getElementById("pincode").value
+
+};
+
+
+
+fetch(scriptURL,{
+
+method:"POST",
+
+body:JSON.stringify(data)
+
+})
+
+.then(()=>{
+
 
 const upi =
-`upi://pay?pa=8714917161@fam&pn=LOXICA${price ? `&am=${price}` : ""}&cu=INR`;
+"upi://pay?pa=8714917161@fam&pn=LOXICA&am="+price+"&cu=INR";
 
-const payBtn = document.getElementById("payBtn");
-const formBtn = document.getElementById("formBtn");
 
-// Google Form Link
-formBtn.href =
-"https://docs.google.com/forms/d/e/1FAIpQLSe7Bbt5hdu9qdOzSf6O50Fam3L7pzAXZYkBpz7_1ppYCinJiw/viewform";
+window.location.href = upi;
 
-// ആദ്യം I Have Paid button disabled
-formBtn.style.pointerEvents = "none";
-formBtn.style.opacity = "0.5";
-formBtn.innerHTML = "⏳ Complete Payment First";
 
-// Pay Now button click
-payBtn.addEventListener("click", function(){
+})
 
-    // ആദ്യം UPI app തുറക്കുക
-    window.location.href = upi;
 
-    // 5 seconds കഴിഞ്ഞ് button enable
-    setTimeout(function(){
+.catch(()=>{
 
-        formBtn.style.pointerEvents = "auto";
-        formBtn.style.opacity = "1";
-        formBtn.innerHTML = "✅ I Have Paid";
-
-    },5000);
+alert("Something went wrong. Try again.");
 
 });
 
+
+});
+
+
 </script>
+
+
+</body>
+</html>
