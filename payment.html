@@ -4,50 +4,133 @@
 <title>LOXICA Secure Payment</title>
 
 <style>
+
+*{
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
 body{
-  font-family: Arial, sans-serif;
-  background:#f5f5f5;
-  text-align:center;
-  padding:20px;
+margin:0;
+padding:20px;
+background:#f5f5f5;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
 }
 
 .container{
-  max-width:400px;
-  margin:auto;
-  background:white;
-  padding:25px;
-  border-radius:15px;
-  box-shadow:0 0 15px #ccc;
+
+width:100%;
+max-width:420px;
+background:#111;
+color:white;
+padding:30px 25px;
+border-radius:22px;
+box-shadow:0 15px 35px rgba(0,0,0,0.25);
 }
 
 .logo{
-  font-size:30px;
-  font-weight:bold;
+text-align:center;
+font-size:36px;
+font-weight:800;
+letter-spacing:2px;
+color:white;
+margin-bottom:10px;
+}
+
+h3{
+text-align:center;
+}
+
+#product{
+text-align:center;
+font-size:22px;
+margin-top:25px;
 }
 
 .price{
-  font-size:25px;
-  color:green;
-  margin:15px;
+
+text-align:center;
+font-size:32px;
+font-weight:bold;
+color:#2ecc71;
+margin:15px 0 25px;
+
 }
+
+.secure{
+
+background:#1b1b1b;
+padding:12px;
+border-radius:12px;
+text-align:center;
+color:#2ecc71;
+
+}
+
+
+p{
+text-align:center;
+color:#ccc;
+}
+
 
 button{
-  width:100%;
-  padding:15px;
-  margin-top:15px;
-  border:none;
-  border-radius:10px;
-  background:black;
-  color:white;
-  font-size:16px;
+
+width:100%;
+padding:16px;
+margin-top:15px;
+border:none;
+border-radius:12px;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+
 }
+
+
+button:first-of-type{
+
+background:#2ecc71;
+color:#111;
+
+}
+
 
 #paid{
-  display:none;
-  background:green;
-}
-</style>
 
+background:#00a651;
+color:white;
+
+}
+
+
+button:hover{
+
+opacity:0.9;
+
+}
+
+
+@media(max-width:450px){
+
+body{
+padding:15px;
+}
+
+.container{
+padding:25px 18px;
+}
+
+.logo{
+font-size:32px;
+}
+
+}
+
+</style>
 </head>
 
 <body>
