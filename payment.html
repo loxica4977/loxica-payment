@@ -67,8 +67,8 @@ button{
 <p>Click below to continue payment</p>
 <button onclick="payNow()">Continue to Pay</button>
 
-<button id="paid">
-I Have Paid
+<button id="paid" onclick="orderSuccess()" style="display:none;background:green;">
+I Have Paid ✅
 </button>
 
 </div>
@@ -105,6 +105,15 @@ let upiLink =
 "&tn=" + product;
 
 window.location.href = upiLink;
+
+setTimeout(()=>{
+document.getElementById("paid").style.display="block";
+},5000);
+
+}
+  function orderSuccess(){
+
+window.location.href="thankyou.html";
 
 }
 
