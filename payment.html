@@ -89,7 +89,6 @@ if(price){
 document.getElementById("price").innerHTML = "₹"+price;
 }
 
-
 function payNow(){
 
 let price = params.get("price");
@@ -106,9 +105,7 @@ let upiLink =
 
 window.location.href = upiLink;
 
-setTimeout(()=>{
-document.getElementById("paid").style.display="block";
-},5000);
+}
 
 }
   function orderSuccess(){
