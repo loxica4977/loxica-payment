@@ -78,11 +78,12 @@ I Have Paid ✅
 
 const params = new URLSearchParams(window.location.search);
 
-const product = params.get("product") || "LOXICA Product";
-const price = params.get("price") || "0";
+let product = params.get("product");
+let price = params.get("price");
 
 document.getElementById("product").innerText = product;
 document.getElementById("price").innerText = "₹" + price;
+
 function payNow(){
 
 let price = params.get("price");
