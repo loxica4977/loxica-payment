@@ -1,17 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>LOXICA Payment</title>
+<title>LOXICA Secure Payment</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f5f5f5;
+  text-align:center;
+  padding:20px;
+}
+
+.container{
+  max-width:400px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 0 15px #ccc;
+}
+
+.logo{
+  font-size:30px;
+  font-weight:bold;
+}
+
+.price{
+  font-size:25px;
+  color:green;
+  margin:15px;
+}
+
+button{
+  width:100%;
+  padding:15px;
+  margin-top:15px;
+  border:none;
+  border-radius:10px;
+  background:black;
+  color:white;
+  font-size:16px;
+}
+
+#paid{
+  display:none;
+  background:green;
+}
+</style>
+
 </head>
 
 <body>
 
-<h1>LOXICA Secure Payment</h1>
+<div class="container">
 
-<p id="product"></p>
-<p id="price"></p>
+<div class="logo">LOXICA</div>
 
-<button>Pay Now</button>
+<h3>🔒 Secure Payment</h3>
+
+<h2 id="product">Product Name</h2>
+
+<div class="price" id="price">₹0</div>
+
+<h3>Pay Using UPI</h3>
+
+<p>Scan QR Code or Pay using UPI</p>
+
+<img src="upi-qr.png" width="220">
+
+<button onclick="payNow()">Pay Now</button>
+
+<button id="paid">
+I Have Paid
+</button>
+
+</div>
+
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+let product = params.get("product");
+let price = params.get("price");
+
+if(product){
+document.getElementById("product").innerHTML = product;
+}
+
+if(price){
+document.getElementById("price").innerHTML = "₹"+price;
+}
+
+
+function payNow(){
+ document.getElementById("paid").style.display="block";
+}
+
+</script>
+
 
 </body>
 </html>
