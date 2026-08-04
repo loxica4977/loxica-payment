@@ -376,7 +376,7 @@ fetch(scriptURL,{method:"POST",body:JSON.stringify(data)})
 .then(()=>{
 
 submitBtn.innerHTML =
-'<span class="spinner"></span>Opening UPI...';
+'<span class="spinner"></span>Opening Payment...';
 window.location.href =
 "payment.html?product="+encodeURIComponent(product)+"&price="+price;
 
