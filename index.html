@@ -377,9 +377,8 @@ fetch(scriptURL,{method:"POST",body:JSON.stringify(data)})
 
 submitBtn.innerHTML =
 '<span class="spinner"></span>Opening UPI...';
-
 window.location.href =
-"upi://pay?pa=8714917161@fam&pn=LOXICA&am="+price+"&cu=INR";
+"payment.html?product="+encodeURIComponent(product)+"&price="+price;
 
 })
 .catch(()=>{
