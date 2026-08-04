@@ -106,9 +106,29 @@ color:#fff;
 font-size:18px;
 cursor:pointer;
 }
-
 button:hover{
 background:#333;
+}
+
+.spinner{
+display:inline-block;
+width:18px;
+height:18px;
+border:3px solid rgba(255,255,255,.4);
+border-top:3px solid #fff;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-right:8px;
+vertical-align:middle;
+}
+
+@keyframes spin{
+0%{
+transform:rotate(0deg);
+}
+100%{
+transform:rotate(360deg);
+}
 }
 </style>
 </head>
@@ -156,7 +176,15 @@ document.getElementById("product").innerText=product;
 document.getElementById("price").innerText="₹"+price;
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
+
 e.preventDefault();
+
+const submitBtn = document.querySelector('button[type="submit"]');
+
+submitBtn.disabled = true;
+submitBtn.innerHTML =
+'<span class="spinner"></span>Processing...';
+
 const data={
 product:product,
 price:price,
@@ -172,9 +200,24 @@ color:document.getElementById("color").value
 
 fetch(scriptURL,{method:"POST",body:JSON.stringify(data)})
 .then(()=>{
-window.location.href="upi://pay?pa=8714917161@fam&pn=LOXICA&am="+price+"&cu=INR";
+
+submitBtn.innerHTML =
+'<span class="spinner"></span>Opening UPI...';
+
+window.location.href =
+"upi://pay?pa=8714917161@fam&pn=LOXICA&am="+price+"&cu=INR";
+
 })
-.catch(()=>alert("Something went wrong. Try again."));
+.catch(()=>{
+
+submitBtn.disabled = false;
+
+submitBtn.innerHTML =
+"Continue To Payment 💳";
+
+alert("Something went wrong. Try again.");
+
+});
 });
 </script>
 </body>
