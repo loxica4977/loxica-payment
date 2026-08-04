@@ -78,16 +78,14 @@ I Have Paid ✅
 
 const params = new URLSearchParams(window.location.search);
 
-let product = params.get("product");
-let price = params.get("price");
+const product = params.get("product") || "Product Name";
+const price = params.get("price") || "0";
 
 document.getElementById("product").innerText = product;
 document.getElementById("price").innerText = "₹" + price;
 
-function payNow(){
 
-let price = params.get("price");
-let product = params.get("product");
+function payNow(){
 
 let upiID = "8714917161@fam";
 
@@ -102,8 +100,8 @@ window.location.href = upiLink;
 
 }
 
-}
-  function orderSuccess(){
+
+function orderSuccess(){
 
 window.location.href="thankyou.html";
 
