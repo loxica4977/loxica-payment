@@ -68,7 +68,7 @@ button{
 
 <img src="upi-qr.png" width="220">
 
-<button onclick="payNow()">Pay Now</button>
+<button onclick="payNow()">Continue to Pay</button>
 
 <button id="paid">
 I Have Paid
@@ -94,7 +94,21 @@ document.getElementById("price").innerHTML = "₹"+price;
 
 
 function payNow(){
- document.getElementById("paid").style.display="block";
+
+let price = params.get("price");
+let product = params.get("product");
+
+let upiID = "8714917161@fam";
+
+let upiLink =
+"upi://pay?pa=" + upiID +
+"&pn=LOXICA" +
+"&am=" + price +
+"&cu=INR" +
+"&tn=" + product;
+
+window.location.href = upiLink;
+
 }
 
 </script>
