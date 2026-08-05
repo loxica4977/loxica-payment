@@ -243,10 +243,10 @@ image: reader.result
 
 
 
-fetch(scriptURL + "?type=screenshot",{
+ffetch(scriptURL + "?type=screenshot",{
 method:"POST",
 headers:{
-"Content-Type":"text/plain"
+"Content-Type":"application/json"
 },
 body:JSON.stringify(data)
 })
