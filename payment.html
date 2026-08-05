@@ -242,11 +242,10 @@ image: reader.result
 };
 
 
-
 fetch(scriptURL + "?type=screenshot",{
 method:"POST",
 headers:{
-"Content-Type":"application/json"
+"Content-Type":"text/plain"
 },
 body:JSON.stringify(data)
 })
