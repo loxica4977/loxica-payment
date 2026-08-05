@@ -244,13 +244,12 @@ image: reader.result
 
 
 fetch(scriptURL + "?type=screenshot",{
-
 method:"POST",
-
+headers:{
+"Content-Type":"text/plain"
+},
 body:JSON.stringify(data)
-
 })
-
 .then(response=>response.json())
 
 .then(result=>{
