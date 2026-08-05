@@ -140,10 +140,7 @@ font-size:30px;
 
 <p>Click below to continue payment</p>
 
-
-<button onclick="payNow()">
-Continue To Pay 💳
-</button>
+<button id="payBtn" onclick="payNow()">Pay Now 💳</button>
 
 
 <button id="paid" onclick="orderSuccess()">
@@ -172,12 +169,14 @@ document.getElementById("product").innerText = product;
 document.getElementById("price").innerText = "₹" + price;
 
 
-
 function payNow(){
 
+const payBtn = document.getElementById("payBtn");
+
+payBtn.disabled = true;
+payBtn.innerText = "Opening UPI...";
 
 let upiID = "8714917161@fam";
-
 
 let upiLink =
 "upi://pay?pa=" + upiID +
@@ -186,9 +185,9 @@ let upiLink =
 "&cu=INR" +
 "&tn=" + product;
 
-
 window.location.href = upiLink;
 
+}
 
 }
 
