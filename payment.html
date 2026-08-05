@@ -21,7 +21,6 @@ display:flex;
 justify-content:center;
 }
 
-
 .container{
 width:100%;
 max-width:430px;
@@ -32,7 +31,6 @@ border-radius:18px;
 box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
 
-
 .logo{
 text-align:center;
 font-size:32px;
@@ -40,12 +38,10 @@ font-weight:bold;
 letter-spacing:1px;
 }
 
-
 h3{
 text-align:center;
 margin:15px 0;
 }
-
 
 #product{
 text-align:center;
@@ -53,7 +49,6 @@ font-size:22px;
 font-weight:bold;
 margin-top:20px;
 }
-
 
 .price{
 text-align:center;
@@ -63,12 +58,10 @@ color:#2ecc71;
 margin:10px 0 20px;
 }
 
-
 p{
 text-align:center;
 color:#ccc;
 }
-
 
 button{
 width:100%;
@@ -81,12 +74,10 @@ font-weight:bold;
 cursor:pointer;
 }
 
-
 button:first-of-type{
 background:#2ecc71;
 color:#111;
 }
-
 
 #paid{
 display:none;
@@ -94,11 +85,9 @@ background:#00a651;
 color:white;
 }
 
-
 button:hover{
 opacity:.9;
 }
-
 
 @media(max-width:450px){
 
@@ -116,72 +105,39 @@ font-size:30px;
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
-
 <div class="logo">LOXICA</div>
-
 
 <h3>🔒 Secure Payment</h3>
 
-
 <h2 id="product">Product Name</h2>
-
 
 <div class="price" id="price">₹0</div>
 
-
 <h3>Pay Using UPI</h3>
-
 
 <p>Click below to continue payment</p>
 
 <button id="payBtn" onclick="payNow()">Pay Now 💳</button>
 
-
-<button id="paid">
+<button id="paid" onclick="orderSuccess()">
 I Have Paid ✅
 </button>
 
-<input 
-type="file" 
-id="screenshot"
-accept="image/*"
-style="margin-top:20px;width:100%;color:white;">
-
-<button onclick="uploadPayment()">
-Upload Payment Screenshot 📸
-</button>
-
-
 </div>
 
-
-
 <script>
-
-
-const scriptURL="https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
-
 
 const params = new URLSearchParams(window.location.search);
 
 const product = params.get("product") || "Product Name";
-
 const price = params.get("price") || "0";
 
-const orderId = params.get("orderId") || "";
-
-
-
 document.getElementById("product").innerText = product;
-
 document.getElementById("price").innerText = "₹" + price;
-
 
 function payNow(){
 
@@ -197,87 +153,17 @@ let upiLink =
 "&pn=LOXICA" +
 "&am=" + price +
 "&cu=INR" +
-"&tn=" + product;
+"&tn=" + encodeURIComponent(product);
 
 window.location.href = upiLink;
 
 }
 
-
 window.addEventListener("focus",()=>{
 
 document.getElementById("paid").style.display="block";
 
-
 });
-
-
-function uploadPayment(){
-
-const file =
-document.getElementById("screenshot").files[0];
-
-
-if(!file){
-
-alert("Please upload payment screenshot");
-
-return;
-
-}
-
-
-const reader = new FileReader();
-
-
-reader.onload = function(){
-
-
-const data = {
-
-orderId: orderId,
-
-image: reader.result
-
-};
-
-
-fetch(scriptURL + "?type=screenshot",{
-method:"POST",
-headers:{
-"Content-Type":"text/plain"
-},
-body:JSON.stringify(data)
-})
-.then(response=>response.json())
-
-.then(result=>{
-
-console.log(result);
-
-
-
-if(result.success){
-
-alert("Payment Screenshot Uploaded ✅");
-
-window.location.href="thankyou.html";
-
-}
-
-
-});
-
-
-};
-
-
-
-reader.readAsDataURL(file);
-
-
-}
-
 
 function orderSuccess(){
 
@@ -285,9 +171,7 @@ window.location.href="thankyou.html";
 
 }
 
-
 </script>
-
 
 </body>
 </html>
