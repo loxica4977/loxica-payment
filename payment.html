@@ -143,8 +143,18 @@ font-size:30px;
 <button id="payBtn" onclick="payNow()">Pay Now 💳</button>
 
 
-<button id="paid" onclick="orderSuccess()">
+<button id="paid">
 I Have Paid ✅
+</button>
+
+<input 
+type="file" 
+id="screenshot"
+accept="image/*"
+style="margin-top:20px;width:100%;color:white;">
+
+<button onclick="uploadPayment()">
+Upload Payment Screenshot 📸
 </button>
 
 
@@ -155,12 +165,16 @@ I Have Paid ✅
 <script>
 
 
-const params = new URLSearchParams(window.location.search);
+const scriptURL="https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
 
+
+const params = new URLSearchParams(window.location.search);
 
 const product = params.get("product") || "Product Name";
 
 const price = params.get("price") || "0";
+
+const orderId = params.get("orderId") || "";
 
 
 
@@ -189,6 +203,79 @@ window.location.href = upiLink;
 
 }
 
+
+window.addEventListener("focus",()=>{
+
+document.getElementById("paid").style.display="block";
+
+
+});
+
+
+function uploadPayment(){
+
+const file =
+document.getElementById("screenshot").files[0];
+
+
+if(!file){
+
+alert("Please upload payment screenshot");
+
+return;
+
+}
+
+
+const reader = new FileReader();
+
+
+reader.onload = function(){
+
+
+const data = {
+
+orderId: orderId,
+
+image: reader.result
+
+};
+
+
+
+fetch(scriptURL + "?type=screenshot",{
+
+method:"POST",
+
+body:JSON.stringify(data)
+
+})
+
+.then(response=>response.json())
+
+.then(result=>{
+
+
+if(result.success){
+
+alert("Payment Screenshot Uploaded ✅");
+
+window.location.href="thankyou.html";
+
+}
+
+
+});
+
+
+};
+
+
+
+reader.readAsDataURL(file);
+
+
+}
 
 
 function orderSuccess(){
