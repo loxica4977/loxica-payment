@@ -136,10 +136,13 @@ const params = new URLSearchParams(window.location.search);
 const product = params.get("product") || "Product Name";
 const price = params.get("price") || "0";
 
+  let paymentStarted = false;
+
 document.getElementById("product").innerText = product;
 document.getElementById("price").innerText = "₹" + price;
 
 function payNow(){
+  paymentStarted = true;
 
 const payBtn = document.getElementById("payBtn");
 
@@ -161,7 +164,11 @@ window.location.href = upiLink;
 
 window.addEventListener("focus",()=>{
 
+if(paymentStarted){
+
 document.getElementById("paid").style.display="block";
+
+}
 
 });
 function orderSuccess(){
