@@ -1,1 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOXICA - Thank You</title>
 
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f5f5f5;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
+}
+
+.container{
+width:100%;
+max-width:430px;
+background:#111;
+color:#fff;
+padding:35px 25px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.logo{
+font-size:32px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.success{
+font-size:70px;
+margin-bottom:15px;
+}
+
+h2{
+margin-bottom:15px;
+}
+
+.orderid{
+margin:20px 0;
+font-size:18px;
+font-weight:bold;
+color:#2ecc71;
+word-break:break-word;
+}
+
+p{
+color:#ccc;
+line-height:1.7;
+margin-bottom:15px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+background:#2ecc71;
+color:#111;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.9;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="logo">LOXICA</div>
+
+<div class="success">✅</div>
+
+<h2>Thank You!</h2>
+
+<p>Your order has been received successfully.</p>
+
+<div class="orderid" id="orderId"></div>
+
+<p>
+Your order will be processed shortly.<br>
+You will receive a tracking ID once it has been dispatched.
+</p>
+
+<button onclick="window.location.href='index.html'">
+Continue Shopping
+</button>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const orderId = params.get("orderId");
+
+if(orderId){
+document.getElementById("orderId").innerHTML =
+"🆔 Order ID: <br>" + orderId;
+}else{
+document.getElementById("orderId").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
