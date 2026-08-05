@@ -164,13 +164,11 @@ window.addEventListener("focus",()=>{
 document.getElementById("paid").style.display="block";
 
 });
-
 function orderSuccess(){
-
-window.location.href="thankyou.html";
-
+window.location.href =
+"thankyou.html?orderId=" +
+encodeURIComponent(params.get("orderId") || "");
 }
-
 </script>
 
 </body>
