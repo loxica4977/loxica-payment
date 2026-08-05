@@ -372,13 +372,23 @@ pincode:document.getElementById("pincode").value,
 color:document.getElementById("color").value
 };
 
-fetch(scriptURL,{method:"POST",body:JSON.stringify(data)})
-.then(()=>{
+fetch(scriptURL,{
+method:"POST",
+body:JSON.stringify(data)
+})
+.then(response=>response.json())
+.then(result=>{
 
 submitBtn.innerHTML =
 '<span class="spinner"></span>Opening Payment...';
+
+const orderId = result.orderId;
+
 window.location.href =
-"payment.html?product="+encodeURIComponent(product)+"&price="+encodeURIComponent(price);
+"payment.html?product="+encodeURIComponent(product)+
+"&price="+encodeURIComponent(price)+
+"&orderId="+encodeURIComponent(orderId);
+
 })
 .catch(()=>{
 
