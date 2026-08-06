@@ -145,27 +145,21 @@ function payNow(){
 
   paymentStarted = true;
 
-  let upiID = "8714917161@fam";
+  const payBtn = document.getElementById("payBtn");
 
-  let upiLink =
-  "upi://pay?pa=" + upiID +
-  "&pn=LOXICA" +
-  "&am=" + price +
-  "&cu=INR" +
-  "&tn=" + encodeURIComponent(product);
+  payBtn.disabled = true;
+  payBtn.innerText = "Opening UPI...";
 
-  // Open UPI immediately
+  const upiID = "8714917161@fam";
+
+  const upiLink =
+    "upi://pay?pa=" + upiID +
+    "&pn=LOXICA" +
+    "&am=" + price +
+    "&cu=INR" +
+    "&tn=" + encodeURIComponent(product);
+
   window.location.href = upiLink;
-
-  // Update button after a short delay
-  setTimeout(function(){
-
-    const payBtn = document.getElementById("payBtn");
-
-    payBtn.disabled = true;
-    payBtn.innerText = "Opening UPI...";
-
-  },300);
 
 }
 
