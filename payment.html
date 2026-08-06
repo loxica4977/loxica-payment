@@ -170,10 +170,20 @@ function payNow(){
 }
 
 
-function orderSuccess(){
-window.location.href =
-"thankyou.html?orderId=" +
-encodeURIComponent(params.get("orderId") || "");
+window.addEventListener("focus", function () {
+
+  if (paymentStarted) {
+    document.getElementById("paid").style.display = "block";
+  }
+
+});
+
+function orderSuccess() {
+
+  window.location.href =
+    "thankyou.html?orderId=" +
+    encodeURIComponent(params.get("orderId") || "");
+
 }
 </script>
 
