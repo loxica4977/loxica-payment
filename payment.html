@@ -159,7 +159,7 @@ function payNow(){
     "&cu=INR" +
     "&tn=" + encodeURIComponent(product);
 
-  window.location.href = upiLink;
+window.location.replace(upiLink);
 
 }
 
