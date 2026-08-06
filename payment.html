@@ -142,31 +142,30 @@ document.getElementById("product").innerText = product;
 document.getElementById("price").innerText = "₹" + price;
 
 function payNow(){
+
   paymentStarted = true;
 
-const payBtn = document.getElementById("payBtn");
+  let upiID = "8714917161@fam";
 
-payBtn.disabled = true;
-payBtn.innerText = "Opening UPI...";
+  let upiLink =
+  "upi://pay?pa=" + upiID +
+  "&pn=LOXICA" +
+  "&am=" + price +
+  "&cu=INR" +
+  "&tn=" + encodeURIComponent(product);
 
-let upiID = "8714917161@fam";
+  // Open UPI immediately
+  window.location.href = upiLink;
 
-let upiLink =
-"upi://pay?pa=" + upiID +
-"&pn=LOXICA" +
-"&am=" + price +
-"&cu=INR" +
-"&tn=" + encodeURIComponent(product);
+  // Update button after a short delay
+  setTimeout(function(){
 
-window.location.href = upiLink;
+    const payBtn = document.getElementById("payBtn");
 
-}
+    payBtn.disabled = true;
+    payBtn.innerText = "Opening UPI...";
 
-window.addEventListener("focus",()=>{
-
-if(paymentStarted){
-
-document.getElementById("paid").style.display="block";
+  },300);
 
 }
 
