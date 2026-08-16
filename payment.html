@@ -121,13 +121,14 @@ font-size:30px;
 
 <p>Click below to continue payment</p>
 
-<button id="payBtn" onclick="payNow()">Pay Now 💳</button>
+<button id="payBtn" onclick="payNow()">
+Pay Now 💳
+</button>
 
-<p id="upiNote" style="font-size:13px;color:#aaa;margin-top:12px;line-height:1.6;">
-<b>Note:</b> If the UPI app doesn't open after tapping <b>Pay Now</b>,
-tap the <b>⋮ (three dots)</b>, refresh the page, and tap <b>Pay Now</b> again.
+<p id="upiNote" style="font-size:13px;color:#bbb;margin-top:12px;line-height:1.5;">
+<b>Note:</b> If the UPI app doesn't open after tapping <b>Pay Now</b>, tap the <b>⋮ (three dots)</b>, <b>Refresh</b> the page, then tap <b>Pay Now</b> again.
 </p>
-  
+
 <button id="paid" onclick="orderSuccess()">
 I Have Paid ✅
 </button>
@@ -141,49 +142,85 @@ const params = new URLSearchParams(window.location.search);
 const product = params.get("product") || "Product Name";
 const price = params.get("price") || "0";
 
-  let paymentStarted = false;
+let paymentStarted = false;
+let pageLeft = false;
 
 document.getElementById("product").innerText = product;
+
 document.getElementById("price").innerText = "₹" + price;
+
 
 function payNow(){
 
-  paymentStarted = true;
+paymentStarted = true;
 
-  const payBtn = document.getElementById("payBtn");
+const payBtn = document.getElementById("payBtn");
 
-  payBtn.disabled = true;
-  payBtn.innerText = "Opening UPI...";
+payBtn.disabled = true;
 
-  const upiID = "8714917161@fam";
+payBtn.innerText = "Opening UPI...";
 
-  const upiLink =
-    "upi://pay?pa=" + upiID +
-    "&pn=LOXICA" +
-    "&am=" + price +
-    "&cu=INR" +
-    "&tn=" + encodeURIComponent(product);
+
+const upiID = "8714917161@fam";
+
+const upiLink =
+"upi://pay?pa=" + upiID +
+"&pn=LOXICA" +
+"&am=" + encodeURIComponent(price) +
+"&cu=INR" +
+"&tn=" + encodeURIComponent(product);
+
+
+/* Wait until browser leaves payment page */
+
+setTimeout(function(){
+
+pageLeft = true;
 
 window.location.href = upiLink;
 
+},100);
+
 }
 
 
-window.addEventListener("focus", function () {
+/* Detect when customer comes back from UPI */
 
-  if (paymentStarted) {
-    document.getElementById("paid").style.display = "block";
-  }
+document.addEventListener("visibilitychange", function(){
+
+if(
+document.visibilityState === "visible" &&
+paymentStarted &&
+pageLeft
+){
+
+setTimeout(function(){
+
+document.getElementById("paid").style.display = "block";
+
+const payBtn = document.getElementById("payBtn");
+
+payBtn.disabled = false;
+
+payBtn.innerText = "Pay Now Again 💳";
+
+},500);
+
+}
 
 });
 
-function orderSuccess() {
 
-  window.location.href =
-    "thankyou.html?orderId=" +
-    encodeURIComponent(params.get("orderId") || "");
+function orderSuccess(){
+
+window.location.href =
+"thankyou.html?orderId=" +
+encodeURIComponent(
+params.get("orderId") || ""
+);
 
 }
+
 </script>
 
 </body>
