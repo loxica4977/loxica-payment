@@ -103,39 +103,41 @@ font-size:30px;
 
 }
 /* ===== FOOTER ===== */
-
 .footer{
 width:100%;
 max-width:430px;
 background:#111;
-color:white;
+color:#fff;
 margin-top:25px;
-border-radius:18px 18px 0 0;
 overflow:hidden;
 }
 
 .footer-features{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:1px;
-background:#333;
+width:100%;
+display:grid !important;
+grid-template-columns:1fr 1fr !important;
+grid-template-rows:1fr 1fr !important;
+gap:0;
 }
 
 .feature{
+width:100%;
 background:#111;
-padding:20px 10px;
+padding:20px 8px;
 text-align:center;
-min-height:145px;
+min-height:140px;
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
+border:1px solid #222;
 }
 
 .feature-icon{
 width:48px;
 height:48px;
-border:2px solid #2563eb;
+border:2px solid #0066ff !important;
+color:#0066ff !important;
 border-radius:50%;
 display:flex;
 align-items:center;
@@ -145,15 +147,15 @@ margin-bottom:10px;
 }
 
 .feature h4{
-font-size:13px;
+font-size:12px;
 margin:0 0 7px;
-color:white;
+color:#fff !important;
 }
 
 .feature p{
 font-size:11px;
 line-height:1.4;
-color:#aaa;
+color:#aaa !important;
 margin:0;
 }
 
@@ -161,12 +163,13 @@ margin:0;
 text-align:center;
 padding:25px 15px 20px;
 border-top:1px solid #222;
+background:#111;
 }
 
 .footer-brand h2{
 margin:0 0 6px;
 font-size:24px;
-letter-spacing:1px;
+color:#fff;
 }
 
 .footer-brand p{
@@ -181,6 +184,7 @@ padding:15px;
 border-top:1px solid #222;
 font-size:11px;
 color:#888;
+background:#111;
 }
 </style>
 
@@ -217,50 +221,50 @@ I Have Paid ✅
 </div>
 <footer class="footer">
 
-  <div class="footer-features">
+<div class="footer-features">
 
-    <div class="feature">
-      <div class="feature-icon">🚚</div>
-      <div>
-        <h4>FREE DELIVERY</h4>
-        <p>Delivered safely to your doorstep.</p>
-      </div>
-    </div>
+<div class="feature">
+<div class="feature-icon">🚚</div>
+<div>
+<h4>FREE DELIVERY</h4>
+<p>Delivered safely to your doorstep.</p>
+</div>
+</div>
 
-    <div class="feature">
-      <div class="feature-icon">🔒</div>
-      <div>
-        <h4>SECURE PAYMENT</h4>
-        <p>Safe & secure UPI payments.</p>
-      </div>
-    </div>
+<div class="feature">
+<div class="feature-icon">🔒</div>
+<div>
+<h4>SECURE PAYMENT</h4>
+<p>Safe & secure UPI payments.</p>
+</div>
+</div>
 
-    <div class="feature">
-      <div class="feature-icon">⚡</div>
-      <div>
-        <h4>EXPRESS DELIVERY</h4>
-        <p>Fast dispatch and quick delivery.</p>
-      </div>
-    </div>
+<div class="feature">
+<div class="feature-icon">⚡</div>
+<div>
+<h4>EXPRESS DELIVERY</h4>
+<p>Fast dispatch and quick delivery.</p>
+</div>
+</div>
 
-    <div class="feature">
-      <div class="feature-icon">💎</div>
-      <div>
-        <h4>LATEST PRODUCTS</h4>
-        <p>Discover trending products and collections.</p>
-      </div>
-    </div>
+<div class="feature">
+<div class="feature-icon">💎</div>
+<div>
+<h4>LATEST PRODUCTS</h4>
+<p>Discover trending products and collections.</p>
+</div>
+</div>
 
-  </div>
+</div>
 
-  <div class="footer-brand">
-    <h2>LOXICA</h2>
-    <p>Smart Products. Better Everyday Life.</p>
-  </div>
+<div class="footer-brand">
+<h2>LOXICA</h2>
+<p>Smart Products. Better Everyday Life.</p>
+</div>
 
-  <div class="footer-bottom">
-    © 2026 LOXICA. All Rights Reserved.
-  </div>
+<div class="footer-bottom">
+© 2026 LOXICA. All Rights Reserved.
+</div>
 
 </footer>
 <script>
