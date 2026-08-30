@@ -18,8 +18,6 @@ font-family:Arial,Helvetica,sans-serif;
 
 body{
 background:#f5f5f5;
-margin:0;
-padding:0;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -33,7 +31,6 @@ background:#fff;
 border-radius:18px 18px 0 0;
 padding:25px 25px 0 25px;
 box-shadow:0 10px 30px rgba(0,0,0,.15);
-margin:0;
 }
 
 .logo{
@@ -122,6 +119,10 @@ button:active{
 background:#2563EB;
 }
 
+button:disabled{
+cursor:not-allowed;
+}
+
 .spinner{
 display:inline-block;
 width:18px;
@@ -153,7 +154,6 @@ background:#111;
 color:#fff;
 margin:0 auto;
 overflow:hidden;
-border-radius:0;
 }
 
 .footer-features{
@@ -191,7 +191,6 @@ margin-bottom:10px;
 margin:0 0 6px;
 font-size:12px;
 color:#fff;
-text-align:center;
 }
 
 .feature p{
@@ -199,7 +198,6 @@ margin:0;
 font-size:10px;
 line-height:1.4;
 color:#aaa;
-text-align:center;
 }
 
 .footer-main{
@@ -212,22 +210,18 @@ text-align:center;
 
 .footer-main h2{
 margin:0 0 7px;
-padding:0;
 color:#fff;
 font-size:22px;
 font-weight:600;
 letter-spacing:1px;
-text-align:center;
 }
 
 .footer-main p{
 margin:0 auto;
-padding:0;
 max-width:360px;
 color:#aaa;
 font-size:11px;
 line-height:1.5;
-text-align:center;
 }
 
 .footer-bottom{
@@ -240,27 +234,10 @@ color:#777;
 font-size:10px;
 }
 
-
-/* ================= MOBILE ================= */
-
 @media(max-width:768px){
 
 .footer-features{
-display:grid;
 grid-template-columns:1fr 1fr;
-}
-
-.feature{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-}
-
-.feature-icon{
-border-color:#0066ff;
-color:#0066ff;
 }
 
 }
@@ -279,14 +256,12 @@ color:#0066ff;
 
 <div class="price" id="price">₹0</div>
 
-
 <form id="orderForm">
 
 <input
 id="name"
 placeholder="Full Name"
 required>
-
 
 <div class="phone-group">
 
@@ -302,49 +277,41 @@ required>
 
 </div>
 
-
 <textarea
 id="address"
 placeholder="Full Address"
 required></textarea>
-
 
 <input
 id="landmark"
 placeholder="Landmark"
 required>
 
-
 <input
 id="city"
 placeholder="City"
 required>
-
 
 <input
 id="state"
 placeholder="State"
 required>
 
-
 <input
 id="pincode"
 placeholder="Pincode"
 required>
-
 
 <input
 id="color"
 type="text"
 placeholder="Color (Optional - e.g. Black, Blue, White)">
 
-
 <button type="submit">
 Continue To Payment 💳
 </button>
 
 </form>
-
 
 <p class="note">
 Fill details first. After submitting, UPI payment will open.
@@ -359,7 +326,6 @@ Fill details first. After submitting, UPI payment will open.
 
 <div class="footer-features">
 
-
 <div class="feature">
 
 <div class="feature-icon">
@@ -368,11 +334,9 @@ Fill details first. After submitting, UPI payment will open.
 
 <div>
 <h4>Free Delivery</h4>
-
 <p>
 Free shipping on all orders across India.
 </p>
-
 </div>
 
 </div>
@@ -386,11 +350,9 @@ Free shipping on all orders across India.
 
 <div>
 <h4>Secure Payment</h4>
-
 <p>
 100% safe and encrypted UPI checkout.
 </p>
-
 </div>
 
 </div>
@@ -404,11 +366,9 @@ Free shipping on all orders across India.
 
 <div>
 <h4>Express Delivery</h4>
-
 <p>
 Fast dispatch and quick delivery across India.
 </p>
-
 </div>
 
 </div>
@@ -422,15 +382,12 @@ Fast dispatch and quick delivery across India.
 
 <div>
 <h4>Latest Products</h4>
-
 <p>
 Discover trending gadgets and premium collections.
 </p>
-
 </div>
 
 </div>
-
 
 </div>
 
@@ -481,8 +438,7 @@ document.getElementById("price").innerText =
 
 
 /* ==================================================
-   STORAGE KEY
-   Different product = different saved details
+   PRODUCT-SPECIFIC STORAGE
    ================================================== */
 
 const storageKey =
@@ -490,7 +446,7 @@ const storageKey =
 
 
 /* ==================================================
-   RESTORE DETAILS + RESET BUTTON
+   RESTORE DETAILS WHEN COMING BACK
    ================================================== */
 
 window.addEventListener("pageshow",function(){
@@ -499,7 +455,7 @@ const submitBtn =
 document.querySelector('button[type="submit"]');
 
 
-/* Always reset button */
+/* ALWAYS RESET BUTTON */
 
 submitBtn.disabled = false;
 
@@ -509,7 +465,7 @@ submitBtn.innerHTML =
 "Continue To Payment 💳";
 
 
-/* Get saved data */
+/* RESTORE SAVED DETAILS */
 
 const savedDetails =
 sessionStorage.getItem(storageKey);
@@ -525,8 +481,6 @@ try{
 const data =
 JSON.parse(savedDetails);
 
-
-/* Restore form */
 
 document.getElementById("name").value =
 data.name || "";
@@ -573,7 +527,7 @@ error
 
 
 /* ==================================================
-   SUBMIT
+   SUBMIT FORM
    ================================================== */
 
 document.getElementById("orderForm")
@@ -587,10 +541,10 @@ document.querySelector('button[type="submit"]');
 
 
 /* ==================================================
-   GET CURRENT FORM DETAILS
+   GET CURRENT DETAILS
    ================================================== */
 
-const data = {
+const currentData = {
 
 product:product,
 
@@ -625,14 +579,12 @@ document.getElementById("color").value.trim()
 
 
 /* ==================================================
-   CHECK WHETHER DETAILS CHANGED
+   GET PREVIOUS DATA
    ================================================== */
 
 const savedDetails =
 sessionStorage.getItem(storageKey);
 
-
-let detailsChanged = true;
 
 let oldData = null;
 
@@ -644,29 +596,9 @@ try{
 oldData =
 JSON.parse(savedDetails);
 
-
-detailsChanged =
-
-oldData.name !== data.name ||
-
-oldData.phone !== data.phone ||
-
-oldData.address !== data.address ||
-
-oldData.landmark !== data.landmark ||
-
-oldData.city !== data.city ||
-
-oldData.state !== data.state ||
-
-oldData.pincode !== data.pincode ||
-
-oldData.color !== data.color;
-
-
 }catch(error){
 
-detailsChanged = true;
+oldData = null;
 
 }
 
@@ -674,18 +606,46 @@ detailsChanged = true;
 
 
 /* ==================================================
-   IF NOTHING CHANGED
-   USE OLD ORDER ID
-   NO NEW SAVE
+   CHECK IF DETAILS ARE EXACTLY SAME
    ================================================== */
 
-if(!detailsChanged){
-
-const oldOrderId =
-oldData.orderId || "";
+let detailsChanged = true;
 
 
-if(oldOrderId){
+if(oldData){
+
+detailsChanged =
+
+oldData.name !== currentData.name ||
+
+oldData.phone !== currentData.phone ||
+
+oldData.address !== currentData.address ||
+
+oldData.landmark !== currentData.landmark ||
+
+oldData.city !== currentData.city ||
+
+oldData.state !== currentData.state ||
+
+oldData.pincode !== currentData.pincode ||
+
+oldData.color !== currentData.color;
+
+}
+
+
+/* ==================================================
+   DETAILS SAME
+   → DON'T SAVE AGAIN
+   → USE SAME ORDER ID
+   ================================================== */
+
+if(
+oldData &&
+!detailsChanged &&
+oldData.orderId
+){
 
 window.location.href =
 "payment.html?product=" +
@@ -693,33 +653,52 @@ encodeURIComponent(product) +
 "&price=" +
 encodeURIComponent(price) +
 "&orderId=" +
-encodeURIComponent(oldOrderId);
+encodeURIComponent(oldData.orderId);
 
 return;
 
 }
 
-}
-
 
 /* ==================================================
-   DETAILS CHANGED OR FIRST TIME
-   SAVE NEW ORDER
+   DETAILS CHANGED / FIRST ORDER
    ================================================== */
 
 submitBtn.disabled = true;
 
-submitBtn.style.background = "#2563EB";
+submitBtn.style.background =
+"#2563EB";
 
 submitBtn.innerHTML =
 '<span class="spinner"></span>Processing...';
 
 
+/* ==================================================
+   IMPORTANT:
+   IF OLD ORDER EXISTS, SEND OLD ORDER ID
+   SO APPS SCRIPT UPDATES SAME ROW
+   ================================================== */
+
+if(
+oldData &&
+oldData.orderId
+){
+
+currentData.orderId =
+oldData.orderId;
+
+}
+
+
+/* ==================================================
+   SEND TO GOOGLE APPS SCRIPT
+   ================================================== */
+
 fetch(scriptURL,{
 
 method:"POST",
 
-body:JSON.stringify(data)
+body:JSON.stringify(currentData)
 
 })
 
@@ -731,25 +710,34 @@ response.json()
 
 .then(result=>{
 
-/* Get new Order ID */
+if(!result.success){
+
+throw new Error(
+result.error || "Order failed"
+);
+
+}
+
+
+/* Get Order ID */
 
 const orderId =
 result.orderId;
 
 
-/* Save current details + Order ID */
+/* Save latest details + Order ID */
 
-data.orderId =
+currentData.orderId =
 orderId;
 
 
 sessionStorage.setItem(
 storageKey,
-JSON.stringify(data)
+JSON.stringify(currentData)
 );
 
 
-/* Payment opening state */
+/* Payment button state */
 
 submitBtn.style.background =
 "#2563EB";
@@ -758,7 +746,7 @@ submitBtn.innerHTML =
 '<span class="spinner"></span>Opening Payment...';
 
 
-/* Open payment page */
+/* Open Payment */
 
 window.location.href =
 "payment.html?product=" +
@@ -771,7 +759,9 @@ encodeURIComponent(orderId);
 })
 
 
-.catch(()=>{
+.catch(error=>{
+
+console.log(error);
 
 submitBtn.disabled = false;
 
@@ -780,7 +770,6 @@ submitBtn.style.background =
 
 submitBtn.innerHTML =
 "Continue To Payment 💳";
-
 
 alert(
 "Something went wrong. Try again."
