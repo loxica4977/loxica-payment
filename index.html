@@ -468,6 +468,7 @@ e.preventDefault();
 const submitBtn=document.querySelector('button[type="submit"]');
 
 submitBtn.disabled=true;
+submitBtn.style.background="#2563EB";
 
 submitBtn.innerHTML=
 '<span class="spinner"></span>Processing...';
@@ -510,6 +511,8 @@ body:JSON.stringify(data)
 
 .then(result=>{
 
+submitBtn.style.background="#2563EB";
+
 submitBtn.innerHTML=
 '<span class="spinner"></span>Opening Payment...';
 
@@ -525,6 +528,7 @@ window.location.href=
 .catch(()=>{
 
 submitBtn.disabled=false;
+submitBtn.style.background="#111";
 
 submitBtn.innerHTML=
 "Continue To Payment 💳";
