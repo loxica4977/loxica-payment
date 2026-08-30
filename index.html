@@ -140,6 +140,7 @@ transform:rotate(360deg);
  
 
 /* ===== LOXICA FOOTER ===== */
+/* ===== LOXICA FOOTER ===== */
 
 .footer{
     width:100%;
@@ -152,18 +153,15 @@ transform:rotate(360deg);
 
 .footer-features{
     width:100%;
-    display:grid !important;
-    grid-template-columns:1fr 1fr !important;
-    gap:0 !important;
+    display:grid;
+    grid-template-columns:1fr 1fr;
 }
 
 .feature{
-    width:100%;
     min-height:150px;
     padding:18px 8px;
     background:#111;
     border:1px solid #222;
-    
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -174,90 +172,94 @@ transform:rotate(360deg);
 .feature-icon{
     width:48px;
     height:48px;
-
-    border:2px solid #0066ff !important;
-    color:#0066ff !important;
-
+    border:2px solid #0066ff;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-
-    font-size:21px;
+    font-size:20px;
+    color:#0066ff;
     margin-bottom:10px;
 }
 
 .feature h4{
     margin:0 0 6px;
     font-size:12px;
-    color:#fff !important;
+    color:#fff;
+    text-align:center;
 }
 
 .feature p{
     margin:0;
     font-size:10px;
     line-height:1.4;
-    color:#aaa !important;
+    color:#aaa;
+    text-align:center;
 }
 
-.footer-brand{
+/* ===== BRAND / QUOTE ===== */
+
+.footer-main{
     width:100%;
     background:#111;
-    text-align:center !important;
-    padding:22px 15px 18px;
+    padding:22px 15px 20px;
     border-top:1px solid #222;
+    text-align:center;
 }
 
-.footer-brand h2{
-    margin:0 0 8px !important;
-    padding:0 !important;
+.footer-main h2{
+    margin:0 0 7px;
+    padding:0;
     color:#fff;
-    font-size:22px !important;
+    font-size:22px;
     font-weight:600;
     letter-spacing:1px;
-    text-align:center !important;
+    text-align:center;
 }
 
-.footer-brand p{
-    margin:0 auto !important;
-    padding:0 !important;
+.footer-main p{
+    margin:0 auto;
+    padding:0;
     max-width:360px;
     color:#aaa;
-    font-size:11px !important;
+    font-size:11px;
     line-height:1.5;
-    text-align:center !important;
+    text-align:center;
 }
+
+/* ===== COPYRIGHT ===== */
 
 .footer-bottom{
     width:100%;
     background:#111;
-    text-align:center !important;
+    text-align:center;
     padding:14px 10px;
     border-top:1px solid #222;
     color:#777;
     font-size:10px;
 }
 
+/* ===== MOBILE 2x2 ===== */
+
 @media(max-width:768px){
 
-.footer-features{
-display:grid !important;
-grid-template-columns:1fr 1fr !important;
-grid-template-rows:1fr 1fr !important;
-}
+    .footer-features{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
 
-.feature{
-display:flex !important;
-flex-direction:column !important;
-align-items:center !important;
-justify-content:center !important;
-text-align:center !important;
-}
+    .feature{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+    }
 
-.feature-icon{
-border-color:#0066ff !important;
-color:#0066ff !important;
-}
+    .feature-icon{
+        border-color:#0066ff;
+        color:#0066ff;
+    }
 
 }
 
@@ -358,7 +360,7 @@ Premium products with secure checkout and fast delivery across India.
 </div>
 
 <div class="footer-bottom">
-© 2026 LOXICA. All Rights Reserved.
+© 2025 LOXICA. All Rights Reserved.
 </div>
 
 </footer>
