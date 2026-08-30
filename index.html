@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LOXICA Secure Checkout</title>
- 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 *{
@@ -32,9 +31,9 @@ width:100%;
 max-width:430px;
 background:#fff;
 border-radius:18px 18px 0 0;
-padding:25px;
+padding:25px 25px 0 25px;
 box-shadow:0 10px 30px rgba(0,0,0,.15);
-margin-bottom:0;
+margin:0;
 }
 
 .logo{
@@ -113,6 +112,7 @@ color:#fff;
 font-size:18px;
 cursor:pointer;
 }
+
 button:hover{
 background:#333;
 }
@@ -133,13 +133,13 @@ vertical-align:middle;
 0%{
 transform:rotate(0deg);
 }
+
 100%{
 transform:rotate(360deg);
 }
 }
- 
 
-/* ===== LOXICA FOOTER ===== */
+
 /* ===== LOXICA FOOTER ===== */
 
 .footer{
@@ -153,278 +153,384 @@ border-radius:0;
 }
 
 .footer-features{
-    width:100%;
-    display:grid;
-    grid-template-columns:1fr 1fr;
+width:100%;
+display:grid;
+grid-template-columns:1fr 1fr;
 }
 
 .feature{
-    min-height:150px;
-    padding:18px 8px;
-    background:#111;
-    border:1px solid #222;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+min-height:150px;
+padding:18px 8px;
+background:#111;
+border:1px solid #222;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
 }
 
 .feature-icon{
-    width:48px;
-    height:48px;
-    border:2px solid #0066ff;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    color:#0066ff;
-    margin-bottom:10px;
+width:48px;
+height:48px;
+border:2px solid #0066ff;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+color:#0066ff;
+margin-bottom:10px;
 }
 
 .feature h4{
-    margin:0 0 6px;
-    font-size:12px;
-    color:#fff;
-    text-align:center;
+margin:0 0 6px;
+font-size:12px;
+color:#fff;
+text-align:center;
 }
 
 .feature p{
-    margin:0;
-    font-size:10px;
-    line-height:1.4;
-    color:#aaa;
-    text-align:center;
+margin:0;
+font-size:10px;
+line-height:1.4;
+color:#aaa;
+text-align:center;
 }
+
 
 /* ===== BRAND / QUOTE ===== */
 
 .footer-main{
-    width:100%;
-    background:#111;
-    padding:22px 15px 20px;
-    border-top:1px solid #222;
-    text-align:center;
+width:100%;
+background:#111;
+padding:22px 15px 20px;
+border-top:1px solid #222;
+text-align:center;
 }
 
 .footer-main h2{
-    margin:0 0 7px;
-    padding:0;
-    color:#fff;
-    font-size:22px;
-    font-weight:600;
-    letter-spacing:1px;
-    text-align:center;
+margin:0 0 7px;
+padding:0;
+color:#fff;
+font-size:22px;
+font-weight:600;
+letter-spacing:1px;
+text-align:center;
 }
 
 .footer-main p{
-    margin:0 auto;
-    padding:0;
-    max-width:360px;
-    color:#aaa;
-    font-size:11px;
-    line-height:1.5;
-    text-align:center;
+margin:0 auto;
+padding:0;
+max-width:360px;
+color:#aaa;
+font-size:11px;
+line-height:1.5;
+text-align:center;
 }
+
 
 /* ===== COPYRIGHT ===== */
 
 .footer-bottom{
-    width:100%;
-    background:#111;
-    text-align:center;
-    padding:14px 10px;
-    border-top:1px solid #222;
-    color:#777;
-    font-size:10px;
+width:100%;
+background:#111;
+text-align:center;
+padding:14px 10px;
+border-top:1px solid #222;
+color:#777;
+font-size:10px;
 }
+
 
 /* ===== MOBILE 2x2 ===== */
 
 @media(max-width:768px){
 
-    .footer-features{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-    }
+.footer-features{
+display:grid;
+grid-template-columns:1fr 1fr;
+}
 
-    .feature{
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-        text-align:center;
-    }
+.feature{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
 
-    .feature-icon{
-        border-color:#0066ff;
-        color:#0066ff;
-    }
-
+.feature-icon{
+border-color:#0066ff;
+color:#0066ff;
 }
 
 }
 </style>
 </head>
+
 <body>
+
 <div class="container">
+
 <div class="logo">LOXICA</div>
+
 <div class="secure">🔒 Secure Checkout</div>
+
 <div class="product" id="product">Product</div>
+
 <div class="price" id="price">₹0</div>
 
 <form id="orderForm">
-<input id="name" placeholder="Full Name" required>
-<div class="phone-group">
-  <span>+91</span>
-  <input
-    id="phone"
-    type="tel"
-    placeholder="0000000000"
-    maxlength="10"
-    pattern="[0-9]{10}"
-    required>
-</div>
-<textarea id="address" placeholder="Full Address" required></textarea>
-<input id="landmark" placeholder="Landmark" required>
-<input id="city" placeholder="City" required>
-<input id="state" placeholder="State" required>
-<input id="pincode" placeholder="Pincode" required>
 
 <input
-  id="color"
-  type="text"
-  placeholder="Color (Optional - e.g. Black, Blue, White)">
+id="name"
+placeholder="Full Name"
+required>
 
-<button type="submit">Continue To Payment 💳</button>
-</form>
-<p class="note">Fill details first. After submitting, UPI payment will open.</p>
+<div class="phone-group">
+
+<span>+91</span>
+
+<input
+id="phone"
+type="tel"
+placeholder="0000000000"
+maxlength="10"
+pattern="[0-9]{10}"
+required>
+
 </div>
+
+<textarea
+id="address"
+placeholder="Full Address"
+required></textarea>
+
+<input
+id="landmark"
+placeholder="Landmark"
+required>
+
+<input
+id="city"
+placeholder="City"
+required>
+
+<input
+id="state"
+placeholder="State"
+required>
+
+<input
+id="pincode"
+placeholder="Pincode"
+required>
+
+<input
+id="color"
+type="text"
+placeholder="Color (Optional - e.g. Black, Blue, White)">
+
+<button type="submit">
+Continue To Payment 💳
+</button>
+
+</form>
+
+<p class="note">
+Fill details first. After submitting, UPI payment will open.
+</p>
+
+</div>
+
+
+<!-- ===== FOOTER ===== -->
+
 <footer class="footer">
 
 <div class="footer-features">
 
 <div class="feature">
+
 <div class="feature-icon">
 <i class="fas fa-truck-fast"></i>
 </div>
+
 <div>
 <h4>Free Delivery</h4>
-<p>Free shipping on all orders across India.</p>
-</div>
+<p>
+Free shipping on all orders across India.
+</p>
 </div>
 
+</div>
+
+
 <div class="feature">
+
 <div class="feature-icon">
 <i class="fas fa-shield-halved"></i>
 </div>
+
 <div>
 <h4>Secure Payment</h4>
-<p>100% safe and encrypted UPI checkout.</p>
-</div>
+<p>
+100% safe and encrypted UPI checkout.
+</p>
 </div>
 
+</div>
+
+
 <div class="feature">
+
 <div class="feature-icon">
 <i class="fas fa-bolt"></i>
 </div>
+
 <div>
 <h4>Express Delivery</h4>
-<p>Fast dispatch and quick delivery across India.</p>
-</div>
+<p>
+Fast dispatch and quick delivery across India.
+</p>
 </div>
 
+</div>
+
+
 <div class="feature">
+
 <div class="feature-icon">
 <i class="fas fa-gem"></i>
 </div>
+
 <div>
 <h4>Latest Products</h4>
-<p>Discover trending gadgets and premium collections.</p>
-</div>
+<p>
+Discover trending gadgets and premium collections.
+</p>
 </div>
 
 </div>
+
+</div>
+
 
 <div class="footer-main">
 
 <div>
+
 <h2>LOXICA</h2>
+
 <p>
 Premium products with secure checkout and fast delivery across India.
 </p>
-</div>
-
-
 
 </div>
+
+</div>
+
 
 <div class="footer-bottom">
+
 © 2025 LOXICA. All Rights Reserved.
+
 </div>
 
 </footer>
+
+
 <script>
+
 const scriptURL="https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
+
 const params=new URLSearchParams(window.location.search);
+
 const product=params.get("product")||"LOXICA Product";
+
 const price=params.get("price")||"0";
+
 document.getElementById("product").innerText=product;
+
 document.getElementById("price").innerText="₹"+price;
+
 
 document.getElementById("orderForm").addEventListener("submit",function(e){
 
 e.preventDefault();
 
-const submitBtn = document.querySelector('button[type="submit"]');
+const submitBtn=document.querySelector('button[type="submit"]');
 
-submitBtn.disabled = true;
-submitBtn.innerHTML =
+submitBtn.disabled=true;
+
+submitBtn.innerHTML=
 '<span class="spinner"></span>Processing...';
 
+
 const data={
+
 product:product,
+
 price:price,
+
 name:document.getElementById("name").value,
+
 phone:"+91"+document.getElementById("phone").value,
+
 address:document.getElementById("address").value,
+
 landmark:document.getElementById("landmark").value,
+
 city:document.getElementById("city").value,
+
 state:document.getElementById("state").value,
+
 pincode:document.getElementById("pincode").value,
+
 color:document.getElementById("color").value
+
 };
 
+
 fetch(scriptURL,{
+
 method:"POST",
+
 body:JSON.stringify(data)
+
 })
+
 .then(response=>response.json())
+
 .then(result=>{
 
-submitBtn.innerHTML =
+submitBtn.innerHTML=
 '<span class="spinner"></span>Opening Payment...';
 
-const orderId = result.orderId;
+const orderId=result.orderId;
 
-window.location.href =
+window.location.href=
 "payment.html?product="+encodeURIComponent(product)+
 "&price="+encodeURIComponent(price)+
 "&orderId="+encodeURIComponent(orderId);
 
 })
+
 .catch(()=>{
 
-submitBtn.disabled = false;
+submitBtn.disabled=false;
 
-submitBtn.innerHTML =
+submitBtn.innerHTML=
 "Continue To Payment 💳";
 
 alert("Something went wrong. Try again.");
 
 });
+
 });
+
 </script>
+
 </body>
 </html>
