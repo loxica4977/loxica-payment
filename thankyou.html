@@ -3,9 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>LOXICA - Thank You</title>
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -16,109 +21,611 @@ font-family:Arial,Helvetica,sans-serif;
 body{
 background:#f5f5f5;
 display:flex;
-justify-content:center;
+flex-direction:column;
 align-items:center;
 min-height:100vh;
-padding:20px;
 }
+
+
+/* ================= MAIN CONTAINER ================= */
 
 .container{
+
 width:100%;
 max-width:430px;
-background:#111;
-color:#fff;
-padding:35px 25px;
-border-radius:18px;
-text-align:center;
+
+background:#fff;
+
+border-radius:18px 18px 0 0;
+
+padding:30px 25px 25px;
+
 box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+text-align:center;
+
 }
+
+
+/* ================= LOGO ================= */
 
 .logo{
+
 font-size:32px;
+
 font-weight:bold;
-margin-bottom:20px;
+
+margin-bottom:10px;
+
+color:#111;
+
 }
+
+
+/* ================= SUCCESS ================= */
 
 .success{
-font-size:70px;
-margin-bottom:15px;
+
+width:75px;
+height:75px;
+
+margin:10px auto 18px;
+
+border-radius:50%;
+
+background:#2563EB;
+
+color:#fff;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:38px;
+
 }
 
+
+/* ================= TITLE ================= */
+
 h2{
-margin-bottom:15px;
+
+font-size:25px;
+
+color:#111;
+
+margin-bottom:10px;
+
+}
+
+
+/* ================= MESSAGE ================= */
+
+.message{
+
+color:#555;
+
+font-size:15px;
+
+line-height:1.6;
+
+margin-bottom:20px;
+
+}
+
+
+/* ================= ORDER ID ================= */
+
+.order-box{
+
+background:#f5f7ff;
+
+border:1px solid #dbe4ff;
+
+border-radius:10px;
+
+padding:14px;
+
+margin:20px 0;
+
+}
+
+.order-label{
+
+font-size:12px;
+
+color:#777;
+
+margin-bottom:5px;
+
 }
 
 .orderid{
-margin:20px 0;
+
 font-size:18px;
+
 font-weight:bold;
-color:#2ecc71;
+
+color:#2563EB;
+
 word-break:break-word;
+
 }
 
-p{
-color:#ccc;
-line-height:1.7;
-margin-bottom:15px;
+
+/* ================= INFO ================= */
+
+.info{
+
+font-size:13px;
+
+color:#666;
+
+line-height:1.6;
+
+margin-bottom:5px;
+
 }
+
+
+/* ================= BUTTON ================= */
 
 button{
+
 width:100%;
+
 padding:15px;
-margin-top:20px;
-background:#2ecc71;
-color:#111;
+
+margin-top:18px;
+
+background:#111;
+
+color:#fff;
+
 border:none;
+
 border-radius:10px;
+
 font-size:18px;
-font-weight:bold;
+
 cursor:pointer;
+
+transition:background .2s ease;
+
 }
 
 button:hover{
-opacity:.9;
+
+background:#333;
+
 }
+
+button:active{
+
+background:#2563EB;
+
+}
+
+
+/* ================= FOOTER ================= */
+
+.footer{
+
+width:100%;
+
+max-width:430px;
+
+background:#111;
+
+color:#fff;
+
+overflow:hidden;
+
+}
+
+
+/* ================= FOOTER FEATURES ================= */
+
+.footer-features{
+
+width:100%;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+}
+
+.feature{
+
+min-height:150px;
+
+padding:18px 8px;
+
+background:#111;
+
+border:1px solid #222;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+text-align:center;
+
+}
+
+.feature-icon{
+
+width:48px;
+
+height:48px;
+
+border:2px solid #0066ff;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:20px;
+
+color:#0066ff;
+
+margin-bottom:10px;
+
+}
+
+.feature h4{
+
+margin:0 0 6px;
+
+font-size:12px;
+
+color:#fff;
+
+}
+
+.feature p{
+
+margin:0;
+
+font-size:10px;
+
+line-height:1.4;
+
+color:#aaa;
+
+}
+
+
+/* ================= FOOTER MAIN ================= */
+
+.footer-main{
+
+width:100%;
+
+background:#111;
+
+padding:22px 15px 20px;
+
+border-top:1px solid #222;
+
+text-align:center;
+
+}
+
+.footer-main h2{
+
+margin:0 0 7px;
+
+color:#fff;
+
+font-size:22px;
+
+font-weight:600;
+
+letter-spacing:1px;
+
+}
+
+.footer-main p{
+
+margin:0 auto;
+
+max-width:360px;
+
+color:#aaa;
+
+font-size:11px;
+
+line-height:1.5;
+
+}
+
+
+/* ================= COPYRIGHT ================= */
+
+.footer-bottom{
+
+width:100%;
+
+background:#111;
+
+text-align:center;
+
+padding:14px 10px;
+
+border-top:1px solid #222;
+
+color:#777;
+
+font-size:10px;
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+.footer-features{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+}
+
 </style>
 
 </head>
+
+
 <body>
+
+
+<!-- ================= MAIN ================= -->
 
 <div class="container">
 
-<div class="logo">LOXICA</div>
 
-<div class="success">✅</div>
+<div class="logo">
+LOXICA
+</div>
 
-<h2>Thank You!</h2>
 
-<p>Your order has been received successfully.</p>
+<div class="success">
+✓
+</div>
 
-<div class="orderid" id="orderId"></div>
 
-<p>
-Your order will be processed shortly.<br>
-You will receive a tracking ID once it has been dispatched.
+<h2>
+Thank You!
+</h2>
+
+
+<p class="message">
+Your order has been received successfully.
 </p>
-  
-<button onclick="window.location.href='https://theditto1309.wixsite.com/loxica77'">
-Continue Shopping 🛍️
-</button>
+
+
+<!-- ORDER ID -->
+
+<div class="order-box">
+
+<div class="order-label">
+ORDER ID
+</div>
+
+<div class="orderid" id="orderId">
+Loading...
+</div>
 
 </div>
 
+
+<p class="info">
+
+Your order will be processed shortly.<br>
+
+You will receive a tracking ID once it has been dispatched.
+
+</p>
+
+
+<button
+onclick="window.location.href='https://theditto1309.wixsite.com/loxica77'">
+
+Continue Shopping 🛍️
+
+</button>
+
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+
+<div class="footer-features">
+
+
+<!-- FREE DELIVERY -->
+
+<div class="feature">
+
+<div class="feature-icon">
+
+<i class="fas fa-truck-fast"></i>
+
+</div>
+
+<div>
+
+<h4>
+Free Delivery
+</h4>
+
+<p>
+Free shipping on all orders across India.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- SECURE PAYMENT -->
+
+<div class="feature">
+
+<div class="feature-icon">
+
+<i class="fas fa-shield-halved"></i>
+
+</div>
+
+<div>
+
+<h4>
+Secure Payment
+</h4>
+
+<p>
+100% safe and encrypted UPI checkout.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- EXPRESS DELIVERY -->
+
+<div class="feature">
+
+<div class="feature-icon">
+
+<i class="fas fa-bolt"></i>
+
+</div>
+
+<div>
+
+<h4>
+Express Delivery
+</h4>
+
+<p>
+Fast dispatch and quick delivery across India.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- LATEST PRODUCTS -->
+
+<div class="feature">
+
+<div class="feature-icon">
+
+<i class="fas fa-gem"></i>
+
+</div>
+
+<div>
+
+<h4>
+Latest Products
+</h4>
+
+<p>
+Discover trending gadgets and premium collections.
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- ================= BRAND ================= -->
+
+<div class="footer-main">
+
+<h2>
+LOXICA
+</h2>
+
+<p>
+Premium products with secure checkout and fast delivery across India.
+</p>
+
+</div>
+
+
+
+<!-- ================= COPYRIGHT ================= -->
+
+<div class="footer-bottom">
+
+© 2025 LOXICA. All Rights Reserved.
+
+</div>
+
+
+</footer>
+
+
+
 <script>
 
-const params = new URLSearchParams(window.location.search);
-const orderId = params.get("orderId");
+/* ================================
+   GET ORDER ID
+   ================================ */
+
+const params =
+new URLSearchParams(window.location.search);
+
+
+const orderId =
+params.get("orderId");
+
 
 if(orderId){
-document.getElementById("orderId").innerHTML =
-"🆔 Order ID: <br>" + orderId;
+
+document.getElementById("orderId").innerText =
+orderId;
+
 }else{
-document.getElementById("orderId").style.display="none";
+
+document.getElementById("orderId").innerText =
+"Order Confirmed";
+
 }
 
 </script>
+
 
 </body>
 </html>
