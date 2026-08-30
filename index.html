@@ -450,51 +450,70 @@ document.getElementById("price").innerText="₹"+price;
    RESTORE PREVIOUSLY FILLED DETAILS
    ========================================== */
 
+/* ==========================================
+   RESTORE DETAILS + RESET BUTTON ON BACK
+   ========================================== */
+
 window.addEventListener("pageshow",function(){
 
-const savedDetails=
-sessionStorage.getItem("loxicaCheckoutDetails");
+    const submitBtn =
+        document.querySelector('button[type="submit"]');
 
-if(!savedDetails){
-return;
-}
+    /* Always reset button when returning to Index */
 
-try{
+    submitBtn.disabled = false;
 
-const data=JSON.parse(savedDetails);
+    submitBtn.style.background = "#111";
 
-document.getElementById("name").value=
-data.name || "";
+    submitBtn.innerHTML =
+        "Continue To Payment 💳";
 
-document.getElementById("phone").value=
-(data.phone || "").replace(/^\+91/,"");
 
-document.getElementById("address").value=
-data.address || "";
+    /* Restore previously entered details */
 
-document.getElementById("landmark").value=
-data.landmark || "";
+    const savedDetails =
+        sessionStorage.getItem("loxicaCheckoutDetails");
 
-document.getElementById("city").value=
-data.city || "";
+    if(!savedDetails){
+        return;
+    }
 
-document.getElementById("state").value=
-data.state || "";
+    try{
 
-document.getElementById("pincode").value=
-data.pincode || "";
+        const data = JSON.parse(savedDetails);
 
-document.getElementById("color").value=
-data.color || "";
+        document.getElementById("name").value =
+            data.name || "";
 
-}catch(error){
+        document.getElementById("phone").value =
+            (data.phone || "").replace(/^\+91/, "");
 
-console.log(
-"Could not restore checkout details",
-error
-);
+        document.getElementById("address").value =
+            data.address || "";
 
-}
+        document.getElementById("landmark").value =
+            data.landmark || "";
+
+        document.getElementById("city").value =
+            data.city || "";
+
+        document.getElementById("state").value =
+            data.state || "";
+
+        document.getElementById("pincode").value =
+            data.pincode || "";
+
+        document.getElementById("color").value =
+            data.color || "";
+
+    }catch(error){
+
+        console.log(
+            "Could not restore checkout details",
+            error
+        );
+
+    }
 
 });
 
