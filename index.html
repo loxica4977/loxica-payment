@@ -19,7 +19,6 @@ body{
 background:#f5f5f5;
 margin:0;
 padding:0;
-font-family:Arial,Helvetica,sans-serif;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -203,9 +202,6 @@ color:#aaa;
 text-align:center;
 }
 
-
-/* ===== BRAND / QUOTE ===== */
-
 .footer-main{
 width:100%;
 background:#111;
@@ -234,9 +230,6 @@ line-height:1.5;
 text-align:center;
 }
 
-
-/* ===== COPYRIGHT ===== */
-
 .footer-bottom{
 width:100%;
 background:#111;
@@ -247,8 +240,6 @@ color:#777;
 font-size:10px;
 }
 
-
-/* ===== MOBILE 2x2 ===== */
 
 @media(max-width:768px){
 
@@ -350,8 +341,6 @@ Fill details first. After submitting, UPI payment will open.
 </div>
 
 
-<!-- ===== FOOTER ===== -->
-
 <footer class="footer">
 
 <div class="footer-features">
@@ -424,15 +413,11 @@ Discover trending gadgets and premium collections.
 
 <div class="footer-main">
 
-<div>
-
 <h2>LOXICA</h2>
 
 <p>
 Premium products with secure checkout and fast delivery across India.
 </p>
-
-</div>
 
 </div>
 
@@ -461,13 +446,75 @@ document.getElementById("product").innerText=product;
 document.getElementById("price").innerText="₹"+price;
 
 
+/* ==========================================
+   RESTORE PREVIOUSLY FILLED DETAILS
+   ========================================== */
+
+window.addEventListener("pageshow",function(){
+
+const savedDetails=
+sessionStorage.getItem("loxicaCheckoutDetails");
+
+if(!savedDetails){
+return;
+}
+
+try{
+
+const data=JSON.parse(savedDetails);
+
+document.getElementById("name").value=
+data.name || "";
+
+document.getElementById("phone").value=
+(data.phone || "").replace(/^\+91/,"");
+
+document.getElementById("address").value=
+data.address || "";
+
+document.getElementById("landmark").value=
+data.landmark || "";
+
+document.getElementById("city").value=
+data.city || "";
+
+document.getElementById("state").value=
+data.state || "";
+
+document.getElementById("pincode").value=
+data.pincode || "";
+
+document.getElementById("color").value=
+data.color || "";
+
+}catch(error){
+
+console.log(
+"Could not restore checkout details",
+error
+);
+
+}
+
+});
+
+
+/* ==========================================
+   ORDER FORM
+   ========================================== */
+
 document.getElementById("orderForm").addEventListener("submit",function(e){
 
 e.preventDefault();
 
-const submitBtn=document.querySelector('button[type="submit"]');
+const submitBtn=
+document.querySelector('button[type="submit"]');
+
+
+/* Change button to blue immediately */
 
 submitBtn.disabled=true;
+
 submitBtn.style.background="#2563EB";
 
 submitBtn.innerHTML=
@@ -482,7 +529,8 @@ price:price,
 
 name:document.getElementById("name").value,
 
-phone:"+91"+document.getElementById("phone").value,
+phone:"+91"+
+document.getElementById("phone").value,
 
 address:document.getElementById("address").value,
 
@@ -498,6 +546,20 @@ color:document.getElementById("color").value
 
 };
 
+
+/* ==========================================
+   SAVE DETAILS FOR BACK BUTTON
+   ========================================== */
+
+sessionStorage.setItem(
+"loxicaCheckoutDetails",
+JSON.stringify(data)
+);
+
+
+/* ==========================================
+   SEND ORDER TO GOOGLE APPS SCRIPT
+   ========================================== */
 
 fetch(scriptURL,{
 
@@ -518,16 +580,22 @@ submitBtn.innerHTML=
 
 const orderId=result.orderId;
 
+
 window.location.href=
-"payment.html?product="+encodeURIComponent(product)+
-"&price="+encodeURIComponent(price)+
-"&orderId="+encodeURIComponent(orderId);
+"payment.html?product="+
+encodeURIComponent(product)+
+"&price="+
+encodeURIComponent(price)+
+"&orderId="+
+encodeURIComponent(orderId);
 
 })
+
 
 .catch(()=>{
 
 submitBtn.disabled=false;
+
 submitBtn.style.background="#111";
 
 submitBtn.innerHTML=
