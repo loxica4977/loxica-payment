@@ -211,6 +211,20 @@ color:#777;
 margin-top:3px;
 }
 
+/* PAYMENT INSTRUCTION */
+
+.payment-instruction{
+margin:14px 0 8px;
+padding:11px 12px;
+background:#f8f8f8;
+border-left:3px solid #2563EB;
+border-radius:6px;
+font-size:12px;
+line-height:1.5;
+color:#555;
+text-align:center;
+}
+
 /* PAY BUTTON */
 
 #payBtn{
@@ -392,7 +406,6 @@ font-size:24px;
 
 <body>
 
-
 <div class="container">
 
 <!-- HEADER -->
@@ -409,13 +422,11 @@ LOXICA
 
 </div>
 
-
 <div class="content">
 
 <div class="title">
 Complete Your Payment
 </div>
-
 
 <!-- ORDER SUMMARY -->
 
@@ -451,7 +462,6 @@ Total Amount
 
 </div>
 
-
 <!-- PAYMENT METHOD -->
 
 <div class="payment-section">
@@ -460,9 +470,7 @@ Total Amount
 Choose Payment Method
 </div>
 
-
 <div class="payment-box">
-
 
 <!-- GOOGLE PAY -->
 
@@ -492,7 +500,6 @@ Pay using Google Pay
 
 </div>
 
-
 <!-- PHONEPE -->
 
 <div
@@ -520,10 +527,6 @@ Pay using PhonePe
 </div>
 
 </div>
-
-
-
-
 
 <!-- OTHER UPI -->
 
@@ -553,34 +556,35 @@ Use any available UPI app
 
 </div>
 
+<!-- INSTRUCTION -->
+
+<div class="payment-instruction">
+Select your preferred payment method and click <b>Pay Now</b> to continue.
+</div>
+
+<!-- PAY BUTTON -->
 
 <button
 id="payBtn"
 onclick="payNow()"
 >
-
 Pay Now 💳
-
 </button>
-
 
 <div id="appMessage"></div>
 
+<!-- PAID BUTTON -->
 
 <button
 id="paid"
 onclick="orderSuccess()"
 >
-
 I Have Paid ✅
-
 </button>
 
-
 </div>
 
 </div>
-
 
 <!-- SECURITY -->
 
@@ -593,18 +597,15 @@ Never share your UPI PIN or OTP with anyone.
 
 </div>
 
-
 </div>
 
 </div>
-
 
 <!-- FOOTER -->
 
 <footer class="footer">
 
 <div class="footer-features">
-
 
 <div class="feature">
 
@@ -620,7 +621,6 @@ Delivered safely to your doorstep.
 
 </div>
 
-
 <div class="feature">
 
 <div class="feature-icon">
@@ -635,7 +635,6 @@ Safe & secure UPI payments.
 
 </div>
 
-
 <div class="feature">
 
 <div class="feature-icon">
@@ -649,7 +648,6 @@ Fast dispatch and quick delivery.
 </p>
 
 </div>
-
 
 <div class="feature">
 
@@ -667,7 +665,6 @@ Discover trending products and collections.
 
 </div>
 
-
 <div class="footer-brand">
 
 <h2>LOXICA</h2>
@@ -678,7 +675,6 @@ Smart Products. Better Everyday Life.
 
 </div>
 
-
 <div class="footer-bottom">
 
 © 2026 LOXICA. All Rights Reserved.
@@ -686,7 +682,6 @@ Smart Products. Better Everyday Life.
 </div>
 
 </footer>
-
 
 <script>
 
@@ -705,7 +700,6 @@ params.get("price") || "0";
 
 const orderId =
 params.get("orderId") || "";
-
 
 document.getElementById("product").innerText =
 product;
@@ -738,12 +732,12 @@ option.classList.remove("selected");
 
 });
 
-
 element.classList.add("selected");
 
 selectedApp = app;
 
-document.getElementById("appMessage").style.display="none";
+document.getElementById("appMessage").style.display =
+"none";
 
 }
 
@@ -760,7 +754,6 @@ document.getElementById("payBtn");
 const message =
 document.getElementById("appMessage");
 
-
 paymentStarted = true;
 
 
@@ -770,7 +763,7 @@ const upiID =
 "8714917161@fam";
 
 
-/* Common UPI URL */
+/* COMMON UPI URL */
 
 const upiLink =
 "upi://pay?pa=" +
@@ -806,12 +799,10 @@ encodeURIComponent(product);
 }
 
 
-
-
-else if(selectedApp === "fampay"){
+else if(selectedApp === "phonepe"){
 
 appLink =
-"fampay://upi/pay?pa=" +
+"phonepe://pay?pa=" +
 encodeURIComponent(upiID) +
 "&pn=LOXICA" +
 "&am=" +
@@ -832,11 +823,10 @@ payBtn.disabled = true;
 payBtn.innerText =
 "Opening Payment...";
 
-
 pageLeft = true;
 
 
-/* Try selected payment app */
+/* TRY SELECTED PAYMENT APP */
 
 setTimeout(function(){
 
