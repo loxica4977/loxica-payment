@@ -29,7 +29,7 @@ min-height:100vh;
 
 
 /* =========================================
-   MAIN PAYMENT CONTAINER
+   MAIN
 ========================================= */
 
 .container{
@@ -58,9 +58,9 @@ letter-spacing:1px;
 }
 
 .secure{
-margin-top:5px;
 font-size:13px;
 color:#0a8f3d;
+margin-top:5px;
 }
 
 
@@ -69,10 +69,10 @@ color:#0a8f3d;
 ========================================= */
 
 .content{
-padding:20px;
+padding:18px;
 }
 
-.title{
+.page-title{
 font-size:22px;
 font-weight:bold;
 margin-bottom:18px;
@@ -88,18 +88,19 @@ border:1px solid #ddd;
 border-radius:10px;
 overflow:hidden;
 background:#fff;
+margin-bottom:16px;
 }
 
 .card-title{
-padding:14px 15px;
-font-size:16px;
-font-weight:bold;
 background:#f7f7f7;
 border-bottom:1px solid #ddd;
+padding:13px 15px;
+font-size:16px;
+font-weight:bold;
 }
 
-.order-details{
-padding:16px;
+.order-body{
+padding:15px;
 }
 
 .product-label{
@@ -109,7 +110,7 @@ margin-bottom:5px;
 }
 
 .product-name{
-font-size:18px;
+font-size:17px;
 font-weight:bold;
 line-height:1.4;
 }
@@ -118,73 +119,128 @@ line-height:1.4;
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-top:18px;
-padding-top:15px;
 border-top:1px solid #eee;
+margin-top:15px;
+padding-top:14px;
 }
 
-.total-label{
+.total{
 font-size:16px;
 font-weight:bold;
 }
 
 .price{
-font-size:25px;
+font-size:24px;
 font-weight:bold;
 color:#0a8f3d;
 }
 
 
 /* =========================================
-   PAYMENT METHOD
+   PAYMENT METHODS
 ========================================= */
 
-.payment-section{
-margin-top:18px;
+.payment-card{
 border:1px solid #ddd;
 border-radius:10px;
 overflow:hidden;
 }
 
-.payment-title{
-padding:14px 15px;
-font-size:16px;
-font-weight:bold;
+.payment-header{
 background:#f7f7f7;
 border-bottom:1px solid #ddd;
+padding:13px 15px;
+font-size:16px;
+font-weight:bold;
 }
 
-.upi-box{
-padding:16px;
-}
-
-.upi-header{
+.payment-option{
 display:flex;
 align-items:center;
 gap:12px;
-margin-bottom:12px;
+padding:15px;
+border-bottom:1px solid #eee;
+cursor:pointer;
+transition:.15s;
 }
 
-.upi-icon{
+.payment-option:last-child{
+border-bottom:none;
+}
+
+.payment-option:hover{
+background:#fafafa;
+}
+
+.payment-option.selected{
+background:#f6faff;
+}
+
+
+/* RADIO */
+
+.payment-option input{
+width:18px;
+height:18px;
+margin:0;
+accent-color:#2563EB;
+cursor:pointer;
+}
+
+
+/* ICON */
+
+.method-icon{
 width:42px;
 height:42px;
 border-radius:8px;
-background:#eef5ff;
 display:flex;
 align-items:center;
 justify-content:center;
-color:#2563EB;
-font-size:20px;
+font-size:19px;
+flex-shrink:0;
 }
 
-.upi-name{
-font-size:16px;
+.upi-icon{
+background:#eef5ff;
+color:#2563EB;
+}
+
+.gpay-icon{
+background:#f3f6ff;
+color:#4285F4;
+}
+
+.phonepe-icon{
+background:#f2eaff;
+color:#6739B7;
+}
+
+.fampay-icon{
+background:#eefcf4;
+color:#0a8f3d;
+}
+
+.other-icon{
+background:#f5f5f5;
+color:#555;
+}
+
+
+/* TEXT */
+
+.method-info{
+flex:1;
+}
+
+.method-name{
+font-size:15px;
 font-weight:bold;
 }
 
-.upi-sub{
-font-size:12px;
-color:#666;
+.method-sub{
+font-size:11px;
+color:#777;
 margin-top:3px;
 }
 
@@ -196,6 +252,7 @@ margin-top:3px;
 #payBtn{
 width:100%;
 padding:15px;
+margin-top:16px;
 border:none;
 border-radius:8px;
 background:#2563EB;
@@ -203,7 +260,6 @@ color:#fff;
 font-size:17px;
 font-weight:bold;
 cursor:pointer;
-margin-top:8px;
 }
 
 #payBtn:hover{
@@ -224,6 +280,7 @@ cursor:not-allowed;
 display:none;
 width:100%;
 padding:15px;
+margin-top:12px;
 border:none;
 border-radius:8px;
 background:#0a8f3d;
@@ -231,7 +288,6 @@ color:#fff;
 font-size:17px;
 font-weight:bold;
 cursor:pointer;
-margin-top:12px;
 }
 
 #paid:hover{
@@ -240,35 +296,35 @@ background:#087a34;
 
 
 /* =========================================
-   SECURITY NOTE
+   NOTE
+========================================= */
+
+.note{
+margin-top:14px;
+font-size:12px;
+line-height:1.5;
+color:#666;
+}
+
+
+/* =========================================
+   SECURITY
 ========================================= */
 
 .security{
-margin-top:18px;
+margin-top:16px;
 padding:13px;
-border-radius:8px;
 background:#f6fff9;
 border:1px solid #d8f1df;
+border-radius:8px;
 font-size:12px;
-color:#555;
 line-height:1.5;
+color:#555;
 }
 
 .security i{
 color:#0a8f3d;
 margin-right:5px;
-}
-
-
-/* =========================================
-   UPI NOTE
-========================================= */
-
-#upiNote{
-font-size:12px;
-line-height:1.5;
-color:#666;
-margin:14px 0 0;
 }
 
 
@@ -316,7 +372,6 @@ margin-bottom:10px;
 .feature h4{
 font-size:12px;
 margin:0 0 6px;
-color:#fff;
 }
 
 .feature p{
@@ -369,23 +424,15 @@ color:#777;
 @media(max-width:450px){
 
 .content{
-padding:18px;
+padding:16px;
 }
 
 .logo{
 font-size:28px;
 }
 
-.title{
+.page-title{
 font-size:21px;
-}
-
-.product-name{
-font-size:17px;
-}
-
-.price{
-font-size:24px;
 }
 
 }
@@ -398,7 +445,7 @@ font-size:24px;
 
 
 <!-- =========================================
-     PAYMENT PAGE
+     PAYMENT CONTAINER
 ========================================= -->
 
 <div class="container">
@@ -424,12 +471,14 @@ LOXICA
 <div class="content">
 
 
-<div class="title">
+<div class="page-title">
 Complete Your Payment
 </div>
 
 
-<!-- ORDER SUMMARY -->
+<!-- =========================================
+     ORDER SUMMARY
+========================================= -->
 
 <div class="order-card">
 
@@ -437,7 +486,7 @@ Complete Your Payment
 Order Summary
 </div>
 
-<div class="order-details">
+<div class="order-body">
 
 <div class="product-label">
 Product
@@ -452,8 +501,8 @@ Product Name
 
 <div class="price-row">
 
-<div class="total-label">
-Total Amount
+<div class="total">
+Order Total
 </div>
 
 <div
@@ -469,38 +518,184 @@ id="price">
 </div>
 
 
-<!-- PAYMENT METHOD -->
+<!-- =========================================
+     PAYMENT METHODS
+========================================= -->
 
-<div class="payment-section">
+<div class="payment-card">
 
-<div class="payment-title">
-Payment Method
+<div class="payment-header">
+Select Payment Method
 </div>
 
 
-<div class="upi-box">
+<!-- UPI -->
 
+<label
+class="payment-option selected"
+id="upiOption">
 
-<div class="upi-header">
+<input
+type="radio"
+name="paymentMethod"
+value="upi"
+checked>
 
-<div class="upi-icon">
+<div class="method-icon upi-icon">
+
 <i class="fa-solid fa-mobile-screen-button"></i>
-</div>
-
-<div>
-
-<div class="upi-name">
-UPI Payment
-</div>
-
-<div class="upi-sub">
-Pay securely using any UPI app
-</div>
 
 </div>
 
+<div class="method-info">
+
+<div class="method-name">
+UPI
 </div>
 
+<div class="method-sub">
+Google Pay, PhonePe, FamPay & other UPI apps
+</div>
+
+</div>
+
+</label>
+
+
+<!-- GOOGLE PAY -->
+
+<label
+class="payment-option"
+id="gpayOption">
+
+<input
+type="radio"
+name="paymentMethod"
+value="gpay">
+
+<div class="method-icon gpay-icon">
+
+<i class="fa-brands fa-google"></i>
+
+</div>
+
+<div class="method-info">
+
+<div class="method-name">
+Google Pay
+</div>
+
+<div class="method-sub">
+Pay using Google Pay
+</div>
+
+</div>
+
+</label>
+
+
+<!-- PHONEPE -->
+
+<label
+class="payment-option"
+id="phonepeOption">
+
+<input
+type="radio"
+name="paymentMethod"
+value="phonepe">
+
+<div class="method-icon phonepe-icon">
+
+<i class="fa-solid fa-mobile-screen-button"></i>
+
+</div>
+
+<div class="method-info">
+
+<div class="method-name">
+PhonePe
+</div>
+
+<div class="method-sub">
+Pay using PhonePe
+</div>
+
+</div>
+
+</label>
+
+
+<!-- FAMPAY -->
+
+<label
+class="payment-option"
+id="fampayOption">
+
+<input
+type="radio"
+name="paymentMethod"
+value="fampay">
+
+<div class="method-icon fampay-icon">
+
+<i class="fa-solid fa-wallet"></i>
+
+</div>
+
+<div class="method-info">
+
+<div class="method-name">
+FamPay
+</div>
+
+<div class="method-sub">
+Pay using FamPay
+</div>
+
+</div>
+
+</label>
+
+
+<!-- OTHER UPI -->
+
+<label
+class="payment-option"
+id="otherOption">
+
+<input
+type="radio"
+name="paymentMethod"
+value="other">
+
+<div class="method-icon other-icon">
+
+<i class="fa-solid fa-qrcode"></i>
+
+</div>
+
+<div class="method-info">
+
+<div class="method-name">
+Other UPI App
+</div>
+
+<div class="method-sub">
+Choose another UPI app
+</div>
+
+</div>
+
+</label>
+
+
+</div>
+
+
+<!-- =========================================
+     PAY BUTTON
+========================================= -->
 
 <button
 id="payBtn"
@@ -511,6 +706,8 @@ Pay Now 💳
 </button>
 
 
+<!-- PAID -->
+
 <button
 id="paid"
 onclick="orderSuccess()">
@@ -520,16 +717,13 @@ I Have Paid ✅
 </button>
 
 
-<p id="upiNote">
+<!-- NOTE -->
 
-<b>Note:</b> Tap <b>Pay Now</b> to open your UPI app.
-After completing the payment, return to this page and tap
-<b>I Have Paid</b>.
+<div class="note">
 
-</p>
-
-
-</div>
+After clicking <b>Pay Now</b>, your phone may open
+the selected/available UPI app. Complete the payment
+and return to this page.
 
 </div>
 
@@ -540,8 +734,10 @@ After completing the payment, return to this page and tap
 
 <i class="fa-solid fa-shield-halved"></i>
 
-Your payment is processed through UPI.
-Never share your UPI PIN or OTP with anyone.
+<b>Secure Payment</b><br>
+
+Never share your UPI PIN, OTP or banking password
+with anyone.
 
 </div>
 
@@ -649,7 +845,7 @@ Smart Products. Better Everyday Life.
 
 
 /* =========================================
-   GET URL PARAMETERS
+   URL PARAMETERS
 ========================================= */
 
 const params =
@@ -665,7 +861,7 @@ params.get("price") || "0";
 
 
 /* =========================================
-   SHOW PRODUCT + PRICE
+   DISPLAY PRODUCT
 ========================================= */
 
 document.getElementById("product").innerText =
@@ -686,10 +882,53 @@ let pageLeft = false;
 
 
 /* =========================================
+   PAYMENT OPTION SELECTION
+========================================= */
+
+const options =
+document.querySelectorAll(
+".payment-option"
+);
+
+
+options.forEach(function(option){
+
+option.addEventListener("click",function(){
+
+options.forEach(function(item){
+
+item.classList.remove("selected");
+
+});
+
+
+option.classList.add("selected");
+
+});
+
+});
+
+
+/* =========================================
    PAY NOW
 ========================================= */
 
 function payNow(){
+
+const selected =
+document.querySelector(
+'input[name="paymentMethod"]:checked'
+);
+
+
+if(!selected){
+
+alert("Please select a payment method.");
+
+return;
+
+}
+
 
 paymentStarted = true;
 
@@ -704,15 +943,24 @@ payBtn.innerText =
 "Opening UPI...";
 
 
+/* =========================================
+   YOUR UPI ID
+========================================= */
+
 const upiID =
 "8714917161@fam";
 
 
+/* =========================================
+   UPI PAYMENT LINK
+========================================= */
+
 const upiLink =
 "upi://pay?pa=" +
-upiID +
+encodeURIComponent(upiID) +
 
-"&pn=LOXICA" +
+"&pn=" +
+encodeURIComponent("LOXICA") +
 
 "&am=" +
 encodeURIComponent(price) +
@@ -723,7 +971,9 @@ encodeURIComponent(price) +
 encodeURIComponent(product);
 
 
-/* Open UPI */
+/* =========================================
+   OPEN UPI
+========================================= */
 
 setTimeout(function(){
 
@@ -738,7 +988,7 @@ upiLink;
 
 
 /* =========================================
-   CUSTOMER RETURNS FROM UPI
+   RETURN FROM UPI
 ========================================= */
 
 document.addEventListener(
