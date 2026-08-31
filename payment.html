@@ -19,271 +19,237 @@ font-family:Arial,Helvetica,sans-serif;
 
 body{
 margin:0;
-background:#f3f3f3;
-color:#111;
+padding:0;
+background:#f5f5f5;
 display:flex;
 flex-direction:column;
 align-items:center;
 min-height:100vh;
 }
 
+
+/* ================= PAYMENT CONTAINER ================= */
+
 .container{
 width:100%;
 max-width:430px;
 background:#fff;
-min-height:100vh;
-box-shadow:0 5px 25px rgba(0,0,0,.12);
+padding:18px 20px 25px;
+box-shadow:0 10px 30px rgba(0,0,0,.12);
 }
 
-/* HEADER */
 
-.header{
-padding:18px 20px;
-border-bottom:1px solid #ddd;
-background:#fff;
-}
+/* ================= LOGO ================= */
 
 .logo{
-font-size:30px;
+text-align:center;
+font-size:32px;
 font-weight:bold;
 letter-spacing:1px;
+color:#111;
+margin-bottom:12px;
 }
+
+
+/* ================= SECURE ================= */
 
 .secure{
-margin-top:5px;
-font-size:13px;
+text-align:center;
 color:#0a8f3d;
-}
-
-/* CONTENT */
-
-.content{
-padding:20px;
-}
-
-.title{
-font-size:22px;
+font-size:15px;
 font-weight:bold;
-margin-bottom:18px;
+margin-bottom:20px;
 }
 
-/* ORDER */
 
-.order-card{
-border:1px solid #ddd;
-border-radius:10px;
-overflow:hidden;
-background:#fff;
-}
+/* ================= PRODUCT ================= */
 
-.card-title{
-padding:14px 15px;
-font-size:16px;
+#product{
+text-align:center;
+font-size:20px;
 font-weight:bold;
-background:#f7f7f7;
-border-bottom:1px solid #ddd;
-}
-
-.order-details{
-padding:16px;
-}
-
-.product-label{
-font-size:12px;
-color:#666;
-margin-bottom:5px;
-}
-
-.product-name{
-font-size:18px;
-font-weight:bold;
-line-height:1.4;
-}
-
-.price-row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-top:18px;
-padding-top:15px;
-border-top:1px solid #eee;
-}
-
-.total-label{
-font-size:16px;
-font-weight:bold;
+color:#111;
+margin-bottom:8px;
 }
 
 .price{
-font-size:25px;
+text-align:center;
+font-size:30px;
 font-weight:bold;
 color:#0a8f3d;
+margin-bottom:22px;
 }
 
-/* PAYMENT */
 
-.payment-section{
-margin-top:18px;
-border:1px solid #ddd;
-border-radius:10px;
-overflow:hidden;
-}
+/* ================= SECTION ================= */
 
-.payment-title{
-padding:14px 15px;
-font-size:16px;
+.section-title{
+font-size:17px;
 font-weight:bold;
-background:#f7f7f7;
-border-bottom:1px solid #ddd;
+margin-bottom:12px;
+color:#111;
 }
 
-.payment-box{
-padding:15px;
+
+/* ================= UPI OPTIONS ================= */
+
+.upi-options{
+border:1px solid #ddd;
+border-radius:12px;
+overflow:hidden;
+background:#fff;
 }
 
-/* APP OPTIONS */
 
 .upi-option{
 display:flex;
 align-items:center;
-padding:14px 12px;
-border:1px solid #ddd;
-border-radius:9px;
-margin-bottom:10px;
+padding:15px;
+border-bottom:1px solid #eee;
 cursor:pointer;
-background:#fff;
 transition:.2s;
 }
+
+
+.upi-option:last-child{
+border-bottom:none;
+}
+
 
 .upi-option:hover{
 background:#f7f7f7;
 }
 
+
 .upi-option.selected{
-border:2px solid #2563EB;
-background:#f5f8ff;
+background:#f0f7ff;
 }
 
-.radio{
-width:20px;
-height:20px;
-border:2px solid #999;
-border-radius:50%;
-margin-right:12px;
+
+.app-icon{
+width:44px;
+height:44px;
+border-radius:10px;
 display:flex;
 align-items:center;
 justify-content:center;
-flex-shrink:0;
+font-size:22px;
+font-weight:bold;
+margin-right:14px;
+background:#eee;
 }
+
+
+.gpay{
+color:#4285F4;
+}
+
+
+.phonepe{
+color:#5f259f;
+}
+
+
+.fampay{
+color:#111;
+}
+
+
+.app-info{
+flex:1;
+}
+
+
+.app-name{
+font-size:16px;
+font-weight:bold;
+color:#111;
+}
+
+
+.app-sub{
+font-size:12px;
+color:#777;
+margin-top:3px;
+}
+
+
+.radio{
+width:21px;
+height:21px;
+border:2px solid #aaa;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
 
 .upi-option.selected .radio{
 border-color:#2563EB;
 }
 
+
 .upi-option.selected .radio::after{
 content:"";
-width:10px;
-height:10px;
+width:11px;
+height:11px;
 background:#2563EB;
 border-radius:50%;
 }
 
-.app-icon{
-width:42px;
-height:42px;
-border-radius:9px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:20px;
-margin-right:12px;
-background:#f1f1f1;
-}
 
-.app-name{
-font-size:15px;
-font-weight:bold;
-}
-
-.app-sub{
-font-size:11px;
-color:#777;
-margin-top:3px;
-}
-
-/* PAY BUTTON */
+/* ================= PAY BUTTON ================= */
 
 #payBtn{
 width:100%;
 padding:15px;
+margin-top:18px;
 border:none;
-border-radius:8px;
+border-radius:10px;
 background:#2563EB;
 color:#fff;
-font-size:17px;
+font-size:18px;
 font-weight:bold;
 cursor:pointer;
-margin-top:8px;
 }
 
-#payBtn:hover{
-background:#1d4ed8;
-}
 
 #payBtn:disabled{
 opacity:.7;
 cursor:not-allowed;
 }
 
-/* PAID */
+
+/* ================= PAID BUTTON ================= */
 
 #paid{
 display:none;
 width:100%;
 padding:15px;
+margin-top:12px;
 border:none;
-border-radius:8px;
+border-radius:10px;
 background:#0a8f3d;
 color:#fff;
-font-size:17px;
+font-size:18px;
 font-weight:bold;
 cursor:pointer;
-margin-top:12px;
 }
 
-/* MESSAGE */
 
-#appMessage{
-display:none;
-margin-top:12px;
-padding:11px;
-border-radius:8px;
-background:#fff8e6;
-border:1px solid #f1d48a;
-font-size:12px;
+/* ================= MESSAGE ================= */
+
+#status{
+text-align:center;
+font-size:13px;
+color:#666;
 line-height:1.5;
-color:#555;
+margin-top:13px;
 }
 
-/* SECURITY */
 
-.security{
-margin-top:18px;
-padding:13px;
-border-radius:8px;
-background:#f6fff9;
-border:1px solid #d8f1df;
-font-size:12px;
-color:#555;
-line-height:1.5;
-}
-
-.security i{
-color:#0a8f3d;
-margin-right:5px;
-}
-
-/* FOOTER */
+/* ================= FOOTER ================= */
 
 .footer{
 width:100%;
@@ -292,15 +258,16 @@ background:#111;
 color:#fff;
 }
 
+
 .footer-features{
 display:grid;
 grid-template-columns:1fr 1fr;
 }
 
+
 .feature{
 min-height:140px;
 padding:18px 8px;
-background:#111;
 border:1px solid #222;
 display:flex;
 flex-direction:column;
@@ -309,24 +276,26 @@ justify-content:center;
 text-align:center;
 }
 
+
 .feature-icon{
-width:46px;
-height:46px;
+width:48px;
+height:48px;
 border:2px solid #0066ff;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:19px;
+font-size:20px;
 color:#0066ff;
 margin-bottom:10px;
 }
 
+
 .feature h4{
 font-size:12px;
-margin:0 0 6px;
-color:#fff;
+margin:0 0 7px;
 }
+
 
 .feature p{
 font-size:10px;
@@ -335,53 +304,47 @@ color:#aaa;
 margin:0;
 }
 
+
 .footer-brand{
 text-align:center;
-padding:22px 15px 18px;
+padding:22px 15px;
 border-top:1px solid #222;
 }
+
 
 .footer-brand h2{
 margin:0 0 6px;
-font-size:23px;
+font-size:24px;
 }
+
 
 .footer-brand p{
 margin:0;
-font-size:11px;
+font-size:12px;
 color:#aaa;
 }
 
+
 .footer-bottom{
 text-align:center;
-padding:14px 10px;
+padding:14px;
 border-top:1px solid #222;
-font-size:10px;
-color:#777;
+font-size:11px;
+color:#888;
 }
 
-/* MOBILE */
+
+/* ================= MOBILE ================= */
 
 @media(max-width:450px){
 
-.content{
-padding:18px;
+.container{
+padding-left:18px;
+padding-right:18px;
 }
 
 .logo{
-font-size:28px;
-}
-
-.title{
-font-size:21px;
-}
-
-.product-name{
-font-size:17px;
-}
-
-.price{
-font-size:24px;
+font-size:30px;
 }
 
 }
@@ -390,244 +353,147 @@ font-size:24px;
 
 </head>
 
+
 <body>
 
 
+<!-- ================= PAYMENT ================= -->
+
 <div class="container">
-
-<!-- HEADER -->
-
-<div class="header">
 
 <div class="logo">
 LOXICA
 </div>
 
+
 <div class="secure">
-🔒 Secure Checkout
-</div>
-
-</div>
-
-
-<div class="content">
-
-<div class="title">
-Complete Your Payment
+🔒 Secure UPI Payment
 </div>
 
 
-<!-- ORDER SUMMARY -->
-
-<div class="order-card">
-
-<div class="card-title">
-Order Summary
-</div>
-
-<div class="order-details">
-
-<div class="product-label">
-Product
-</div>
-
-<div class="product-name" id="product">
+<div id="product">
 Product Name
 </div>
 
-<div class="price-row">
-
-<div class="total-label">
-Total Amount
-</div>
 
 <div class="price" id="price">
 ₹0
 </div>
 
-</div>
 
-</div>
-
-</div>
-
-
-<!-- PAYMENT METHOD -->
-
-<div class="payment-section">
-
-<div class="payment-title">
-Choose Payment Method
+<div class="section-title">
+Select UPI App
 </div>
 
 
-<div class="payment-box">
+<div class="upi-options">
 
 
 <!-- GOOGLE PAY -->
 
-<div
-class="upi-option"
+<div class="upi-option selected"
 data-app="gpay"
-onclick="selectApp(this,'gpay')"
->
+onclick="selectApp('gpay',this)">
 
-<div class="radio"></div>
-
-<div class="app-icon">
+<div class="app-icon gpay">
 <i class="fa-brands fa-google"></i>
 </div>
 
-<div>
+<div class="app-info">
 
 <div class="app-name">
 Google Pay
 </div>
 
 <div class="app-sub">
-Pay using Google Pay
+Pay securely using Google Pay
 </div>
 
 </div>
+
+<div class="radio"></div>
 
 </div>
 
 
 <!-- PHONEPE -->
 
-<div
-class="upi-option"
+<div class="upi-option"
 data-app="phonepe"
-onclick="selectApp(this,'phonepe')"
->
+onclick="selectApp('phonepe',this)">
 
-<div class="radio"></div>
-
-<div class="app-icon">
+<div class="app-icon phonepe">
 <i class="fa-solid fa-mobile-screen-button"></i>
 </div>
 
-<div>
+<div class="app-info">
 
 <div class="app-name">
 PhonePe
 </div>
 
 <div class="app-sub">
-Pay using PhonePe
+Pay securely using PhonePe
 </div>
 
 </div>
+
+<div class="radio"></div>
 
 </div>
 
 
 <!-- FAMPAY -->
 
-<div
-class="upi-option"
+<div class="upi-option"
 data-app="fampay"
-onclick="selectApp(this,'fampay')"
->
+onclick="selectApp('fampay',this)">
 
-<div class="radio"></div>
-
-<div class="app-icon">
+<div class="app-icon fampay">
 <i class="fa-solid fa-wallet"></i>
 </div>
 
-<div>
+<div class="app-info">
 
 <div class="app-name">
 FamPay
 </div>
 
 <div class="app-sub">
-Pay using FamPay
+Pay securely using FamPay
 </div>
 
 </div>
-
-</div>
-
-
-<!-- OTHER UPI -->
-
-<div
-class="upi-option selected"
-data-app="upi"
-onclick="selectApp(this,'upi')"
->
 
 <div class="radio"></div>
 
-<div class="app-icon">
-<i class="fa-solid fa-qrcode"></i>
 </div>
 
-<div>
-
-<div class="app-name">
-Other UPI Apps
-</div>
-
-<div class="app-sub">
-Use any available UPI app
-</div>
-
-</div>
 
 </div>
 
 
-<button
-id="payBtn"
-onclick="payNow()"
->
-
+<button id="payBtn" onclick="payNow()">
 Pay Now 💳
-
 </button>
 
 
-<div id="appMessage"></div>
-
-
-<button
-id="paid"
-onclick="orderSuccess()"
->
-
+<button id="paid" onclick="orderSuccess()">
 I Have Paid ✅
-
 </button>
 
 
+<div id="status">
+Select your UPI app and tap Pay Now.
 </div>
 
 </div>
 
 
-<!-- SECURITY -->
-
-<div class="security">
-
-<i class="fa-solid fa-shield-halved"></i>
-
-Your payment is processed through UPI.
-Never share your UPI PIN or OTP with anyone.
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 
 <footer class="footer">
+
 
 <div class="footer-features">
 
@@ -691,6 +557,7 @@ Discover trending products and collections.
 
 </div>
 
+
 </div>
 
 
@@ -716,18 +583,20 @@ Smart Products. Better Everyday Life.
 
 <script>
 
-/* =========================================
-   URL PARAMETERS
-========================================= */
+
+/* ================= PARAMETERS ================= */
 
 const params =
 new URLSearchParams(window.location.search);
 
+
 const product =
 params.get("product") || "Product Name";
 
+
 const price =
 params.get("price") || "0";
+
 
 const orderId =
 params.get("orderId") || "";
@@ -736,135 +605,65 @@ params.get("orderId") || "";
 document.getElementById("product").innerText =
 product;
 
+
 document.getElementById("price").innerText =
 "₹" + price;
 
 
-/* =========================================
-   SELECTED APP
-========================================= */
+/* ================= UPI ID ================= */
 
-let selectedApp = "upi";
+const upiID =
+"8714917161@fam";
+
+
+/* ================= SELECTED APP ================= */
+
+let selectedApp = "gpay";
 
 let paymentStarted = false;
-let pageLeft = false;
 
 
-/* =========================================
-   SELECT PAYMENT APP
-========================================= */
+/* ================= SELECT APP ================= */
 
-function selectApp(element,app){
+function selectApp(app,element){
+
+selectedApp = app;
+
+
+/* Remove selected from all */
 
 document
 .querySelectorAll(".upi-option")
-.forEach(function(option){
+.forEach(option=>{
 
 option.classList.remove("selected");
 
 });
 
 
+/* Select clicked option */
+
 element.classList.add("selected");
 
-selectedApp = app;
-
-document.getElementById("appMessage").style.display="none";
 
 }
 
 
-/* =========================================
-   PAY NOW
-========================================= */
+/* ================= PAY NOW ================= */
 
 function payNow(){
 
 const payBtn =
 document.getElementById("payBtn");
 
-const message =
-document.getElementById("appMessage");
+const status =
+document.getElementById("status");
 
 
 paymentStarted = true;
 
 
-/* UPI ID */
-
-const upiID =
-"8714917161@fam";
-
-
-/* Common UPI URL */
-
-const upiLink =
-"upi://pay?pa=" +
-encodeURIComponent(upiID) +
-"&pn=" +
-encodeURIComponent("LOXICA") +
-"&am=" +
-encodeURIComponent(price) +
-"&cu=INR" +
-"&tn=" +
-encodeURIComponent(product);
-
-
-/* =========================================
-   APP-SPECIFIC LINKS
-========================================= */
-
-let appLink = upiLink;
-
-
-if(selectedApp === "gpay"){
-
-appLink =
-"tez://upi/pay?pa=" +
-encodeURIComponent(upiID) +
-"&pn=LOXICA" +
-"&am=" +
-encodeURIComponent(price) +
-"&cu=INR" +
-"&tn=" +
-encodeURIComponent(product);
-
-}
-
-
-else if(selectedApp === "phonepe"){
-
-appLink =
-"phonepe://pay?pa=" +
-encodeURIComponent(upiID) +
-"&pn=LOXICA" +
-"&am=" +
-encodeURIComponent(price) +
-"&cu=INR" +
-"&tn=" +
-encodeURIComponent(product);
-
-}
-
-
-else if(selectedApp === "fampay"){
-
-appLink =
-"fampay://upi/pay?pa=" +
-encodeURIComponent(upiID) +
-"&pn=LOXICA" +
-"&am=" +
-encodeURIComponent(price) +
-"&cu=INR" +
-"&tn=" +
-encodeURIComponent(product);
-
-}
-
-
-/* =========================================
-   BUTTON
-========================================= */
+/* Disable */
 
 payBtn.disabled = true;
 
@@ -872,42 +671,129 @@ payBtn.innerText =
 "Opening Payment...";
 
 
-pageLeft = true;
+/*
+IMPORTANT:
+
+UPI intent is created with the
+same merchant UPI ID.
+
+The selected app is used only
+for the user's choice/interface.
+
+*/
+
+const upiLink =
+"upi://pay" +
+"?pa=" + encodeURIComponent(upiID) +
+"&pn=" + encodeURIComponent("LOXICA") +
+"&am=" + encodeURIComponent(price) +
+"&cu=INR" +
+"&tn=" + encodeURIComponent(product);
 
 
-/* Try selected payment app */
+/* App-specific attempt */
 
-setTimeout(function(){
-
-window.location.href = appLink;
-
-},100);
+let appLink = upiLink;
 
 
-/* =========================================
-   SHOW RETURN MESSAGE
-========================================= */
+/*
+Google Pay
 
-setTimeout(function(){
+On many Android phones Google Pay
+accepts the normal UPI intent.
+*/
 
-message.style.display = "block";
+if(selectedApp === "gpay"){
 
-message.innerHTML =
-"Didn't open? Make sure the selected UPI app is installed, or choose <b>Other UPI Apps</b> and try again.";
-
-payBtn.disabled = false;
-
-payBtn.innerText =
-"Pay Now Again 💳";
-
-},2500);
+appLink =
+"tez://upi/pay" +
+"?pa=" + encodeURIComponent(upiID) +
+"&pn=" + encodeURIComponent("LOXICA") +
+"&am=" + encodeURIComponent(price) +
+"&cu=INR" +
+"&tn=" + encodeURIComponent(product);
 
 }
 
 
-/* =========================================
-   CUSTOMER RETURNS
-========================================= */
+/*
+PhonePe
+
+PhonePe can use its UPI intent.
+*/
+
+else if(selectedApp === "phonepe"){
+
+appLink =
+"phonepe://pay" +
+"?pa=" + encodeURIComponent(upiID) +
+"&pn=" + encodeURIComponent("LOXICA") +
+"&am=" + encodeURIComponent(price) +
+"&cu=INR" +
+"&tn=" + encodeURIComponent(product);
+
+}
+
+
+/*
+FamPay
+
+Use normal UPI intent because
+FamPay may register itself as
+a UPI handler.
+*/
+
+else if(selectedApp === "fampay"){
+
+appLink =
+upiLink;
+
+}
+
+
+/* Status */
+
+status.innerText =
+"Opening " +
+(
+selectedApp === "gpay"
+? "Google Pay"
+: selectedApp === "phonepe"
+? "PhonePe"
+: "FamPay"
+) +
+"...";
+
+
+/* Try selected app */
+
+window.location.href = appLink;
+
+
+/*
+Fallback:
+
+If app-specific scheme does not work,
+try normal UPI intent.
+*/
+
+setTimeout(function(){
+
+if(
+document.visibilityState === "visible"
+){
+
+window.location.href =
+upiLink;
+
+}
+
+},1500);
+
+}
+
+
+/* ================= RETURN FROM UPI ================= */
 
 document.addEventListener(
 "visibilitychange",
@@ -915,8 +801,7 @@ function(){
 
 if(
 document.visibilityState === "visible" &&
-paymentStarted &&
-pageLeft
+paymentStarted
 ){
 
 setTimeout(function(){
@@ -924,13 +809,20 @@ setTimeout(function(){
 document.getElementById("paid")
 .style.display = "block";
 
+
 const payBtn =
 document.getElementById("payBtn");
+
 
 payBtn.disabled = false;
 
 payBtn.innerText =
 "Pay Now Again 💳";
+
+
+document.getElementById("status")
+.innerText =
+"If payment is completed, tap I Have Paid.";
 
 },500);
 
@@ -939,9 +831,7 @@ payBtn.innerText =
 });
 
 
-/* =========================================
-   I HAVE PAID
-========================================= */
+/* ================= SUCCESS ================= */
 
 function orderSuccess(){
 
@@ -952,6 +842,7 @@ encodeURIComponent(orderId);
 }
 
 </script>
+
 
 </body>
 </html>
