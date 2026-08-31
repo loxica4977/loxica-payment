@@ -522,33 +522,7 @@ Pay using PhonePe
 </div>
 
 
-<!-- FAMPAY -->
 
-<div
-class="upi-option"
-data-app="fampay"
-onclick="selectApp(this,'fampay')"
->
-
-<div class="radio"></div>
-
-<div class="app-icon">
-<i class="fa-solid fa-wallet"></i>
-</div>
-
-<div>
-
-<div class="app-name">
-FamPay
-</div>
-
-<div class="app-sub">
-Pay using FamPay
-</div>
-
-</div>
-
-</div>
 
 
 <!-- OTHER UPI -->
@@ -832,19 +806,6 @@ encodeURIComponent(product);
 }
 
 
-else if(selectedApp === "phonepe"){
-
-appLink =
-"phonepe://pay?pa=" +
-encodeURIComponent(upiID) +
-"&pn=LOXICA" +
-"&am=" +
-encodeURIComponent(price) +
-"&cu=INR" +
-"&tn=" +
-encodeURIComponent(product);
-
-}
 
 
 else if(selectedApp === "fampay"){
