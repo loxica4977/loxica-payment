@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -165,13 +164,8 @@ border:2px solid #2563EB;
 background:#f5f8ff;
 }
 
-/* DISABLED */
-
-.payment-box.disabled{
+.upi-option.disabled{
 opacity:.5;
-}
-
-.payment-box.disabled .upi-option{
 pointer-events:none;
 cursor:not-allowed;
 }
@@ -237,9 +231,10 @@ color:#555;
 text-align:center;
 }
 
-/* PAY BUTTON */
+/* PAY NOW */
 
 #payBtn{
+display:block;
 width:100%;
 padding:15px;
 border:none;
@@ -276,8 +271,7 @@ font-weight:bold;
 cursor:pointer;
 margin-top:12px;
 position:relative;
-z-index:9999;
-pointer-events:auto;
+z-index:20;
 }
 
 #paid:hover{
@@ -603,7 +597,7 @@ Pay Now 💳
 </button>
 
 
-<!-- APP MESSAGE -->
+<!-- MESSAGE -->
 
 <div id="appMessage"></div>
 
@@ -763,8 +757,14 @@ document.getElementById("price").innerText =
 
 let selectedApp = "upi";
 
-let paymentStarted = false;
+/*
+IMPORTANT:
 
+false = Pay Now visible
+true  = UPI was opened and user returned
+*/
+
+let paymentStarted = false;
 let returnedFromUPI = false;
 
 
@@ -774,7 +774,7 @@ let returnedFromUPI = false;
 
 function selectApp(element,app){
 
-if(paymentStarted || returnedFromUPI){
+if(returnedFromUPI){
 return;
 }
 
@@ -806,23 +806,23 @@ if(paymentStarted){
 return;
 }
 
-const payBtn =
-document.getElementById("payBtn");
 
-const message =
-document.getElementById("appMessage");
-
+/* Mark payment as started */
 
 paymentStarted = true;
 
 
-/* UPI ID */
+/* =========================================
+   UPI ID
+========================================= */
 
 const upiID =
 "8714917161@fam";
 
 
-/* COMMON UPI */
+/* =========================================
+   COMMON UPI LINK
+========================================= */
 
 const upiLink =
 "upi://pay?pa=" +
@@ -836,12 +836,12 @@ encodeURIComponent(price) +
 encodeURIComponent(product);
 
 
-/* APP LINK */
+/* =========================================
+   SELECT APP LINK
+========================================= */
 
 let appLink = upiLink;
 
-
-/* GOOGLE PAY */
 
 if(selectedApp === "gpay"){
 
@@ -858,9 +858,7 @@ encodeURIComponent(product);
 }
 
 
-/* PHONEPE */
-
-if(selectedApp === "phonepe"){
+else if(selectedApp === "phonepe"){
 
 appLink =
 "phonepe://pay?pa=" +
@@ -875,7 +873,12 @@ encodeURIComponent(product);
 }
 
 
-/* BUTTON */
+/* =========================================
+   PAY BUTTON
+========================================= */
+
+const payBtn =
+document.getElementById("payBtn");
 
 payBtn.disabled = true;
 
@@ -883,31 +886,20 @@ payBtn.innerText =
 "Opening Payment...";
 
 
-/*
-IMPORTANT:
-
-Store payment state.
-
-This helps when browser
-returns from UPI app.
-*/
-
-sessionStorage.setItem(
-"loxica_payment_started_" + orderId,
-"true"
-);
-
-
-/* OPEN UPI */
+/* =========================================
+   OPEN UPI
+========================================= */
 
 setTimeout(function(){
 
 window.location.href = appLink;
 
-},200);
+},100);
 
 
-/* FALLBACK */
+/* =========================================
+   FALLBACK
+========================================= */
 
 setTimeout(function(){
 
@@ -916,52 +908,53 @@ document.visibilityState === "visible" &&
 !returnedFromUPI
 ){
 
-message.style.display = "block";
+/*
+UPI app probably did not open.
+Allow Pay Now again.
+*/
 
-message.innerHTML =
-"Didn't open? Make sure the selected UPI app is installed.";
+paymentStarted = false;
 
 payBtn.disabled = false;
 
 payBtn.innerText =
 "Pay Now 💳";
 
-paymentStarted = false;
+document.getElementById("appMessage")
+.style.display = "block";
+
+document.getElementById("appMessage")
+.innerHTML =
+"Didn't open? Please make sure a UPI app is installed.";
 
 }
 
-},4000);
+},3500);
 
 }
 
 
 /* =========================================
-   SHOW RETURNED STATE
+   USER RETURNED FROM UPI
 ========================================= */
 
 function handleUPIReturn(){
+
+if(!paymentStarted){
+return;
+}
 
 if(returnedFromUPI){
 return;
 }
 
+
+/*
+IMPORTANT:
+Only now change the UI.
+*/
+
 returnedFromUPI = true;
-
-
-/* SHOW I HAVE PAID */
-
-const paidBtn =
-document.getElementById("paid");
-
-paidBtn.style.display = "block";
-
-paidBtn.disabled = false;
-
-paidBtn.removeAttribute("disabled");
-
-paidBtn.style.pointerEvents = "auto";
-
-paidBtn.style.cursor = "pointer";
 
 
 /* HIDE PAY NOW */
@@ -969,20 +962,37 @@ paidBtn.style.cursor = "pointer";
 const payBtn =
 document.getElementById("payBtn");
 
-payBtn.style.display = "none";
+payBtn.style.display =
+"none";
 
 
-/* HIDE MESSAGE */
+/* SHOW I HAVE PAID */
 
-document.getElementById("appMessage")
-.style.display = "none";
+const paidBtn =
+document.getElementById("paid");
+
+paidBtn.style.display =
+"block";
+
+paidBtn.disabled = false;
 
 
 /* DISABLE PAYMENT OPTIONS */
 
 document
-.getElementById("paymentBox")
-.classList.add("disabled");
+.querySelectorAll(".upi-option")
+.forEach(function(option){
+
+option.classList.add("disabled");
+
+});
+
+
+/* HIDE MESSAGE */
+
+document.getElementById("appMessage")
+.style.display =
+"none";
 
 
 /* CHANGE INSTRUCTION */
@@ -1004,35 +1014,19 @@ function(){
 
 if(
 document.visibilityState === "visible" &&
-paymentStarted
+paymentStarted &&
+!returnedFromUPI
 ){
 
-setTimeout(function(){
-
-handleUPIReturn();
-
-},1000);
-
-}
-
-});
-
-
-/* =========================================
-   WINDOW FOCUS
-========================================= */
-
-window.addEventListener(
-"focus",
-function(){
-
-if(paymentStarted){
+/*
+Wait briefly for browser/app transition.
+*/
 
 setTimeout(function(){
 
 handleUPIReturn();
 
-},500);
+},800);
 
 }
 
@@ -1047,29 +1041,22 @@ window.addEventListener(
 "pageshow",
 function(){
 
-const savedState =
-sessionStorage.getItem(
-"loxica_payment_started_" + orderId
-);
-
-
 /*
-If payment was started earlier
-and browser is visible,
+If browser returns from UPI,
 show I Have Paid.
 */
 
 if(
-savedState === "true" &&
-document.visibilityState === "visible" &&
-paymentStarted
+paymentStarted &&
+!returnedFromUPI &&
+document.visibilityState === "visible"
 ){
 
 setTimeout(function(){
 
 handleUPIReturn();
 
-},700);
+},800);
 
 }
 
@@ -1083,32 +1070,14 @@ handleUPIReturn();
 function showVerification(){
 
 /*
-Prevent accidental multiple clicks
-*/
-
-const paidBtn =
-document.getElementById("paid");
-
-paidBtn.disabled = true;
-
-paidBtn.innerText =
-"Opening Confirmation...";
-
-
-/*
-Order ID check
+Order ID required.
 */
 
 if(!orderId){
 
 alert(
-"Order ID is missing. Please contact LOXICA support."
+"Order ID is missing. Please go back and try again."
 );
-
-paidBtn.disabled = false;
-
-paidBtn.innerText =
-"I Have Paid ✅";
 
 return;
 
@@ -1116,35 +1085,18 @@ return;
 
 
 /*
-Clear payment state
+Go to Thank You page.
 */
 
-sessionStorage.removeItem(
-"loxica_payment_started_" + orderId
-);
-
-
-/*
-OPEN THANK YOU PAGE
-*/
-
-const thankYouURL =
+window.location.replace(
 "https://loxica4977.github.io/loxica-payment/thankyou.html" +
 "?orderId=" +
 encodeURIComponent(orderId) +
 "&product=" +
 encodeURIComponent(product) +
 "&price=" +
-encodeURIComponent(price);
-
-
-/*
-Use location.replace so
-payment page is not kept as
-a normal forward step.
-*/
-
-window.location.replace(thankYouURL);
+encodeURIComponent(price)
+);
 
 }
 
