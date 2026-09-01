@@ -284,36 +284,6 @@ line-height:1.5;
 color:#555;
 }
 
-/* ================= VERIFICATION ================= */
-
-#verificationMessage{
-display:none;
-margin-top:14px;
-padding:18px 14px;
-border-radius:10px;
-background:#f5f8ff;
-border:1px solid #dbe4ff;
-text-align:center;
-}
-
-.verification-icon{
-font-size:32px;
-margin-bottom:9px;
-}
-
-.verification-title{
-font-size:17px;
-font-weight:bold;
-color:#111;
-margin-bottom:8px;
-}
-
-.verification-text{
-font-size:12px;
-line-height:1.6;
-color:#666;
-}
-
 /* ================= SECURITY ================= */
 
 .security{
@@ -457,11 +427,13 @@ LOXICA
 
 </div>
 
+
 <div class="content">
 
 <div class="title">
 Complete Your Payment
 </div>
+
 
 <!-- ================= ORDER SUMMARY ================= -->
 
@@ -497,6 +469,7 @@ Total Amount
 
 </div>
 
+
 <!-- ================= PAYMENT METHOD ================= -->
 
 <div class="payment-section">
@@ -506,6 +479,7 @@ Choose Payment Method
 </div>
 
 <div class="payment-box">
+
 
 <!-- GOOGLE PAY -->
 
@@ -535,6 +509,7 @@ Pay using Google Pay
 
 </div>
 
+
 <!-- PHONEPE -->
 
 <div
@@ -563,6 +538,7 @@ Pay using PhonePe
 
 </div>
 
+
 <!-- OTHER UPI -->
 
 <div
@@ -584,11 +560,13 @@ Other UPI Apps
 </div>
 
 <div class="app-sub">
-Use any available UPI app</div>
-
+Use any available UPI app
 </div>
 
 </div>
+
+</div>
+
 
 <!-- ================= INSTRUCTION ================= -->
 
@@ -598,6 +576,7 @@ Select your preferred payment method and click
 <b>Pay Now</b> to continue.
 
 </div>
+
 
 <!-- ================= PAY BUTTON ================= -->
 
@@ -610,9 +589,11 @@ Pay Now 💳
 
 </button>
 
+
 <!-- ================= APP MESSAGE ================= -->
 
 <div id="appMessage"></div>
+
 
 <!-- ================= I HAVE PAID ================= -->
 
@@ -625,34 +606,11 @@ I Have Paid ✅
 
 </button>
 
-<!-- ================= VERIFICATION MESSAGE ================= -->
-
-<div id="verificationMessage">
-
-<div class="verification-icon">
-⏳
-</div>
-
-<div class="verification-title">
-Please Wait for Order Confirmation
-</div>
-
-<div class="verification-text">
-
-Your payment is being verified.<br><br>
-
-Please wait for order confirmation.<br>
-
-You will receive an order confirmation message
-on WhatsApp shortly.
 
 </div>
 
 </div>
 
-</div>
-
-</div>
 
 <!-- ================= SECURITY ================= -->
 
@@ -668,6 +626,7 @@ Never share your UPI PIN or OTP with anyone.
 </div>
 
 </div>
+
 
 <!-- ================= FOOTER ================= -->
 
@@ -689,6 +648,7 @@ Delivered safely to your doorstep.
 
 </div>
 
+
 <div class="feature">
 
 <div class="feature-icon">
@@ -703,6 +663,7 @@ Safe & secure UPI payments.
 
 </div>
 
+
 <div class="feature">
 
 <div class="feature-icon">
@@ -716,6 +677,7 @@ Fast dispatch and quick delivery.
 </p>
 
 </div>
+
 
 <div class="feature">
 
@@ -733,6 +695,7 @@ Discover trending products and collections.
 
 </div>
 
+
 <div class="footer-brand">
 
 <h2>LOXICA</h2>
@@ -743,6 +706,7 @@ Smart Products. Better Everyday Life.
 
 </div>
 
+
 <div class="footer-bottom">
 
 © 2026 LOXICA. All Rights Reserved.
@@ -750,6 +714,7 @@ Smart Products. Better Everyday Life.
 </div>
 
 </footer>
+
 
 <script>
 
@@ -825,7 +790,18 @@ const message =
 document.getElementById("appMessage");
 
 
-paymentStarted = true;
+/* Check price */
+
+if(!price || price === "0"){
+
+message.style.display = "block";
+
+message.innerText =
+"Payment amount is not available.";
+
+return;
+
+}
 
 
 /* UPI ID */
@@ -902,10 +878,15 @@ appLink = upiLink;
    BUTTON STATE
 ========================================= */
 
+paymentStarted = true;
+
 payBtn.disabled = true;
 
 payBtn.innerText =
 "Opening Payment...";
+
+
+/* Mark that user is leaving */
 
 pageLeft = true;
 
@@ -962,29 +943,22 @@ pageLeft
 
 setTimeout(function(){
 
-/*
-   SHOW I HAVE PAID
-*/
+/* Show I Have Paid */
 
 document.getElementById("paid")
 .style.display = "block";
 
 
-/*
-   HIDE PAY NOW
-*/
+/* Hide Pay Now */
 
 document.getElementById("payBtn")
 .style.display = "none";
 
 
-/*
-   HIDE FALLBACK
-*/
+/* Hide fallback */
 
 document.getElementById("appMessage")
 .style.display = "none";
-
 
 },500);
 
@@ -1000,19 +974,24 @@ document.getElementById("appMessage")
 function showVerification(){
 
 /*
-   Hide I Have Paid
+   Open Thank You page
+   with Order ID, Product and Price
 */
 
-document.getElementById("paid")
-.style.display = "none";
+const thankYouPage =
+"thankyou.html" +
+"?orderId=" +
+encodeURIComponent(orderId) +
+"&product=" +
+encodeURIComponent(product) +
+"&price=" +
+encodeURIComponent(price);
 
 
-/*
-   Show verification message
-*/
+/* Redirect */
 
-document.getElementById("verificationMessage")
-.style.display = "block";
+window.location.href =
+thankYouPage;
 
 }
 
