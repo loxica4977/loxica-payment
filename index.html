@@ -930,28 +930,23 @@ document.getElementById("summaryTotal").innerText =
    RESTORE SAVED DETAILS
 ================================================== */
 
-window.addEventListener("pageshow", function(event){
+window.addEventListener("pageshow", function(){
 
-    /*
-     * Browser Back ചെയ്തെത്തുമ്പോൾ
-     * old "Processing..." / "Opening Payment..."
-     * button state reset ചെയ്യുക.
-     */
+/*
+ * If there is NO session ID,
+ * this is a completely new checkout.
+ *
+ * Therefore DO NOT restore anything.
+ */
 
-    const submitBtn =
-        document.querySelector(".continue-btn");
+if(!storageKey){
 
-    if(submitBtn){
+clearCheckoutForm();
 
-        submitBtn.disabled = false;
+return;
 
-        submitBtn.style.background = "#111";
+}
 
-        submitBtn.innerHTML =
-            "Continue To Payment 💳";
-    }
-
-});
 
 /*
  * Get saved checkout for THIS session only.
