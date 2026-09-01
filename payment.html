@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -163,6 +163,18 @@ background:#f7f7f7;
 .upi-option.selected{
 border:2px solid #2563EB;
 background:#f5f8ff;
+}
+
+/* DISABLED AFTER RETURN */
+
+.upi-disabled{
+opacity:.5;
+pointer-events:none;
+cursor:not-allowed;
+}
+
+.upi-disabled .upi-option{
+cursor:not-allowed;
 }
 
 .radio{
@@ -427,13 +439,11 @@ LOXICA
 
 </div>
 
-
 <div class="content">
 
 <div class="title">
 Complete Your Payment
 </div>
-
 
 <!-- ================= ORDER SUMMARY ================= -->
 
@@ -469,7 +479,6 @@ Total Amount
 
 </div>
 
-
 <!-- ================= PAYMENT METHOD ================= -->
 
 <div class="payment-section">
@@ -478,16 +487,14 @@ Total Amount
 Choose Payment Method
 </div>
 
-<div class="payment-box">
-
+<div class="payment-box" id="paymentBox">
 
 <!-- GOOGLE PAY -->
 
 <div
 class="upi-option"
 data-app="gpay"
-onclick="selectApp(this,'gpay')"
->
+onclick="selectApp(this,'gpay')">
 
 <div class="radio"></div>
 
@@ -515,8 +522,7 @@ Pay using Google Pay
 <div
 class="upi-option"
 data-app="phonepe"
-onclick="selectApp(this,'phonepe')"
->
+onclick="selectApp(this,'phonepe')">
 
 <div class="radio"></div>
 
@@ -544,8 +550,7 @@ Pay using PhonePe
 <div
 class="upi-option selected"
 data-app="upi"
-onclick="selectApp(this,'upi')"
->
+onclick="selectApp(this,'upi')">
 
 <div class="radio"></div>
 
@@ -570,7 +575,7 @@ Use any available UPI app
 
 <!-- ================= INSTRUCTION ================= -->
 
-<div class="payment-instruction">
+<div class="payment-instruction" id="paymentInstruction">
 
 Select your preferred payment method and click
 <b>Pay Now</b> to continue.
@@ -582,8 +587,7 @@ Select your preferred payment method and click
 
 <button
 id="payBtn"
-onclick="payNow()"
->
+onclick="payNow()">
 
 Pay Now 💳
 
@@ -599,13 +603,11 @@ Pay Now 💳
 
 <button
 id="paid"
-onclick="showVerification()"
->
+onclick="showVerification()">
 
 I Have Paid ✅
 
 </button>
-
 
 </div>
 
@@ -735,8 +737,13 @@ const orderId =
 params.get("orderId") || "";
 
 
+/* DISPLAY PRODUCT */
+
 document.getElementById("product").innerText =
 product;
+
+
+/* DISPLAY PRICE */
 
 document.getElementById("price").innerText =
 "₹" + price;
@@ -758,6 +765,12 @@ let pageLeft = false;
 ========================================= */
 
 function selectApp(element,app){
+
+/* Don't allow selection after payment started */
+
+if(paymentStarted){
+return;
+}
 
 document
 .querySelectorAll(".upi-option")
@@ -790,27 +803,26 @@ const message =
 document.getElementById("appMessage");
 
 
-/* Check price */
+/* Prevent double click */
 
-if(!price || price === "0"){
-
-message.style.display = "block";
-
-message.innerText =
-"Payment amount is not available.";
-
+if(paymentStarted){
 return;
-
 }
 
+paymentStarted = true;
 
-/* UPI ID */
+
+/* =========================================
+   UPI ID
+========================================= */
 
 const upiID =
 "8714917161@fam";
 
 
-/* COMMON UPI LINK */
+/* =========================================
+   COMMON UPI LINK
+========================================= */
 
 const upiLink =
 "upi://pay?pa=" +
@@ -825,7 +837,7 @@ encodeURIComponent(product);
 
 
 /* =========================================
-   APP LINKS
+   APP LINK
 ========================================= */
 
 let appLink = upiLink;
@@ -878,21 +890,16 @@ appLink = upiLink;
    BUTTON STATE
 ========================================= */
 
-paymentStarted = true;
-
 payBtn.disabled = true;
 
 payBtn.innerText =
 "Opening Payment...";
 
-
-/* Mark that user is leaving */
-
 pageLeft = true;
 
 
 /* =========================================
-   OPEN UPI
+   OPEN UPI APP
 ========================================= */
 
 setTimeout(function(){
@@ -920,6 +927,8 @@ payBtn.disabled = false;
 payBtn.innerText =
 "Pay Now 💳";
 
+paymentStarted = false;
+
 }
 
 },2500);
@@ -943,22 +952,47 @@ pageLeft
 
 setTimeout(function(){
 
-/* Show I Have Paid */
+/* =========================================
+   SHOW I HAVE PAID
+========================================= */
 
 document.getElementById("paid")
 .style.display = "block";
 
 
-/* Hide Pay Now */
+/* =========================================
+   HIDE PAY NOW
+========================================= */
 
 document.getElementById("payBtn")
 .style.display = "none";
 
 
-/* Hide fallback */
+/* =========================================
+   HIDE FALLBACK
+========================================= */
 
 document.getElementById("appMessage")
 .style.display = "none";
+
+
+/* =========================================
+   DISABLE UPI OPTIONS
+========================================= */
+
+document
+.getElementById("paymentBox")
+.classList.add("upi-disabled");
+
+
+/* =========================================
+   CHANGE INSTRUCTION
+========================================= */
+
+document.getElementById("paymentInstruction")
+.innerHTML =
+"Payment initiated. Please click <b>I Have Paid ✅</b> to continue.";
+
 
 },500);
 
@@ -974,29 +1008,39 @@ document.getElementById("appMessage")
 function showVerification(){
 
 /*
-   Open Thank You page
-   with Order ID, Product and Price
+   Prevent multiple clicks
 */
 
-const thankYouPage =
-"thankyou.html" +
+const paidButton =
+document.getElementById("paid");
+
+paidButton.disabled = true;
+
+paidButton.innerText =
+"Processing...";
+
+
+/*
+   Open Thank You / Verification page
+*/
+
+const thankYouUrl =
+"https://loxica4977.github.io/loxica-payment/thankyou.html" +
 "?orderId=" +
-encodeURIComponent(orderId) +
-"&product=" +
-encodeURIComponent(product) +
-"&price=" +
-encodeURIComponent(price);
+encodeURIComponent(orderId);
 
 
-/* Redirect */
+/*
+   Redirect
+*/
 
 window.location.href =
-thankYouPage;
+thankYouUrl;
 
 }
 
 </script>
 
 </body>
+
 </html>
-```
