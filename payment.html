@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -249,7 +250,7 @@ opacity:.7;
 cursor:not-allowed;
 }
 
-/* ================= PAID BUTTON ================= */
+/* ================= I HAVE PAID ================= */
 
 #paid{
 display:none;
@@ -283,7 +284,7 @@ line-height:1.5;
 color:#555;
 }
 
-/* ================= PAYMENT VERIFICATION ================= */
+/* ================= VERIFICATION ================= */
 
 #verificationMessage{
 display:none;
@@ -583,8 +584,7 @@ Other UPI Apps
 </div>
 
 <div class="app-sub">
-Use any available UPI app
-</div>
+Use any available UPI app</div>
 
 </div>
 
@@ -639,9 +639,11 @@ Please Wait for Order Confirmation
 
 <div class="verification-text">
 
-Your payment is being verified.<br>
+Your payment is being verified.<br><br>
 
-You will receive your order confirmation message
+Please wait for order confirmation.<br>
+
+You will receive an order confirmation message
 on WhatsApp shortly.
 
 </div>
@@ -767,6 +769,7 @@ params.get("price") || "0";
 const orderId =
 params.get("orderId") || "";
 
+
 document.getElementById("product").innerText =
 product;
 
@@ -775,7 +778,7 @@ document.getElementById("price").innerText =
 
 
 /* =========================================
-   SELECTED APP
+   PAYMENT VARIABLES
 ========================================= */
 
 let selectedApp = "upi";
@@ -803,8 +806,8 @@ element.classList.add("selected");
 
 selectedApp = app;
 
-document.getElementById("appMessage").style.display =
-"none";
+document.getElementById("appMessage")
+.style.display = "none";
 
 }
 
@@ -821,6 +824,7 @@ document.getElementById("payBtn");
 const message =
 document.getElementById("appMessage");
 
+
 paymentStarted = true;
 
 
@@ -830,7 +834,7 @@ const upiID =
 "8714917161@fam";
 
 
-/* COMMON UPI URL */
+/* COMMON UPI LINK */
 
 const upiLink =
 "upi://pay?pa=" +
@@ -845,7 +849,7 @@ encodeURIComponent(product);
 
 
 /* =========================================
-   APP-SPECIFIC LINKS
+   APP LINKS
 ========================================= */
 
 let appLink = upiLink;
@@ -895,7 +899,7 @@ appLink = upiLink;
 
 
 /* =========================================
-   BUTTON
+   BUTTON STATE
 ========================================= */
 
 payBtn.disabled = true;
@@ -907,7 +911,7 @@ pageLeft = true;
 
 
 /* =========================================
-   OPEN PAYMENT APP
+   OPEN UPI
 ========================================= */
 
 setTimeout(function(){
@@ -918,14 +922,12 @@ window.location.href = appLink;
 
 
 /* =========================================
-   SHOW FALLBACK MESSAGE
+   FALLBACK
 ========================================= */
 
 setTimeout(function(){
 
-if(
-document.visibilityState === "visible"
-){
+if(document.visibilityState === "visible"){
 
 message.style.display = "block";
 
@@ -945,7 +947,7 @@ payBtn.innerText =
 
 
 /* =========================================
-   CUSTOMER RETURNS FROM UPI APP
+   RETURN FROM UPI APP
 ========================================= */
 
 document.addEventListener(
@@ -961,7 +963,7 @@ pageLeft
 setTimeout(function(){
 
 /*
-   Show I Have Paid button
+   SHOW I HAVE PAID
 */
 
 document.getElementById("paid")
@@ -969,17 +971,15 @@ document.getElementById("paid")
 
 
 /*
-   Keep Pay Now hidden
+   HIDE PAY NOW
 */
 
-const payBtn =
-document.getElementById("payBtn");
-
-payBtn.style.display = "none";
+document.getElementById("payBtn")
+.style.display = "none";
 
 
 /*
-   Hide fallback message
+   HIDE FALLBACK
 */
 
 document.getElementById("appMessage")
@@ -1000,7 +1000,7 @@ document.getElementById("appMessage")
 function showVerification(){
 
 /*
-   Hide I Have Paid button
+   Hide I Have Paid
 */
 
 document.getElementById("paid")
@@ -1020,3 +1020,4 @@ document.getElementById("verificationMessage")
 
 </body>
 </html>
+```
