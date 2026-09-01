@@ -165,15 +165,11 @@ border:2px solid #2563EB;
 background:#f5f8ff;
 }
 
-/* DISABLED AFTER RETURN */
+/* DISABLED AFTER RETURN FROM UPI */
 
 .upi-disabled{
 opacity:.5;
 pointer-events:none;
-cursor:not-allowed;
-}
-
-.upi-disabled .upi-option{
 cursor:not-allowed;
 }
 
@@ -280,6 +276,10 @@ margin-top:12px;
 
 #paid:hover{
 background:#087a34;
+}
+
+#paid:active{
+background:#06662b;
 }
 
 /* ================= APP MESSAGE ================= */
@@ -766,7 +766,7 @@ let pageLeft = false;
 
 function selectApp(element,app){
 
-/* Don't allow selection after payment started */
+/* Don't allow changing after payment started */
 
 if(paymentStarted){
 return;
@@ -969,7 +969,7 @@ document.getElementById("payBtn")
 
 
 /* =========================================
-   HIDE FALLBACK
+   HIDE FALLBACK MESSAGE
 ========================================= */
 
 document.getElementById("appMessage")
@@ -977,7 +977,7 @@ document.getElementById("appMessage")
 
 
 /* =========================================
-   DISABLE UPI OPTIONS
+   DISABLE PAYMENT OPTIONS
 ========================================= */
 
 document
@@ -993,7 +993,6 @@ document.getElementById("paymentInstruction")
 .innerHTML =
 "Payment initiated. Please click <b>I Have Paid ✅</b> to continue.";
 
-
 },500);
 
 }
@@ -1008,34 +1007,15 @@ document.getElementById("paymentInstruction")
 function showVerification(){
 
 /*
-   Prevent multiple clicks
-*/
-
-const paidButton =
-document.getElementById("paid");
-
-paidButton.disabled = true;
-
-paidButton.innerText =
-"Processing...";
-
-
-/*
-   Open Thank You / Verification page
-*/
-
-const thankYouUrl =
-"https://loxica4977.github.io/loxica-payment/thankyou.html" +
-"?orderId=" +
-encodeURIComponent(orderId);
-
-
-/*
-   Redirect
+   IMPORTANT:
+   I Have Paid button is NOT disabled.
+   It directly opens the verification page.
 */
 
 window.location.href =
-thankYouUrl;
+"https://loxica4977.github.io/loxica-payment/thankyou.html" +
+"?orderId=" +
+encodeURIComponent(orderId);
 
 }
 
