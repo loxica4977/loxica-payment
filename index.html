@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -859,6 +858,48 @@ const price =
 params.get("price") ||
 "0";
 
+/*
+ * IMPORTANT:
+ *
+ * Every NEW Buy Now click from Wix
+ * sends a NEW session ID.
+ *
+ * Example:
+ *
+ * ?product=ABC&price=499&session=CHK_123
+ */
+
+const checkoutSession =
+params.get("session") ||
+"";
+
+
+/* ==================================================
+   CHECKOUT STORAGE KEY
+================================================== */
+
+/*
+ * We DON'T use product name anymore.
+ *
+ * We use the unique checkout session.
+ *
+ * This means:
+ *
+ * Same checkout session
+ * → same saved details
+ * → same Order ID
+ *
+ * New Buy Now click
+ * → new session
+ * → blank details
+ * → new Order ID
+ */
+
+const storageKey =
+checkoutSession
+    ? "loxicaCheckout_" + checkoutSession
+    : null;
+
 
 /* ==================================================
    DISPLAY PRODUCT
@@ -866,6 +907,11 @@ params.get("price") ||
 
 document.getElementById("product").innerText =
 product;
+
+
+/* ==================================================
+   DISPLAY PRICE
+================================================== */
 
 document.getElementById("price").innerText =
 "₹" + price;
@@ -881,30 +927,55 @@ document.getElementById("summaryTotal").innerText =
 
 
 /* ==================================================
-   PRODUCT-SPECIFIC STORAGE
-================================================== */
-
-const storageKey =
-"loxicaCheckout_" + product;
-
-
-/* ==================================================
    RESTORE SAVED DETAILS
 ================================================== */
 
 window.addEventListener("pageshow", function(){
 
+/*
+ * If there is NO session ID,
+ * this is a completely new checkout.
+ *
+ * Therefore DO NOT restore anything.
+ */
+
+if(!storageKey){
+
+clearCheckoutForm();
+
+return;
+
+}
+
+
+/*
+ * Get saved checkout for THIS session only.
+ */
+
 const savedDetails =
 sessionStorage.getItem(storageKey);
 
 if(!savedDetails){
+
+/*
+ * New checkout session.
+ * Keep form completely empty.
+ */
+
+clearCheckoutForm();
+
 return;
+
 }
+
 
 try{
 
 const data =
 JSON.parse(savedDetails);
+
+
+/* Restore details */
 
 document.getElementById("name").value =
 data.name || "";
@@ -934,13 +1005,38 @@ data.color || "";
 catch(error){
 
 console.log(
-"Could not restore checkout details",
+"Could not restore checkout details:",
 error
 );
 
 }
 
 });
+
+
+/* ==================================================
+   CLEAR FORM
+================================================== */
+
+function clearCheckoutForm(){
+
+document.getElementById("name").value = "";
+
+document.getElementById("phone").value = "";
+
+document.getElementById("address").value = "";
+
+document.getElementById("landmark").value = "";
+
+document.getElementById("city").value = "";
+
+document.getElementById("state").value = "";
+
+document.getElementById("pincode").value = "";
+
+document.getElementById("color").value = "";
+
+}
 
 
 /* ==================================================
@@ -954,7 +1050,7 @@ e.preventDefault();
 
 
 const submitBtn =
-document.querySelector('button[type="submit"]');
+document.querySelector(".continue-btn");
 
 
 /* ==================================================
@@ -962,11 +1058,37 @@ document.querySelector('button[type="submit"]');
 ================================================== */
 
 const phoneValue =
-document.getElementById("phone").value.trim();
+document.getElementById("phone")
+.value
+.trim();
+
 
 if(!/^[0-9]{10}$/.test(phoneValue)){
 
-alert("Please enter a valid 10-digit mobile number.");
+alert(
+"Please enter a valid 10-digit mobile number."
+);
+
+return;
+
+}
+
+
+/* ==================================================
+   VALIDATE PINCODE
+================================================== */
+
+const pincodeValue =
+document.getElementById("pincode")
+.value
+.trim();
+
+
+if(!/^[0-9]{6}$/.test(pincodeValue)){
+
+alert(
+"Please enter a valid 6-digit pincode."
+);
 
 return;
 
@@ -984,40 +1106,61 @@ product: product,
 price: price,
 
 name:
-document.getElementById("name").value.trim(),
+document.getElementById("name")
+.value
+.trim(),
 
 phone:
 "+91" + phoneValue,
 
 address:
-document.getElementById("address").value.trim(),
+document.getElementById("address")
+.value
+.trim(),
 
 landmark:
-document.getElementById("landmark").value.trim(),
+document.getElementById("landmark")
+.value
+.trim(),
 
 city:
-document.getElementById("city").value.trim(),
+document.getElementById("city")
+.value
+.trim(),
 
 state:
-document.getElementById("state").value.trim(),
+document.getElementById("state")
+.value
+.trim(),
 
 pincode:
-document.getElementById("pincode").value.trim(),
+pincodeValue,
 
 color:
-document.getElementById("color").value.trim() || "-"
+document.getElementById("color")
+.value
+.trim() || "-"
 
 };
 
 
 /* ==================================================
-   GET PREVIOUS ORDER ID
+   FIND EXISTING ORDER ID
 ================================================== */
 
 let savedOrderId = "";
 
+
+/*
+ * ONLY use the Order ID from
+ * THIS checkout session.
+ */
+
+if(storageKey){
+
 const savedDetails =
 sessionStorage.getItem(storageKey);
+
 
 if(savedDetails){
 
@@ -1025,6 +1168,7 @@ try{
 
 const oldData =
 JSON.parse(savedDetails);
+
 
 if(oldData.orderId){
 
@@ -1037,7 +1181,7 @@ oldData.orderId;
 catch(error){
 
 console.log(
-"Old checkout data error",
+"Could not read previous checkout:",
 error
 );
 
@@ -1045,19 +1189,11 @@ error
 
 }
 
+}
+
 
 /* ==================================================
-   IMPORTANT FIX
-==================================================
-
-   Every Continue To Payment click is sent
-   to Google Apps Script.
-
-   If old orderId exists:
-   → same row UPDATE
-
-   If no orderId exists:
-   → NEW ORDER CREATE
+   SAME ORDER = UPDATE
 ================================================== */
 
 if(savedOrderId){
@@ -1112,7 +1248,7 @@ result.error ||
 
 
 /* ==================================================
-   GET ORDER ID
+   ORDER ID FROM SERVER
 ================================================== */
 
 const orderId =
@@ -1126,10 +1262,19 @@ result.orderId;
 currentData.orderId =
 orderId;
 
+
+/*
+ * Save ONLY inside this checkout session.
+ */
+
+if(storageKey){
+
 sessionStorage.setItem(
 storageKey,
 JSON.stringify(currentData)
 );
+
+}
 
 
 /* ==================================================
@@ -1141,12 +1286,19 @@ submitBtn.innerHTML =
 
 
 window.location.href =
-"payment.html?product=" +
+"payment.html" +
+
+"?product=" +
 encodeURIComponent(product) +
+
 "&price=" +
 encodeURIComponent(price) +
+
 "&orderId=" +
-encodeURIComponent(orderId);
+encodeURIComponent(orderId) +
+
+"&session=" +
+encodeURIComponent(checkoutSession);
 
 })
 
@@ -1158,6 +1310,8 @@ console.log(
 error
 );
 
+
+/* Restore button */
 
 submitBtn.disabled = false;
 
@@ -1181,4 +1335,3 @@ alert(
 </body>
 
 </html>
-```
