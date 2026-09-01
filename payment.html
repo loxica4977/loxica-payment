@@ -168,10 +168,14 @@ background:#f5f8ff;
 
 /* DISABLED PAYMENT OPTIONS */
 
-.upi-disabled{
+.upi-disabled .upi-option{
 opacity:.5;
 pointer-events:none;
 cursor:not-allowed;
+}
+
+.upi-disabled .payment-instruction{
+opacity:.6;
 }
 
 .radio{
@@ -282,7 +286,12 @@ background:#087a34;
 #paid:active{
 background:#06662b;
 }
-
+#paid{
+display:none;
+pointer-events:auto !important;
+position:relative;
+z-index:10;
+}
 /* APP MESSAGE */
 
 #appMessage{
@@ -997,9 +1006,12 @@ document.getElementById("appMessage")
 ========================================= */
 
 document
-.getElementById("paymentBox")
-.classList.add("upi-disabled");
-
+.querySelectorAll(".upi-option")
+.forEach(function(option){
+    option.style.pointerEvents = "none";
+    option.style.opacity = "0.5";
+    option.style.cursor = "not-allowed";
+});
 
 /* =========================================
    CHANGE INSTRUCTION
