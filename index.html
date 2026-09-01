@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,8 +27,6 @@ color:#111;
 min-height:100vh;
 }
 
-/* ================= HEADER ================= */
-
 .header{
 width:100%;
 background:#111;
@@ -44,8 +43,6 @@ font-weight:800;
 letter-spacing:1.5px;
 }
 
-/* ================= MAIN ================= */
-
 .main{
 width:100%;
 max-width:1100px;
@@ -59,15 +56,11 @@ font-weight:500;
 margin-bottom:18px;
 }
 
-/* ================= LAYOUT ================= */
-
 .checkout-grid{
 display:grid;
 grid-template-columns:1fr 350px;
 gap:20px;
 }
-
-/* ================= CARD ================= */
 
 .card{
 background:white;
@@ -119,8 +112,6 @@ font-size:23px;
 font-weight:bold;
 color:#0a8f3d;
 }
-
-/* ================= FORM ================= */
 
 label{
 display:block;
@@ -186,8 +177,6 @@ font-weight:normal;
 color:#777;
 }
 
-/* ================= BUTTON ================= */
-
 .continue-btn{
 width:100%;
 padding:14px;
@@ -227,8 +216,6 @@ to{
 transform:rotate(360deg);
 }
 }
-
-/* ================= SUMMARY ================= */
 
 .summary{
 background:white;
@@ -284,16 +271,12 @@ color:#0a8f3d;
 margin-right:6px;
 }
 
-/* ================= NOTE ================= */
-
 .note{
 font-size:12px;
 color:#666;
 text-align:center;
 margin-top:12px;
 }
-
-/* ================= FOOTER ================= */
 
 .footer{
 width:100%;
@@ -372,8 +355,6 @@ font-size:10px;
 color:#777;
 }
 
-/* ================= MOBILE ================= */
-
 @media(max-width:750px){
 
 .header{
@@ -444,8 +425,6 @@ font-size:20px;
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <header class="header">
 
 <div class="logo">
@@ -455,24 +434,17 @@ LOXICA
 </header>
 
 
-<!-- ================= MAIN ================= -->
-
 <main class="main">
 
 <div class="checkout-title">
 Checkout
 </div>
 
-
 <div class="checkout-grid">
 
 
-<!-- ================= DETAILS ================= -->
-
 <div class="details-card">
 
-
-<!-- PRODUCT -->
 
 <div class="card">
 
@@ -483,7 +455,6 @@ Checkout
 Product Details
 
 </div>
-
 
 <div class="product-box">
 
@@ -503,8 +474,6 @@ id="price">
 
 </div>
 
-
-<!-- ADDRESS -->
 
 <div class="card">
 
@@ -647,14 +616,11 @@ Your details are securely saved for this checkout.
 </div>
 
 
-<!-- ================= SUMMARY ================= -->
-
 <aside class="summary">
 
 <h2>
 Order Summary
 </h2>
-
 
 <div class="summary-row">
 
@@ -670,7 +636,6 @@ Product
 
 </div>
 
-
 <div class="summary-row">
 
 <span>
@@ -683,7 +648,6 @@ Price
 
 </div>
 
-
 <div class="total">
 
 <span>
@@ -695,7 +659,6 @@ Total
 </span>
 
 </div>
-
 
 <div class="secure-box">
 
@@ -719,25 +682,19 @@ Fast delivery across India.
 
 </aside>
 
-
 </div>
 
 </main>
 
 
-<!-- ================= FOOTER ================= -->
-
 <footer class="footer">
 
 <div class="footer-features">
 
-
 <div class="feature">
 
 <div class="feature-icon">
-
 <i class="fa-solid fa-truck-fast"></i>
-
 </div>
 
 <h4>
@@ -754,9 +711,7 @@ Delivered safely to your doorstep.
 <div class="feature">
 
 <div class="feature-icon">
-
 <i class="fa-solid fa-shield-halved"></i>
-
 </div>
 
 <h4>
@@ -773,9 +728,7 @@ Safe & secure UPI payments.
 <div class="feature">
 
 <div class="feature-icon">
-
 <i class="fa-solid fa-bolt"></i>
-
 </div>
 
 <h4>
@@ -792,9 +745,7 @@ Fast dispatch and quick delivery.
 <div class="feature">
 
 <div class="feature-icon">
-
 <i class="fa-solid fa-gem"></i>
-
 </div>
 
 <h4>
@@ -806,7 +757,6 @@ Discover trending products and collections.
 </p>
 
 </div>
-
 
 </div>
 
@@ -850,24 +800,16 @@ const scriptURL =
 const params =
 new URLSearchParams(window.location.search);
 
+
 const product =
 params.get("product") ||
 "LOXICA Product";
+
 
 const price =
 params.get("price") ||
 "0";
 
-/*
- * IMPORTANT:
- *
- * Every NEW Buy Now click from Wix
- * sends a NEW session ID.
- *
- * Example:
- *
- * ?product=ABC&price=499&session=CHK_123
- */
 
 const checkoutSession =
 params.get("session") ||
@@ -875,25 +817,8 @@ params.get("session") ||
 
 
 /* ==================================================
-   CHECKOUT STORAGE KEY
+   STORAGE KEY
 ================================================== */
-
-/*
- * We DON'T use product name anymore.
- *
- * We use the unique checkout session.
- *
- * This means:
- *
- * Same checkout session
- * → same saved details
- * → same Order ID
- *
- * New Buy Now click
- * → new session
- * → blank details
- * → new Order ID
- */
 
 const storageKey =
 checkoutSession
@@ -907,11 +832,6 @@ checkoutSession
 
 document.getElementById("product").innerText =
 product;
-
-
-/* ==================================================
-   DISPLAY PRICE
-================================================== */
 
 document.getElementById("price").innerText =
 "₹" + price;
@@ -927,91 +847,27 @@ document.getElementById("summaryTotal").innerText =
 
 
 /* ==================================================
-   RESTORE SAVED DETAILS
+   BUTTON RESET
 ================================================== */
 
-window.addEventListener("pageshow", function(){
+function resetContinueButton(){
 
-/*
- * If there is NO session ID,
- * this is a completely new checkout.
- *
- * Therefore DO NOT restore anything.
- */
+    const submitBtn =
+        document.querySelector(".continue-btn");
 
-if(!storageKey){
+    if(!submitBtn){
+        return;
+    }
 
-clearCheckoutForm();
+    submitBtn.disabled = false;
 
-return;
+    submitBtn.style.background =
+        "#111";
 
-}
-
-
-/*
- * Get saved checkout for THIS session only.
- */
-
-const savedDetails =
-sessionStorage.getItem(storageKey);
-
-if(!savedDetails){
-
-/*
- * New checkout session.
- * Keep form completely empty.
- */
-
-clearCheckoutForm();
-
-return;
+    submitBtn.innerHTML =
+        "Continue To Payment 💳";
 
 }
-
-
-try{
-
-const data =
-JSON.parse(savedDetails);
-
-
-/* Restore details */
-
-document.getElementById("name").value =
-data.name || "";
-
-document.getElementById("phone").value =
-(data.phone || "").replace(/^\+91/,"");
-
-document.getElementById("address").value =
-data.address || "";
-
-document.getElementById("landmark").value =
-data.landmark || "";
-
-document.getElementById("city").value =
-data.city || "";
-
-document.getElementById("state").value =
-data.state || "";
-
-document.getElementById("pincode").value =
-data.pincode || "";
-
-document.getElementById("color").value =
-data.color || "";
-
-}
-catch(error){
-
-console.log(
-"Could not restore checkout details:",
-error
-);
-
-}
-
-});
 
 
 /* ==================================================
@@ -1020,23 +876,157 @@ error
 
 function clearCheckoutForm(){
 
-document.getElementById("name").value = "";
+    document.getElementById("name").value = "";
 
-document.getElementById("phone").value = "";
+    document.getElementById("phone").value = "";
 
-document.getElementById("address").value = "";
+    document.getElementById("address").value = "";
 
-document.getElementById("landmark").value = "";
+    document.getElementById("landmark").value = "";
 
-document.getElementById("city").value = "";
+    document.getElementById("city").value = "";
 
-document.getElementById("state").value = "";
+    document.getElementById("state").value = "";
 
-document.getElementById("pincode").value = "";
+    document.getElementById("pincode").value = "";
 
-document.getElementById("color").value = "";
+    document.getElementById("color").value = "";
 
 }
+
+
+/* ==================================================
+   RESTORE SAVED DETAILS
+================================================== */
+
+function restoreCheckout(){
+
+    /*
+     * IMPORTANT:
+     * Button always becomes normal
+     * when returning to Index.
+     */
+
+    resetContinueButton();
+
+
+    /*
+     * No session =
+     * completely new checkout.
+     */
+
+    if(!storageKey){
+
+        clearCheckoutForm();
+
+        return;
+
+    }
+
+
+    const savedDetails =
+        sessionStorage.getItem(storageKey);
+
+
+    /*
+     * No saved details =
+     * new checkout session.
+     */
+
+    if(!savedDetails){
+
+        clearCheckoutForm();
+
+        return;
+
+    }
+
+
+    try{
+
+        const data =
+            JSON.parse(savedDetails);
+
+
+        document.getElementById("name").value =
+            data.name || "";
+
+
+        document.getElementById("phone").value =
+            (data.phone || "")
+                .replace(/^\+91/, "");
+
+
+        document.getElementById("address").value =
+            data.address || "";
+
+
+        document.getElementById("landmark").value =
+            data.landmark || "";
+
+
+        document.getElementById("city").value =
+            data.city || "";
+
+
+        document.getElementById("state").value =
+            data.state || "";
+
+
+        document.getElementById("pincode").value =
+            data.pincode || "";
+
+
+        document.getElementById("color").value =
+            data.color === "-"
+                ? ""
+                : (data.color || "");
+
+    }
+
+    catch(error){
+
+        console.log(
+            "Could not restore checkout details:",
+            error
+        );
+
+        clearCheckoutForm();
+
+    }
+
+}
+
+
+/* ==================================================
+   PAGE SHOW
+================================================== */
+
+/*
+ * THIS IS THE FIX YOU ASKED FOR.
+ *
+ * Payment page
+ * ↓
+ * Back
+ * ↓
+ * Index
+ *
+ * Continue To Payment button
+ * immediately returns.
+ *
+ * No refresh required.
+ */
+
+window.addEventListener(
+    "pageshow",
+    function(event){
+
+        resetContinueButton();
+
+        restoreCheckout();
+
+    }
+);
 
 
 /* ==================================================
@@ -1044,294 +1034,285 @@ document.getElementById("color").value = "";
 ================================================== */
 
 document.getElementById("orderForm")
-.addEventListener("submit", function(e){
+.addEventListener(
+    "submit",
+    function(e){
 
-e.preventDefault();
-
-
-const submitBtn =
-document.querySelector(".continue-btn");
+        e.preventDefault();
 
 
-/* ==================================================
-   VALIDATE PHONE
-================================================== */
-
-const phoneValue =
-document.getElementById("phone")
-.value
-.trim();
+        const submitBtn =
+            document.querySelector(".continue-btn");
 
 
-if(!/^[0-9]{10}$/.test(phoneValue)){
+        /* ==========================================
+           PHONE VALIDATION
+        ========================================== */
 
-alert(
-"Please enter a valid 10-digit mobile number."
+        const phoneValue =
+            document.getElementById("phone")
+                .value
+                .trim();
+
+
+        if(!/^[0-9]{10}$/.test(phoneValue)){
+
+            alert(
+                "Please enter a valid 10-digit mobile number."
+            );
+
+            return;
+
+        }
+
+
+        /* ==========================================
+           PINCODE VALIDATION
+        ========================================== */
+
+        const pincodeValue =
+            document.getElementById("pincode")
+                .value
+                .trim();
+
+
+        if(!/^[0-9]{6}$/.test(pincodeValue)){
+
+            alert(
+                "Please enter a valid 6-digit pincode."
+            );
+
+            return;
+
+        }
+
+
+        /* ==========================================
+           CURRENT DATA
+        ========================================== */
+
+        const currentData = {
+
+            product: product,
+
+            price: price,
+
+            name:
+                document.getElementById("name")
+                    .value
+                    .trim(),
+
+            phone:
+                "+91" + phoneValue,
+
+            address:
+                document.getElementById("address")
+                    .value
+                    .trim(),
+
+            landmark:
+                document.getElementById("landmark")
+                    .value
+                    .trim(),
+
+            city:
+                document.getElementById("city")
+                    .value
+                    .trim(),
+
+            state:
+                document.getElementById("state")
+                    .value
+                    .trim(),
+
+            pincode:
+                pincodeValue,
+
+            color:
+                document.getElementById("color")
+                    .value
+                    .trim() || "-"
+
+        };
+
+
+        /* ==========================================
+           FIND OLD ORDER ID
+        ========================================== */
+
+        let savedOrderId = "";
+
+
+        if(storageKey){
+
+            const savedDetails =
+                sessionStorage.getItem(storageKey);
+
+
+            if(savedDetails){
+
+                try{
+
+                    const oldData =
+                        JSON.parse(savedDetails);
+
+
+                    if(oldData.orderId){
+
+                        savedOrderId =
+                            oldData.orderId;
+
+                    }
+
+                }
+
+                catch(error){
+
+                    console.log(
+                        "Could not read previous checkout:",
+                        error
+                    );
+
+                }
+
+            }
+
+        }
+
+
+        /* ==========================================
+           SAME ORDER = UPDATE
+        ========================================== */
+
+        if(savedOrderId){
+
+            currentData.orderId =
+                savedOrderId;
+
+        }
+
+
+        /* ==========================================
+           BUTTON LOADING
+        ========================================== */
+
+        submitBtn.disabled = true;
+
+        submitBtn.style.background =
+            "#2563EB";
+
+        submitBtn.innerHTML =
+            '<span class="spinner"></span>Processing...';
+
+
+        /* ==========================================
+           SAVE / UPDATE ORDER
+        ========================================== */
+
+        fetch(
+            scriptURL,
+            {
+                method:"POST",
+                body:JSON.stringify(currentData)
+            }
+        )
+
+        .then(function(response){
+
+            return response.json();
+
+        })
+
+        .then(function(result){
+
+            if(!result.success){
+
+                throw new Error(
+                    result.error ||
+                    "Order could not be saved"
+                );
+
+            }
+
+
+            /* ======================================
+               ORDER ID
+            ====================================== */
+
+            const orderId =
+                result.orderId;
+
+
+            /* ======================================
+               SAVE SESSION
+            ====================================== */
+
+            currentData.orderId =
+                orderId;
+
+
+            if(storageKey){
+
+                sessionStorage.setItem(
+
+                    storageKey,
+
+                    JSON.stringify(currentData)
+
+                );
+
+            }
+
+
+            /* ======================================
+               OPEN PAYMENT
+            ====================================== */
+
+            submitBtn.innerHTML =
+                '<span class="spinner"></span>Opening Payment...';
+
+
+            window.location.href =
+                "payment.html" +
+
+                "?product=" +
+                encodeURIComponent(product) +
+
+                "&price=" +
+                encodeURIComponent(price) +
+
+                "&orderId=" +
+                encodeURIComponent(orderId) +
+
+                "&session=" +
+                encodeURIComponent(checkoutSession);
+
+        })
+
+
+        .catch(function(error){
+
+            console.log(
+                "Order save error:",
+                error
+            );
+
+
+            resetContinueButton();
+
+
+            alert(
+                "Unable to save your order. Please try again."
+            );
+
+        });
+
+    }
 );
-
-return;
-
-}
-
-
-/* ==================================================
-   VALIDATE PINCODE
-================================================== */
-
-const pincodeValue =
-document.getElementById("pincode")
-.value
-.trim();
-
-
-if(!/^[0-9]{6}$/.test(pincodeValue)){
-
-alert(
-"Please enter a valid 6-digit pincode."
-);
-
-return;
-
-}
-
-
-/* ==================================================
-   CURRENT CUSTOMER DATA
-================================================== */
-
-const currentData = {
-
-product: product,
-
-price: price,
-
-name:
-document.getElementById("name")
-.value
-.trim(),
-
-phone:
-"+91" + phoneValue,
-
-address:
-document.getElementById("address")
-.value
-.trim(),
-
-landmark:
-document.getElementById("landmark")
-.value
-.trim(),
-
-city:
-document.getElementById("city")
-.value
-.trim(),
-
-state:
-document.getElementById("state")
-.value
-.trim(),
-
-pincode:
-pincodeValue,
-
-color:
-document.getElementById("color")
-.value
-.trim() || "-"
-
-};
-
-
-/* ==================================================
-   FIND EXISTING ORDER ID
-================================================== */
-
-let savedOrderId = "";
-
-
-/*
- * ONLY use the Order ID from
- * THIS checkout session.
- */
-
-if(storageKey){
-
-const savedDetails =
-sessionStorage.getItem(storageKey);
-
-
-if(savedDetails){
-
-try{
-
-const oldData =
-JSON.parse(savedDetails);
-
-
-if(oldData.orderId){
-
-savedOrderId =
-oldData.orderId;
-
-}
-
-}
-catch(error){
-
-console.log(
-"Could not read previous checkout:",
-error
-);
-
-}
-
-}
-
-}
-
-
-/* ==================================================
-   SAME ORDER = UPDATE
-================================================== */
-
-if(savedOrderId){
-
-currentData.orderId =
-savedOrderId;
-
-}
-
-
-/* ==================================================
-   BUTTON LOADING
-================================================== */
-
-submitBtn.disabled = true;
-
-submitBtn.style.background =
-"#2563EB";
-
-submitBtn.innerHTML =
-'<span class="spinner"></span>Processing...';
-
-
-/* ==================================================
-   SAVE TO GOOGLE SHEET
-================================================== */
-
-fetch(scriptURL, {
-
-method:"POST",
-
-body:JSON.stringify(currentData)
-
-})
-
-.then(function(response){
-
-return response.json();
-
-})
-
-.then(function(result){
-
-if(!result.success){
-
-throw new Error(
-result.error ||
-"Order could not be saved"
-);
-
-}
-
-
-/* ==================================================
-   ORDER ID FROM SERVER
-================================================== */
-
-const orderId =
-result.orderId;
-
-
-/* ==================================================
-   SAVE DETAILS + ORDER ID
-================================================== */
-
-currentData.orderId =
-orderId;
-
-
-/*
- * Save ONLY inside this checkout session.
- */
-
-if(storageKey){
-
-sessionStorage.setItem(
-storageKey,
-JSON.stringify(currentData)
-);
-
-}
-
-
-/* ==================================================
-   OPEN PAYMENT PAGE
-================================================== */
-
-submitBtn.innerHTML =
-'<span class="spinner"></span>Opening Payment...';
-
-
-window.location.href =
-"payment.html" +
-
-"?product=" +
-encodeURIComponent(product) +
-
-"&price=" +
-encodeURIComponent(price) +
-
-"&orderId=" +
-encodeURIComponent(orderId) +
-
-"&session=" +
-encodeURIComponent(checkoutSession);
-
-})
-
-
-.catch(function(error){
-
-console.log(
-"Order save error:",
-error
-);
-
-
-/* Restore button */
-
-submitBtn.disabled = false;
-
-submitBtn.style.background =
-"#111";
-
-submitBtn.innerHTML =
-"Continue To Payment 💳";
-
-
-alert(
-"Unable to save your order. Please try again."
-);
-
-});
-
-});
 
 </script>
 
 </body>
 
 </html>
+```
