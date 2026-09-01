@@ -35,7 +35,7 @@ min-height:100vh;
 box-shadow:0 5px 25px rgba(0,0,0,.12);
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 
 .header{
 padding:18px 20px;
@@ -55,7 +55,7 @@ font-size:13px;
 color:#0a8f3d;
 }
 
-/* CONTENT */
+/* ================= CONTENT ================= */
 
 .content{
 padding:20px;
@@ -67,7 +67,7 @@ font-weight:bold;
 margin-bottom:18px;
 }
 
-/* ORDER */
+/* ================= ORDER ================= */
 
 .order-card{
 border:1px solid #ddd;
@@ -120,7 +120,7 @@ font-weight:bold;
 color:#0a8f3d;
 }
 
-/* PAYMENT */
+/* ================= PAYMENT ================= */
 
 .payment-section{
 margin-top:18px;
@@ -141,7 +141,7 @@ border-bottom:1px solid #ddd;
 padding:15px;
 }
 
-/* APP OPTIONS */
+/* ================= UPI OPTIONS ================= */
 
 .upi-option{
 display:flex;
@@ -211,7 +211,7 @@ color:#777;
 margin-top:3px;
 }
 
-/* PAYMENT INSTRUCTION */
+/* ================= INSTRUCTION ================= */
 
 .payment-instruction{
 margin:14px 0 8px;
@@ -225,7 +225,7 @@ color:#555;
 text-align:center;
 }
 
-/* PAY BUTTON */
+/* ================= PAY BUTTON ================= */
 
 #payBtn{
 width:100%;
@@ -249,7 +249,7 @@ opacity:.7;
 cursor:not-allowed;
 }
 
-/* PAID */
+/* ================= PAID BUTTON ================= */
 
 #paid{
 display:none;
@@ -265,7 +265,11 @@ cursor:pointer;
 margin-top:12px;
 }
 
-/* MESSAGE */
+#paid:hover{
+background:#087a34;
+}
+
+/* ================= APP MESSAGE ================= */
 
 #appMessage{
 display:none;
@@ -279,7 +283,37 @@ line-height:1.5;
 color:#555;
 }
 
-/* SECURITY */
+/* ================= PAYMENT VERIFICATION ================= */
+
+#verificationMessage{
+display:none;
+margin-top:14px;
+padding:18px 14px;
+border-radius:10px;
+background:#f5f8ff;
+border:1px solid #dbe4ff;
+text-align:center;
+}
+
+.verification-icon{
+font-size:32px;
+margin-bottom:9px;
+}
+
+.verification-title{
+font-size:17px;
+font-weight:bold;
+color:#111;
+margin-bottom:8px;
+}
+
+.verification-text{
+font-size:12px;
+line-height:1.6;
+color:#666;
+}
+
+/* ================= SECURITY ================= */
 
 .security{
 margin-top:18px;
@@ -297,7 +331,7 @@ color:#0a8f3d;
 margin-right:5px;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 
 .footer{
 width:100%;
@@ -374,7 +408,7 @@ font-size:10px;
 color:#777;
 }
 
-/* MOBILE */
+/* ================= MOBILE ================= */
 
 @media(max-width:450px){
 
@@ -408,7 +442,7 @@ font-size:24px;
 
 <div class="container">
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 
 <div class="header">
 
@@ -428,7 +462,7 @@ LOXICA
 Complete Your Payment
 </div>
 
-<!-- ORDER SUMMARY -->
+<!-- ================= ORDER SUMMARY ================= -->
 
 <div class="order-card">
 
@@ -462,7 +496,7 @@ Total Amount
 
 </div>
 
-<!-- PAYMENT METHOD -->
+<!-- ================= PAYMENT METHOD ================= -->
 
 <div class="payment-section">
 
@@ -556,37 +590,69 @@ Use any available UPI app
 
 </div>
 
-<!-- INSTRUCTION -->
+<!-- ================= INSTRUCTION ================= -->
 
 <div class="payment-instruction">
-Select your preferred payment method and click <b>Pay Now</b> to continue.
+
+Select your preferred payment method and click
+<b>Pay Now</b> to continue.
+
 </div>
 
-<!-- PAY BUTTON -->
+<!-- ================= PAY BUTTON ================= -->
 
 <button
 id="payBtn"
 onclick="payNow()"
 >
+
 Pay Now 💳
+
 </button>
+
+<!-- ================= APP MESSAGE ================= -->
 
 <div id="appMessage"></div>
 
-<!-- PAID BUTTON -->
+<!-- ================= I HAVE PAID ================= -->
 
 <button
 id="paid"
-onclick="orderSuccess()"
+onclick="showVerification()"
 >
+
 I Have Paid ✅
+
 </button>
 
+<!-- ================= VERIFICATION MESSAGE ================= -->
+
+<div id="verificationMessage">
+
+<div class="verification-icon">
+⏳
+</div>
+
+<div class="verification-title">
+Please Wait for Order Confirmation
+</div>
+
+<div class="verification-text">
+
+Your payment is being verified.<br>
+
+You will receive your order confirmation message
+on WhatsApp shortly.
+
+</div>
+
 </div>
 
 </div>
 
-<!-- SECURITY -->
+</div>
+
+<!-- ================= SECURITY ================= -->
 
 <div class="security">
 
@@ -601,7 +667,7 @@ Never share your UPI PIN or OTP with anyone.
 
 </div>
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 
 <footer class="footer">
 
@@ -715,6 +781,7 @@ document.getElementById("price").innerText =
 let selectedApp = "upi";
 
 let paymentStarted = false;
+
 let pageLeft = false;
 
 
@@ -784,6 +851,8 @@ encodeURIComponent(product);
 let appLink = upiLink;
 
 
+/* GOOGLE PAY */
+
 if(selectedApp === "gpay"){
 
 appLink =
@@ -798,6 +867,8 @@ encodeURIComponent(product);
 
 }
 
+
+/* PHONEPE */
 
 else if(selectedApp === "phonepe"){
 
@@ -814,6 +885,15 @@ encodeURIComponent(product);
 }
 
 
+/* OTHER UPI */
+
+else if(selectedApp === "upi"){
+
+appLink = upiLink;
+
+}
+
+
 /* =========================================
    BUTTON
 ========================================= */
@@ -826,7 +906,9 @@ payBtn.innerText =
 pageLeft = true;
 
 
-/* TRY SELECTED PAYMENT APP */
+/* =========================================
+   OPEN PAYMENT APP
+========================================= */
 
 setTimeout(function(){
 
@@ -836,20 +918,26 @@ window.location.href = appLink;
 
 
 /* =========================================
-   SHOW RETURN MESSAGE
+   SHOW FALLBACK MESSAGE
 ========================================= */
 
 setTimeout(function(){
 
+if(
+document.visibilityState === "visible"
+){
+
 message.style.display = "block";
 
 message.innerHTML =
-"Didn't open? Make sure the selected UPI app is installed, or choose <b>Other UPI Apps</b> and try again.";
+"Didn't open? Make sure the selected UPI app is installed.";
 
 payBtn.disabled = false;
 
 payBtn.innerText =
-"Pay Now Again 💳";
+"Pay Now 💳";
+
+}
 
 },2500);
 
@@ -857,7 +945,7 @@ payBtn.innerText =
 
 
 /* =========================================
-   CUSTOMER RETURNS
+   CUSTOMER RETURNS FROM UPI APP
 ========================================= */
 
 document.addEventListener(
@@ -872,16 +960,31 @@ pageLeft
 
 setTimeout(function(){
 
+/*
+   Show I Have Paid button
+*/
+
 document.getElementById("paid")
 .style.display = "block";
+
+
+/*
+   Keep Pay Now hidden
+*/
 
 const payBtn =
 document.getElementById("payBtn");
 
-payBtn.disabled = false;
+payBtn.style.display = "none";
 
-payBtn.innerText =
-"Pay Now Again 💳";
+
+/*
+   Hide fallback message
+*/
+
+document.getElementById("appMessage")
+.style.display = "none";
+
 
 },500);
 
@@ -894,11 +997,22 @@ payBtn.innerText =
    I HAVE PAID
 ========================================= */
 
-function orderSuccess(){
+function showVerification(){
 
-window.location.href =
-"thankyou.html?orderId=" +
-encodeURIComponent(orderId);
+/*
+   Hide I Have Paid button
+*/
+
+document.getElementById("paid")
+.style.display = "none";
+
+
+/*
+   Show verification message
+*/
+
+document.getElementById("verificationMessage")
+.style.display = "block";
 
 }
 
