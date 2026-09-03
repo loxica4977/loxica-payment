@@ -1,426 +1,16 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>LOXICA Secure Payment</title>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-<style>
-
-*{
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-margin:0;
-background:#f3f3f3;
-color:#111;
-display:flex;
-flex-direction:column;
-align-items:center;
-min-height:100vh;
-}
-
-.container{
-width:100%;
-max-width:430px;
-background:#fff;
-min-height:100vh;
-box-shadow:0 5px 25px rgba(0,0,0,.12);
-}
-
-/* ================= HEADER ================= */
-
-.header{
-padding:18px 20px;
-border-bottom:1px solid #ddd;
-background:#fff;
-}
-
-.logo{
-font-size:30px;
-font-weight:bold;
-letter-spacing:1px;
-}
-
-.secure{
-margin-top:5px;
-font-size:13px;
-color:#0a8f3d;
-}
-
-/* ================= CONTENT ================= */
-
-.content{
-padding:20px;
-}
-
-.title{
-font-size:22px;
-font-weight:bold;
-margin-bottom:18px;
-}
-
-/* ================= ORDER ================= */
-
-.order-card{
-border:1px solid #ddd;
-border-radius:10px;
-overflow:hidden;
-background:#fff;
-}
-
-.card-title{
-padding:14px 15px;
-font-size:16px;
-font-weight:bold;
-background:#f7f7f7;
-border-bottom:1px solid #ddd;
-}
-
-.order-details{
-padding:16px;
-}
-
-.product-label{
-font-size:12px;
-color:#666;
-margin-bottom:5px;
-}
-
-.product-name{
-font-size:18px;
-font-weight:bold;
-line-height:1.4;
-}
-
-.price-row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-top:18px;
-padding-top:15px;
-border-top:1px solid #eee;
-}
-
-.total-label{
-font-size:16px;
-font-weight:bold;
-}
-
-.price{
-font-size:25px;
-font-weight:bold;
-color:#0a8f3d;
-}
-
-/* ================= PAYMENT ================= */
-
-.payment-section{
-margin-top:18px;
-border:1px solid #ddd;
-border-radius:10px;
-overflow:hidden;
-}
-
-.payment-title{
-padding:14px 15px;
-font-size:16px;
-font-weight:bold;
-background:#f7f7f7;
-border-bottom:1px solid #ddd;
-}
-
-.payment-box{
-padding:15px;
-}
-
-/* ================= UPI OPTIONS ================= */
-
-.upi-option{
-display:flex;
-align-items:center;
-padding:14px 12px;
-border:1px solid #ddd;
-border-radius:9px;
-margin-bottom:10px;
-cursor:pointer;
-background:#fff;
-transition:.2s;
-}
-
-.upi-option:hover{
-background:#f7f7f7;
-}
-
-.upi-option.selected{
-border:2px solid #2563EB;
-background:#f5f8ff;
-}
-
-.upi-option.disabled{
-opacity:.5;
-pointer-events:none;
-cursor:not-allowed;
-}
-
-.radio{
-width:20px;
-height:20px;
-border:2px solid #999;
-border-radius:50%;
-margin-right:12px;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-shrink:0;
-}
-
-.upi-option.selected .radio{
-border-color:#2563EB;
-}
-
-.upi-option.selected .radio::after{
-content:"";
-width:10px;
-height:10px;
-background:#2563EB;
-border-radius:50%;
-}
-
-.app-icon{
-width:42px;
-height:42px;
-border-radius:9px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:20px;
-margin-right:12px;
-background:#f1f1f1;
-}
-
-.app-name{
-font-size:15px;
-font-weight:bold;
-}
-
-.app-sub{
-font-size:11px;
-color:#777;
-margin-top:3px;
-}
-
-/* ================= INSTRUCTION ================= */
-
-.payment-instruction{
-margin:14px 0 8px;
-padding:11px 12px;
-background:#f8f8f8;
-border-left:3px solid #2563EB;
-border-radius:6px;
-font-size:12px;
-line-height:1.5;
-color:#555;
-text-align:center;
-}
-
-/* ================= PAY NOW ================= */
-
-#payBtn{
-display:block;
-width:100%;
-padding:15px;
-border:none;
-border-radius:8px;
-background:#2563EB;
-color:#fff;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
-margin-top:8px;
-}
-
-#payBtn:hover{
-background:#1d4ed8;
-}
-
-#payBtn:disabled{
-opacity:.7;
-cursor:not-allowed;
-}
-
-/* ================= I HAVE PAID ================= */
-
-#paid{
-display:none;
-width:100%;
-padding:15px;
-border:none;
-border-radius:8px;
-background:#0a8f3d;
-color:#fff;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
-margin-top:12px;
-position:relative;
-z-index:50;
-}
-
-#paid:hover{
-background:#087a34;
-}
-
-#paid:active{
-background:#06662b;
-}
-
-/* ================= APP MESSAGE ================= */
-
-#appMessage{
-display:none;
-margin-top:12px;
-padding:11px;
-border-radius:8px;
-background:#fff8e6;
-border:1px solid #f1d48a;
-font-size:12px;
-line-height:1.5;
-color:#555;
-text-align:center;
-}
-
-/* ================= SECURITY ================= */
-
-.security{
-margin-top:18px;
-padding:13px;
-border-radius:8px;
-background:#f6fff9;
-border:1px solid #d8f1df;
-font-size:12px;
-color:#555;
-line-height:1.5;
-}
-
-.security i{
-color:#0a8f3d;
-margin-right:5px;
-}
-
-/* ================= FOOTER ================= */
-
-.footer{
-width:100%;
-max-width:430px;
-background:#111;
-color:#fff;
-}
-
-.footer-features{
-display:grid;
-grid-template-columns:1fr 1fr;
-}
-
-.feature{
-min-height:140px;
-padding:18px 8px;
-background:#111;
-border:1px solid #222;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-}
-
-.feature-icon{
-width:46px;
-height:46px;
-border:2px solid #0066ff;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:19px;
-color:#0066ff;
-margin-bottom:10px;
-}
-
-.feature h4{
-font-size:12px;
-margin:0 0 6px;
-color:#fff;
-}
-
-.feature p{
-font-size:10px;
-line-height:1.4;
-color:#aaa;
-margin:0;
-}
-
-.footer-brand{
-text-align:center;
-padding:22px 15px 18px;
-border-top:1px solid #222;
-}
-
-.footer-brand h2{
-margin:0 0 6px;
-font-size:23px;
-}
-
-.footer-brand p{
-margin:0;
-font-size:11px;
-color:#aaa;
-}
-
-.footer-bottom{
-text-align:center;
-padding:14px 10px;
-border-top:1px solid #222;
-font-size:10px;
-color:#777;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:450px){
-
-.content{
-padding:18px;
-}
-
-.logo{
-font-size:28px;
-}
-
-.title{
-font-size:21px;
-}
-
-.product-name{
-font-size:17px;
-}
-
-.price{
-font-size:24px;
-}
-
-}
-
-</style>
+<style> *{ box-sizing:border-box; font-family:Arial,Helvetica,sans-serif; } body{ margin:0; background:#f3f3f3; color:#111; display:flex; flex-direction:column; align-items:center; min-height:100vh; } .container{ width:100%; max-width:430px; background:#fff; min-height:100vh; box-shadow:0 5px 25px rgba(0,0,0,.12); } .header{ padding:18px 20px; border-bottom:1px solid #ddd; background:#fff; } .logo{ font-size:30px; font-weight:bold; letter-spacing:1px; } .secure{ margin-top:5px; font-size:13px; color:#0a8f3d; } .content{ padding:20px; } .title{ font-size:22px; font-weight:bold; margin-bottom:18px; } .order-card{ border:1px solid #ddd; border-radius:10px; overflow:hidden; background:#fff; } .card-title{ padding:14px 15px; font-size:16px; font-weight:bold; background:#f7f7f7; border-bottom:1px solid #ddd; } .order-details{ padding:16px; } .product-label{ font-size:12px; color:#666; margin-bottom:5px; } .product-name{ font-size:18px; font-weight:bold; line-height:1.4; } .price-row{ display:flex; justify-content:space-between; align-items:center; margin-top:18px; padding-top:15px; border-top:1px solid #eee; } .total-label{ font-size:16px; font-weight:bold; } .price{ font-size:25px; font-weight:bold; color:#0a8f3d; } .payment-section{ margin-top:18px; border:1px solid #ddd; border-radius:10px; overflow:hidden; } .payment-title{ padding:14px 15px; font-size:16px; font-weight:bold; background:#f7f7f7; border-bottom:1px solid #ddd; } .payment-box{ padding:15px; } .upi-option{ display:flex; align-items:center; padding:14px 12px; border:1px solid #ddd; border-radius:9px; margin-bottom:10px; cursor:pointer; background:#fff; transition:.2s; } .upi-option:hover{ background:#f7f7f7; } .upi-option.selected{ border:2px solid #2563EB; background:#f5f8ff; } .upi-option.disabled{ opacity:.5; pointer-events:none; cursor:not-allowed; } .radio{ width:20px; height:20px; border:2px solid #999; border-radius:50%; margin-right:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; } .upi-option.selected .radio{ border-color:#2563EB; } .upi-option.selected .radio::after{ content:""; width:10px; height:10px; background:#2563EB; border-radius:50%; } .app-icon{ width:42px; height:42px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:20px; margin-right:12px; background:#f1f1f1; } .app-name{ font-size:15px; font-weight:bold; } .app-sub{ font-size:11px; color:#777; margin-top:3px; } .payment-instruction{ margin:14px 0 8px; padding:11px 12px; background:#f8f8f8; border-left:3px solid #2563EB; border-radius:6px; font-size:12px; line-height:1.5; color:#555; text-align:center; } #payBtn{ display:block; width:100%; padding:15px; border:none; border-radius:8px; background:#2563EB; color:#fff; font-size:17px; font-weight:bold; cursor:pointer; margin-top:8px; } #payBtn:hover{ background:#1d4ed8; } #payBtn:disabled{ opacity:.7; cursor:not-allowed; } #paid{ display:none; width:100%; padding:15px; border:none; border-radius:8px; background:#0a8f3d; color:#fff; font-size:17px; font-weight:bold; cursor:pointer; margin-top:12px; position:relative; z-index:50; } #paid:hover{ background:#087a34; } #paid:active{ background:#06662b; } #appMessage{ display:none; margin-top:12px; padding:11px; border-radius:8px; background:#fff8e6; border:1px solid #f1d48a; font-size:12px; line-height:1.5; color:#555; text-align:center; } .security{ margin-top:18px; padding:13px; border-radius:8px; background:#f6fff9; border:1px solid #d8f1df; font-size:12px; color:#555; line-height:1.5; } .security i{ color:#0a8f3d; margin-right:5px; } .footer{ width:100%; max-width:430px; background:#111; color:#fff; } .footer-features{ display:grid; grid-template-columns:1fr 1fr; } .feature{ min-height:140px; padding:18px 8px; background:#111; border:1px solid #222; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; } .feature-icon{ width:46px; height:46px; border:2px solid #0066ff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:19px; color:#0066ff; margin-bottom:10px; } .feature h4{ font-size:12px; margin:0 0 6px; color:#fff; } .feature p{ font-size:10px; line-height:1.4; color:#aaa; margin:0; } .footer-brand{ text-align:center; padding:22px 15px 18px; border-top:1px solid #222; } .footer-brand h2{ margin:0 0 6px; font-size:23px; } .footer-brand p{ margin:0; font-size:11px; color:#aaa; } .footer-bottom{ text-align:center; padding:14px 10px; border-top:1px solid #222; font-size:10px; color:#777; } @media(max-width:450px){ .content{ padding:18px; } .logo{ font-size:28px; } .title{ font-size:21px; } .product-name{ font-size:17px; } .price{ font-size:24px; } } </style>
 
 </head>
 
@@ -428,45 +18,27 @@ font-size:24px;
 
 <div class="container">
 
-<!-- ================= HEADER ================= -->
-
 <div class="header">
 
-<div class="logo">
-LOXICA
-</div>
+<div class="logo"> LOXICA </div>
 
-<div class="secure">
-🔒 Secure Checkout
-</div>
+<div class="secure"> 🔒 Secure Checkout </div>
 
 </div>
-
 
 <div class="content">
 
-<div class="title">
-Complete Your Payment
-</div>
-
-
-<!-- ================= ORDER SUMMARY ================= -->
+<div class="title"> Complete Your Payment </div>
 
 <div class="order-card">
 
-<div class="card-title">
-Order Summary
-</div>
+<div class="card-title"> Order Summary </div>
 
 <div class="order-details">
 
-<div class="product-label">
-Product
-</div>
+<div class="product-label"> Product </div>
 
-<div
-class="product-name"
-id="product">
+<div class="product-name" id="product">
 
 Product Name
 
@@ -474,13 +46,9 @@ Product Name
 
 <div class="price-row">
 
-<div class="total-label">
-Total Amount
-</div>
+<div class="total-label"> Total Amount </div>
 
-<div
-class="price"
-id="price">
+<div class="price" id="price">
 
 ₹0
 
@@ -492,149 +60,84 @@ id="price">
 
 </div>
 
-
-<!-- ================= PAYMENT METHOD ================= -->
-
 <div class="payment-section">
 
-<div class="payment-title">
-Choose Payment Method
-</div>
+<div class="payment-title"> Choose Payment Method </div>
 
 <div class="payment-box">
 
-
-<!-- GOOGLE PAY -->
-
-<div
-class="upi-option"
-data-app="gpay"
-onclick="selectApp(this,'gpay')">
+<div class="upi-option" data-app="gpay" onclick="selectApp(this,'gpay')">
 
 <div class="radio"></div>
 
-<div class="app-icon">
-<i class="fa-brands fa-google"></i>
-</div>
+<div class="app-icon"> <i class="fa-brands fa-google"></i> </div>
 
 <div>
 
-<div class="app-name">
-Google Pay
-</div>
+<div class="app-name"> Google Pay </div>
 
-<div class="app-sub">
-Pay using Google Pay
-</div>
+<div class="app-sub"> Pay using Google Pay </div>
 
 </div>
 
 </div>
 
-
-<!-- PHONEPE -->
-
-<div
-class="upi-option"
-data-app="phonepe"
-onclick="selectApp(this,'phonepe')">
+<div class="upi-option" data-app="phonepe" onclick="selectApp(this,'phonepe')">
 
 <div class="radio"></div>
 
-<div class="app-icon">
-<i class="fa-solid fa-mobile-screen-button"></i>
-</div>
+<div class="app-icon"> <i class="fa-solid fa-mobile-screen-button"></i> </div>
 
 <div>
 
-<div class="app-name">
-PhonePe
-</div>
+<div class="app-name"> PhonePe </div>
 
-<div class="app-sub">
-Pay using PhonePe
-</div>
+<div class="app-sub"> Pay using PhonePe </div>
 
 </div>
 
 </div>
 
-
-<!-- OTHER UPI -->
-
-<div
-class="upi-option selected"
-data-app="upi"
-onclick="selectApp(this,'upi')">
+<div class="upi-option selected" data-app="upi" onclick="selectApp(this,'upi')">
 
 <div class="radio"></div>
 
-<div class="app-icon">
-<i class="fa-solid fa-qrcode"></i>
-</div>
+<div class="app-icon"> <i class="fa-solid fa-qrcode"></i> </div>
 
 <div>
 
-<div class="app-name">
-Other UPI Apps
-</div>
+<div class="app-name"> Other UPI Apps </div>
 
-<div class="app-sub">
-Use any available UPI app
-</div>
+<div class="app-sub"> Use any available UPI app </div>
 
 </div>
 
 </div>
 
-
-<!-- ================= INSTRUCTION ================= -->
-
-<div
-class="payment-instruction"
-id="paymentInstruction">
+<div class="payment-instruction" id="paymentInstruction">
 
 Select your preferred payment method and click
 <b>Pay Now</b> to continue.
 
 </div>
 
-
-<!-- ================= PAY NOW ================= -->
-
-<button
-type="button"
-id="payBtn"
-onclick="payNow()">
+<button type="button" id="payBtn" onclick="payNow()">
 
 Pay Now 💳
 
 </button>
 
-
-<!-- ================= APP MESSAGE ================= -->
-
 <div id="appMessage"></div>
 
-
-<!-- ================= I HAVE PAID ================= -->
-
-<button
-type="button"
-id="paid"
-onclick="showVerification()">
+<button type="button" id="paid" onclick="showVerification()">
 
 I Have Paid ✅
 
 </button>
 
-
 </div>
 
 </div>
-
-
-<!-- ================= SECURITY ================= -->
 
 <div class="security">
 
@@ -649,85 +152,59 @@ Never share your UPI PIN or OTP with anyone.
 
 </div>
 
-
-<!-- ================= FOOTER ================= -->
-
 <footer class="footer">
 
 <div class="footer-features">
 
 <div class="feature">
 
-<div class="feature-icon">
-<i class="fa-solid fa-truck-fast"></i>
-</div>
+<div class="feature-icon"> <i class="fa-solid fa-truck-fast"></i> </div>
 
 <h4>FREE DELIVERY</h4>
 
-<p>
-Delivered safely to your doorstep.
-</p>
+<p> Delivered safely to your doorstep. </p>
 
 </div>
-
 
 <div class="feature">
 
-<div class="feature-icon">
-<i class="fa-solid fa-shield-halved"></i>
-</div>
+<div class="feature-icon"> <i class="fa-solid fa-shield-halved"></i> </div>
 
 <h4>SECURE PAYMENT</h4>
 
-<p>
-Safe & secure UPI payments.
-</p>
+<p> Safe & secure UPI payments. </p>
 
 </div>
-
 
 <div class="feature">
 
-<div class="feature-icon">
-<i class="fa-solid fa-bolt"></i>
-</div>
+<div class="feature-icon"> <i class="fa-solid fa-bolt"></i> </div>
 
 <h4>EXPRESS DELIVERY</h4>
 
-<p>
-Fast dispatch and quick delivery.
-</p>
+<p> Fast dispatch and quick delivery. </p>
 
 </div>
-
 
 <div class="feature">
 
-<div class="feature-icon">
-<i class="fa-solid fa-gem"></i>
-</div>
+<div class="feature-icon"> <i class="fa-solid fa-gem"></i> </div>
 
 <h4>LATEST PRODUCTS</h4>
 
-<p>
-Discover trending products and collections.
-</p>
+<p> Discover trending products and collections. </p>
 
 </div>
 
 </div>
-
 
 <div class="footer-brand">
 
 <h2>LOXICA</h2>
 
-<p>
-Smart Products. Better Everyday Life.
-</p>
+<p> Smart Products. Better Everyday Life. </p>
 
 </div>
-
 
 <div class="footer-bottom">
 
@@ -737,503 +214,8 @@ Smart Products. Better Everyday Life.
 
 </footer>
 
-
-<script>
-
-/* =========================================
-   URL PARAMETERS
-========================================= */
-
-const params =
-new URLSearchParams(window.location.search);
-
-const product =
-params.get("product") || "Product Name";
-
-const price =
-params.get("price") || "0";
-
-const orderId =
-params.get("orderId") || "";
-
-
-/* =========================================
-   DISPLAY PRODUCT
-========================================= */
-
-document.getElementById("product").innerText =
-product;
-
-
-/* =========================================
-   DISPLAY PRICE
-========================================= */
-
-document.getElementById("price").innerText =
-"₹" + price;
-
-
-/* =========================================
-   PAYMENT STATE
-========================================= */
-
-let selectedApp = "upi";
-
-let paymentStarted = false;
-
-let returnedFromUPI = false;
-
-let pageWasHidden = false;
-
-let fallbackTimer = null;
-
-
-/* =========================================
-   CHECK PREVIOUS PAYMENT STATE
-========================================= */
-
-const savedPayment =
-sessionStorage.getItem("loxicaPaymentStarted");
-
-if(savedPayment === "true"){
-
-paymentStarted = true;
-
-}
-
-
-/* =========================================
-   SELECT PAYMENT APP
-========================================= */
-
-function selectApp(element,app){
-
-if(paymentStarted || returnedFromUPI){
-return;
-}
-
-document
-.querySelectorAll(".upi-option")
-.forEach(function(option){
-
-option.classList.remove("selected");
-
-});
-
-element.classList.add("selected");
-
-selectedApp = app;
-
-}
-
-
-/* =========================================
-   PAY NOW
-========================================= */
-
-function payNow(){
-
-if(paymentStarted){
-return;
-}
-
-
-/* Mark payment started */
-
-paymentStarted = true;
-
-pageWasHidden = false;
-
-returnedFromUPI = false;
-
-
-/* Save state */
-
-sessionStorage.setItem(
-"loxicaPaymentStarted",
-"true"
-);
-
-
-/* =========================================
-   UPI ID
-========================================= */
-
-const upiID =
-"8714917161@fam";
-
-
-/* =========================================
-   COMMON UPI LINK
-========================================= */
-
-const upiLink =
-"upi://pay?pa=" +
-encodeURIComponent(upiID) +
-"&pn=" +
-encodeURIComponent("LOXICA") +
-"&am=" +
-encodeURIComponent(price) +
-"&cu=INR" +
-"&tn=" +
-encodeURIComponent(product);
-
-
-/* =========================================
-   SELECT APP LINK
-========================================= */
-
-let appLink = upiLink;
-
-
-/* GOOGLE PAY */
-
-if(selectedApp === "gpay"){
-
-appLink =
-"tez://upi/pay?pa=" +
-encodeURIComponent(upiID) +
-"&pn=" +
-encodeURIComponent("LOXICA") +
-"&am=" +
-encodeURIComponent(price) +
-"&cu=INR" +
-"&tn=" +
-encodeURIComponent(product);
-
-}
-
-
-/* PHONEPE */
-
-else if(selectedApp === "phonepe"){
-
-appLink =
-"phonepe://pay?pa=" +
-encodeURIComponent(upiID) +
-"&pn=" +
-encodeURIComponent("LOXICA") +
-"&am=" +
-encodeURIComponent(price) +
-"&cu=INR" +
-"&tn=" +
-encodeURIComponent(product);
-
-}
-
-
-/* =========================================
-   PAY BUTTON
-========================================= */
-
-const payBtn =
-document.getElementById("payBtn");
-
-payBtn.disabled = true;
-
-payBtn.innerText =
-"Opening Payment...";
-
-
-/* =========================================
-   OPEN UPI APP
-========================================= */
-
-setTimeout(function(){
-
-window.location.href = appLink;
-
-},100);
-
-
-/* =========================================
-   APP NOT OPEN FALLBACK
-========================================= */
-
-fallbackTimer = setTimeout(function(){
-
-/*
-IMPORTANT:
-
-If page never became hidden,
-the UPI app probably did not open.
-*/
-
-if(
-document.visibilityState === "visible" &&
-!pageWasHidden &&
-!returnedFromUPI
-){
-
-paymentStarted = false;
-
-sessionStorage.removeItem(
-"loxicaPaymentStarted"
-);
-
-payBtn.disabled = false;
-
-payBtn.innerText =
-"Pay Now 💳";
-
-const message =
-document.getElementById("appMessage");
-
-message.style.display =
-"block";
-
-message.innerHTML =
-"Didn't open? Please make sure a UPI app is installed.";
-
-}
-
-},5000);
-
-}
-
-
-/* =========================================
-   PAGE BECAME HIDDEN
-========================================= */
-
-document.addEventListener(
-"visibilitychange",
-function(){
-
-if(document.visibilityState === "hidden"){
-
-if(paymentStarted){
-
-pageWasHidden = true;
-
-}
-
-return;
-
-}
-
-
-/* =========================================
-   PAGE BECAME VISIBLE AGAIN
-========================================= */
-
-if(
-document.visibilityState === "visible" &&
-paymentStarted &&
-pageWasHidden &&
-!returnedFromUPI
-){
-
-setTimeout(function(){
-
-handleUPIReturn();
-
-},500);
-
-}
-
-});
-
-
-/* =========================================
-   HANDLE RETURN FROM UPI
-========================================= */
-
-function handleUPIReturn(){
-
-if(!paymentStarted){
-return;
-}
-
-if(returnedFromUPI){
-return;
-}
-
-
-/* Mark returned */
-
-returnedFromUPI = true;
-
-
-/* Clear fallback */
-
-if(fallbackTimer){
-
-clearTimeout(fallbackTimer);
-
-}
-
-
-/* =========================================
-   HIDE PAY NOW
-========================================= */
-
-const payBtn =
-document.getElementById("payBtn");
-
-payBtn.style.display =
-"none";
-
-
-/* =========================================
-   SHOW I HAVE PAID
-========================================= */
-
-const paidBtn =
-document.getElementById("paid");
-
-paidBtn.style.display =
-"block";
-
-paidBtn.disabled =
-false;
-
-
-/* =========================================
-   DISABLE PAYMENT METHODS
-========================================= */
-
-document
-.querySelectorAll(".upi-option")
-.forEach(function(option){
-
-option.classList.add("disabled");
-
-});
-
-
-/* =========================================
-   HIDE MESSAGE
-========================================= */
-
-document.getElementById("appMessage")
-.style.display =
-"none";
-
-
-/* =========================================
-   CHANGE INSTRUCTION
-========================================= */
-
-document.getElementById("paymentInstruction")
-.innerHTML =
-"Payment initiated. Please click <b>I Have Paid ✅</b> to continue.";
-
-
-/* Keep state */
-
-sessionStorage.setItem(
-"loxicaPaymentReturned",
-"true"
-);
-
-}
-
-
-/* =========================================
-   PAGE SHOW
-========================================= */
-
-window.addEventListener(
-"pageshow",
-function(){
-
-/*
-If the page was restored from browser
-cache after returning from UPI.
-*/
-
-if(
-sessionStorage.getItem("loxicaPaymentReturned") === "true"
-){
-
-paymentStarted = true;
-
-returnedFromUPI = true;
-
-document.getElementById("payBtn")
-.style.display =
-"none";
-
-document.getElementById("paid")
-.style.display =
-"block";
-
-document.getElementById("paid")
-.disabled =
-false;
-
-document
-.querySelectorAll(".upi-option")
-.forEach(function(option){
-
-option.classList.add("disabled");
-
-});
-
-document.getElementById("paymentInstruction")
-.innerHTML =
-"Payment initiated. Please click <b>I Have Paid ✅</b> to continue.";
-
-}
-
-});
-
-
-/* =========================================
-   I HAVE PAID
-========================================= */
-
-function showVerification(){
-
-if(!orderId){
-
-alert(
-"Order ID is missing. Please go back and try again."
-);
-
-return;
-
-}
-
-
-/*
-Clear temporary payment state
-*/
-
-sessionStorage.removeItem(
-"loxicaPaymentStarted"
-);
-
-sessionStorage.removeItem(
-"loxicaPaymentReturned"
-);
-
-
-/*
-Open Thank You page
-*/
-
-window.location.replace(
-
-"https://loxica4977.github.io/loxica-payment/thankyou.html" +
-
-"?orderId=" +
-encodeURIComponent(orderId) +
-
-"&product=" +
-encodeURIComponent(product) +
-
-"&price=" +
-encodeURIComponent(price)
-
-);
-
-}
-
-</script>
+<script> const params = new URLSearchParams(window.location.search); const product = params.get("product") || "Product Name"; const price = params.get("price") || "0"; const orderId = params.get("orderId") || ""; const color = params.get("color") || ""; document.getElementById("product").innerText = product; document.getElementById("price").innerText = "₹" + price; let selectedApp = "upi"; let paymentStarted = false; let returnedFromUPI = false; let pageWasHidden = false; let fallbackTimer = null; const savedPayment = sessionStorage.getItem("loxicaPaymentStarted"); if(savedPayment === "true"){ paymentStarted = true; } function selectApp(element,app){ if(paymentStarted || returnedFromUPI){ return; } document .querySelectorAll(".upi-option") .forEach(function(option){ option.classList.remove("selected"); }); element.classList.add("selected"); selectedApp = app; } function payNow(){ if(paymentStarted){ return; } paymentStarted = true; pageWasHidden = false; returnedFromUPI = false; sessionStorage.setItem( "loxicaPaymentStarted", "true" ); const upiID = "8714917161@fam"; const upiLink = "upi://pay?pa=" + encodeURIComponent(upiID) + "&pn=" + encodeURIComponent("LOXICA") + "&am=" + encodeURIComponent(price) + "&cu=INR" + "&tn=" + encodeURIComponent(product); let appLink = upiLink; if(selectedApp === "gpay"){ appLink = "tez://upi/pay?pa=" + encodeURIComponent(upiID) + "&pn=" + encodeURIComponent("LOXICA") + "&am=" + encodeURIComponent(price) + "&cu=INR" + "&tn=" + encodeURIComponent(product); } else if(selectedApp === "phonepe"){ appLink = "phonepe://pay?pa=" + encodeURIComponent(upiID) + "&pn=" + encodeURIComponent("LOXICA") + "&am=" + encodeURIComponent(price) + "&cu=INR" + "&tn=" + encodeURIComponent(product); } const payBtn = document.getElementById("payBtn"); payBtn.disabled = true; payBtn.innerText = "Opening Payment..."; setTimeout(function(){ window.location.href = appLink; },100); fallbackTimer = setTimeout(function(){ if( document.visibilityState === "visible" && !pageWasHidden && !returnedFromUPI ){ paymentStarted = false; sessionStorage.removeItem( "loxicaPaymentStarted" ); payBtn.disabled = false; payBtn.innerText = "Pay Now 💳"; const message = document.getElementById("appMessage"); message.style.display = "block"; message.innerHTML = "Didn't open? Please make sure a UPI app is installed."; } },5000); } document.addEventListener( "visibilitychange", function(){ if(document.visibilityState === "hidden"){ if(paymentStarted){ pageWasHidden = true; } return; } if( document.visibilityState === "visible" && paymentStarted && pageWasHidden && !returnedFromUPI ){ setTimeout(function(){ handleUPIReturn(); },500); } }); function handleUPIReturn(){ if(!paymentStarted){ return; } if(returnedFromUPI){ return; } returnedFromUPI = true; if(fallbackTimer){ clearTimeout(fallbackTimer); } const payBtn = document.getElementById("payBtn"); payBtn.style.display = "none"; const paidBtn = document.getElementById("paid"); paidBtn.style.display = "block"; paidBtn.disabled = false; document .querySelectorAll(".upi-option") .forEach(function(option){ option.classList.add("disabled"); }); document.getElementById("appMessage") .style.display = "none"; document.getElementById("paymentInstruction") .innerHTML = "Payment initiated. Please click <b>I Have Paid ✅</b> to continue."; sessionStorage.setItem( "loxicaPaymentReturned", "true" ); } window.addEventListener( "pageshow", function(){ if( sessionStorage.getItem("loxicaPaymentReturned") === "true" ){ paymentStarted = true; returnedFromUPI = true; document.getElementById("payBtn") .style.display = "none"; document.getElementById("paid") .style.display = "block"; document.getElementById("paid") .disabled = false; document .querySelectorAll(".upi-option") .forEach(function(option){ option.classList.add("disabled"); }); document.getElementById("paymentInstruction") .innerHTML = "Payment initiated. Please click <b>I Have Paid ✅</b> to continue."; } }); function showVerification(){ if(!orderId){ alert( "Order ID is missing. Please go back and try again." ); return; } sessionStorage.removeItem( "loxicaPaymentStarted" ); sessionStorage.removeItem( "loxicaPaymentReturned" ); window.location.replace( "https://loxica4977.github.io/loxica-payment/thankyou.html" + "?orderId=" + encodeURIComponent(orderId) + "&product=" + encodeURIComponent(product) + "&price=" + encodeURIComponent(price) + "&color=" + encodeURIComponent(color) ); } </script>
 
 </body>
 
 </html>
-```
