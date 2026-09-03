@@ -1,61 +1,53 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>LOXICA Checkout</title>
 
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
     background:#eaeded;
     color:#111;
+    min-height:100vh;
 }
 
-/* ================= HEADER ================= */
-
-header{
-    height:64px;
-    background:#131921;
+.header{
+    width:100%;
+    background:#111;
     color:white;
+    height:64px;
     display:flex;
     align-items:center;
-    padding:0 35px;
+    justify-content:center;
 }
 
 .logo{
-    font-size:28px;
+    font-size:29px;
     font-weight:800;
     letter-spacing:1.5px;
 }
 
-.secure{
-    margin-left:auto;
-    font-size:14px;
-    color:#ddd;
-}
-
-.secure i{
-    color:#fff;
-    margin-right:6px;
-}
-
-/* ================= MAIN ================= */
-
-.container{
-    max-width:1200px;
+.main{
+    width:100%;
+    max-width:1100px;
     margin:25px auto;
-    padding:0 18px;
+    padding:0 15px;
 }
 
 .checkout-title{
@@ -64,297 +56,364 @@ header{
     margin-bottom:18px;
 }
 
-/* ================= LAYOUT ================= */
-
 .checkout-grid{
     display:grid;
-    grid-template-columns:minmax(0,1fr) 340px;
-    gap:22px;
-}
-
-/* ================= CARDS ================= */
-
-.card,
-.summary{
-    background:#fff;
-    border:1px solid #ddd;
-    border-radius:4px;
+    grid-template-columns:1fr 350px;
+    gap:20px;
 }
 
 .card{
-    padding:24px;
-}
-
-.summary{
-    padding:20px;
-    height:max-content;
-}
-
-.card h2,
-.summary h2{
-    font-size:21px;
-    font-weight:500;
+    background:white;
+    border-radius:5px;
+    padding:22px;
+    border:1px solid #ddd;
     margin-bottom:18px;
 }
 
-/* ================= PRODUCT ================= */
+.card-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:18px;
+}
+
+.number{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:#111;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    font-weight:bold;
+}
 
 .product-box{
-    border:1px solid #ddd;
-    padding:18px;
-    margin-bottom:25px;
-    background:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:18px;
+    border-bottom:1px solid #ddd;
+    margin-bottom:18px;
 }
 
 .product-name{
     font-size:18px;
     font-weight:600;
-    line-height:1.4;
-    margin-bottom:10px;
+    max-width:65%;
 }
 
 .product-price{
-    color:#b12704;
-    font-size:21px;
-    font-weight:600;
-}
-
-/* ================= FORM ================= */
-
-.form-group{
-    margin-bottom:17px;
+    font-size:23px;
+    font-weight:bold;
+    color:#0a8f3d;
 }
 
 label{
     display:block;
-    font-size:14px;
-    font-weight:700;
+    font-size:13px;
+    font-weight:bold;
     margin-bottom:6px;
 }
 
 input,
 textarea{
     width:100%;
+    padding:12px;
     border:1px solid #a6a6a6;
-    border-radius:3px;
-    padding:11px 12px;
+    border-radius:4px;
     font-size:15px;
-    background:#fff;
     outline:none;
+    background:#fff;
+    margin-bottom:14px;
 }
 
 input:focus,
 textarea:focus{
-    border-color:#e77600;
-    box-shadow:0 0 0 2px rgba(231,118,0,.25);
+    border:2px solid #111;
 }
 
 textarea{
-    min-height:85px;
+    height:80px;
     resize:vertical;
 }
 
-.row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
+.phone-group{
+    display:flex;
+    margin-bottom:14px;
 }
 
-/* ================= COLOR ================= */
+.phone-code{
+    width:55px;
+    height:45px;
+    background:#eee;
+    border:1px solid #a6a6a6;
+    border-right:none;
+    border-radius:4px 0 0 4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.phone-group input{
+    height:45px;
+    margin:0;
+    border-radius:0 4px 4px 0;
+}
+
+.two-column{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+
+/* ==================================================
+   READ ONLY COLOR
+================================================== */
 
 .color-box{
-    margin-top:4px;
-    margin-bottom:20px;
+    margin-top:2px;
+    margin-bottom:14px;
 }
 
 .selected-color{
     width:100%;
-    padding:11px 12px;
+    min-height:45px;
+    padding:12px;
     border:1px solid #a6a6a6;
-    border-radius:3px;
-    background:#f7f7f7;
+    border-radius:4px;
+    background:#f3f3f3;
     font-size:15px;
-    font-weight:600;
+    font-weight:bold;
+    color:#111;
+    display:flex;
+    align-items:center;
 }
 
 .selected-color.empty{
     color:#777;
-    font-weight:400;
+    font-weight:normal;
 }
 
-/* ================= BUTTON ================= */
+
+/* ==================================================
+   CONTINUE BUTTON
+================================================== */
 
 .continue-btn{
     width:100%;
-    border:1px solid #a88734;
-    border-radius:8px;
-    padding:12px;
-    background:#ffd814;
-    color:#111;
-    font-size:15px;
+    padding:14px;
+    border:none;
+    border-radius:4px;
+    background:#111;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
     cursor:pointer;
-    box-shadow:0 1px 2px rgba(0,0,0,.15);
+    margin-top:4px;
 }
 
 .continue-btn:hover{
-    background:#f7ca00;
+    background:#333;
 }
 
 .continue-btn:disabled{
-    background:#ddd;
-    border-color:#bbb;
+    opacity:.8;
     cursor:not-allowed;
 }
 
-/* ================= SUMMARY ================= */
+.spinner{
+    display:inline-block;
+    width:17px;
+    height:17px;
+    border:3px solid rgba(255,255,255,.4);
+    border-top:3px solid white;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    vertical-align:middle;
+    margin-right:8px;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+/* ==================================================
+   SUMMARY
+================================================== */
+
+.summary{
+    background:white;
+    border:1px solid #ddd;
+    border-radius:5px;
+    padding:20px;
+    height:max-content;
+    position:sticky;
+    top:15px;
+}
 
 .summary h2{
-    padding-bottom:15px;
-    border-bottom:1px solid #ddd;
+    font-size:21px;
+    margin-bottom:18px;
 }
 
 .summary-row{
     display:flex;
     justify-content:space-between;
-    align-items:flex-start;
     gap:15px;
-    padding:14px 0;
-    border-bottom:1px solid #eee;
+    margin-bottom:14px;
     font-size:14px;
-}
-
-.summary-row span:first-child{
-    color:#555;
 }
 
 .summary-product{
-    max-width:65%;
-    text-align:right;
     font-weight:600;
     line-height:1.4;
+    text-align:right;
+    max-width:65%;
     word-break:break-word;
 }
 
-#summaryPrice,
-#summaryColor{
-    font-weight:600;
-    text-align:right;
-}
-
 .total{
+    border-top:1px solid #ddd;
+    padding-top:15px;
+    margin-top:8px;
     display:flex;
     justify-content:space-between;
-    padding:18px 0;
-    color:#b12704;
     font-size:21px;
-    font-weight:500;
+    font-weight:bold;
+    color:#0a8f3d;
 }
 
 .secure-box{
-    border-top:1px solid #ddd;
-    padding-top:16px;
-    margin-top:4px;
-    color:#555;
+    margin-top:20px;
+    padding:14px;
+    background:#f7f7f7;
+    border-radius:4px;
     font-size:13px;
-    line-height:1.6;
+    color:#555;
+    line-height:1.5;
 }
 
 .secure-box i{
-    color:#333;
+    color:#0a8f3d;
     margin-right:6px;
 }
 
-/* ================= MESSAGES ================= */
-
-.error-message{
-    display:none;
-    background:#fff0f0;
-    border:1px solid #d00;
-    color:#c40000;
-    padding:12px;
-    margin-bottom:15px;
-    border-radius:3px;
-    font-size:14px;
+.note{
+    font-size:12px;
+    color:#666;
+    text-align:center;
+    margin-top:12px;
 }
 
-.success-message{
-    display:none;
-    background:#f0fff4;
-    border:1px solid #198754;
-    color:#08752c;
-    padding:12px;
-    margin-bottom:15px;
-    border-radius:3px;
-    font-size:14px;
-}
 
-/* ================= FOOTER ================= */
+/* ==================================================
+   FOOTER
+================================================== */
 
-footer{
-    margin-top:35px;
-    background:#131921;
-    color:#fff;
-    padding:30px 20px;
-}
-
-.footer-inner{
-    max-width:1200px;
-    margin:auto;
+.footer{
+    width:100%;
+    background:#111;
+    color:white;
+    margin-top:30px;
 }
 
 .footer-features{
+    max-width:1100px;
+    margin:auto;
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:20px;
-    padding-bottom:25px;
-    border-bottom:1px solid #3a4149;
 }
 
 .feature{
+    min-height:145px;
+    padding:20px 12px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
     text-align:center;
+    border-right:1px solid #292929;
 }
 
-.feature i{
-    font-size:22px;
-    margin-bottom:9px;
+.feature:last-child{
+    border-right:none;
+}
+
+.feature-icon{
+    width:45px;
+    height:45px;
+    border:2px solid #0066ff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#0066ff;
+    font-size:18px;
+    margin-bottom:10px;
 }
 
 .feature h4{
-    font-size:14px;
-    margin-bottom:5px;
+    font-size:12px;
+    margin-bottom:6px;
 }
 
 .feature p{
-    color:#bbb;
-    font-size:12px;
+    font-size:10px;
+    line-height:1.4;
+    color:#aaa;
 }
 
 .footer-brand{
     text-align:center;
-    padding-top:22px;
+    padding:22px 15px;
+    border-top:1px solid #292929;
 }
 
-.footer-brand strong{
+.footer-brand h2{
     font-size:23px;
-    letter-spacing:2px;
+    margin-bottom:5px;
 }
 
 .footer-brand p{
+    font-size:11px;
     color:#aaa;
-    font-size:12px;
-    margin-top:7px;
 }
 
-/* ================= MOBILE ================= */
+.footer-bottom{
+    text-align:center;
+    padding:13px;
+    border-top:1px solid #292929;
+    font-size:10px;
+    color:#777;
+}
 
-@media(max-width:800px){
 
-    header{
-        padding:0 18px;
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:750px){
+
+    .header{
+        height:58px;
     }
 
-    .secure{
-        font-size:12px;
+    .main{
+        margin-top:18px;
+    }
+
+    .checkout-title{
+        font-size:23px;
     }
 
     .checkout-grid{
@@ -362,36 +421,30 @@ footer{
     }
 
     .summary{
-        order:2;
+        position:static;
+        grid-row:1;
+    }
+
+    .details-card{
+        grid-row:2;
     }
 
     .footer-features{
         grid-template-columns:1fr 1fr;
-        gap:25px 10px;
     }
+
+    .feature{
+        min-height:135px;
+        border-bottom:1px solid #292929;
+    }
+
 }
 
-@media(max-width:500px){
 
-    header{
-        height:58px;
-    }
+@media(max-width:430px){
 
-    .logo{
-        font-size:24px;
-    }
-
-    .secure{
-        display:none;
-    }
-
-    .container{
-        margin:18px auto;
+    .main{
         padding:0 10px;
-    }
-
-    .checkout-title{
-        font-size:24px;
     }
 
     .card,
@@ -399,1119 +452,1354 @@ footer{
         padding:17px;
     }
 
-    .row{
+    .two-column{
         grid-template-columns:1fr;
         gap:0;
     }
 
-    .footer-features{
-        grid-template-columns:1fr 1fr;
+    .product-name{
+        font-size:16px;
     }
+
+    .product-price{
+        font-size:20px;
+    }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
 
-<header>
+<header class="header">
 
-    <div class="logo">
-        LOXICA
-    </div>
-
-    <div class="secure">
-        <i class="fa-solid fa-lock"></i>
-        Secure Checkout
-    </div>
+<div class="logo">
+    LOXICA
+</div>
 
 </header>
 
 
-<!-- ================= MAIN ================= -->
+<main class="main">
 
-<div class="container">
 
-    <div class="checkout-title">
-        Checkout
-    </div>
+<div class="checkout-title">
+    Checkout
+</div>
 
-    <div class="checkout-grid">
 
-        <!-- ================= LEFT ================= -->
+<div class="checkout-grid">
 
-        <div>
 
-            <div class="card">
+    <!-- ==================================================
+         LEFT SIDE
+    ================================================== -->
 
-                <h2>Product Details</h2>
+    <div class="details-card">
 
-                <div class="product-box">
 
-                    <div
-                        class="product-name"
-                        id="product">
-                        Product
-                    </div>
+        <!-- PRODUCT DETAILS -->
 
-                    <div
-                        class="product-price"
-                        id="price">
-                        ₹0
-                    </div>
+        <div class="card">
 
+            <div class="card-title">
+
+                <div class="number">
+                    1
                 </div>
 
+                Product Details
 
-                <h2>Delivery Address</h2>
+            </div>
+
+
+            <div class="product-box">
 
                 <div
-                    id="errorMessage"
-                    class="error-message">
+                    class="product-name"
+                    id="product">
+                    Product
                 </div>
+
 
                 <div
-                    id="successMessage"
-                    class="success-message">
+                    class="product-price"
+                    id="price">
+                    ₹0
                 </div>
-
-
-                <form id="checkoutForm">
-
-                    <div class="form-group">
-
-                        <label for="name">
-                            Full Name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="name"
-                            placeholder="Enter your full name"
-                            required>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="phone">
-                            Phone Number
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="phone"
-                            placeholder="Enter 10 digit mobile number"
-                            maxlength="10"
-                            required>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="address">
-                            Address
-                        </label>
-
-                        <textarea
-                            id="address"
-                            placeholder="House name, house number, street..."
-                            required></textarea>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="landmark">
-                            Landmark
-                        </label>
-
-                        <input
-                            type="text"
-                            id="landmark"
-                            placeholder="Nearby landmark">
-
-                    </div>
-
-
-                    <div class="row">
-
-                        <div class="form-group">
-
-                            <label for="city">
-                                City
-                            </label>
-
-                            <input
-                                type="text"
-                                id="city"
-                                placeholder="City"
-                                required>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="state">
-                                State
-                            </label>
-
-                            <input
-                                type="text"
-                                id="state"
-                                placeholder="State"
-                                required>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="pincode">
-                            Pincode
-                        </label>
-
-                        <input
-                            type="text"
-                            id="pincode"
-                            placeholder="6 digit pincode"
-                            maxlength="6"
-                            required>
-
-                    </div>
-
-
-                    <!-- ================= COLOR ================= -->
-
-                    <div
-                        id="colorSection"
-                        class="color-box"
-                        style="display:none;">
-
-                        <label>
-                            Color
-                        </label>
-
-                        <div
-                            id="selectedColorDisplay"
-                            class="selected-color">
-                            -
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        type="submit"
-                        id="continueBtn"
-                        class="continue-btn">
-
-                        Continue To Payment
-
-                    </button>
-
-                </form>
 
             </div>
 
         </div>
 
 
-        <!-- ================= SUMMARY ================= -->
 
-        <aside class="summary">
+        <!-- DELIVERY DETAILS -->
 
-            <h2>
-                Order Summary
-            </h2>
+        <div class="card">
 
+            <div class="card-title">
 
-            <div class="summary-row">
-
-                <span>
-                    Product
-                </span>
-
-                <span
-                    class="summary-product"
-                    id="summaryProduct">
-                    Product
-                </span>
-
-            </div>
-
-
-            <div class="summary-row">
-
-                <span>
-                    Price
-                </span>
-
-                <span id="summaryPrice">
-                    ₹0
-                </span>
-
-            </div>
-
-
-            <!-- COLOR -->
-
-            <div
-                class="summary-row"
-                id="summaryColorRow"
-                style="display:none;">
-
-                <span>
-                    Color
-                </span>
-
-                <span
-                    class="summary-product"
-                    id="summaryColor">
-                    -
-                </span>
-
-            </div>
-
-
-            <div class="total">
-
-                <span>
-                    Order Total
-                </span>
-
-                <span id="summaryTotal">
-                    ₹0
-                </span>
-
-            </div>
-
-
-            <div class="secure-box">
-
-                <div>
-                    <i class="fa-solid fa-lock"></i>
-                    Secure Checkout
+                <div class="number">
+                    2
                 </div>
 
-                <div>
-                    Your information is securely processed.
-                </div>
+                Delivery Address
 
             </div>
 
-        </aside>
+
+            <form id="orderForm">
+
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    id="name"
+                    placeholder="Enter your full name"
+                    required>
+
+
+
+                <label>
+                    Mobile Number
+                </label>
+
+
+                <div class="phone-group">
+
+                    <div class="phone-code">
+                        +91
+                    </div>
+
+
+                    <input
+                        id="phone"
+                        type="tel"
+                        placeholder="10-digit mobile number"
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                        required>
+
+                </div>
+
+
+
+                <label>
+                    Full Address
+                </label>
+
+
+                <textarea
+                    id="address"
+                    placeholder="House / Building / Street / Area"
+                    required></textarea>
+
+
+
+                <label>
+                    Landmark
+                </label>
+
+
+                <input
+                    id="landmark"
+                    placeholder="Nearby landmark"
+                    required>
+
+
+
+                <div class="two-column">
+
+
+                    <div>
+
+                        <label>
+                            City
+                        </label>
+
+                        <input
+                            id="city"
+                            placeholder="City"
+                            required>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            State
+                        </label>
+
+                        <input
+                            id="state"
+                            placeholder="State"
+                            required>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <label>
+                    Pincode
+                </label>
+
+
+                <input
+                    id="pincode"
+                    placeholder="6-digit pincode"
+                    maxlength="6"
+                    pattern="[0-9]{6}"
+                    required>
+
+
+
+                <!-- ==================================================
+                     COLOR - READ ONLY
+                ================================================== -->
+
+                <div
+                    id="colorSection"
+                    class="color-box"
+                    style="display:none;">
+
+                    <label>
+                        Color
+                    </label>
+
+
+                    <div
+                        id="selectedColorDisplay"
+                        class="selected-color">
+                        -
+                    </div>
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="continue-btn">
+
+                    Continue To Payment 💳
+
+                </button>
+
+
+            </form>
+
+
+            <p class="note">
+                Your details are securely saved for this checkout.
+            </p>
+
+
+        </div>
 
     </div>
+
+
+
+    <!-- ==================================================
+         ORDER SUMMARY
+    ================================================== -->
+
+    <aside class="summary">
+
+        <h2>
+            Order Summary
+        </h2>
+
+
+        <div class="summary-row">
+
+            <span>
+                Product
+            </span>
+
+
+            <span
+                class="summary-product"
+                id="summaryProduct">
+                Product
+            </span>
+
+        </div>
+
+
+
+        <div class="summary-row">
+
+            <span>
+                Price
+            </span>
+
+
+            <span id="summaryPrice">
+                ₹0
+            </span>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             COLOR ROW
+        ================================================== -->
+
+        <div
+            class="summary-row"
+            id="summaryColorRow"
+            style="display:none;">
+
+            <span>
+                Color
+            </span>
+
+
+            <span
+                class="summary-product"
+                id="summaryColor">
+                -
+            </span>
+
+        </div>
+
+
+
+        <div class="total">
+
+            <span>
+                Total
+            </span>
+
+
+            <span id="summaryTotal">
+                ₹0
+            </span>
+
+        </div>
+
+
+
+        <div class="secure-box">
+
+            <i class="fa-solid fa-lock"></i>
+
+            Secure checkout
+
+            <br>
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            Your order details are protected.
+
+            <br>
+
+            <i class="fa-solid fa-truck"></i>
+
+            Fast delivery across India.
+
+        </div>
+
+
+    </aside>
+
+
+</div>
+
+</main>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
+<footer class="footer">
+
+
+<div class="footer-features">
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            <i class="fa-solid fa-truck-fast"></i>
+        </div>
+
+        <h4>
+            FREE DELIVERY
+        </h4>
+
+        <p>
+            Delivered safely to your doorstep.
+        </p>
+
+    </div>
+
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <h4>
+            SECURE PAYMENT
+        </h4>
+
+        <p>
+            Safe & secure UPI payments.
+        </p>
+
+    </div>
+
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            <i class="fa-solid fa-bolt"></i>
+        </div>
+
+        <h4>
+            EXPRESS DELIVERY
+        </h4>
+
+        <p>
+            Fast dispatch and quick delivery.
+        </p>
+
+    </div>
+
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            <i class="fa-solid fa-gem"></i>
+        </div>
+
+        <h4>
+            LATEST PRODUCTS
+        </h4>
+
+        <p>
+            Discover trending products and collections.
+        </p>
+
+    </div>
+
 
 </div>
 
 
-<!-- ================= FOOTER ================= -->
 
-<footer>
+<div class="footer-brand">
 
-    <div class="footer-inner">
+    <h2>
+        LOXICA
+    </h2>
 
-        <div class="footer-features">
+    <p>
+        Smart Products. Better Everyday Life.
+    </p>
 
-            <div class="feature">
-
-                <i class="fa-solid fa-shield-halved"></i>
-
-                <h4>
-                    Secure Payment
-                </h4>
-
-                <p>
-                    Safe and secure checkout
-                </p>
-
-            </div>
+</div>
 
 
-            <div class="feature">
 
-                <i class="fa-solid fa-truck-fast"></i>
+<div class="footer-bottom">
 
-                <h4>
-                    Fast Delivery
-                </h4>
+    © 2026 LOXICA. All Rights Reserved.
 
-                <p>
-                    Quick delivery to your door
-                </p>
+</div>
 
-            </div>
-
-
-            <div class="feature">
-
-                <i class="fa-solid fa-headset"></i>
-
-                <h4>
-                    Customer Support
-                </h4>
-
-                <p>
-                    We're here to help
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <i class="fa-solid fa-rotate-left"></i>
-
-                <h4>
-                    Easy Returns
-                </h4>
-
-                <p>
-                    14-day return policy
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-brand">
-
-            <strong>
-                LOXICA
-            </strong>
-
-            <p>
-                © 2026 LOXICA. All rights reserved.
-            </p>
-
-        </div>
-
-    </div>
 
 </footer>
 
 
+
 <script>
 
-/* =========================================
+/* ==================================================
+   GOOGLE APPS SCRIPT
+================================================== */
+
+const scriptURL =
+"https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
+
+
+/* ==================================================
    URL PARAMETERS
-========================================= */
+================================================== */
 
 const params =
     new URLSearchParams(
         window.location.search
     );
 
+
 const product =
-    (params.get("product") || "Product").trim();
+    params.get("product") ||
+    "LOXICA Product";
+
 
 const price =
-    (params.get("price") || "0").trim();
+    params.get("price") ||
+    "0";
+
 
 const checkoutSession =
-    (params.get("session") || "").trim();
+    params.get("session") ||
+    "";
+
+
+/* ==================================================
+   SELECTED COLOR FROM WIX
+================================================== */
 
 const selectedColorFromURL =
     (params.get("color") || "").trim();
 
 
-/* =========================================
-   ELEMENTS
-========================================= */
+/* ==================================================
+   STORAGE KEY
+================================================== */
 
-const productElement =
-    document.getElementById("product");
-
-const priceElement =
-    document.getElementById("price");
-
-const summaryProduct =
-    document.getElementById("summaryProduct");
-
-const summaryPrice =
-    document.getElementById("summaryPrice");
-
-const summaryTotal =
-    document.getElementById("summaryTotal");
-
-const colorSection =
-    document.getElementById("colorSection");
-
-const selectedColorDisplay =
-    document.getElementById(
-        "selectedColorDisplay"
-    );
-
-const summaryColorRow =
-    document.getElementById(
-        "summaryColorRow"
-    );
-
-const summaryColor =
-    document.getElementById(
-        "summaryColor"
-    );
-
-const checkoutForm =
-    document.getElementById(
-        "checkoutForm"
-    );
-
-const continueBtn =
-    document.getElementById(
-        "continueBtn"
-    );
-
-const errorMessage =
-    document.getElementById(
-        "errorMessage"
-    );
-
-const successMessage =
-    document.getElementById(
-        "successMessage"
-    );
+const storageKey =
+    checkoutSession
+        ? "loxicaCheckout_" +
+          checkoutSession
+        : null;
 
 
-/* =========================================
-   PRODUCT
-========================================= */
+/* ==================================================
+   DISPLAY PRODUCT
+================================================== */
 
-productElement.innerText =
-    product;
-
-summaryProduct.innerText =
+document.getElementById(
+    "product"
+).innerText =
     product;
 
 
-/* =========================================
-   PRICE
-========================================= */
-
-let numericPrice =
-    parseFloat(
-        String(price)
-            .replace(/[₹,\s]/g,"")
-    );
-
-if(isNaN(numericPrice)){
-    numericPrice = 0;
-}
-
-const formattedPrice =
-    "₹" +
-    numericPrice.toLocaleString("en-IN");
-
-priceElement.innerText =
-    formattedPrice;
-
-summaryPrice.innerText =
-    formattedPrice;
-
-summaryTotal.innerText =
-    formattedPrice;
+document.getElementById(
+    "price"
+).innerText =
+    "₹" + price;
 
 
-/* =========================================
+document.getElementById(
+    "summaryProduct"
+).innerText =
+    product;
+
+
+document.getElementById(
+    "summaryPrice"
+).innerText =
+    "₹" + price;
+
+
+document.getElementById(
+    "summaryTotal"
+).innerText =
+    "₹" + price;
+
+
+/* ==================================================
    COLOR DISPLAY
-========================================= */
+================================================== */
 
 function updateColorDisplay(colorValue){
 
     const color =
         (colorValue || "").trim();
 
+
+    const colorSection =
+        document.getElementById(
+            "colorSection"
+        );
+
+
+    const colorDisplay =
+        document.getElementById(
+            "selectedColorDisplay"
+        );
+
+
+    const summaryColorRow =
+        document.getElementById(
+            "summaryColorRow"
+        );
+
+
+    const summaryColor =
+        document.getElementById(
+            "summaryColor"
+        );
+
+
     if(color){
+
+        /* Show Color section */
 
         colorSection.style.display =
             "block";
 
-        selectedColorDisplay.innerText =
+
+        /* Show selected color */
+
+        colorDisplay.innerText =
             color;
 
-        selectedColorDisplay.classList.remove(
+
+        colorDisplay.classList.remove(
             "empty"
         );
+
+
+        /* Show Color in Order Summary */
 
         summaryColorRow.style.display =
             "flex";
 
+
         summaryColor.innerText =
             color;
 
-    }else{
+    }
+    else{
+
+        /* Hide Color section */
 
         colorSection.style.display =
             "none";
 
+
+        /* Hide Summary Color */
+
         summaryColorRow.style.display =
             "none";
 
-        selectedColorDisplay.innerText =
+
+        colorDisplay.innerText =
             "-";
 
-        selectedColorDisplay.classList.add(
+
+        colorDisplay.classList.add(
             "empty"
         );
 
+
         summaryColor.innerText =
             "-";
+
     }
+
 }
 
 
-/*
-   Color comes from Wix URL.
-   It is READ ONLY.
-*/
+/* ==================================================
+   INITIAL COLOR
+================================================== */
 
 updateColorDisplay(
     selectedColorFromURL
 );
 
 
-/* =========================================
-   SESSION
-========================================= */
+/* ==================================================
+   RESET BUTTON
+================================================== */
 
-const storageKey =
-    "loxicaCheckout_" +
-    checkoutSession;
+function resetContinueButton(){
+
+    const submitBtn =
+        document.querySelector(
+            ".continue-btn"
+        );
 
 
-/* =========================================
-   RESTORE DATA
-========================================= */
+    if(!submitBtn){
 
-try{
+        return;
 
-    const savedData =
+    }
+
+
+    submitBtn.disabled =
+        false;
+
+
+    submitBtn.style.background =
+        "#111";
+
+
+    submitBtn.innerHTML =
+        "Continue To Payment 💳";
+
+}
+
+
+/* ==================================================
+   CLEAR FORM
+================================================== */
+
+function clearCheckoutForm(){
+
+    document.getElementById(
+        "name"
+    ).value = "";
+
+
+    document.getElementById(
+        "phone"
+    ).value = "";
+
+
+    document.getElementById(
+        "address"
+    ).value = "";
+
+
+    document.getElementById(
+        "landmark"
+    ).value = "";
+
+
+    document.getElementById(
+        "city"
+    ).value = "";
+
+
+    document.getElementById(
+        "state"
+    ).value = "";
+
+
+    document.getElementById(
+        "pincode"
+    ).value = "";
+
+
+    /*
+     * Keep Wix selected color.
+     */
+
+    updateColorDisplay(
+        selectedColorFromURL
+    );
+
+}
+
+
+/* ==================================================
+   RESTORE SAVED DETAILS
+================================================== */
+
+function restoreCheckout(){
+
+    resetContinueButton();
+
+
+    /*
+     * No session
+     */
+
+    if(!storageKey){
+
+        clearCheckoutForm();
+
+        return;
+
+    }
+
+
+    const savedDetails =
         sessionStorage.getItem(
             storageKey
         );
 
-    if(savedData){
 
-        const data =
-            JSON.parse(savedData);
+    /*
+     * No saved details
+     */
 
+    if(!savedDetails){
 
-        if(data.name){
+        clearCheckoutForm();
 
-            document.getElementById(
-                "name"
-            ).value =
-                data.name;
-        }
+        return;
 
-
-        if(data.phone){
-
-            let savedPhone =
-                data.phone
-                    .toString()
-                    .replace("+91","")
-                    .replace(/\D/g,"");
-
-            document.getElementById(
-                "phone"
-            ).value =
-                savedPhone;
-        }
-
-
-        if(data.address){
-
-            document.getElementById(
-                "address"
-            ).value =
-                data.address;
-        }
-
-
-        if(data.landmark){
-
-            document.getElementById(
-                "landmark"
-            ).value =
-                data.landmark;
-        }
-
-
-        if(data.city){
-
-            document.getElementById(
-                "city"
-            ).value =
-                data.city;
-        }
-
-
-        if(data.state){
-
-            document.getElementById(
-                "state"
-            ).value =
-                data.state;
-        }
-
-
-        if(data.pincode){
-
-            document.getElementById(
-                "pincode"
-            ).value =
-                data.pincode;
-        }
-
-
-        if(data.color){
-
-            updateColorDisplay(
-                data.color
-            );
-
-        }else{
-
-            updateColorDisplay(
-                selectedColorFromURL
-            );
-        }
     }
 
-}catch(error){
 
-    console.log(
-        "Session restore error:",
-        error
-    );
+    try{
+
+        const data =
+            JSON.parse(
+                savedDetails
+            );
+
+
+        document.getElementById(
+            "name"
+        ).value =
+            data.name || "";
+
+
+        document.getElementById(
+            "phone"
+        ).value =
+            (data.phone || "")
+                .replace(
+                    /^\+91/,
+                    ""
+                );
+
+
+        document.getElementById(
+            "address"
+        ).value =
+            data.address || "";
+
+
+        document.getElementById(
+            "landmark"
+        ).value =
+            data.landmark || "";
+
+
+        document.getElementById(
+            "city"
+        ).value =
+            data.city || "";
+
+
+        document.getElementById(
+            "state"
+        ).value =
+            data.state || "";
+
+
+        document.getElementById(
+            "pincode"
+        ).value =
+            data.pincode || "";
+
+
+        /*
+         * COLOR
+         *
+         * URL color is preferred.
+         * If URL has no color,
+         * saved session color is used.
+         */
+
+        const savedColor =
+            selectedColorFromURL ||
+            data.color ||
+            "";
+
+
+        updateColorDisplay(
+            savedColor
+        );
+
+
+    }
+    catch(error){
+
+        console.log(
+            "Could not restore checkout details:",
+            error
+        );
+
+
+        clearCheckoutForm();
+
+    }
+
 }
 
 
-/* =========================================
-   ERROR
-========================================= */
+/* ==================================================
+   PAGE SHOW
+================================================== */
 
-function showError(message){
+window.addEventListener(
+    "pageshow",
+    function(){
 
-    errorMessage.innerText =
-        message;
+        resetContinueButton();
 
-    errorMessage.style.display =
-        "block";
+        restoreCheckout();
 
-    successMessage.style.display =
-        "none";
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-}
+    }
+);
 
 
-/* =========================================
+/* ==================================================
    FORM SUBMIT
-========================================= */
+================================================== */
 
-checkoutForm.addEventListener(
+document.getElementById(
+    "orderForm"
+)
+.addEventListener(
     "submit",
-    async function(event){
+    function(e){
 
-        event.preventDefault();
-
-
-        errorMessage.style.display =
-            "none";
-
-        successMessage.style.display =
-            "none";
+        e.preventDefault();
 
 
-        /* FORM DATA */
+        const submitBtn =
+            document.querySelector(
+                ".continue-btn"
+            );
 
-        const nameValue =
-            document.getElementById(
-                "name"
-            ).value.trim();
 
+        /* ==========================================
+           PHONE VALIDATION
+        ========================================== */
 
         const phoneValue =
             document.getElementById(
                 "phone"
-            ).value
-            .replace(/\D/g,"");
+            )
+            .value
+            .trim();
 
 
-        const addressValue =
-            document.getElementById(
-                "address"
-            ).value.trim();
+        if(
+            !/^[0-9]{10}$/.test(
+                phoneValue
+            )
+        ){
+
+            alert(
+                "Please enter a valid 10-digit mobile number."
+            );
 
 
-        const landmarkValue =
-            document.getElementById(
-                "landmark"
-            ).value.trim();
+            return;
+
+        }
 
 
-        const cityValue =
-            document.getElementById(
-                "city"
-            ).value.trim();
-
-
-        const stateValue =
-            document.getElementById(
-                "state"
-            ).value.trim();
-
+        /* ==========================================
+           PINCODE VALIDATION
+        ========================================== */
 
         const pincodeValue =
             document.getElementById(
                 "pincode"
-            ).value.trim();
+            )
+            .value
+            .trim();
 
 
-        /* COLOR */
+        if(
+            !/^[0-9]{6}$/.test(
+                pincodeValue
+            )
+        ){
+
+            alert(
+                "Please enter a valid 6-digit pincode."
+            );
+
+
+            return;
+
+        }
+
+
+        /* ==========================================
+           COLOR
+        ========================================== */
+
+        /*
+         * IMPORTANT:
+         *
+         * Color is NOT taken from
+         * a dropdown anymore.
+         *
+         * It comes directly from Wix URL.
+         */
 
         let colorValue =
             selectedColorFromURL;
 
 
-        try{
+        /*
+         * If URL color is empty,
+         * try session storage.
+         */
 
-            const savedData =
+        if(
+            !colorValue &&
+            storageKey
+        ){
+
+            const savedDetails =
                 sessionStorage.getItem(
                     storageKey
                 );
 
-            if(savedData){
 
-                const data =
-                    JSON.parse(savedData);
+            if(savedDetails){
 
-                if(data.color){
+                try{
 
-                    colorValue =
-                        data.color.trim();
+                    const oldData =
+                        JSON.parse(
+                            savedDetails
+                        );
+
+
+                    if(oldData.color){
+
+                        colorValue =
+                            oldData.color
+                                .trim();
+
+                    }
+
                 }
+                catch(error){
+
+                    console.log(
+                        "Could not read saved color:",
+                        error
+                    );
+
+                }
+
             }
 
-        }catch(error){
-
-            console.log(
-                "Color session error:",
-                error
-            );
         }
 
 
-        /* VALIDATION */
+        /*
+         * If still empty,
+         * save "-"
+         */
 
-        if(!nameValue){
+        if(!colorValue){
 
-            showError(
-                "Please enter your full name."
-            );
+            colorValue =
+                "-";
 
-            return;
         }
 
 
-        if(phoneValue.length !== 10){
-
-            showError(
-                "Please enter a valid 10 digit phone number."
-            );
-
-            return;
-        }
-
-
-        if(!addressValue){
-
-            showError(
-                "Please enter your address."
-            );
-
-            return;
-        }
-
-
-        if(!cityValue){
-
-            showError(
-                "Please enter your city."
-            );
-
-            return;
-        }
-
-
-        if(!stateValue){
-
-            showError(
-                "Please enter your state."
-            );
-
-            return;
-        }
-
-
-        if(pincodeValue.length !== 6){
-
-            showError(
-                "Please enter a valid 6 digit pincode."
-            );
-
-            return;
-        }
-
-
-        /* ORDER DATA */
+        /* ==========================================
+           CURRENT DATA
+        ========================================== */
 
         const currentData = {
 
             product:
                 product,
 
+
             price:
-                numericPrice,
+                price,
+
 
             name:
-                nameValue,
+                document.getElementById(
+                    "name"
+                )
+                .value
+                .trim(),
+
 
             phone:
                 "+91" +
                 phoneValue,
 
+
             address:
-                addressValue,
+                document.getElementById(
+                    "address"
+                )
+                .value
+                .trim(),
+
 
             landmark:
-                landmarkValue,
+                document.getElementById(
+                    "landmark"
+                )
+                .value
+                .trim(),
+
 
             city:
-                cityValue,
+                document.getElementById(
+                    "city"
+                )
+                .value
+                .trim(),
+
 
             state:
-                stateValue,
+                document.getElementById(
+                    "state"
+                )
+                .value
+                .trim(),
+
 
             pincode:
                 pincodeValue,
 
+
+            /*
+             * Selected Wix color
+             */
+
             color:
                 colorValue
+
         };
 
 
-        /* SAVE SESSION */
+        /* ==========================================
+           FIND OLD ORDER ID
+        ========================================== */
 
-        try{
-
-            sessionStorage.setItem(
-                storageKey,
-                JSON.stringify(
-                    currentData
-                )
-            );
-
-        }catch(error){
-
-            console.log(
-                "Session save error:",
-                error
-            );
-        }
+        let savedOrderId =
+            "";
 
 
-        /* BUTTON */
+        if(storageKey){
 
-        continueBtn.disabled =
-            true;
-
-        continueBtn.innerText =
-            "Processing...";
-
-
-        /* APPS SCRIPT */
-
-        const scriptURL =
-            "https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
-
-
-        try{
-
-            const response =
-                await fetch(
-                    scriptURL,
-                    {
-                        method:"POST",
-
-                        headers:{
-                            "Content-Type":
-                                "text/plain;charset=utf-8"
-                        },
-
-                        body:
-                            JSON.stringify(
-                                currentData
-                            )
-                    }
+            const savedDetails =
+                sessionStorage.getItem(
+                    storageKey
                 );
 
 
-            const result =
-                await response.json();
-
-
-            if(
-                result &&
-                result.success
-            ){
-
-                const orderId =
-                    result.orderId || "";
-
-
-                currentData.orderId =
-                    orderId;
-
+            if(savedDetails){
 
                 try{
 
-                    sessionStorage.setItem(
-                        storageKey,
-                        JSON.stringify(
-                            currentData
-                        )
-                    );
+                    const oldData =
+                        JSON.parse(
+                            savedDetails
+                        );
 
-                }catch(error){
+
+                    if(oldData.orderId){
+
+                        savedOrderId =
+                            oldData.orderId;
+
+                    }
+
+                }
+                catch(error){
 
                     console.log(
-                        "Order save error:",
+                        "Could not read previous checkout:",
                         error
                     );
+
                 }
 
+            }
 
-                /* PAYMENT URL */
-
-                let paymentURL =
-                    "payment.html?" +
-                    "product=" +
-                    encodeURIComponent(
-                        product
-                    ) +
-                    "&price=" +
-                    encodeURIComponent(
-                        numericPrice
-                    ) +
-                    "&orderId=" +
-                    encodeURIComponent(
-                        orderId
-                    ) +
-                    "&session=" +
-                    encodeURIComponent(
-                        checkoutSession
-                    );
+        }
 
 
-                /* COLOR */
+        /* ==========================================
+           SAME ORDER = UPDATE
+        ========================================== */
 
-                if(colorValue){
+        if(savedOrderId){
 
-                    paymentURL +=
-                        "&color=" +
-                        encodeURIComponent(
-                            colorValue
-                        );
-                }
+            currentData.orderId =
+                savedOrderId;
+
+        }
 
 
-                /* REDIRECT */
+        /* ==========================================
+           BUTTON LOADING
+        ========================================== */
 
-                window.location.href =
-                    paymentURL;
+        submitBtn.disabled =
+            true;
 
-            }else{
+
+        submitBtn.style.background =
+            "#2563EB";
+
+
+        submitBtn.innerHTML =
+            '<span class="spinner"></span>Processing...';
+
+
+        /* ==========================================
+           SAVE / UPDATE ORDER
+        ========================================== */
+
+        fetch(
+            scriptURL,
+            {
+                method:"POST",
+
+                body:
+                    JSON.stringify(
+                        currentData
+                    )
+            }
+        )
+
+        .then(function(response){
+
+            return response.json();
+
+        })
+
+        .then(function(result){
+
+            if(!result.success){
 
                 throw new Error(
-                    result &&
-                    result.message
-                        ? result.message
-                        : "Order submission failed."
+                    result.error ||
+                    "Order could not be saved"
                 );
+
             }
 
 
-        }catch(error){
+            /* ======================================
+               ORDER ID
+            ====================================== */
 
-            console.error(
-                "Submit error:",
+            const orderId =
+                result.orderId;
+
+
+            /* ======================================
+               SAVE SESSION
+            ====================================== */
+
+            currentData.orderId =
+                orderId;
+
+
+            if(storageKey){
+
+                sessionStorage.setItem(
+
+                    storageKey,
+
+                    JSON.stringify(
+                        currentData
+                    )
+
+                );
+
+            }
+
+
+            /* ======================================
+               OPEN PAYMENT
+            ====================================== */
+
+            submitBtn.innerHTML =
+                '<span class="spinner"></span>Opening Payment...';
+
+
+            let paymentURL =
+                "payment.html" +
+
+                "?product=" +
+                encodeURIComponent(
+                    product
+                ) +
+
+                "&price=" +
+                encodeURIComponent(
+                    price
+                ) +
+
+                "&orderId=" +
+                encodeURIComponent(
+                    orderId
+                ) +
+
+                "&session=" +
+                encodeURIComponent(
+                    checkoutSession
+                );
+
+
+            /*
+             * Send selected color
+             * to payment page.
+             */
+
+            if(
+                colorValue &&
+                colorValue !== "-"
+            ){
+
+                paymentURL +=
+                    "&color=" +
+                    encodeURIComponent(
+                        colorValue
+                    );
+
+            }
+
+
+            /*
+             * Redirect
+             */
+
+            window.location.href =
+                paymentURL;
+
+        })
+
+
+        .catch(function(error){
+
+            console.log(
+                "Order save error:",
                 error
             );
 
-            showError(
-                "Something went wrong. Please try again."
+
+            resetContinueButton();
+
+
+            alert(
+                "Unable to save your order. Please try again."
             );
 
-            continueBtn.disabled =
-                false;
-
-            continueBtn.innerText =
-                "Continue To Payment";
-        }
-
-    }
-);
-
-
-/* =========================================
-   PHONE
-========================================= */
-
-document
-.getElementById("phone")
-.addEventListener(
-    "input",
-    function(){
-
-        this.value =
-            this.value
-                .replace(/\D/g,"")
-                .slice(0,10);
-
-    }
-);
-
-
-/* =========================================
-   PINCODE
-========================================= */
-
-document
-.getElementById("pincode")
-.addEventListener(
-    "input",
-    function(){
-
-        this.value =
-            this.value
-                .replace(/\D/g,"")
-                .slice(0,6);
+        });
 
     }
 );
@@ -1519,4 +1807,5 @@ document
 </script>
 
 </body>
+
 </html>
