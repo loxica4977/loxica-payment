@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,7 +120,7 @@ display:flex;
 justify-content:space-between;
 gap:15px;
 font-size:13px;
-padding:7px 0;
+padding:9px 0;
 border-bottom:1px solid #eee;
 }
 
@@ -138,6 +136,7 @@ color:#777;
 font-weight:bold;
 text-align:right;
 word-break:break-word;
+max-width:65%;
 }
 
 /* ================= INFO ================= */
@@ -346,9 +345,12 @@ Loading...
 </div>
 
 
-<!-- ================= OPTIONAL ORDER DETAILS ================= -->
+<!-- ================= ORDER DETAILS ================= -->
 
 <div class="order-info" id="orderInfo">
+
+
+<!-- PRODUCT -->
 
 <div class="info-row">
 
@@ -356,12 +358,16 @@ Loading...
 Product
 </span>
 
-<span class="info-value" id="product">
+<span
+class="info-value"
+id="product">
 -
 </span>
 
 </div>
 
+
+<!-- PRICE -->
 
 <div class="info-row">
 
@@ -369,11 +375,34 @@ Product
 Amount
 </span>
 
-<span class="info-value" id="price">
+<span
+class="info-value"
+id="price">
 -
 </span>
 
 </div>
+
+
+<!-- COLOR -->
+
+<div
+class="info-row"
+id="colorRow"
+style="display:none;">
+
+<span class="info-label">
+Color
+</span>
+
+<span
+class="info-value"
+id="color">
+-
+</span>
+
+</div>
+
 
 </div>
 
@@ -538,17 +567,29 @@ Premium products with secure checkout and fast delivery across India.
 ========================================= */
 
 const params =
-new URLSearchParams(window.location.search);
+new URLSearchParams(
+    window.location.search
+);
 
 
 const orderId =
 params.get("orderId") || "";
 
+
 const product =
 params.get("product") || "";
 
+
 const price =
 params.get("price") || "";
+
+
+/*
+ * COLOR FROM PAYMENT PAGE
+ */
+
+const color =
+(params.get("color") || "").trim();
 
 
 /* =========================================
@@ -557,41 +598,83 @@ params.get("price") || "";
 
 if(orderId){
 
-    document.getElementById("orderId").innerText =
+    document.getElementById(
+        "orderId"
+    ).innerText =
     orderId;
 
 }else{
 
-    document.getElementById("orderId").innerText =
+    document.getElementById(
+        "orderId"
+    ).innerText =
     "Processing";
 
 }
 
 
 /* =========================================
-   SHOW PRODUCT + PRICE
+   SHOW ORDER DETAILS
 ========================================= */
 
-if(product || price){
+if(
+    product ||
+    price ||
+    color
+){
 
-    document.getElementById("orderInfo").style.display =
+    document.getElementById(
+        "orderInfo"
+    ).style.display =
     "block";
 
 }
 
 
+/* =========================================
+   SHOW PRODUCT
+========================================= */
+
 if(product){
 
-    document.getElementById("product").innerText =
+    document.getElementById(
+        "product"
+    ).innerText =
     product;
 
 }
 
 
+/* =========================================
+   SHOW PRICE
+========================================= */
+
 if(price){
 
-    document.getElementById("price").innerText =
+    document.getElementById(
+        "price"
+    ).innerText =
     "₹" + price;
+
+}
+
+
+/* =========================================
+   SHOW COLOR
+========================================= */
+
+if(color){
+
+    document.getElementById(
+        "colorRow"
+    ).style.display =
+    "flex";
+
+
+    document.getElementById(
+        "color"
+    ).innerText =
+    color;
 
 }
 
@@ -643,4 +726,3 @@ window.addEventListener(
 </body>
 
 </html>
-```
