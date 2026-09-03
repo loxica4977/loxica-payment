@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,407 +14,409 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-background:#eaeded;
-color:#111;
-min-height:100vh;
+    background:#eaeded;
+    color:#111;
+    min-height:100vh;
 }
 
 .header{
-width:100%;
-background:#111;
-color:white;
-height:64px;
-display:flex;
-align-items:center;
-justify-content:center;
+    width:100%;
+    background:#111;
+    color:white;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .logo{
-font-size:29px;
-font-weight:800;
-letter-spacing:1.5px;
+    font-size:29px;
+    font-weight:800;
+    letter-spacing:1.5px;
 }
 
 .main{
-width:100%;
-max-width:1100px;
-margin:25px auto;
-padding:0 15px;
+    width:100%;
+    max-width:1100px;
+    margin:25px auto;
+    padding:0 15px;
 }
 
 .checkout-title{
-font-size:28px;
-font-weight:500;
-margin-bottom:18px;
+    font-size:28px;
+    font-weight:500;
+    margin-bottom:18px;
 }
 
 .checkout-grid{
-display:grid;
-grid-template-columns:1fr 350px;
-gap:20px;
+    display:grid;
+    grid-template-columns:1fr 350px;
+    gap:20px;
 }
 
 .card{
-background:white;
-border-radius:5px;
-padding:22px;
-border:1px solid #ddd;
-margin-bottom:18px;
+    background:white;
+    border-radius:5px;
+    padding:22px;
+    border:1px solid #ddd;
+    margin-bottom:18px;
 }
 
 .card-title{
-display:flex;
-align-items:center;
-gap:10px;
-font-size:20px;
-font-weight:600;
-margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:18px;
 }
 
 .number{
-width:30px;
-height:30px;
-border-radius:50%;
-background:#111;
-color:white;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:14px;
-font-weight:bold;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:#111;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    font-weight:bold;
 }
 
 .product-box{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding-bottom:18px;
-border-bottom:1px solid #ddd;
-margin-bottom:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:18px;
+    border-bottom:1px solid #ddd;
+    margin-bottom:18px;
 }
 
 .product-name{
-font-size:18px;
-font-weight:600;
-max-width:65%;
+    font-size:18px;
+    font-weight:600;
+    max-width:65%;
 }
 
 .product-price{
-font-size:23px;
-font-weight:bold;
-color:#0a8f3d;
+    font-size:23px;
+    font-weight:bold;
+    color:#0a8f3d;
 }
 
 label{
-display:block;
-font-size:13px;
-font-weight:bold;
-margin-bottom:6px;
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:6px;
 }
 
 input,
-textarea{
-width:100%;
-padding:12px;
-border:1px solid #a6a6a6;
-border-radius:4px;
-font-size:15px;
-outline:none;
-background:#fff;
-margin-bottom:14px;
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #a6a6a6;
+    border-radius:4px;
+    font-size:15px;
+    outline:none;
+    background:#fff;
+    margin-bottom:14px;
 }
 
 input:focus,
-textarea:focus{
-border:2px solid #111;
+textarea:focus,
+select:focus{
+    border:2px solid #111;
 }
 
 textarea{
-height:80px;
-resize:vertical;
+    height:80px;
+    resize:vertical;
+}
+
+select{
+    height:45px;
+    cursor:pointer;
 }
 
 .phone-group{
-display:flex;
-margin-bottom:14px;
+    display:flex;
+    margin-bottom:14px;
 }
 
 .phone-code{
-width:55px;
-height:45px;
-background:#eee;
-border:1px solid #a6a6a6;
-border-right:none;
-border-radius:4px 0 0 4px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
+    width:55px;
+    height:45px;
+    background:#eee;
+    border:1px solid #a6a6a6;
+    border-right:none;
+    border-radius:4px 0 0 4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
 }
 
 .phone-group input{
-height:45px;
-margin:0;
-border-radius:0 4px 4px 0;
+    height:45px;
+    margin:0;
+    border-radius:0 4px 4px 0;
 }
 
 .two-column{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-}
-
-.optional{
-font-weight:normal;
-color:#777;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
 .continue-btn{
-width:100%;
-padding:14px;
-border:none;
-border-radius:4px;
-background:#111;
-color:white;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
-margin-top:4px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:4px;
+    background:#111;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:4px;
 }
 
 .continue-btn:hover{
-background:#333;
+    background:#333;
 }
 
 .continue-btn:disabled{
-opacity:.8;
-cursor:not-allowed;
+    opacity:.8;
+    cursor:not-allowed;
 }
 
 .spinner{
-display:inline-block;
-width:17px;
-height:17px;
-border:3px solid rgba(255,255,255,.4);
-border-top:3px solid white;
-border-radius:50%;
-animation:spin 1s linear infinite;
-vertical-align:middle;
-margin-right:8px;
+    display:inline-block;
+    width:17px;
+    height:17px;
+    border:3px solid rgba(255,255,255,.4);
+    border-top:3px solid white;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    vertical-align:middle;
+    margin-right:8px;
 }
 
 @keyframes spin{
-to{
-transform:rotate(360deg);
-}
+    to{
+        transform:rotate(360deg);
+    }
 }
 
 .summary{
-background:white;
-border:1px solid #ddd;
-border-radius:5px;
-padding:20px;
-height:max-content;
-position:sticky;
-top:15px;
+    background:white;
+    border:1px solid #ddd;
+    border-radius:5px;
+    padding:20px;
+    height:max-content;
+    position:sticky;
+    top:15px;
 }
 
 .summary h2{
-font-size:21px;
-margin-bottom:18px;
+    font-size:21px;
+    margin-bottom:18px;
 }
 
 .summary-row{
-display:flex;
-justify-content:space-between;
-gap:15px;
-margin-bottom:14px;
-font-size:14px;
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:14px;
+    font-size:14px;
 }
 
 .summary-product{
-font-weight:600;
-line-height:1.4;
+    font-weight:600;
+    line-height:1.4;
 }
 
 .total{
-border-top:1px solid #ddd;
-padding-top:15px;
-margin-top:8px;
-display:flex;
-justify-content:space-between;
-font-size:21px;
-font-weight:bold;
-color:#0a8f3d;
+    border-top:1px solid #ddd;
+    padding-top:15px;
+    margin-top:8px;
+    display:flex;
+    justify-content:space-between;
+    font-size:21px;
+    font-weight:bold;
+    color:#0a8f3d;
 }
 
 .secure-box{
-margin-top:20px;
-padding:14px;
-background:#f7f7f7;
-border-radius:4px;
-font-size:13px;
-color:#555;
-line-height:1.5;
+    margin-top:20px;
+    padding:14px;
+    background:#f7f7f7;
+    border-radius:4px;
+    font-size:13px;
+    color:#555;
+    line-height:1.5;
 }
 
 .secure-box i{
-color:#0a8f3d;
-margin-right:6px;
+    color:#0a8f3d;
+    margin-right:6px;
 }
 
 .note{
-font-size:12px;
-color:#666;
-text-align:center;
-margin-top:12px;
+    font-size:12px;
+    color:#666;
+    text-align:center;
+    margin-top:12px;
 }
 
 .footer{
-width:100%;
-background:#111;
-color:white;
-margin-top:30px;
+    width:100%;
+    background:#111;
+    color:white;
+    margin-top:30px;
 }
 
 .footer-features{
-max-width:1100px;
-margin:auto;
-display:grid;
-grid-template-columns:repeat(4,1fr);
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
 }
 
 .feature{
-min-height:145px;
-padding:20px 12px;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-border-right:1px solid #292929;
+    min-height:145px;
+    padding:20px 12px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border-right:1px solid #292929;
 }
 
 .feature:last-child{
-border-right:none;
+    border-right:none;
 }
 
 .feature-icon{
-width:45px;
-height:45px;
-border:2px solid #0066ff;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-color:#0066ff;
-font-size:18px;
-margin-bottom:10px;
+    width:45px;
+    height:45px;
+    border:2px solid #0066ff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#0066ff;
+    font-size:18px;
+    margin-bottom:10px;
 }
 
 .feature h4{
-font-size:12px;
-margin-bottom:6px;
+    font-size:12px;
+    margin-bottom:6px;
 }
 
 .feature p{
-font-size:10px;
-line-height:1.4;
-color:#aaa;
+    font-size:10px;
+    line-height:1.4;
+    color:#aaa;
 }
 
 .footer-brand{
-text-align:center;
-padding:22px 15px;
-border-top:1px solid #292929;
+    text-align:center;
+    padding:22px 15px;
+    border-top:1px solid #292929;
 }
 
 .footer-brand h2{
-font-size:23px;
-margin-bottom:5px;
+    font-size:23px;
+    margin-bottom:5px;
 }
 
 .footer-brand p{
-font-size:11px;
-color:#aaa;
+    font-size:11px;
+    color:#aaa;
 }
 
 .footer-bottom{
-text-align:center;
-padding:13px;
-border-top:1px solid #292929;
-font-size:10px;
-color:#777;
+    text-align:center;
+    padding:13px;
+    border-top:1px solid #292929;
+    font-size:10px;
+    color:#777;
 }
 
 @media(max-width:750px){
 
-.header{
-height:58px;
-}
+    .header{
+        height:58px;
+    }
 
-.main{
-margin-top:18px;
-}
+    .main{
+        margin-top:18px;
+    }
 
-.checkout-title{
-font-size:23px;
-}
+    .checkout-title{
+        font-size:23px;
+    }
 
-.checkout-grid{
-grid-template-columns:1fr;
-}
+    .checkout-grid{
+        grid-template-columns:1fr;
+    }
 
-.summary{
-position:static;
-grid-row:1;
-}
+    .summary{
+        position:static;
+        grid-row:1;
+    }
 
-.details-card{
-grid-row:2;
-}
+    .details-card{
+        grid-row:2;
+    }
 
-.footer-features{
-grid-template-columns:1fr 1fr;
-}
+    .footer-features{
+        grid-template-columns:1fr 1fr;
+    }
 
-.feature{
-min-height:135px;
-border-bottom:1px solid #292929;
-}
+    .feature{
+        min-height:135px;
+        border-bottom:1px solid #292929;
+    }
 
 }
 
 @media(max-width:430px){
 
-.main{
-padding:0 10px;
-}
+    .main{
+        padding:0 10px;
+    }
 
-.card,
-.summary{
-padding:17px;
-}
+    .card,
+    .summary{
+        padding:17px;
+    }
 
-.two-column{
-grid-template-columns:1fr;
-gap:0;
-}
+    .two-column{
+        grid-template-columns:1fr;
+        gap:0;
+    }
 
-.product-name{
-font-size:16px;
-}
+    .product-name{
+        font-size:16px;
+    }
 
-.product-price{
-font-size:20px;
-}
+    .product-price{
+        font-size:20px;
+    }
 
 }
 
@@ -427,363 +428,384 @@ font-size:20px;
 
 <header class="header">
 
-<div class="logo">
-LOXICA
-</div>
+    <div class="logo">
+        LOXICA
+    </div>
 
 </header>
 
 
 <main class="main">
 
-<div class="checkout-title">
-Checkout
-</div>
+    <div class="checkout-title">
+        Checkout
+    </div>
 
-<div class="checkout-grid">
+    <div class="checkout-grid">
 
+        <div class="details-card">
 
-<div class="details-card">
+            <!-- PRODUCT DETAILS -->
 
+            <div class="card">
 
-<div class="card">
+                <div class="card-title">
 
-<div class="card-title">
+                    <div class="number">1</div>
 
-<div class="number">1</div>
+                    Product Details
 
-Product Details
+                </div>
 
-</div>
+                <div class="product-box">
 
-<div class="product-box">
+                    <div
+                        class="product-name"
+                        id="product">
+                        Product
+                    </div>
 
-<div
-class="product-name"
-id="product">
-Product
-</div>
+                    <div
+                        class="product-price"
+                        id="price">
+                        ₹0
+                    </div>
 
-<div
-class="product-price"
-id="price">
-₹0
-</div>
+                </div>
 
-</div>
+            </div>
 
-</div>
 
+            <!-- DELIVERY DETAILS -->
 
-<div class="card">
+            <div class="card">
 
-<div class="card-title">
+                <div class="card-title">
 
-<div class="number">2</div>
+                    <div class="number">2</div>
 
-Delivery Address
+                    Delivery Address
 
-</div>
+                </div>
 
 
-<form id="orderForm">
+                <form id="orderForm">
 
 
-<label>
-Full Name
-</label>
+                    <label>
+                        Full Name
+                    </label>
 
-<input
-id="name"
-placeholder="Enter your full name"
-required>
+                    <input
+                        id="name"
+                        placeholder="Enter your full name"
+                        required>
 
 
-<label>
-Mobile Number
-</label>
+                    <label>
+                        Mobile Number
+                    </label>
 
-<div class="phone-group">
+                    <div class="phone-group">
 
-<div class="phone-code">
-+91
-</div>
+                        <div class="phone-code">
+                            +91
+                        </div>
 
-<input
-id="phone"
-type="tel"
-placeholder="10-digit mobile number"
-maxlength="10"
-pattern="[0-9]{10}"
-required>
+                        <input
+                            id="phone"
+                            type="tel"
+                            placeholder="10-digit mobile number"
+                            maxlength="10"
+                            pattern="[0-9]{10}"
+                            required>
 
-</div>
+                    </div>
 
 
-<label>
-Full Address
-</label>
+                    <label>
+                        Full Address
+                    </label>
 
-<textarea
-id="address"
-placeholder="House / Building / Street / Area"
-required></textarea>
+                    <textarea
+                        id="address"
+                        placeholder="House / Building / Street / Area"
+                        required></textarea>
 
 
-<label>
-Landmark
-</label>
+                    <label>
+                        Landmark
+                    </label>
 
-<input
-id="landmark"
-placeholder="Nearby landmark"
-required>
+                    <input
+                        id="landmark"
+                        placeholder="Nearby landmark"
+                        required>
 
 
-<div class="two-column">
+                    <div class="two-column">
 
-<div>
+                        <div>
 
-<label>
-City
-</label>
+                            <label>
+                                City
+                            </label>
 
-<input
-id="city"
-placeholder="City"
-required>
+                            <input
+                                id="city"
+                                placeholder="City"
+                                required>
 
-</div>
+                        </div>
 
 
-<div>
+                        <div>
 
-<label>
-State
-</label>
+                            <label>
+                                State
+                            </label>
 
-<input
-id="state"
-placeholder="State"
-required>
+                            <input
+                                id="state"
+                                placeholder="State"
+                                required>
 
-</div>
+                        </div>
 
-</div>
+                    </div>
 
 
-<label>
-Pincode
-</label>
+                    <label>
+                        Pincode
+                    </label>
 
-<input
-id="pincode"
-placeholder="6-digit pincode"
-maxlength="6"
-pattern="[0-9]{6}"
-required>
+                    <input
+                        id="pincode"
+                        placeholder="6-digit pincode"
+                        maxlength="6"
+                        pattern="[0-9]{6}"
+                        required>
 
 
-<label>
-Color
-<span class="optional">
-(Optional)
-</span>
-</label>
+                    <!-- COLOR -->
+                    <!-- Hidden automatically when product has no color -->
 
-<input
-id="color"
-placeholder="Black, Blue, White etc.">
+                    <div
+                        id="colorSection"
+                        style="display:none;">
 
+                        <label>
+                            Color
+                        </label>
 
-<button
-type="submit"
-class="continue-btn">
+                        <select id="color">
 
-Continue To Payment 💳
+                            <option value="">
+                                Select Color
+                            </option>
 
-</button>
+                        </select>
 
+                    </div>
 
-</form>
 
-<p class="note">
-Your details are securely saved for this checkout.
-</p>
+                    <button
+                        type="submit"
+                        class="continue-btn">
 
-</div>
+                        Continue To Payment 💳
 
-</div>
+                    </button>
 
 
-<aside class="summary">
+                </form>
 
-<h2>
-Order Summary
-</h2>
+                <p class="note">
+                    Your details are securely saved for this checkout.
+                </p>
 
-<div class="summary-row">
+            </div>
 
-<span>
-Product
-</span>
+        </div>
 
-<span
-class="summary-product"
-id="summaryProduct">
-Product
-</span>
 
-</div>
+        <!-- ORDER SUMMARY -->
 
-<div class="summary-row">
+        <aside class="summary">
 
-<span>
-Price
-</span>
+            <h2>
+                Order Summary
+            </h2>
 
-<span id="summaryPrice">
-₹0
-</span>
 
-</div>
+            <div class="summary-row">
 
-<div class="total">
+                <span>
+                    Product
+                </span>
 
-<span>
-Total
-</span>
+                <span
+                    class="summary-product"
+                    id="summaryProduct">
+                    Product
+                </span>
 
-<span id="summaryTotal">
-₹0
-</span>
+            </div>
 
-</div>
 
-<div class="secure-box">
+            <div class="summary-row">
 
-<i class="fa-solid fa-lock"></i>
+                <span>
+                    Price
+                </span>
 
-Secure checkout
+                <span id="summaryPrice">
+                    ₹0
+                </span>
 
-<br>
+            </div>
 
-<i class="fa-solid fa-shield-halved"></i>
 
-Your order details are protected.
+            <div class="total">
 
-<br>
+                <span>
+                    Total
+                </span>
 
-<i class="fa-solid fa-truck"></i>
+                <span id="summaryTotal">
+                    ₹0
+                </span>
 
-Fast delivery across India.
+            </div>
 
-</div>
 
-</aside>
+            <div class="secure-box">
 
-</div>
+                <i class="fa-solid fa-lock"></i>
+
+                Secure checkout
+
+                <br>
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Your order details are protected.
+
+                <br>
+
+                <i class="fa-solid fa-truck"></i>
+
+                Fast delivery across India.
+
+            </div>
+
+        </aside>
+
+    </div>
 
 </main>
 
 
 <footer class="footer">
 
-<div class="footer-features">
-
-<div class="feature">
-
-<div class="feature-icon">
-<i class="fa-solid fa-truck-fast"></i>
-</div>
-
-<h4>
-FREE DELIVERY
-</h4>
-
-<p>
-Delivered safely to your doorstep.
-</p>
-
-</div>
+    <div class="footer-features">
 
 
-<div class="feature">
+        <div class="feature">
 
-<div class="feature-icon">
-<i class="fa-solid fa-shield-halved"></i>
-</div>
+            <div class="feature-icon">
+                <i class="fa-solid fa-truck-fast"></i>
+            </div>
 
-<h4>
-SECURE PAYMENT
-</h4>
+            <h4>
+                FREE DELIVERY
+            </h4>
 
-<p>
-Safe & secure UPI payments.
-</p>
+            <p>
+                Delivered safely to your doorstep.
+            </p>
 
-</div>
-
-
-<div class="feature">
-
-<div class="feature-icon">
-<i class="fa-solid fa-bolt"></i>
-</div>
-
-<h4>
-EXPRESS DELIVERY
-</h4>
-
-<p>
-Fast dispatch and quick delivery.
-</p>
-
-</div>
+        </div>
 
 
-<div class="feature">
+        <div class="feature">
 
-<div class="feature-icon">
-<i class="fa-solid fa-gem"></i>
-</div>
+            <div class="feature-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
 
-<h4>
-LATEST PRODUCTS
-</h4>
+            <h4>
+                SECURE PAYMENT
+            </h4>
 
-<p>
-Discover trending products and collections.
-</p>
+            <p>
+                Safe & secure UPI payments.
+            </p>
 
-</div>
-
-</div>
+        </div>
 
 
-<div class="footer-brand">
+        <div class="feature">
 
-<h2>
-LOXICA
-</h2>
+            <div class="feature-icon">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
 
-<p>
-Smart Products. Better Everyday Life.
-</p>
+            <h4>
+                EXPRESS DELIVERY
+            </h4>
 
-</div>
+            <p>
+                Fast dispatch and quick delivery.
+            </p>
+
+        </div>
 
 
-<div class="footer-bottom">
+        <div class="feature">
 
-© 2026 LOXICA. All Rights Reserved.
+            <div class="feature-icon">
+                <i class="fa-solid fa-gem"></i>
+            </div>
 
-</div>
+            <h4>
+                LATEST PRODUCTS
+            </h4>
+
+            <p>
+                Discover trending products and collections.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-brand">
+
+        <h2>
+            LOXICA
+        </h2>
+
+        <p>
+            Smart Products. Better Everyday Life.
+        </p>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 LOXICA. All Rights Reserved.
+
+    </div>
 
 </footer>
 
 
 <script>
+
 
 /* ==================================================
    GOOGLE APPS SCRIPT
@@ -798,22 +820,72 @@ const scriptURL =
 ================================================== */
 
 const params =
-new URLSearchParams(window.location.search);
+    new URLSearchParams(window.location.search);
 
 
 const product =
-params.get("product") ||
-"LOXICA Product";
+    params.get("product") ||
+    "LOXICA Product";
 
 
 const price =
-params.get("price") ||
-"0";
+    params.get("price") ||
+    "0";
 
 
 const checkoutSession =
-params.get("session") ||
-"";
+    params.get("session") ||
+    "";
+
+
+/* ==================================================
+   COLOR PARAMETERS
+================================================== */
+
+const selectedColorFromURL =
+    params.get("color") ||
+    "";
+
+let availableColors = [];
+
+
+try {
+
+    const colorsParam =
+        params.get("colors");
+
+    if(colorsParam){
+
+        const parsedColors =
+            JSON.parse(colorsParam);
+
+        if(Array.isArray(parsedColors)){
+
+            availableColors =
+                parsedColors
+                    .map(function(color){
+
+                        return String(color).trim();
+
+                    })
+                    .filter(function(color){
+
+                        return color !== "";
+
+                    });
+
+        }
+
+    }
+
+} catch(error){
+
+    console.log(
+        "Could not read color options:",
+        error
+    );
+
+}
 
 
 /* ==================================================
@@ -821,9 +893,9 @@ params.get("session") ||
 ================================================== */
 
 const storageKey =
-checkoutSession
-    ? "loxicaCheckout_" + checkoutSession
-    : null;
+    checkoutSession
+        ? "loxicaCheckout_" + checkoutSession
+        : null;
 
 
 /* ==================================================
@@ -831,19 +903,116 @@ checkoutSession
 ================================================== */
 
 document.getElementById("product").innerText =
-product;
+    product;
+
 
 document.getElementById("price").innerText =
-"₹" + price;
+    "₹" + price;
+
 
 document.getElementById("summaryProduct").innerText =
-product;
+    product;
+
 
 document.getElementById("summaryPrice").innerText =
-"₹" + price;
+    "₹" + price;
+
 
 document.getElementById("summaryTotal").innerText =
-"₹" + price;
+    "₹" + price;
+
+
+/* ==================================================
+   COLOR DROPDOWN
+================================================== */
+
+function setupColor(){
+
+    const colorSection =
+        document.getElementById("colorSection");
+
+    const colorSelect =
+        document.getElementById("color");
+
+
+    /*
+     * NO COLOR OPTION
+     * Hide entire section
+     */
+
+    if(
+        !Array.isArray(availableColors) ||
+        availableColors.length === 0
+    ){
+
+        colorSection.style.display =
+            "none";
+
+        colorSelect.innerHTML =
+            '<option value="">Select Color</option>';
+
+        return;
+
+    }
+
+
+    /*
+     * COLOR AVAILABLE
+     * Show section
+     */
+
+    colorSection.style.display =
+        "block";
+
+
+    colorSelect.innerHTML =
+        '<option value="">Select Color</option>';
+
+
+    /*
+     * Add all available colors
+     */
+
+    availableColors.forEach(function(color){
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            color;
+
+
+        option.textContent =
+            color;
+
+
+        /*
+         * Select Wix selected color
+         */
+
+        if(
+            selectedColorFromURL &&
+            color.toLowerCase() ===
+            selectedColorFromURL.toLowerCase()
+        ){
+
+            option.selected =
+                true;
+
+        }
+
+
+        colorSelect.appendChild(option);
+
+    });
+
+}
+
+
+/* Run color setup */
+
+setupColor();
 
 
 /* ==================================================
@@ -855,14 +1024,21 @@ function resetContinueButton(){
     const submitBtn =
         document.querySelector(".continue-btn");
 
+
     if(!submitBtn){
+
         return;
+
     }
 
-    submitBtn.disabled = false;
+
+    submitBtn.disabled =
+        false;
+
 
     submitBtn.style.background =
         "#111";
+
 
     submitBtn.innerHTML =
         "Continue To Payment 💳";
@@ -876,21 +1052,29 @@ function resetContinueButton(){
 
 function clearCheckoutForm(){
 
-    document.getElementById("name").value = "";
+    document.getElementById("name").value =
+        "";
 
-    document.getElementById("phone").value = "";
+    document.getElementById("phone").value =
+        "";
 
-    document.getElementById("address").value = "";
+    document.getElementById("address").value =
+        "";
 
-    document.getElementById("landmark").value = "";
+    document.getElementById("landmark").value =
+        "";
 
-    document.getElementById("city").value = "";
+    document.getElementById("city").value =
+        "";
 
-    document.getElementById("state").value = "";
+    document.getElementById("state").value =
+        "";
 
-    document.getElementById("pincode").value = "";
+    document.getElementById("pincode").value =
+        "";
 
-    document.getElementById("color").value = "";
+    document.getElementById("color").value =
+        "";
 
 }
 
@@ -902,17 +1086,14 @@ function clearCheckoutForm(){
 function restoreCheckout(){
 
     /*
-     * IMPORTANT:
-     * Button always becomes normal
-     * when returning to Index.
+     * Reset button immediately
      */
 
     resetContinueButton();
 
 
     /*
-     * No session =
-     * completely new checkout.
+     * No session
      */
 
     if(!storageKey){
@@ -924,13 +1105,16 @@ function restoreCheckout(){
     }
 
 
+    /*
+     * Get saved details
+     */
+
     const savedDetails =
         sessionStorage.getItem(storageKey);
 
 
     /*
-     * No saved details =
-     * new checkout session.
+     * No saved details
      */
 
     if(!savedDetails){
@@ -977,13 +1161,98 @@ function restoreCheckout(){
             data.pincode || "";
 
 
-        document.getElementById("color").value =
-            data.color === "-"
-                ? ""
-                : (data.color || "");
+        /*
+         * Restore Color
+         */
+
+        const savedColor =
+            data.color || "";
+
+
+        const colorSelect =
+            document.getElementById("color");
+
+
+        if(
+            savedColor &&
+            savedColor !== "-"
+        ){
+
+            /*
+             * If color exists in dropdown,
+             * select it.
+             */
+
+            let found =
+                false;
+
+
+            for(
+                let i = 0;
+                i < colorSelect.options.length;
+                i++
+            ){
+
+                if(
+                    colorSelect.options[i]
+                        .value
+                        .toLowerCase() ===
+                    savedColor.toLowerCase()
+                ){
+
+                    colorSelect.selectedIndex =
+                        i;
+
+                    found =
+                        true;
+
+                    break;
+
+                }
+
+            }
+
+
+            /*
+             * If old saved color is not
+             * in current dropdown,
+             * add it temporarily.
+             */
+
+            if(
+                !found &&
+                colorSectionIsVisible()
+            ){
+
+                const option =
+                    document.createElement("option");
+
+
+                option.value =
+                    savedColor;
+
+
+                option.textContent =
+                    savedColor;
+
+
+                option.selected =
+                    true;
+
+
+                colorSelect.appendChild(option);
+
+            }
+
+        }else{
+
+            colorSelect.value =
+                "";
+
+        }
+
 
     }
-
     catch(error){
 
         console.log(
@@ -999,29 +1268,40 @@ function restoreCheckout(){
 
 
 /* ==================================================
+   CHECK COLOR SECTION
+================================================== */
+
+function colorSectionIsVisible(){
+
+    const section =
+        document.getElementById("colorSection");
+
+    return (
+        section &&
+        section.style.display !== "none"
+    );
+
+}
+
+
+/* ==================================================
    PAGE SHOW
 ================================================== */
 
-/*
- * THIS IS THE FIX YOU ASKED FOR.
- *
- * Payment page
- * ↓
- * Back
- * ↓
- * Index
- *
- * Continue To Payment button
- * immediately returns.
- *
- * No refresh required.
- */
-
 window.addEventListener(
     "pageshow",
-    function(event){
+    function(){
+
+        /*
+         * Button reset
+         */
 
         resetContinueButton();
+
+
+        /*
+         * Restore customer details
+         */
 
         restoreCheckout();
 
@@ -1055,7 +1335,9 @@ document.getElementById("orderForm")
                 .trim();
 
 
-        if(!/^[0-9]{10}$/.test(phoneValue)){
+        if(
+            !/^[0-9]{10}$/.test(phoneValue)
+        ){
 
             alert(
                 "Please enter a valid 10-digit mobile number."
@@ -1076,10 +1358,55 @@ document.getElementById("orderForm")
                 .trim();
 
 
-        if(!/^[0-9]{6}$/.test(pincodeValue)){
+        if(
+            !/^[0-9]{6}$/.test(pincodeValue)
+        ){
 
             alert(
                 "Please enter a valid 6-digit pincode."
+            );
+
+            return;
+
+        }
+
+
+        /* ==========================================
+           GET COLOR
+        ========================================== */
+
+        const colorElement =
+            document.getElementById("color");
+
+
+        let colorValue =
+            "-";
+
+
+        if(
+            colorElement &&
+            colorSectionIsVisible()
+        ){
+
+            colorValue =
+                colorElement.value.trim() ||
+                "-";
+
+        }
+
+
+        /*
+         * If color exists but customer
+         * has not selected it
+         */
+
+        if(
+            colorSectionIsVisible() &&
+            colorValue === "-"
+        ){
+
+            alert(
+                "Please select a color."
             );
 
             return;
@@ -1093,9 +1420,11 @@ document.getElementById("orderForm")
 
         const currentData = {
 
-            product: product,
+            product:
+                product,
 
-            price: price,
+            price:
+                price,
 
             name:
                 document.getElementById("name")
@@ -1129,9 +1458,7 @@ document.getElementById("orderForm")
                 pincodeValue,
 
             color:
-                document.getElementById("color")
-                    .value
-                    .trim() || "-"
+                colorValue
 
         };
 
@@ -1140,13 +1467,16 @@ document.getElementById("orderForm")
            FIND OLD ORDER ID
         ========================================== */
 
-        let savedOrderId = "";
+        let savedOrderId =
+            "";
 
 
         if(storageKey){
 
             const savedDetails =
-                sessionStorage.getItem(storageKey);
+                sessionStorage.getItem(
+                    storageKey
+                );
 
 
             if(savedDetails){
@@ -1154,7 +1484,9 @@ document.getElementById("orderForm")
                 try{
 
                     const oldData =
-                        JSON.parse(savedDetails);
+                        JSON.parse(
+                            savedDetails
+                        );
 
 
                     if(oldData.orderId){
@@ -1165,7 +1497,6 @@ document.getElementById("orderForm")
                     }
 
                 }
-
                 catch(error){
 
                     console.log(
@@ -1196,10 +1527,13 @@ document.getElementById("orderForm")
            BUTTON LOADING
         ========================================== */
 
-        submitBtn.disabled = true;
+        submitBtn.disabled =
+            true;
+
 
         submitBtn.style.background =
             "#2563EB";
+
 
         submitBtn.innerHTML =
             '<span class="spinner"></span>Processing...';
@@ -1213,7 +1547,11 @@ document.getElementById("orderForm")
             scriptURL,
             {
                 method:"POST",
-                body:JSON.stringify(currentData)
+
+                body:
+                    JSON.stringify(
+                        currentData
+                    )
             }
         )
 
@@ -1257,7 +1595,9 @@ document.getElementById("orderForm")
 
                     storageKey,
 
-                    JSON.stringify(currentData)
+                    JSON.stringify(
+                        currentData
+                    )
 
                 );
 
@@ -1272,20 +1612,50 @@ document.getElementById("orderForm")
                 '<span class="spinner"></span>Opening Payment...';
 
 
-            window.location.href =
+            let paymentURL =
                 "payment.html" +
 
                 "?product=" +
-                encodeURIComponent(product) +
+                encodeURIComponent(
+                    product
+                ) +
 
                 "&price=" +
-                encodeURIComponent(price) +
+                encodeURIComponent(
+                    price
+                ) +
 
                 "&orderId=" +
-                encodeURIComponent(orderId) +
+                encodeURIComponent(
+                    orderId
+                ) +
 
                 "&session=" +
-                encodeURIComponent(checkoutSession);
+                encodeURIComponent(
+                    checkoutSession
+                );
+
+
+            /*
+             * Send selected color to payment page too
+             */
+
+            if(
+                colorValue &&
+                colorValue !== "-"
+            ){
+
+                paymentURL +=
+                    "&color=" +
+                    encodeURIComponent(
+                        colorValue
+                    );
+
+            }
+
+
+            window.location.href =
+                paymentURL;
 
         })
 
@@ -1315,4 +1685,3 @@ document.getElementById("orderForm")
 </body>
 
 </html>
-```
