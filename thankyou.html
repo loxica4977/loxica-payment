@@ -367,23 +367,6 @@ id="product">
 </div>
 
 
-<!-- PRICE -->
-
-<div class="info-row">
-
-<span class="info-label">
-Amount
-</span>
-
-<span
-class="info-value"
-id="price">
--
-</span>
-
-</div>
-
-
 <!-- COLOR -->
 
 <div
@@ -398,6 +381,23 @@ Color
 <span
 class="info-value"
 id="color">
+-
+</span>
+
+</div>
+
+
+<!-- AMOUNT -->
+
+<div class="info-row">
+
+<span class="info-label">
+Amount
+</span>
+
+<span
+class="info-value"
+id="price">
 -
 </span>
 
@@ -646,20 +646,6 @@ if(product){
 
 
 /* =========================================
-   SHOW PRICE
-========================================= */
-
-if(price){
-
-    document.getElementById(
-        "price"
-    ).innerText =
-    "₹" + price;
-
-}
-
-
-/* =========================================
    SHOW COLOR
 ========================================= */
 
@@ -675,6 +661,20 @@ if(color){
         "color"
     ).innerText =
     color;
+
+}
+
+
+/* =========================================
+   SHOW PRICE / AMOUNT
+========================================= */
+
+if(price){
+
+    document.getElementById(
+        "price"
+    ).innerText =
+    "₹" + price;
 
 }
 
