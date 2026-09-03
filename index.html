@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 
 <html lang="en">
@@ -108,6 +109,23 @@ body{
 }
 
 .product-price{
+    font-size:23px;
+    font-weight:bold;
+    color:#0a8f3d;
+    text-align:right;
+}
+
+.original-price{
+    display:block;
+    font-size:14px;
+    font-weight:normal;
+    color:#777;
+    text-decoration:line-through;
+    margin-bottom:3px;
+}
+
+.offer-price{
+    display:block;
     font-size:23px;
     font-weight:bold;
     color:#0a8f3d;
@@ -280,6 +298,23 @@ textarea{
     text-align:right;
     max-width:65%;
     word-break:break-word;
+}
+
+.summary-price-box{
+    text-align:right;
+}
+
+.summary-original-price{
+    display:block;
+    color:#777;
+    text-decoration:line-through;
+    font-size:13px;
+    margin-bottom:2px;
+}
+
+.summary-offer-price{
+    display:block;
+    font-weight:bold;
 }
 
 .total{
@@ -462,6 +497,10 @@ textarea{
     }
 
     .product-price{
+        font-size:20px;
+    }
+
+    .offer-price{
         font-size:20px;
     }
 
@@ -771,8 +810,22 @@ textarea{
             </span>
 
 
-            <span id="summaryPrice">
-                ₹0
+            <span
+                class="summary-price-box"
+                id="summaryPrice">
+
+                <span
+                    class="summary-original-price"
+                    id="summaryOriginalPrice">
+                    ₹0
+                </span>
+
+                <span
+                    class="summary-offer-price"
+                    id="summaryOfferPrice">
+                    ₹0
+                </span>
+
             </span>
 
         </div>
@@ -961,9 +1014,22 @@ const product =
     "LOXICA Product";
 
 
+/*
+ * OFFER / CURRENT PRICE
+ */
+
 const price =
     params.get("price") ||
     "0";
+
+
+/*
+ * ORIGINAL / STRIKE PRICE
+ */
+
+const originalPrice =
+    params.get("originalPrice") ||
+    price;
 
 
 const checkoutSession =
@@ -1000,11 +1066,45 @@ document.getElementById(
     product;
 
 
-document.getElementById(
-    "price"
-).innerText =
-    "₹" + price;
+/* ==================================================
+   DISPLAY PRODUCT PRICE
+================================================== */
 
+const productPriceElement =
+    document.getElementById(
+        "price"
+    );
+
+
+if(
+    originalPrice !== price &&
+    originalPrice !== "0"
+){
+
+    productPriceElement.innerHTML =
+
+        '<span class="original-price">₹' +
+        originalPrice +
+        '</span>' +
+
+        '<span class="offer-price">₹' +
+        price +
+        '</span>';
+
+}
+else{
+
+    productPriceElement.innerHTML =
+        '<span class="offer-price">₹' +
+        price +
+        '</span>';
+
+}
+
+
+/* ==================================================
+   DISPLAY SUMMARY PRODUCT
+================================================== */
 
 document.getElementById(
     "summaryProduct"
@@ -1012,11 +1112,43 @@ document.getElementById(
     product;
 
 
+/* ==================================================
+   DISPLAY SUMMARY PRICE
+================================================== */
+
 document.getElementById(
-    "summaryPrice"
+    "summaryOriginalPrice"
+).innerText =
+    "₹" + originalPrice;
+
+
+document.getElementById(
+    "summaryOfferPrice"
 ).innerText =
     "₹" + price;
 
+
+/*
+ * Hide strike price if there is
+ * no actual discount.
+ */
+
+if(
+    originalPrice === price ||
+    originalPrice === "0"
+){
+
+    document.getElementById(
+        "summaryOriginalPrice"
+    ).style.display =
+        "none";
+
+}
+
+
+/* ==================================================
+   TOTAL = OFFER PRICE
+================================================== */
 
 document.getElementById(
     "summaryTotal"
@@ -1523,8 +1655,22 @@ document.getElementById(
                 product,
 
 
+            /*
+             * IMPORTANT:
+             *
+             * price = OFFER PRICE
+             */
+
             price:
                 price,
+
+
+            /*
+             * Original / strike price
+             */
+
+            originalPrice:
+                originalPrice,
 
 
             name:
@@ -1748,6 +1894,11 @@ document.getElementById(
                     price
                 ) +
 
+                "&originalPrice=" +
+                encodeURIComponent(
+                    originalPrice
+                ) +
+
                 "&orderId=" +
                 encodeURIComponent(
                     orderId
@@ -1813,3 +1964,4 @@ document.getElementById(
 </body>
 
 </html>
+```
