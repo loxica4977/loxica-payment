@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -428,384 +429,385 @@ select{
 
 <header class="header">
 
-    <div class="logo">
-        LOXICA
-    </div>
+```
+<div class="logo">
+    LOXICA
+</div>
+```
 
 </header>
 
-
 <main class="main">
 
-    <div class="checkout-title">
-        Checkout
-    </div>
+```
+<div class="checkout-title">
+    Checkout
+</div>
 
-    <div class="checkout-grid">
+<div class="checkout-grid">
 
-        <div class="details-card">
+    <div class="details-card">
 
-            <!-- PRODUCT DETAILS -->
+        <!-- PRODUCT DETAILS -->
 
-            <div class="card">
+        <div class="card">
 
-                <div class="card-title">
+            <div class="card-title">
 
-                    <div class="number">1</div>
+                <div class="number">1</div>
 
-                    Product Details
+                Product Details
 
+            </div>
+
+            <div class="product-box">
+
+                <div
+                    class="product-name"
+                    id="product">
+                    Product
                 </div>
 
-                <div class="product-box">
-
-                    <div
-                        class="product-name"
-                        id="product">
-                        Product
-                    </div>
-
-                    <div
-                        class="product-price"
-                        id="price">
-                        ₹0
-                    </div>
-
+                <div
+                    class="product-price"
+                    id="price">
+                    ₹0
                 </div>
 
             </div>
 
+        </div>
 
-            <!-- DELIVERY DETAILS -->
 
-            <div class="card">
+        <!-- DELIVERY DETAILS -->
 
-                <div class="card-title">
+        <div class="card">
 
-                    <div class="number">2</div>
+            <div class="card-title">
 
-                    Delivery Address
+                <div class="number">2</div>
+
+                Delivery Address
+
+            </div>
+
+
+            <form id="orderForm">
+
+
+                <label>
+                    Full Name
+                </label>
+
+                <input
+                    id="name"
+                    placeholder="Enter your full name"
+                    required>
+
+
+                <label>
+                    Mobile Number
+                </label>
+
+                <div class="phone-group">
+
+                    <div class="phone-code">
+                        +91
+                    </div>
+
+                    <input
+                        id="phone"
+                        type="tel"
+                        placeholder="10-digit mobile number"
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                        required>
 
                 </div>
 
 
-                <form id="orderForm">
+                <label>
+                    Full Address
+                </label>
+
+                <textarea
+                    id="address"
+                    placeholder="House / Building / Street / Area"
+                    required></textarea>
 
 
-                    <label>
-                        Full Name
-                    </label>
+                <label>
+                    Landmark
+                </label>
 
-                    <input
-                        id="name"
-                        placeholder="Enter your full name"
-                        required>
+                <input
+                    id="landmark"
+                    placeholder="Nearby landmark"
+                    required>
 
 
-                    <label>
-                        Mobile Number
-                    </label>
+                <div class="two-column">
 
-                    <div class="phone-group">
+                    <div>
 
-                        <div class="phone-code">
-                            +91
-                        </div>
+                        <label>
+                            City
+                        </label>
 
                         <input
-                            id="phone"
-                            type="tel"
-                            placeholder="10-digit mobile number"
-                            maxlength="10"
-                            pattern="[0-9]{10}"
+                            id="city"
+                            placeholder="City"
                             required>
 
                     </div>
 
 
-                    <label>
-                        Full Address
-                    </label>
-
-                    <textarea
-                        id="address"
-                        placeholder="House / Building / Street / Area"
-                        required></textarea>
-
-
-                    <label>
-                        Landmark
-                    </label>
-
-                    <input
-                        id="landmark"
-                        placeholder="Nearby landmark"
-                        required>
-
-
-                    <div class="two-column">
-
-                        <div>
-
-                            <label>
-                                City
-                            </label>
-
-                            <input
-                                id="city"
-                                placeholder="City"
-                                required>
-
-                        </div>
-
-
-                        <div>
-
-                            <label>
-                                State
-                            </label>
-
-                            <input
-                                id="state"
-                                placeholder="State"
-                                required>
-
-                        </div>
-
-                    </div>
-
-
-                    <label>
-                        Pincode
-                    </label>
-
-                    <input
-                        id="pincode"
-                        placeholder="6-digit pincode"
-                        maxlength="6"
-                        pattern="[0-9]{6}"
-                        required>
-
-
-                    <!-- COLOR -->
-                    <!-- Hidden automatically when product has no color -->
-
-                    <div
-                        id="colorSection"
-                        style="display:none;">
+                    <div>
 
                         <label>
-                            Color
+                            State
                         </label>
 
-                        <select id="color">
-
-                            <option value="">
-                                Select Color
-                            </option>
-
-                        </select>
+                        <input
+                            id="state"
+                            placeholder="State"
+                            required>
 
                     </div>
 
-
-                    <button
-                        type="submit"
-                        class="continue-btn">
-
-                        Continue To Payment 💳
-
-                    </button>
+                </div>
 
 
-                </form>
+                <label>
+                    Pincode
+                </label>
 
-                <p class="note">
-                    Your details are securely saved for this checkout.
-                </p>
+                <input
+                    id="pincode"
+                    placeholder="6-digit pincode"
+                    maxlength="6"
+                    pattern="[0-9]{6}"
+                    required>
 
-            </div>
+
+                <!-- COLOR -->
+
+                <div
+                    id="colorSection"
+                    style="display:none;">
+
+                    <label>
+                        Color
+                    </label>
+
+                    <select id="color">
+
+                        <option value="">
+                            Select Color
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="continue-btn">
+
+                    Continue To Payment 💳
+
+                </button>
+
+
+            </form>
+
+            <p class="note">
+                Your details are securely saved for this checkout.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ORDER SUMMARY -->
+
+    <aside class="summary">
+
+        <h2>
+            Order Summary
+        </h2>
+
+
+        <div class="summary-row">
+
+            <span>
+                Product
+            </span>
+
+            <span
+                class="summary-product"
+                id="summaryProduct">
+                Product
+            </span>
 
         </div>
 
 
-        <!-- ORDER SUMMARY -->
+        <div class="summary-row">
 
-        <aside class="summary">
+            <span>
+                Price
+            </span>
 
-            <h2>
-                Order Summary
-            </h2>
+            <span id="summaryPrice">
+                ₹0
+            </span>
 
-
-            <div class="summary-row">
-
-                <span>
-                    Product
-                </span>
-
-                <span
-                    class="summary-product"
-                    id="summaryProduct">
-                    Product
-                </span>
-
-            </div>
+        </div>
 
 
-            <div class="summary-row">
+        <div class="total">
 
-                <span>
-                    Price
-                </span>
+            <span>
+                Total
+            </span>
 
-                <span id="summaryPrice">
-                    ₹0
-                </span>
+            <span id="summaryTotal">
+                ₹0
+            </span>
 
-            </div>
-
-
-            <div class="total">
-
-                <span>
-                    Total
-                </span>
-
-                <span id="summaryTotal">
-                    ₹0
-                </span>
-
-            </div>
+        </div>
 
 
-            <div class="secure-box">
+        <div class="secure-box">
 
-                <i class="fa-solid fa-lock"></i>
+            <i class="fa-solid fa-lock"></i>
 
-                Secure checkout
+            Secure checkout
 
-                <br>
+            <br>
 
-                <i class="fa-solid fa-shield-halved"></i>
+            <i class="fa-solid fa-shield-halved"></i>
 
-                Your order details are protected.
+            Your order details are protected.
 
-                <br>
+            <br>
 
-                <i class="fa-solid fa-truck"></i>
+            <i class="fa-solid fa-truck"></i>
 
-                Fast delivery across India.
+            Fast delivery across India.
 
-            </div>
+        </div>
 
-        </aside>
+    </aside>
 
-    </div>
+</div>
+```
 
 </main>
 
-
 <footer class="footer">
 
-    <div class="footer-features">
+```
+<div class="footer-features">
 
 
-        <div class="feature">
+    <div class="feature">
 
-            <div class="feature-icon">
-                <i class="fa-solid fa-truck-fast"></i>
-            </div>
-
-            <h4>
-                FREE DELIVERY
-            </h4>
-
-            <p>
-                Delivered safely to your doorstep.
-            </p>
-
+        <div class="feature-icon">
+            <i class="fa-solid fa-truck-fast"></i>
         </div>
 
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                <i class="fa-solid fa-shield-halved"></i>
-            </div>
-
-            <h4>
-                SECURE PAYMENT
-            </h4>
-
-            <p>
-                Safe & secure UPI payments.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                <i class="fa-solid fa-bolt"></i>
-            </div>
-
-            <h4>
-                EXPRESS DELIVERY
-            </h4>
-
-            <p>
-                Fast dispatch and quick delivery.
-            </p>
-
-        </div>
-
-
-        <div class="feature">
-
-            <div class="feature-icon">
-                <i class="fa-solid fa-gem"></i>
-            </div>
-
-            <h4>
-                LATEST PRODUCTS
-            </h4>
-
-            <p>
-                Discover trending products and collections.
-            </p>
-
-        </div>
-
-
-    </div>
-
-
-    <div class="footer-brand">
-
-        <h2>
-            LOXICA
-        </h2>
+        <h4>
+            FREE DELIVERY
+        </h4>
 
         <p>
-            Smart Products. Better Everyday Life.
+            Delivered safely to your doorstep.
         </p>
 
     </div>
 
 
-    <div class="footer-bottom">
+    <div class="feature">
 
-        © 2026 LOXICA. All Rights Reserved.
+        <div class="feature-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <h4>
+            SECURE PAYMENT
+        </h4>
+
+        <p>
+            Safe & secure UPI payments.
+        </p>
 
     </div>
 
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            <i class="fa-solid fa-bolt"></i>
+        </div>
+
+        <h4>
+            EXPRESS DELIVERY
+        </h4>
+
+        <p>
+            Fast dispatch and quick delivery.
+        </p>
+
+    </div>
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            <i class="fa-solid fa-gem"></i>
+        </div>
+
+        <h4>
+            LATEST PRODUCTS
+        </h4>
+
+        <p>
+            Discover trending products and collections.
+        </p>
+
+    </div>
+
+
+</div>
+
+
+<div class="footer-brand">
+
+    <h2>
+        LOXICA
+    </h2>
+
+    <p>
+        Smart Products. Better Everyday Life.
+    </p>
+
+</div>
+
+
+<div class="footer-bottom">
+
+    © 2026 LOXICA. All Rights Reserved.
+
+</div>
+```
+
 </footer>
 
-
 <script>
-
 
 /* ==================================================
    GOOGLE APPS SCRIPT
@@ -843,21 +845,27 @@ const checkoutSession =
 ================================================== */
 
 const selectedColorFromURL =
-    params.get("color") ||
-    "";
+    (params.get("color") || "").trim();
+
 
 let availableColors = [];
 
+
+/*
+ * Read optional colors parameter
+ */
 
 try {
 
     const colorsParam =
         params.get("colors");
 
+
     if(colorsParam){
 
         const parsedColors =
             JSON.parse(colorsParam);
+
 
         if(Array.isArray(parsedColors)){
 
@@ -884,6 +892,34 @@ try {
         "Could not read color options:",
         error
     );
+
+}
+
+
+/*
+ * IMPORTANT:
+ * If Wix sends only color=Black,
+ * automatically add Black to dropdown.
+ */
+
+if(selectedColorFromURL){
+
+    const alreadyExists =
+        availableColors.some(function(color){
+
+            return color.toLowerCase() ===
+                   selectedColorFromURL.toLowerCase();
+
+        });
+
+
+    if(!alreadyExists){
+
+        availableColors.unshift(
+            selectedColorFromURL
+        );
+
+    }
 
 }
 
@@ -931,25 +967,31 @@ function setupColor(){
     const colorSection =
         document.getElementById("colorSection");
 
+
     const colorSelect =
         document.getElementById("color");
 
 
     /*
-     * NO COLOR OPTION
-     * Hide entire section
+     * If no color exists,
+     * hide Color section.
      */
 
     if(
-        !Array.isArray(availableColors) ||
-        availableColors.length === 0
+        !selectedColorFromURL &&
+        (
+            !Array.isArray(availableColors) ||
+            availableColors.length === 0
+        )
     ){
 
         colorSection.style.display =
             "none";
 
+
         colorSelect.innerHTML =
             '<option value="">Select Color</option>';
+
 
         return;
 
@@ -957,8 +999,8 @@ function setupColor(){
 
 
     /*
-     * COLOR AVAILABLE
-     * Show section
+     * Color exists
+     * Show section.
      */
 
     colorSection.style.display =
@@ -970,7 +1012,7 @@ function setupColor(){
 
 
     /*
-     * Add all available colors
+     * Add colors.
      */
 
     availableColors.forEach(function(color){
@@ -988,7 +1030,8 @@ function setupColor(){
 
 
         /*
-         * Select Wix selected color
+         * Automatically select
+         * Wix selected color.
          */
 
         if(
@@ -1010,7 +1053,9 @@ function setupColor(){
 }
 
 
-/* Run color setup */
+/*
+ * Run color setup.
+ */
 
 setupColor();
 
@@ -1055,26 +1100,47 @@ function clearCheckoutForm(){
     document.getElementById("name").value =
         "";
 
+
     document.getElementById("phone").value =
         "";
+
 
     document.getElementById("address").value =
         "";
 
+
     document.getElementById("landmark").value =
         "";
+
 
     document.getElementById("city").value =
         "";
 
+
     document.getElementById("state").value =
         "";
+
 
     document.getElementById("pincode").value =
         "";
 
-    document.getElementById("color").value =
-        "";
+
+    /*
+     * Keep URL color if available.
+     */
+
+    if(selectedColorFromURL){
+
+        document.getElementById("color").value =
+            selectedColorFromURL;
+
+    }
+    else{
+
+        document.getElementById("color").value =
+            "";
+
+    }
 
 }
 
@@ -1085,15 +1151,11 @@ function clearCheckoutForm(){
 
 function restoreCheckout(){
 
-    /*
-     * Reset button immediately
-     */
-
     resetContinueButton();
 
 
     /*
-     * No session
+     * No session.
      */
 
     if(!storageKey){
@@ -1105,16 +1167,12 @@ function restoreCheckout(){
     }
 
 
-    /*
-     * Get saved details
-     */
-
     const savedDetails =
         sessionStorage.getItem(storageKey);
 
 
     /*
-     * No saved details
+     * No saved details.
      */
 
     if(!savedDetails){
@@ -1162,11 +1220,16 @@ function restoreCheckout(){
 
 
         /*
-         * Restore Color
+         * Restore saved color.
+         *
+         * URL color has priority if
+         * saved color is empty.
          */
 
         const savedColor =
-            data.color || "";
+            data.color ||
+            selectedColorFromURL ||
+            "";
 
 
         const colorSelect =
@@ -1178,14 +1241,13 @@ function restoreCheckout(){
             savedColor !== "-"
         ){
 
-            /*
-             * If color exists in dropdown,
-             * select it.
-             */
-
             let found =
                 false;
 
+
+            /*
+             * Search existing options.
+             */
 
             for(
                 let i = 0;
@@ -1203,8 +1265,10 @@ function restoreCheckout(){
                     colorSelect.selectedIndex =
                         i;
 
+
                     found =
                         true;
+
 
                     break;
 
@@ -1214,9 +1278,8 @@ function restoreCheckout(){
 
 
             /*
-             * If old saved color is not
-             * in current dropdown,
-             * add it temporarily.
+             * If saved color is not
+             * in dropdown, add it.
              */
 
             if(
@@ -1244,7 +1307,8 @@ function restoreCheckout(){
 
             }
 
-        }else{
+        }
+        else{
 
             colorSelect.value =
                 "";
@@ -1259,6 +1323,7 @@ function restoreCheckout(){
             "Could not restore checkout details:",
             error
         );
+
 
         clearCheckoutForm();
 
@@ -1276,6 +1341,7 @@ function colorSectionIsVisible(){
     const section =
         document.getElementById("colorSection");
 
+
     return (
         section &&
         section.style.display !== "none"
@@ -1292,16 +1358,7 @@ window.addEventListener(
     "pageshow",
     function(){
 
-        /*
-         * Button reset
-         */
-
         resetContinueButton();
-
-
-        /*
-         * Restore customer details
-         */
 
         restoreCheckout();
 
@@ -1343,6 +1400,7 @@ document.getElementById("orderForm")
                 "Please enter a valid 10-digit mobile number."
             );
 
+
             return;
 
         }
@@ -1365,6 +1423,7 @@ document.getElementById("orderForm")
             alert(
                 "Please enter a valid 6-digit pincode."
             );
+
 
             return;
 
@@ -1396,8 +1455,27 @@ document.getElementById("orderForm")
 
 
         /*
-         * If color exists but customer
-         * has not selected it
+         * IMPORTANT FALLBACK
+         *
+         * If URL contains color=Black,
+         * use Black even if dropdown
+         * somehow loses its selected value.
+         */
+
+        if(
+            colorValue === "-" &&
+            selectedColorFromURL
+        ){
+
+            colorValue =
+                selectedColorFromURL;
+
+        }
+
+
+        /*
+         * Require color when
+         * Color section is visible.
          */
 
         if(
@@ -1408,6 +1486,7 @@ document.getElementById("orderForm")
             alert(
                 "Please select a color."
             );
+
 
             return;
 
@@ -1423,39 +1502,52 @@ document.getElementById("orderForm")
             product:
                 product,
 
+
             price:
                 price,
+
 
             name:
                 document.getElementById("name")
                     .value
                     .trim(),
 
+
             phone:
                 "+91" + phoneValue,
+
 
             address:
                 document.getElementById("address")
                     .value
                     .trim(),
 
+
             landmark:
                 document.getElementById("landmark")
                     .value
                     .trim(),
+
 
             city:
                 document.getElementById("city")
                     .value
                     .trim(),
 
+
             state:
                 document.getElementById("state")
                     .value
                     .trim(),
 
+
             pincode:
                 pincodeValue,
+
+
+            /*
+             * Google Sheet color value.
+             */
 
             color:
                 colorValue
@@ -1637,7 +1729,7 @@ document.getElementById("orderForm")
 
 
             /*
-             * Send selected color to payment page too
+             * Send color to payment page too.
              */
 
             if(
