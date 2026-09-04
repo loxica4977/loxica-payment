@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -236,297 +237,314 @@ textarea{
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header class="header">
-    <div class="logo">
-        LOXI<span>CA</span>
-    </div>
-</header>
 
+```
+<div class="logo">
+    LOXI<span>CA</span>
+</div>
+```
+
+</header>
 
 <div class="container">
 
-    <div class="checkout-title">
-        Checkout
-    </div>
+```
+<div class="checkout-title">
+    Checkout
+</div>
 
 
-    <div class="checkout-grid">
+<div class="checkout-grid">
 
-        <!-- LEFT SIDE -->
+    <!-- LEFT SIDE -->
 
-        <div>
+    <div>
 
-            <!-- PRODUCT -->
+        <!-- PRODUCT -->
 
-            <div class="box">
+        <div class="box">
 
-                <div class="box-title">
-                    <i class="fa-solid fa-box"></i>
-                    Your Product
-                </div>
+            <div class="box-title">
+                <i class="fa-solid fa-box"></i>
+                Your Product
+            </div>
 
-                <div class="product-box">
+            <div class="product-box">
 
-                    <div class="product-info">
+                <div class="product-info">
 
-                        <div
-                            class="product-name"
-                            id="productName">
-                            LOXICA Product
-                        </div>
-
-                        <div>
-                            <span
-                                class="product-price"
-                                id="productPrice">
-                                ₹0
-                            </span>
-
-                            <span
-                                class="original-price"
-                                id="originalPrice">
-                            </span>
-                        </div>
-
+                    <div
+                        class="product-name"
+                        id="productName">
+                        LOXICA Product
                     </div>
 
-                </div>
+                    <div>
 
-                <div
-                    class="color-box"
-                    id="colorBox"
-                    style="display:none;">
+                        <span
+                            class="product-price"
+                            id="productPrice">
+                            ₹0
+                        </span>
 
-                    <strong>Selected Color:</strong>
+                        <span
+                            class="original-price"
+                            id="originalPrice">
+                        </span>
 
-                    <span id="selectedColor"></span>
+                    </div>
 
                 </div>
 
             </div>
 
 
-            <!-- DELIVERY DETAILS -->
+            <div
+                class="color-box"
+                id="colorBox"
+                style="display:none;">
 
-            <div class="box">
+                <strong>
+                    Selected Color:
+                </strong>
 
-                <div class="box-title">
-                    <i class="fa-solid fa-location-dot"></i>
-                    Delivery Address
-                </div>
+                <span id="selectedColor"></span>
 
+            </div>
 
-                <label for="name">
-                    Full Name
-                </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    placeholder="Enter your full name"
-                    autocomplete="name">
+        </div>
 
 
-                <label for="phone">
-                    Phone Number
-                </label>
+        <!-- DELIVERY DETAILS -->
 
-                <input
-                    type="tel"
-                    id="phone"
-                    placeholder="10 digit mobile number"
-                    maxlength="10"
-                    inputmode="numeric"
-                    autocomplete="tel">
+        <div class="box">
 
-                <div
-                    class="error"
-                    id="phoneError">
-                    Please enter a valid 10 digit phone number.
-                </div>
+            <div class="box-title">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                Delivery Address
+
+            </div>
 
 
-                <label for="address">
-                    Full Address
-                </label>
+            <label for="name">
+                Full Name
+            </label>
 
-                <textarea
-                    id="address"
-                    placeholder="House name, house number, street etc."
-                    autocomplete="street-address"></textarea>
-
-
-                <label for="landmark">
-                    Landmark
-                </label>
-
-                <input
-                    type="text"
-                    id="landmark"
-                    placeholder="Nearby landmark">
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your full name"
+                autocomplete="name">
 
 
-                <div class="row">
+            <label for="phone">
+                Phone Number
+            </label>
 
-                    <div>
-
-                        <label for="city">
-                            City
-                        </label>
-
-                        <input
-                            type="text"
-                            id="city"
-                            placeholder="City">
-
-                    </div>
+            <input
+                type="tel"
+                id="phone"
+                placeholder="10 digit mobile number"
+                maxlength="10"
+                inputmode="numeric"
+                autocomplete="tel">
 
 
-                    <div>
+            <div
+                class="error"
+                id="phoneError">
 
-                        <label for="state">
-                            State
-                        </label>
+                Please enter a valid 10 digit phone number.
 
-                        <input
-                            type="text"
-                            id="state"
-                            placeholder="State"
-                            value="Kerala">
-
-                    </div>
-
-                </div>
+            </div>
 
 
-                <label for="pincode">
-                    Pincode
-                </label>
+            <label for="address">
+                Full Address
+            </label>
 
-                <input
-                    type="tel"
-                    id="pincode"
-                    placeholder="6 digit pincode"
-                    maxlength="6"
-                    inputmode="numeric">
-
-                <div
-                    class="error"
-                    id="pincodeError">
-                    Please enter a valid 6 digit pincode.
-                </div>
+            <textarea
+                id="address"
+                placeholder="House name, house number, street etc."
+                autocomplete="street-address"></textarea>
 
 
-                <div
-                    class="color-box"
-                    id="colorFormBox"
-                    style="display:none;">
+            <label for="landmark">
+                Landmark
+            </label>
 
-                    <label for="color">
-                        Selected Color
+            <input
+                type="text"
+                id="landmark"
+                placeholder="Nearby landmark">
+
+
+            <div class="row">
+
+                <div>
+
+                    <label for="city">
+                        City
                     </label>
 
                     <input
                         type="text"
-                        id="color"
-                        readonly>
+                        id="city"
+                        placeholder="City">
+
+                </div>
+
+
+                <div>
+
+                    <label for="state">
+                        State
+                    </label>
+
+                    <input
+                        type="text"
+                        id="state"
+                        placeholder="State"
+                        value="Kerala">
 
                 </div>
 
             </div>
 
+
+            <label for="pincode">
+                Pincode
+            </label>
+
+            <input
+                type="tel"
+                id="pincode"
+                placeholder="6 digit pincode"
+                maxlength="6"
+                inputmode="numeric">
+
+
+            <div
+                class="error"
+                id="pincodeError">
+
+                Please enter a valid 6 digit pincode.
+
+            </div>
+
+
+            <div
+                class="color-box"
+                id="colorFormBox"
+                style="display:none;">
+
+                <label for="color">
+                    Selected Color
+                </label>
+
+                <input
+                    type="text"
+                    id="color"
+                    readonly>
+
+            </div>
+
         </div>
 
-
-        <!-- RIGHT SIDE -->
-
-        <div>
-
-            <div class="box">
-
-                <div class="box-title">
-                    Order Summary
-                </div>
+    </div>
 
 
-                <div class="summary-row">
+    <!-- RIGHT SIDE -->
 
-                    <span>
-                        Product
-                    </span>
+    <div>
 
-                    <span
-                        id="summaryProduct">
-                        -
-                    </span>
+        <div class="box">
 
-                </div>
+            <div class="box-title">
+                Order Summary
+            </div>
 
 
-                <div class="summary-row">
+            <div class="summary-row">
 
-                    <span>
-                        Price
-                    </span>
+                <span>
+                    Product
+                </span>
 
-                    <span>
-                        ₹<span id="summaryPrice">0</span>
-                    </span>
+                <span id="summaryProduct">
+                    -
+                </span>
 
-                </div>
-
-
-                <div class="summary-row">
-
-                    <span>
-                        Delivery
-                    </span>
-
-                    <span>
-                        FREE
-                    </span>
-
-                </div>
+            </div>
 
 
-                <div class="summary-row summary-total">
+            <div class="summary-row">
 
-                    <span>
-                        Total
-                    </span>
+                <span>
+                    Price
+                </span>
 
-                    <span>
-                        ₹<span id="summaryTotal">0</span>
-                    </span>
+                <span>
+                    ₹<span id="summaryPrice">0</span>
+                </span>
 
-                </div>
-
-
-                <br>
+            </div>
 
 
-                <button
-                    class="continue-btn"
-                    id="continueBtn"
-                    type="button">
+            <div class="summary-row">
 
-                    Continue to Payment
-                    <i class="fa-solid fa-arrow-right"></i>
+                <span>
+                    Delivery
+                </span>
 
-                </button>
+                <span>
+                    FREE
+                </span>
+
+            </div>
 
 
-                <div class="secure">
+            <div class="summary-row summary-total">
 
-                    <i class="fa-solid fa-lock"></i>
+                <span>
+                    Total
+                </span>
 
-                    Secure checkout
+                <span>
+                    ₹<span id="summaryTotal">0</span>
+                </span>
 
-                </div>
+            </div>
+
+
+            <br>
+
+
+            <button
+                class="continue-btn"
+                id="continueBtn"
+                type="button">
+
+                Continue to Payment
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+
+            <div class="secure">
+
+                <i class="fa-solid fa-lock"></i>
+
+                Secure checkout
 
             </div>
 
@@ -535,14 +553,17 @@ textarea{
     </div>
 
 </div>
-
-
-<div class="footer">
-
-    © 2026 LOXICA. All rights reserved.
+```
 
 </div>
 
+<div class="footer">
+
+```
+© 2026 LOXICA. All rights reserved.
+```
+
+</div>
 
 <script>
 
@@ -551,18 +572,22 @@ textarea{
    ========================================================= */
 
 
-/* GOOGLE APPS SCRIPT URL */
+/* =========================================================
+   GOOGLE APPS SCRIPT
+   ========================================================= */
 
 const scriptURL =
 "https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
 
 
 /* =========================================================
-   GET URL PARAMETERS
+   URL PARAMETERS
    ========================================================= */
 
 const params =
-new URLSearchParams(window.location.search);
+new URLSearchParams(
+    window.location.search
+);
 
 
 const product =
@@ -586,29 +611,87 @@ params.get("session") ||
 
 
 const selectedColorFromURL =
-(params.get("color") || "").trim();
+(
+    params.get("color") ||
+    ""
+).trim();
 
 
-/*
-   NEW WIX ORDER DETAILS
-*/
+/* =========================================================
+   WIX DATA
+   ========================================================= */
 
-const wixOrderId =
-params.get("wixOrderId") ||
-"";
-
-
-const orderNumber =
-params.get("orderNumber") ||
-"";
+let memberId =
+(
+    params.get("memberId") ||
+    ""
+).trim();
 
 
-const memberId =
-params.get("memberId") ||
-"";
+let wixOrderId =
+(
+    params.get("wixOrderId") ||
+    ""
+).trim();
 
 
-/* SESSION STORAGE KEY */
+let orderNumber =
+(
+    params.get("orderNumber") ||
+    ""
+).trim();
+
+
+/* =========================================================
+   DEBUG URL DATA
+   ========================================================= */
+
+console.log(
+    "======================================"
+);
+
+console.log(
+    "LOXICA WIX DATA FROM URL"
+);
+
+console.log(
+    "Member ID:",
+    memberId
+);
+
+console.log(
+    "Wix Order ID:",
+    wixOrderId
+);
+
+console.log(
+    "Order Number:",
+    orderNumber
+);
+
+console.log(
+    "Product:",
+    product
+);
+
+console.log(
+    "Price:",
+    price
+);
+
+console.log(
+    "Session:",
+    checkoutSession
+);
+
+console.log(
+    "======================================"
+);
+
+
+/* =========================================================
+   SESSION STORAGE KEY
+   ========================================================= */
 
 const storageKey =
 checkoutSession
@@ -621,37 +704,69 @@ checkoutSession
    ========================================================= */
 
 const productNameElement =
-document.getElementById("productName");
+document.getElementById(
+    "productName"
+);
+
 
 const productPriceElement =
-document.getElementById("productPrice");
+document.getElementById(
+    "productPrice"
+);
+
 
 const originalPriceElement =
-document.getElementById("originalPrice");
+document.getElementById(
+    "originalPrice"
+);
+
 
 const summaryProductElement =
-document.getElementById("summaryProduct");
+document.getElementById(
+    "summaryProduct"
+);
+
 
 const summaryPriceElement =
-document.getElementById("summaryPrice");
+document.getElementById(
+    "summaryPrice"
+);
+
 
 const summaryTotalElement =
-document.getElementById("summaryTotal");
+document.getElementById(
+    "summaryTotal"
+);
+
 
 const continueBtn =
-document.getElementById("continueBtn");
+document.getElementById(
+    "continueBtn"
+);
+
 
 const colorBox =
-document.getElementById("colorBox");
+document.getElementById(
+    "colorBox"
+);
+
 
 const selectedColorElement =
-document.getElementById("selectedColor");
+document.getElementById(
+    "selectedColor"
+);
+
 
 const colorFormBox =
-document.getElementById("colorFormBox");
+document.getElementById(
+    "colorFormBox"
+);
+
 
 const colorInput =
-document.getElementById("color");
+document.getElementById(
+    "color"
+);
 
 
 /* =========================================================
@@ -661,42 +776,56 @@ document.getElementById("color");
 productNameElement.textContent =
 product;
 
+
 summaryProductElement.textContent =
 product;
 
 
 /* =========================================================
-   PRICE
+   DISPLAY PRICE
    ========================================================= */
 
 const numericPrice =
 Number(price) || 0;
 
+
 const numericOriginalPrice =
-Number(originalPrice) || numericPrice;
+Number(originalPrice) ||
+numericPrice;
 
 
 productPriceElement.textContent =
-"₹" + numericPrice.toLocaleString("en-IN");
+"₹" +
+numericPrice.toLocaleString(
+    "en-IN"
+);
 
 
 summaryPriceElement.textContent =
-numericPrice.toLocaleString("en-IN");
+numericPrice.toLocaleString(
+    "en-IN"
+);
 
 
 summaryTotalElement.textContent =
-numericPrice.toLocaleString("en-IN");
+numericPrice.toLocaleString(
+    "en-IN"
+);
 
 
-if (
-    numericOriginalPrice > numericPrice
+if(
+    numericOriginalPrice >
+    numericPrice
 ){
 
     originalPriceElement.textContent =
     "₹" +
-    numericOriginalPrice.toLocaleString("en-IN");
+    numericOriginalPrice.toLocaleString(
+        "en-IN"
+    );
 
-}else{
+}
+else{
 
     originalPriceElement.style.display =
     "none";
@@ -726,7 +855,7 @@ if(selectedColorFromURL){
 
 
 /* =========================================================
-   SESSION STORAGE
+   SAVE FORM DATA
    ========================================================= */
 
 function saveFormData(){
@@ -735,33 +864,62 @@ function saveFormData(){
         return;
     }
 
+
     const data = {
 
         name:
-        document.getElementById("name").value,
+        document.getElementById(
+            "name"
+        ).value,
 
         phone:
-        document.getElementById("phone").value,
+        document.getElementById(
+            "phone"
+        ).value,
 
         address:
-        document.getElementById("address").value,
+        document.getElementById(
+            "address"
+        ).value,
 
         landmark:
-        document.getElementById("landmark").value,
+        document.getElementById(
+            "landmark"
+        ).value,
 
         city:
-        document.getElementById("city").value,
+        document.getElementById(
+            "city"
+        ).value,
 
         state:
-        document.getElementById("state").value,
+        document.getElementById(
+            "state"
+        ).value,
 
         pincode:
-        document.getElementById("pincode").value,
+        document.getElementById(
+            "pincode"
+        ).value,
 
         color:
-        document.getElementById("color").value
+        document.getElementById(
+            "color"
+        ).value,
+
+        /* WIX DATA */
+
+        memberId:
+        memberId,
+
+        wixOrderId:
+        wixOrderId,
+
+        orderNumber:
+        orderNumber
 
     };
+
 
     sessionStorage.setItem(
         storageKey,
@@ -771,56 +929,137 @@ function saveFormData(){
 }
 
 
+/* =========================================================
+   RESTORE FORM DATA
+   ========================================================= */
+
 function restoreFormData(){
 
     if(!storageKey){
         return;
     }
 
+
     const saved =
-    sessionStorage.getItem(storageKey);
+    sessionStorage.getItem(
+        storageKey
+    );
+
 
     if(!saved){
         return;
     }
+
 
     try{
 
         const data =
         JSON.parse(saved);
 
-        document.getElementById("name").value =
+
+        document.getElementById(
+            "name"
+        ).value =
         data.name || "";
 
-        document.getElementById("phone").value =
+
+        document.getElementById(
+            "phone"
+        ).value =
         data.phone || "";
 
-        document.getElementById("address").value =
+
+        document.getElementById(
+            "address"
+        ).value =
         data.address || "";
 
-        document.getElementById("landmark").value =
+
+        document.getElementById(
+            "landmark"
+        ).value =
         data.landmark || "";
 
-        document.getElementById("city").value =
+
+        document.getElementById(
+            "city"
+        ).value =
         data.city || "";
 
-        document.getElementById("state").value =
-        data.state || "Kerala";
 
-        document.getElementById("pincode").value =
+        document.getElementById(
+            "state"
+        ).value =
+        data.state ||
+        "Kerala";
+
+
+        document.getElementById(
+            "pincode"
+        ).value =
         data.pincode || "";
+
 
         if(
             data.color &&
             !selectedColorFromURL
         ){
 
-            document.getElementById("color").value =
+            document.getElementById(
+                "color"
+            ).value =
             data.color;
 
         }
 
-    }catch(error){
+
+        /*
+         ==============================================
+         RESTORE WIX DATA ONLY IF URL IS EMPTY
+         ==============================================
+        */
+
+        if(
+            !memberId &&
+            data.memberId
+        ){
+
+            memberId =
+            String(
+                data.memberId
+            ).trim();
+
+        }
+
+
+        if(
+            !wixOrderId &&
+            data.wixOrderId
+        ){
+
+            wixOrderId =
+            String(
+                data.wixOrderId
+            ).trim();
+
+        }
+
+
+        if(
+            !orderNumber &&
+            data.orderNumber
+        ){
+
+            orderNumber =
+            String(
+                data.orderNumber
+            ).trim();
+
+        }
+
+
+    }
+    catch(error){
 
         console.error(
             "SESSION RESTORE ERROR:",
@@ -832,7 +1071,7 @@ function restoreFormData(){
 }
 
 
-/* Restore old data */
+/* Restore saved data */
 
 restoreFormData();
 
@@ -843,22 +1082,32 @@ restoreFormData();
 
 document
 .getElementById("phone")
-.addEventListener("input", function(){
+.addEventListener(
+    "input",
+    function(){
 
-    this.value =
-    this.value.replace(/\D/g,"").slice(0,10);
+        this.value =
+        this.value
+        .replace(/\D/g,"")
+        .slice(0,10);
 
-});
+    }
+);
 
 
 document
 .getElementById("pincode")
-.addEventListener("input", function(){
+.addEventListener(
+    "input",
+    function(){
 
-    this.value =
-    this.value.replace(/\D/g,"").slice(0,6);
+        this.value =
+        this.value
+        .replace(/\D/g,"")
+        .slice(0,6);
 
-});
+    }
+);
 
 
 /* =========================================================
@@ -874,21 +1123,25 @@ document
     "state",
     "pincode",
     "color"
-].forEach(function(id){
 
-    const element =
-    document.getElementById(id);
+].forEach(
+    function(id){
 
-    if(element){
+        const element =
+        document.getElementById(id);
 
-        element.addEventListener(
-            "input",
-            saveFormData
-        );
+
+        if(element){
+
+            element.addEventListener(
+                "input",
+                saveFormData
+            );
+
+        }
 
     }
-
-});
+);
 
 
 /* =========================================================
@@ -899,11 +1152,14 @@ function hideErrors(){
 
     document.getElementById(
         "phoneError"
-    ).style.display = "none";
+    ).style.display =
+    "none";
+
 
     document.getElementById(
         "pincodeError"
-    ).style.display = "none";
+    ).style.display =
+    "none";
 
 }
 
@@ -918,18 +1174,20 @@ continueBtn.addEventListener(
 
         hideErrors();
 
+
         /* Disable button */
 
         continueBtn.disabled =
         true;
 
+
         continueBtn.innerHTML =
         '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
 
 
-        /* ================================================
-           GET FORM VALUES
-           ================================================ */
+        /* =================================================
+           FORM VALUES
+           ================================================= */
 
         const nameValue =
         document
@@ -989,11 +1247,13 @@ continueBtn.addEventListener(
         .trim();
 
 
-        /* ================================================
+        /* =================================================
            COLOR FROM URL HAS PRIORITY
-           ================================================ */
+           ================================================= */
 
-        if(selectedColorFromURL){
+        if(
+            selectedColorFromURL
+        ){
 
             colorValue =
             selectedColorFromURL;
@@ -1001,9 +1261,9 @@ continueBtn.addEventListener(
         }
 
 
-        /* ================================================
+        /* =================================================
            VALIDATION
-           ================================================ */
+           ================================================= */
 
         if(!nameValue){
 
@@ -1011,30 +1271,42 @@ continueBtn.addEventListener(
                 "Please enter your full name."
             );
 
-            continueBtn.disabled = false;
+
+            continueBtn.disabled =
+            false;
+
 
             continueBtn.innerHTML =
             'Continue to Payment <i class="fa-solid fa-arrow-right"></i>';
+
 
             return;
 
         }
 
 
-        if(phoneValue.length !== 10){
+        if(
+            phoneValue.length !== 10
+        ){
 
             document.getElementById(
                 "phoneError"
-            ).style.display = "block";
+            ).style.display =
+            "block";
+
 
             document
             .getElementById("phone")
             .focus();
 
-            continueBtn.disabled = false;
+
+            continueBtn.disabled =
+            false;
+
 
             continueBtn.innerHTML =
             'Continue to Payment <i class="fa-solid fa-arrow-right"></i>';
+
 
             return;
 
@@ -1047,10 +1319,14 @@ continueBtn.addEventListener(
                 "Please enter your delivery address."
             );
 
-            continueBtn.disabled = false;
+
+            continueBtn.disabled =
+            false;
+
 
             continueBtn.innerHTML =
             'Continue to Payment <i class="fa-solid fa-arrow-right"></i>';
+
 
             return;
 
@@ -1063,10 +1339,14 @@ continueBtn.addEventListener(
                 "Please enter your city."
             );
 
-            continueBtn.disabled = false;
+
+            continueBtn.disabled =
+            false;
+
 
             continueBtn.innerHTML =
             'Continue to Payment <i class="fa-solid fa-arrow-right"></i>';
+
 
             return;
 
@@ -1079,41 +1359,55 @@ continueBtn.addEventListener(
                 "Please enter your state."
             );
 
-            continueBtn.disabled = false;
+
+            continueBtn.disabled =
+            false;
+
 
             continueBtn.innerHTML =
             'Continue to Payment <i class="fa-solid fa-arrow-right"></i>';
+
 
             return;
 
         }
 
 
-        if(pincodeValue.length !== 6){
+        if(
+            pincodeValue.length !== 6
+        ){
 
             document.getElementById(
                 "pincodeError"
-            ).style.display = "block";
+            ).style.display =
+            "block";
+
 
             document
             .getElementById("pincode")
             .focus();
 
-            continueBtn.disabled = false;
+
+            continueBtn.disabled =
+            false;
+
 
             continueBtn.innerHTML =
             'Continue to Payment <i class="fa-solid fa-arrow-right"></i>';
+
 
             return;
 
         }
 
 
-        /* ================================================
-           FINAL DATA
-           ================================================ */
+        /* =================================================
+           FINAL ORDER DATA
+           ================================================= */
 
         const currentData = {
+
+            /* PRODUCT */
 
             product:
             product,
@@ -1124,11 +1418,15 @@ continueBtn.addEventListener(
             originalPrice:
             originalPrice,
 
+
+            /* CUSTOMER */
+
             name:
             nameValue,
 
             phone:
-            "+91" + phoneValue,
+            "+91" +
+            phoneValue,
 
             address:
             addressValue,
@@ -1148,27 +1446,32 @@ continueBtn.addEventListener(
             color:
             colorValue,
 
-            /*
-             ===============================================
-             WIX MEMBER / ORDER DATA
-             ===============================================
-            */
+
+            /* =================================================
+               WIX MEMBER / ORDER INFORMATION
+               ================================================= */
 
             memberId:
-            memberId,
+            String(
+                memberId || ""
+            ).trim(),
 
             wixOrderId:
-            wixOrderId,
+            String(
+                wixOrderId || ""
+            ).trim(),
 
             orderNumber:
-            orderNumber
+            String(
+                orderNumber || ""
+            ).trim()
 
         };
 
 
-        /* ================================================
-           CHECK EXISTING SESSION ORDER
-           ================================================ */
+        /* =================================================
+           EXISTING SESSION ORDER ID
+           ================================================= */
 
         if(storageKey){
 
@@ -1177,21 +1480,28 @@ continueBtn.addEventListener(
                 storageKey
             );
 
+
             if(savedOrder){
 
                 try{
 
                     const parsed =
-                    JSON.parse(savedOrder);
+                    JSON.parse(
+                        savedOrder
+                    );
 
-                    if(parsed.orderId){
+
+                    if(
+                        parsed.orderId
+                    ){
 
                         currentData.orderId =
                         parsed.orderId;
 
                     }
 
-                }catch(error){
+                }
+                catch(error){
 
                     console.error(
                         "ORDER SESSION ERROR:",
@@ -1205,38 +1515,63 @@ continueBtn.addEventListener(
         }
 
 
-        console.log(
-            "LOXICA ORDER DATA:",
-            currentData
-        );
-
-
-        console.log(
-            "MEMBER ID:",
-            memberId
-        );
-
-        console.log(
-            "WIX ORDER ID:",
-            wixOrderId
-        );
-
-        console.log(
-            "ORDER NUMBER:",
-            orderNumber
-        );
-
-
-        /* ================================================
-           SAVE FORM DATA
-           ================================================ */
+        /* =================================================
+           SAVE CURRENT DATA
+           ================================================= */
 
         saveFormData();
 
 
-        /* ================================================
+        /* =================================================
+           DEBUG BEFORE GOOGLE SCRIPT
+           ================================================= */
+
+        console.log(
+            "======================================"
+        );
+
+        console.log(
+            "LOXICA FINAL ORDER DATA"
+        );
+
+        console.log(
+            "Product:",
+            currentData.product
+        );
+
+        console.log(
+            "Price:",
+            currentData.price
+        );
+
+        console.log(
+            "Member ID:",
+            currentData.memberId
+        );
+
+        console.log(
+            "Wix Order ID:",
+            currentData.wixOrderId
+        );
+
+        console.log(
+            "Order Number:",
+            currentData.orderNumber
+        );
+
+        console.log(
+            "Existing Order ID:",
+            currentData.orderId || ""
+        );
+
+        console.log(
+            "======================================"
+        );
+
+
+        /* =================================================
            SEND TO GOOGLE APPS SCRIPT
-           ================================================ */
+           ================================================= */
 
         try{
 
@@ -1245,7 +1580,8 @@ continueBtn.addEventListener(
                 scriptURL,
                 {
 
-                    method:"POST",
+                    method:
+                    "POST",
 
                     headers:{
                         "Content-Type":
@@ -1265,15 +1601,27 @@ continueBtn.addEventListener(
             await response.json();
 
 
+            /* =================================================
+               GOOGLE RESPONSE
+               ================================================= */
+
+            console.log(
+                "======================================"
+            );
+
             console.log(
                 "GOOGLE SCRIPT RESPONSE:",
                 result
             );
 
+            console.log(
+                "======================================"
+            );
 
-            /* ============================================
-               CHECK RESPONSE
-               ============================================ */
+
+            /* =================================================
+               CHECK SUCCESS
+               ================================================= */
 
             if(
                 !result ||
@@ -1288,31 +1636,81 @@ continueBtn.addEventListener(
             }
 
 
-            /* ============================================
-               SAVE ORDER ID
-               ============================================ */
+            /* =================================================
+               GET GOOGLE ORDER ID
+               ================================================= */
 
             const orderId =
             result.orderId || "";
 
 
+            /* =================================================
+               IF SCRIPT RETURNS WIX DATA,
+               KEEP THEM
+               ================================================= */
+
+            if(
+                result.memberId
+            ){
+
+                memberId =
+                String(
+                    result.memberId
+                ).trim();
+
+            }
+
+
+            if(
+                result.wixOrderId
+            ){
+
+                wixOrderId =
+                String(
+                    result.wixOrderId
+                ).trim();
+
+            }
+
+
+            if(
+                result.orderNumber
+            ){
+
+                orderNumber =
+                String(
+                    result.orderNumber
+                ).trim();
+
+            }
+
+
+            /* =================================================
+               SAVE EVERYTHING TO SESSION
+               ================================================= */
+
             if(storageKey){
+
+                let sessionData = {};
+
 
                 const saved =
                 sessionStorage.getItem(
                     storageKey
                 );
 
-                let sessionData = {};
 
                 if(saved){
 
                     try{
 
                         sessionData =
-                        JSON.parse(saved);
+                        JSON.parse(
+                            saved
+                        );
 
-                    }catch(error){
+                    }
+                    catch(error){
 
                         sessionData = {};
 
@@ -1325,6 +1723,18 @@ continueBtn.addEventListener(
                 orderId;
 
 
+                sessionData.memberId =
+                memberId;
+
+
+                sessionData.wixOrderId =
+                wixOrderId;
+
+
+                sessionData.orderNumber =
+                orderNumber;
+
+
                 sessionStorage.setItem(
                     storageKey,
                     JSON.stringify(
@@ -1335,29 +1745,78 @@ continueBtn.addEventListener(
             }
 
 
-            /* ============================================
-               PAYMENT PAGE
-               ============================================ */
+            /* =================================================
+               DEBUG AFTER GOOGLE SAVE
+               ================================================= */
+
+            console.log(
+                "======================================"
+            );
+
+            console.log(
+                "FINAL SAVED VALUES"
+            );
+
+            console.log(
+                "Google Order ID:",
+                orderId
+            );
+
+            console.log(
+                "Member ID:",
+                memberId
+            );
+
+            console.log(
+                "Wix Order ID:",
+                wixOrderId
+            );
+
+            console.log(
+                "Order Number:",
+                orderNumber
+            );
+
+            console.log(
+                "======================================"
+            );
+
+
+            /* =================================================
+               PAYMENT PAGE URL
+               ================================================= */
 
             let paymentURL =
-            "payment.html?product=" +
-            encodeURIComponent(product) +
+            "payment.html" +
+
+            "?product=" +
+            encodeURIComponent(
+                product
+            ) +
 
             "&price=" +
-            encodeURIComponent(price) +
+            encodeURIComponent(
+                price
+            ) +
 
             "&originalPrice=" +
-            encodeURIComponent(originalPrice) +
+            encodeURIComponent(
+                originalPrice
+            ) +
 
             "&orderId=" +
-            encodeURIComponent(orderId);
+            encodeURIComponent(
+                orderId
+            );
 
 
-            /* ============================================
+            /* =================================================
                SESSION
-               ============================================ */
+               ================================================= */
 
-            if(checkoutSession){
+            if(
+                checkoutSession
+            ){
 
                 paymentURL +=
                 "&session=" +
@@ -1368,11 +1827,13 @@ continueBtn.addEventListener(
             }
 
 
-            /* ============================================
+            /* =================================================
                COLOR
-               ============================================ */
+               ================================================= */
 
-            if(colorValue){
+            if(
+                colorValue
+            ){
 
                 paymentURL +=
                 "&color=" +
@@ -1383,11 +1844,13 @@ continueBtn.addEventListener(
             }
 
 
-            /* ============================================
+            /* =================================================
                MEMBER ID
-               ============================================ */
+               ================================================= */
 
-            if(memberId){
+            if(
+                memberId
+            ){
 
                 paymentURL +=
                 "&memberId=" +
@@ -1398,11 +1861,13 @@ continueBtn.addEventListener(
             }
 
 
-            /* ============================================
+            /* =================================================
                WIX ORDER ID
-               ============================================ */
+               ================================================= */
 
-            if(wixOrderId){
+            if(
+                wixOrderId
+            ){
 
                 paymentURL +=
                 "&wixOrderId=" +
@@ -1413,11 +1878,13 @@ continueBtn.addEventListener(
             }
 
 
-            /* ============================================
-               WIX ORDER NUMBER
-               ============================================ */
+            /* =================================================
+               ORDER NUMBER
+               ================================================= */
 
-            if(orderNumber){
+            if(
+                orderNumber
+            ){
 
                 paymentURL +=
                 "&orderNumber=" +
@@ -1428,21 +1895,38 @@ continueBtn.addEventListener(
             }
 
 
+            /* =================================================
+               FINAL PAYMENT URL DEBUG
+               ================================================= */
+
             console.log(
-                "PAYMENT URL:",
+                "======================================"
+            );
+
+            console.log(
+                "PAYMENT PAGE URL:"
+            );
+
+            console.log(
                 paymentURL
             );
 
+            console.log(
+                "======================================"
+            );
 
-            /* ============================================
+
+            /* =================================================
                REDIRECT
-               ============================================ */
+               ================================================= */
 
             window.location.href =
             paymentURL;
 
+        }
 
-        }catch(error){
+
+        catch(error){
 
             console.error(
                 "CHECKOUT ERROR:",
@@ -1452,8 +1936,10 @@ continueBtn.addEventListener(
 
             alert(
                 "Something went wrong while creating your order.\n\n" +
-                (error.message ||
-                "Please try again.")
+                (
+                    error.message ||
+                    "Please try again."
+                )
             );
 
 
