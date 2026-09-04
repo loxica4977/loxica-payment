@@ -1,47 +1,26 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>LOXICA - My Orders</title>
 
 <style>
 
-/* =========================
-   RESET
-========================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-
-/* =========================
-   BODY
-========================= */
-
-body {
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background: #f5f5f5;
-
-    color: #111;
-
-    min-height: 100vh;
-
+body{
+    background:#f5f5f5;
+    color:#111;
 }
 
 
@@ -49,113 +28,55 @@ body {
    HEADER
 ========================= */
 
-.header {
-
-    background: #050505;
-
-    height: 78px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding:
-        0 6%;
-
+.header{
+    width:100%;
+    background:#111;
+    color:white;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
 }
 
-
-.logo {
-
-    color: white;
-
-    font-size: 30px;
-
-    font-weight: 900;
-
-    letter-spacing: 3px;
-
+.logo{
+    font-size:29px;
+    font-weight:800;
+    letter-spacing:1.5px;
 }
 
-
-.logo span {
-
-    color: #b7ff00;
-
+.back-btn{
+    position:absolute;
+    right:22px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    border:1px solid #444;
+    padding:9px 14px;
+    border-radius:6px;
 }
 
-
-.back-btn {
-
-    text-decoration: none;
-
-    color: white;
-
-    border:
-        1px solid #333;
-
-    padding:
-        10px 18px;
-
-    border-radius: 8px;
-
-    font-size: 14px;
-
-    transition: 0.2s;
-
-}
-
-
-.back-btn:hover {
-
-    border-color: #b7ff00;
-
-    color: #b7ff00;
-
+.back-btn:hover{
+    background:#222;
 }
 
 
 /* =========================
-   MAIN
+   PAGE
 ========================= */
 
-.container {
-
-    width: 92%;
-
-    max-width: 1100px;
-
-    margin:
-        35px auto 60px;
-
+.container{
+    width:100%;
+    max-width:900px;
+    margin:28px auto;
+    padding:0 16px;
 }
 
-
-/* =========================
-   TITLE
-========================= */
-
-.page-title {
-
-    font-size: 32px;
-
-    font-weight: 800;
-
-    margin-bottom: 8px;
-
-}
-
-
-.subtitle {
-
-    color: #666;
-
-    font-size: 15px;
-
-    margin-bottom: 28px;
-
+.page-title{
+    font-size:25px;
+    font-weight:700;
+    margin-bottom:18px;
 }
 
 
@@ -163,45 +84,27 @@ body {
    LOADING
 ========================= */
 
-.loading {
-
-    text-align: center;
-
-    padding: 70px 20px;
-
-    color: #555;
-
+.loading{
+    text-align:center;
+    padding:50px 20px;
+    color:#666;
+    font-size:15px;
 }
 
-
-.loader {
-
-    width: 42px;
-
-    height: 42px;
-
-    border:
-        4px solid #ddd;
-
-    border-top-color: #111;
-
-    border-radius: 50%;
-
-    animation:
-        spin 0.8s linear infinite;
-
-    margin:
-        0 auto 18px;
-
+.spinner{
+    width:32px;
+    height:32px;
+    border:3px solid #ddd;
+    border-top:3px solid #111;
+    border-radius:50%;
+    margin:0 auto 14px;
+    animation:spin .8s linear infinite;
 }
 
-
-@keyframes spin {
-
-    to {
-        transform: rotate(360deg);
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
     }
-
 }
 
 
@@ -209,123 +112,13 @@ body {
    ERROR
 ========================= */
 
-.error-box {
-
-    background: white;
-
-    border-radius: 14px;
-
-    padding: 35px;
-
-    text-align: center;
-
-    box-shadow:
-        0 5px 25px
-        rgba(0,0,0,0.06);
-
-}
-
-
-.error-title {
-
-    font-size: 21px;
-
-    font-weight: 700;
-
-    margin-bottom: 8px;
-
-}
-
-
-.error-text {
-
-    color: #666;
-
-    font-size: 14px;
-
-}
-
-
-/* =========================
-   EMPTY ORDERS
-========================= */
-
-.empty-box {
-
-    background: white;
-
-    border-radius: 16px;
-
-    padding: 70px 25px;
-
-    text-align: center;
-
-    box-shadow:
-        0 5px 25px
-        rgba(0,0,0,0.06);
-
-}
-
-
-.empty-icon {
-
-    font-size: 55px;
-
-    margin-bottom: 18px;
-
-}
-
-
-.empty-title {
-
-    font-size: 23px;
-
-    font-weight: 700;
-
-    margin-bottom: 10px;
-
-}
-
-
-.empty-text {
-
-    color: #666;
-
-    font-size: 14px;
-
-    margin-bottom: 25px;
-
-}
-
-
-.shop-btn {
-
-    display: inline-block;
-
-    background: #111;
-
-    color: white;
-
-    text-decoration: none;
-
-    padding:
-        13px 25px;
-
-    border-radius: 8px;
-
-    font-weight: 700;
-
-    transition: 0.2s;
-
-}
-
-
-.shop-btn:hover {
-
-    background: #b7ff00;
-
-    color: #111;
-
+.error-box{
+    background:white;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:25px;
+    text-align:center;
+    color:#555;
 }
 
 
@@ -333,63 +126,94 @@ body {
    ORDER CARD
 ========================= */
 
-.order-card {
+.order-card{
+    background:white;
+    border:1px solid #ddd;
+    border-radius:8px;
+    margin-bottom:14px;
+    overflow:hidden;
+    transition:.2s;
+}
 
-    background: white;
-
-    border-radius: 16px;
-
-    margin-bottom: 20px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 5px 25px
-        rgba(0,0,0,0.07);
-
+.order-card:hover{
+    border-color:#aaa;
 }
 
 
 /* =========================
-   ORDER HEADER
+   COMPACT ORDER ROW
 ========================= */
 
-.order-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    padding:
-        18px 22px;
-
-    background: #fafafa;
-
-    border-bottom:
-        1px solid #eee;
-
+.order-summary{
+    min-height:120px;
+    display:flex;
+    align-items:center;
+    padding:15px;
+    cursor:pointer;
+    gap:18px;
 }
 
 
-.order-id {
+/* =========================
+   PRODUCT IMAGE
+========================= */
 
-    font-size: 14px;
+.product-image-box{
+    width:105px;
+    height:105px;
+    flex-shrink:0;
+    border-radius:7px;
+    background:#f7f7f7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    border:1px solid #eee;
+}
 
-    font-weight: 800;
+.product-image{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
 
+.no-image{
+    font-size:11px;
+    color:#999;
+    text-align:center;
+    padding:8px;
 }
 
 
-.order-date {
+/* =========================
+   SUMMARY CONTENT
+========================= */
 
-    font-size: 13px;
+.summary-content{
+    flex:1;
+    min-width:0;
+}
 
-    color: #777;
+.product-name{
+    font-size:17px;
+    font-weight:700;
+    color:#111;
+    margin-bottom:9px;
+    line-height:1.3;
+}
 
-    margin-top: 5px;
+.price{
+    font-size:16px;
+    font-weight:700;
+    margin-bottom:8px;
+}
 
+.summary-bottom{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
 
@@ -397,206 +221,144 @@ body {
    STATUS
 ========================= */
 
-.status {
-
-    display: inline-block;
-
-    padding:
-        7px 13px;
-
-    border-radius: 30px;
-
-    font-size: 12px;
-
-    font-weight: 800;
-
-    text-transform: uppercase;
-
+.status{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    padding:5px 9px;
+    border-radius:5px;
+    background:#eee;
+    color:#555;
 }
 
-
-.status-paid {
-
-    background: #e8ffd0;
-
-    color: #3c7100;
-
+.status.paid{
+    background:#e8f7df;
+    color:#287a16;
 }
 
-
-.status-pending {
-
-    background: #fff3cd;
-
-    color: #856404;
-
+.status.pending{
+    background:#fff3cd;
+    color:#856404;
 }
 
-
-.status-processing {
-
-    background: #dceeff;
-
-    color: #145a9e;
-
-}
-
-
-.status-shipped {
-
-    background: #e8ddff;
-
-    color: #5d35a3;
-
-}
-
-
-.status-delivered {
-
-    background: #d9fbe5;
-
-    color: #14733a;
-
-}
-
-
-.status-cancelled {
-
-    background: #ffe0e0;
-
-    color: #a30000;
-
+.status.cancelled{
+    background:#fde2e2;
+    color:#b42318;
 }
 
 
 /* =========================
-   ORDER CONTENT
+   ARROW
 ========================= */
 
-.order-content {
-
-    padding: 22px;
-
+.expand-icon{
+    width:30px;
+    height:30px;
+    flex-shrink:0;
+    border-radius:50%;
+    background:#f2f2f2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    transition:.2s;
 }
 
-
-.product-name {
-
-    font-size: 20px;
-
-    font-weight: 800;
-
-    margin-bottom: 18px;
-
+.order-card.open .expand-icon{
+    transform:rotate(180deg);
 }
 
 
 /* =========================
-   DETAILS GRID
+   DETAILS
 ========================= */
 
-.details-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 15px;
-
+.order-details{
+    display:none;
+    border-top:1px solid #eee;
+    padding:18px 20px 20px;
+    background:#fafafa;
 }
 
-
-.detail {
-
-    background: #f8f8f8;
-
-    border-radius: 10px;
-
-    padding: 13px 15px;
-
+.order-card.open .order-details{
+    display:block;
 }
 
-
-.detail-label {
-
-    font-size: 11px;
-
-    color: #777;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.5px;
-
-    margin-bottom: 5px;
-
+.details-title{
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:14px;
 }
 
+.detail-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
 
-.detail-value {
+.detail-box{
+    background:white;
+    border:1px solid #eee;
+    border-radius:6px;
+    padding:11px 12px;
+}
 
-    font-size: 15px;
+.detail-label{
+    font-size:11px;
+    color:#777;
+    margin-bottom:4px;
+}
 
-    font-weight: 700;
+.detail-value{
+    font-size:14px;
+    font-weight:600;
+    color:#111;
+    word-break:break-word;
+}
 
+.total-box{
+    margin-top:12px;
+    background:white;
+    border:1px solid #ddd;
+    border-radius:6px;
+    padding:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.total-label{
+    font-size:14px;
+    font-weight:600;
+}
+
+.total-value{
+    font-size:18px;
+    font-weight:800;
 }
 
 
 /* =========================
-   TOTAL
+   EMPTY
 ========================= */
 
-.total-box {
-
-    margin-top: 18px;
-
-    padding-top: 18px;
-
-    border-top:
-        1px solid #eee;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
+.empty{
+    background:white;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:45px 20px;
+    text-align:center;
 }
 
-
-.total-label {
-
-    font-size: 15px;
-
-    font-weight: 700;
-
+.empty-title{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:8px;
 }
 
-
-.total-price {
-
-    font-size: 24px;
-
-    font-weight: 900;
-
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer {
-
-    text-align: center;
-
-    padding:
-        25px;
-
-    color: #888;
-
-    font-size: 12px;
-
+.empty-text{
+    color:#777;
+    font-size:14px;
 }
 
 
@@ -604,94 +366,96 @@ body {
    MOBILE
 ========================= */
 
-@media (max-width: 600px) {
+@media(max-width:600px){
 
-    .header {
-
-        height: 68px;
-
-        padding:
-            0 5%;
-
+    .header{
+        height:60px;
     }
 
-
-    .logo {
-
-        font-size: 24px;
-
+    .logo{
+        font-size:27px;
     }
 
-
-    .back-btn {
-
-        padding:
-            8px 12px;
-
-        font-size: 12px;
-
+    .back-btn{
+        right:10px;
+        padding:7px 9px;
+        font-size:12px;
     }
 
-
-    .container {
-
-        width: 94%;
-
-        margin-top: 25px;
-
+    .container{
+        margin:20px auto;
+        padding:0 10px;
     }
 
-
-    .page-title {
-
-        font-size: 27px;
-
+    .page-title{
+        font-size:22px;
+        margin-bottom:14px;
     }
 
-
-    .details-grid {
-
-        grid-template-columns: 1fr;
-
+    .order-summary{
+        min-height:100px;
+        padding:11px;
+        gap:12px;
     }
 
-
-    .order-header {
-
-        align-items: flex-start;
-
-        gap: 12px;
-
-        flex-direction: column;
-
+    .product-image-box{
+        width:82px;
+        height:82px;
     }
 
-
-    .status {
-
-        align-self: flex-start;
-
+    .product-name{
+        font-size:15px;
+        margin-bottom:6px;
     }
 
-
-    .order-content {
-
-        padding: 18px;
-
+    .price{
+        font-size:15px;
+        margin-bottom:5px;
     }
 
-
-    .product-name {
-
-        font-size: 18px;
-
+    .status{
+        font-size:10px;
+        padding:4px 7px;
     }
 
+    .expand-icon{
+        width:26px;
+        height:26px;
+        font-size:14px;
+    }
 
-    .total-price {
+    .order-details{
+        padding:15px 12px;
+    }
 
-        font-size: 21px;
+    .detail-grid{
+        grid-template-columns:1fr;
+    }
 
+    .total-value{
+        font-size:16px;
+    }
+
+}
+
+
+/* =========================
+   EXTRA SMALL
+========================= */
+
+@media(max-width:380px){
+
+    .back-btn{
+        display:none;
+    }
+
+    .product-image-box{
+        width:72px;
+        height:72px;
+    }
+
+    .order-summary{
+        gap:9px;
     }
 
 }
@@ -710,9 +474,7 @@ body {
 
 <header class="header">
 
-    <div class="logo">
-        LOXI<span>CA</span>
-    </div>
+    <div class="logo">LOXICA</div>
 
     <a
         href="https://loxicos.com"
@@ -734,509 +496,147 @@ body {
         My Orders
     </h1>
 
-    <p class="subtitle">
-        View your order history and check the status of your orders.
-    </p>
 
+    <div id="loading" class="loading">
 
-    <!-- LOADING -->
+        <div class="spinner"></div>
 
-    <div
-        id="loading"
-        class="loading"
-    >
-
-        <div class="loader"></div>
-
-        <p>
-            Loading your orders...
-        </p>
+        Loading your orders...
 
     </div>
 
 
-    <!-- ERROR -->
-
     <div
-        id="errorBox"
-        class="error-box"
+        id="ordersContainer"
         style="display:none;"
-    >
-
-        <div class="error-title">
-            Unable to load orders
-        </div>
-
-        <div
-            id="errorText"
-            class="error-text"
-        >
-            Something went wrong.
-        </div>
-
-    </div>
-
-
-    <!-- EMPTY -->
-
-    <div
-        id="emptyBox"
-        class="empty-box"
-        style="display:none;"
-    >
-
-        <div class="empty-icon">
-            🛍️
-        </div>
-
-        <div class="empty-title">
-            No orders yet
-        </div>
-
-        <div class="empty-text">
-            You haven't placed any orders yet.
-        </div>
-
-        <a
-            href="https://loxicos.com"
-            class="shop-btn"
-        >
-            Start Shopping
-        </a>
-
-    </div>
-
-
-    <!-- ORDERS -->
-
-    <div id="ordersContainer"></div>
+    ></div>
 
 </main>
 
 
-<footer class="footer">
-
-    © 2026 LOXICA. All rights reserved.
-
-</footer>
-
-
 <script>
 
-/* =====================================================
-   APPS SCRIPT URL
-===================================================== */
+
+// =====================================================
+// API
+// =====================================================
 
 const API_URL =
     "https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
 
 
-/* =====================================================
-   GET MEMBER ID
-===================================================== */
+// =====================================================
+// GET MEMBER ID
+// =====================================================
 
 const params =
     new URLSearchParams(
         window.location.search
     );
 
-
 const memberId =
-    (
-        params.get("memberId") ||
-        ""
-    ).trim();
+    (params.get("memberId") || "").trim();
 
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+// =====================================================
+// ELEMENTS
+// =====================================================
 
 const loading =
-    document.getElementById("loading");
-
-const errorBox =
-    document.getElementById("errorBox");
-
-const errorText =
-    document.getElementById("errorText");
-
-const emptyBox =
-    document.getElementById("emptyBox");
-
-const ordersContainer =
-    document.getElementById("ordersContainer");
-
-
-/* =====================================================
-   FORMAT PRICE
-===================================================== */
-
-function formatPrice(value) {
-
-    const number =
-        Number(value) || 0;
-
-    return "₹" +
-        number.toLocaleString("en-IN", {
-            maximumFractionDigits: 2
-        });
-
-}
-
-
-/* =====================================================
-   FORMAT DATE
-===================================================== */
-
-function formatDate(value) {
-
-    if (!value) {
-        return "-";
-    }
-
-    const date =
-        new Date(value);
-
-    if (isNaN(date.getTime())) {
-        return String(value);
-    }
-
-    return date.toLocaleDateString(
-        "en-IN",
-        {
-            day: "2-digit",
-            month: "short",
-            year: "numeric"
-        }
+    document.getElementById(
+        "loading"
     );
 
-}
+const ordersContainer =
+    document.getElementById(
+        "ordersContainer"
+    );
 
 
-/* =====================================================
-   STATUS CLASS
-===================================================== */
+// =====================================================
+// START
+// =====================================================
 
-function getStatusClass(status) {
+loadOrders();
 
-    const value =
-        String(status || "")
-            .trim()
-            .toLowerCase();
 
-    if (value === "paid") {
-        return "status-paid";
-    }
+// =====================================================
+// LOAD ORDERS
+// =====================================================
 
-    if (value === "pending") {
-        return "status-pending";
-    }
+async function loadOrders(){
 
-    if (value === "processing") {
-        return "status-processing";
-    }
+    try{
 
-    if (value === "shipped") {
-        return "status-shipped";
-    }
+        if(!memberId){
 
-    if (value === "delivered") {
-        return "status-delivered";
-    }
-
-    if (value === "cancelled") {
-        return "status-cancelled";
-    }
-
-    return "status-pending";
-
-}
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHTML(value) {
-
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
-
-
-/* =====================================================
-   CREATE ORDER CARD
-===================================================== */
-
-function createOrderCard(order) {
-
-    const orderId =
-        order.orderId || "-";
-
-    const date =
-        order.date || "";
-
-    const product =
-        order.product || "LOXICA Product";
-
-    const price =
-        Number(order.price) || 0;
-
-    const quantity =
-        Math.max(
-            1,
-            Number(order.quantity) || 1
-        );
-
-    let totalPrice =
-        Number(order.totalPrice);
-
-    if (!totalPrice) {
-
-        totalPrice =
-            price * quantity;
-
-    }
-
-    const color =
-        order.color &&
-        order.color !== "-"
-            ? order.color
-            : "";
-
-    const status =
-        order.status || "Pending";
-
-
-    const card =
-        document.createElement("div");
-
-    card.className =
-        "order-card";
-
-
-    card.innerHTML = `
-
-        <div class="order-header">
-
-            <div>
-
-                <div class="order-id">
-                    Order ID: ${escapeHTML(orderId)}
-                </div>
-
-                <div class="order-date">
-                    ${formatDate(date)}
-                </div>
-
-            </div>
-
-
-            <div
-                class="status ${getStatusClass(status)}"
-            >
-                ${escapeHTML(status)}
-            </div>
-
-        </div>
-
-
-        <div class="order-content">
-
-            <div class="product-name">
-                ${escapeHTML(product)}
-            </div>
-
-
-            <div class="details-grid">
-
-
-                <div class="detail">
-
-                    <div class="detail-label">
-                        Price
-                    </div>
-
-                    <div class="detail-value">
-                        ${formatPrice(price)}
-                    </div>
-
-                </div>
-
-
-                <div class="detail">
-
-                    <div class="detail-label">
-                        Quantity
-                    </div>
-
-                    <div class="detail-value">
-                        ${quantity}
-                    </div>
-
-                </div>
-
-
-                ${
-                    color
-                    ? `
-                    <div class="detail">
-
-                        <div class="detail-label">
-                            Color
-                        </div>
-
-                        <div class="detail-value">
-                            ${escapeHTML(color)}
-                        </div>
-
-                    </div>
-                    `
-                    : ""
-                }
-
-
-                <div class="detail">
-
-                    <div class="detail-label">
-                        Order Status
-                    </div>
-
-                    <div class="detail-value">
-                        ${escapeHTML(status)}
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="total-box">
-
-                <div class="total-label">
-                    Total Price
-                </div>
-
-                <div class="total-price">
-                    ${formatPrice(totalPrice)}
-                </div>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    return card;
-
-}
-
-
-/* =====================================================
-   LOAD ORDERS
-===================================================== */
-
-async function loadOrders() {
-
-    try {
-
-        /* =========================
-           MEMBER ID CHECK
-        ========================= */
-
-        if (!memberId) {
-
-            throw new Error(
-                "Member ID is missing. Please login first."
+            showError(
+                "Member ID is missing. Please login again."
             );
 
+            return;
         }
 
-
-        /* =========================
-           API URL
-        ========================= */
 
         const requestURL =
             API_URL +
-            "?action=getOrders" +
-            "&memberId=" +
-            encodeURIComponent(memberId);
+            "?memberId=" +
+            encodeURIComponent(
+                memberId
+            );
 
-
-        console.log(
-            "Loading orders for member:",
-            memberId
-        );
-
-
-        /* =========================
-           FETCH
-        ========================= */
 
         const response =
             await fetch(
                 requestURL,
                 {
-                    method: "GET",
-                    cache: "no-store"
+                    method:"GET",
+                    cache:"no-store"
                 }
             );
 
 
-        if (!response.ok) {
+        const text =
+            await response.text();
 
-            throw new Error(
-                "Server error: " +
-                response.status
+
+        let data;
+
+        try{
+
+            data =
+                JSON.parse(text);
+
+        }catch(error){
+
+            console.error(
+                "Invalid API response:",
+                text
             );
 
+            showError(
+                "Unable to load orders."
+            );
+
+            return;
         }
 
 
-        /* =========================
-           JSON
-        ========================= */
+        if(
+            !data ||
+            data.success !== true
+        ){
 
-        const data =
-            await response.json();
-
-
-        console.log(
-            "Orders API response:",
-            data
-        );
-
-
-        if (!data.success) {
-
-            throw new Error(
-                data.error ||
-                "Could not load orders."
+            showError(
+                data &&
+                data.error
+                    ? data.error
+                    : "Unable to load orders."
             );
 
+            return;
         }
 
-
-        /* =========================
-           HIDE LOADING
-        ========================= */
-
-        loading.style.display =
-            "none";
-
-
-        /* =========================
-           ORDERS
-        ========================= */
 
         const orders =
             Array.isArray(data.orders)
@@ -1244,85 +644,623 @@ async function loadOrders() {
                 : [];
 
 
-        if (orders.length === 0) {
+        // =========================
+        // SORT NEWEST FIRST
+        // =========================
 
-            emptyBox.style.display =
-                "block";
+        orders.sort(function(a,b){
 
-            return;
+            const dateA =
+                new Date(
+                    a.date || 0
+                ).getTime();
 
-        }
+            const dateB =
+                new Date(
+                    b.date || 0
+                ).getTime();
+
+            return dateB - dateA;
+
+        });
 
 
-        /* =========================
-           SORT NEWEST FIRST
-        ========================= */
-
-        orders.sort(
-            function(a, b) {
-
-                const dateA =
-                    new Date(a.date).getTime() || 0;
-
-                const dateB =
-                    new Date(b.date).getTime() || 0;
-
-                return dateB - dateA;
-
-            }
+        renderOrders(
+            orders
         );
 
 
-        /* =========================
-           DISPLAY ORDERS
-        ========================= */
-
-        orders.forEach(
-            function(order) {
-
-                const card =
-                    createOrderCard(order);
-
-                ordersContainer.appendChild(card);
-
-            }
-        );
-
-
-    } catch (error) {
+    }catch(error){
 
         console.error(
             "MY ORDERS ERROR:",
             error
         );
 
-
-        loading.style.display =
-            "none";
-
-
-        errorBox.style.display =
-            "block";
-
-
-        errorText.textContent =
-            error.message ||
-            "Unable to load your orders.";
+        showError(
+            "Something went wrong while loading your orders."
+        );
 
     }
 
 }
 
 
-/* =====================================================
-   START
-===================================================== */
+// =====================================================
+// RENDER ORDERS
+// =====================================================
 
-loadOrders();
+function renderOrders(orders){
+
+    loading.style.display =
+        "none";
+
+    ordersContainer.style.display =
+        "block";
+
+
+    if(!orders.length){
+
+        ordersContainer.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-title">
+                    No orders yet
+                </div>
+
+                <div class="empty-text">
+                    Your orders will appear here after you place an order.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    ordersContainer.innerHTML =
+        orders.map(function(order,index){
+
+            return createOrderCard(
+                order,
+                index
+            );
+
+        }).join("");
+
+
+    // =========================
+    // CLICK TO EXPAND
+    // =========================
+
+    document
+        .querySelectorAll(
+            ".order-summary"
+        )
+        .forEach(function(summary){
+
+            summary.addEventListener(
+                "click",
+                function(){
+
+                    const card =
+                        summary.closest(
+                            ".order-card"
+                        );
+
+
+                    // Close other orders
+                    document
+                        .querySelectorAll(
+                            ".order-card.open"
+                        )
+                        .forEach(function(other){
+
+                            if(other !== card){
+
+                                other.classList.remove(
+                                    "open"
+                                );
+
+                            }
+
+                        });
+
+
+                    // Toggle current
+                    card.classList.toggle(
+                        "open"
+                    );
+
+                }
+            );
+
+        });
+
+}
+
+
+// =====================================================
+// CREATE ORDER CARD
+// =====================================================
+
+function createOrderCard(
+    order,
+    index
+){
+
+    const product =
+        escapeHTML(
+            order.product ||
+            "LOXICA Product"
+        );
+
+
+    const price =
+        Number(
+            order.unitPrice ??
+            order.price ??
+            0
+        );
+
+
+    const quantity =
+        Math.max(
+            1,
+            Number(
+                order.quantity
+            ) || 1
+        );
+
+
+    const total =
+        Number(
+            order.totalPrice
+        ) ||
+        (
+            price *
+            quantity
+        );
+
+
+    const color =
+        escapeHTML(
+            order.color ||
+            "-"
+        );
+
+
+    const orderId =
+        escapeHTML(
+            order.orderId ||
+            "-"
+        );
+
+
+    const status =
+        String(
+            order.status ||
+            "Pending"
+        ).trim();
+
+
+    const date =
+        formatDate(
+            order.date
+        );
+
+
+    const statusClass =
+        getStatusClass(
+            status
+        );
+
+
+    /*
+       IMAGE
+
+       If Apps Script later returns
+       order.image, it will be used.
+
+       Until then, the image box
+       stays clean instead of showing
+       a broken image.
+    */
+
+    const imageUrl =
+        order.image ||
+        order.productImage ||
+        "";
+
+
+    let imageHTML = "";
+
+
+    if(imageUrl){
+
+        imageHTML = `
+
+            <img
+                src="${escapeAttribute(imageUrl)}"
+                class="product-image"
+                alt="${product}"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            >
+
+            <div
+                class="no-image"
+                style="display:none;"
+            >
+                Product Image
+            </div>
+
+        `;
+
+    }else{
+
+        imageHTML = `
+
+            <div class="no-image">
+                Product Image
+            </div>
+
+        `;
+
+    }
+
+
+    return `
+
+        <div
+            class="order-card"
+            data-index="${index}"
+        >
+
+
+            <!-- SUMMARY -->
+
+            <div class="order-summary">
+
+
+                <!-- PRODUCT PHOTO -->
+
+                <div class="product-image-box">
+
+                    ${imageHTML}
+
+                </div>
+
+
+                <!-- PRODUCT INFO -->
+
+                <div class="summary-content">
+
+                    <div class="product-name">
+
+                        ${product}
+
+                    </div>
+
+
+                    <div class="price">
+
+                        ₹${formatMoney(price)}
+
+                    </div>
+
+
+                    <div class="summary-bottom">
+
+                        <span
+                            class="status ${statusClass}"
+                        >
+
+                            ${escapeHTML(status)}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ARROW -->
+
+                <div class="expand-icon">
+
+                    ↓
+
+                </div>
+
+
+            </div>
+
+
+            <!-- DETAILS -->
+
+            <div class="order-details">
+
+                <div class="details-title">
+
+                    Order Details
+
+                </div>
+
+
+                <div class="detail-grid">
+
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            Order ID
+                        </div>
+
+                        <div class="detail-value">
+                            ${orderId}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            Order Date
+                        </div>
+
+                        <div class="detail-value">
+                            ${date}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            Quantity
+                        </div>
+
+                        <div class="detail-value">
+                            ${quantity}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            Color
+                        </div>
+
+                        <div class="detail-value">
+                            ${color}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            Unit Price
+                        </div>
+
+                        <div class="detail-value">
+                            ₹${formatMoney(price)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            Status
+                        </div>
+
+                        <div class="detail-value">
+                            ${escapeHTML(status)}
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="total-box">
+
+                    <div class="total-label">
+                        Total Price
+                    </div>
+
+                    <div class="total-value">
+                        ₹${formatMoney(total)}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    `;
+
+}
+
+
+// =====================================================
+// STATUS CLASS
+// =====================================================
+
+function getStatusClass(status){
+
+    const value =
+        String(status)
+            .toLowerCase()
+            .trim();
+
+
+    if(value === "paid"){
+        return "paid";
+    }
+
+
+    if(
+        value === "cancelled" ||
+        value === "canceled"
+    ){
+
+        return "cancelled";
+
+    }
+
+
+    return "pending";
+
+}
+
+
+// =====================================================
+// FORMAT DATE
+// =====================================================
+
+function formatDate(value){
+
+    if(!value){
+        return "-";
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return String(value);
+
+    }
+
+
+    return date.toLocaleString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+// =====================================================
+// FORMAT MONEY
+// =====================================================
+
+function formatMoney(value){
+
+    const number =
+        Number(value) || 0;
+
+
+    return number.toLocaleString(
+        "en-IN",
+        {
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+
+// =====================================================
+// ESCAPE HTML
+// =====================================================
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+// =====================================================
+// ESCAPE ATTRIBUTE
+// =====================================================
+
+function escapeAttribute(value){
+
+    return escapeHTML(
+        value
+    );
+
+}
+
+
+// =====================================================
+// ERROR
+// =====================================================
+
+function showError(message){
+
+    loading.style.display =
+        "none";
+
+    ordersContainer.style.display =
+        "block";
+
+
+    ordersContainer.innerHTML = `
+
+        <div class="error-box">
+
+            ${escapeHTML(message)}
+
+        </div>
+
+    `;
+
+}
 
 </script>
-
 
 </body>
 
 </html>
+
