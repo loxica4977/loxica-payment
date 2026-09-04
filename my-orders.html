@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -147,7 +148,7 @@ body{
 }
 
 /* =========================
-   PRODUCT IMAGE
+   PRODUCT IMAGE BOX
 ========================= */
 
 .product-image-box{
@@ -168,13 +169,6 @@ body{
     height:100%;
     object-fit:contain;
     display:block;
-}
-
-.no-image{
-    font-size:11px;
-    color:#999;
-    text-align:center;
-    padding:8px;
 }
 
 /* =========================
@@ -234,6 +228,16 @@ body{
 .status.cancelled{
     background:#fde2e2;
     color:#b42318;
+}
+
+.status.shipped{
+    background:#e5f0ff;
+    color:#1457a6;
+}
+
+.status.delivered{
+    background:#e8f7df;
+    color:#287a16;
 }
 
 /* =========================
@@ -526,13 +530,18 @@ body{
         My Orders
     </h1>
 
-    <div id="loading" class="loading">
+
+    <div
+        id="loading"
+        class="loading"
+    >
 
         <div class="spinner"></div>
 
         Loading your orders...
 
     </div>
+
 
     <div
         id="ordersContainer"
@@ -629,6 +638,7 @@ async function loadOrders(){
 
         let data;
 
+
         try{
 
             data =
@@ -666,14 +676,16 @@ async function loadOrders(){
 
 
         const orders =
-            Array.isArray(data.orders)
+            Array.isArray(
+                data.orders
+            )
                 ? data.orders
                 : [];
 
 
-        // =========================
-        // NEWEST FIRST
-        // =========================
+        // =================================================
+        // NEWEST ORDER FIRST
+        // =================================================
 
         orders.sort(function(a,b){
 
@@ -759,9 +771,9 @@ function renderOrders(orders){
         }).join("");
 
 
-    // =========================
+    // =================================================
     // EXPAND / COLLAPSE
-    // =========================
+    // =================================================
 
     document
         .querySelectorAll(
@@ -798,7 +810,7 @@ function renderOrders(orders){
                         });
 
 
-                    // Toggle current
+                    // Open / close selected order
 
                     card.classList.toggle(
                         "open"
@@ -909,11 +921,10 @@ function createOrderCard(
 
 
     /*
-       Tracking ID ഉണ്ടെങ്കിൽ മാത്രം
-       Tracking box കാണിക്കും.
+       T COLUMN = TRACKING ID
 
-       Sheet-ലെ T column:
-       Tracking ID
+       Tracking ID ഇല്ലെങ്കിൽ
+       box കാണിക്കില്ല.
     */
 
     if(rawTrackingId){
@@ -934,12 +945,14 @@ function createOrderCard(
 
                 </div>
 
+
                 <div class="tracking-id">
                     ${trackingId}
                 </div>
 
+
                 <div class="tracking-note">
-                    Your tracking ID has been added by LOXICA.
+                    Tracking ID added by LOXICA
                 </div>
 
             </div>
@@ -950,17 +963,31 @@ function createOrderCard(
 
 
     // =================================================
-    // IMAGE
+    // PRODUCT IMAGE
     // =================================================
 
     const imageUrl =
-        order.image ||
-        order.productImage ||
-        "";
+        String(
+            order.image ||
+            order.productImage ||
+            ""
+        ).trim();
 
 
     let imageHTML = "";
 
+
+    /*
+       IMPORTANT:
+
+       Image available:
+       → Show image
+
+       Image not available:
+       → Completely blank box
+
+       NO "Product Image" TEXT
+    */
 
     if(imageUrl){
 
@@ -970,33 +997,20 @@ function createOrderCard(
                 src="${escapeAttribute(imageUrl)}"
                 class="product-image"
                 alt="${product}"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                onerror="this.style.display='none';"
             >
-
-            <div
-                class="no-image"
-                style="display:none;"
-            >
-                Product Image
-            </div>
 
         `;
 
     }else{
 
-        imageHTML = `
-
-            <div class="no-image">
-                Product Image
-            </div>
-
-        `;
+        imageHTML = "";
 
     }
 
 
     // =================================================
-    // COMPLETE CARD
+    // RETURN CARD
     // =================================================
 
     return `
@@ -1006,12 +1020,15 @@ function createOrderCard(
             data-index="${index}"
         >
 
-            <!-- SUMMARY -->
+
+            <!-- =========================
+                 ORDER SUMMARY
+            ========================= -->
 
             <div class="order-summary">
 
 
-                <!-- PRODUCT PHOTO -->
+                <!-- PRODUCT IMAGE -->
 
                 <div class="product-image-box">
 
@@ -1020,7 +1037,7 @@ function createOrderCard(
                 </div>
 
 
-                <!-- PRODUCT INFO -->
+                <!-- PRODUCT INFORMATION -->
 
                 <div class="summary-content">
 
@@ -1047,7 +1064,7 @@ function createOrderCard(
                 </div>
 
 
-                <!-- ARROW -->
+                <!-- EXPAND ARROW -->
 
                 <div class="expand-icon">
                     ↓
@@ -1057,9 +1074,12 @@ function createOrderCard(
             </div>
 
 
-            <!-- DETAILS -->
+            <!-- =========================
+                 ORDER DETAILS
+            ========================= -->
 
             <div class="order-details">
+
 
                 <div class="details-title">
                     Order Details
@@ -1084,7 +1104,7 @@ function createOrderCard(
                     </div>
 
 
-                    <!-- DATE -->
+                    <!-- ORDER DATE -->
 
                     <div class="detail-box">
 
@@ -1162,16 +1182,16 @@ function createOrderCard(
                 </div>
 
 
-                <!-- =================================
+                <!-- =========================
                      TRACKING INFORMATION
-                ================================== -->
+                ========================= -->
 
                 ${trackingHTML}
 
 
-                <!-- =================================
+                <!-- =========================
                      TOTAL
-                ================================== -->
+                ========================= -->
 
                 <div class="total-box">
 
@@ -1210,6 +1230,16 @@ function getStatusClass(status){
 
     if(value === "paid"){
         return "paid";
+    }
+
+
+    if(value === "shipped"){
+        return "shipped";
+    }
+
+
+    if(value === "delivered"){
+        return "delivered";
     }
 
 
@@ -1362,3 +1392,14 @@ function showError(message){
 </body>
 
 </html>
+```
+
+**ഇപ്പോൾ result:**
+
+* Image URL ഉണ്ടെങ്കിൽ → product photo കാണിക്കും.
+* Image URL ഇല്ലെങ്കിൽ → **blank image box**, “Product Image” text ഇല്ല.
+* Sheet **T column**-ൽ Tracking ID add ചെയ്താൽ → order തുറക്കുമ്പോൾ **🚚 Tracking Information** കാണിക്കും.
+* Tracking ID ഇല്ലെങ്കിൽ → tracking box കാണിക്കില്ല.
+* Multiple orders ഉണ്ടെങ്കിൽ ഓരോ order-വും individually expand/collapse ചെയ്യാം.
+
+**ഇനി GitHub-ൽ commit ചെയ്ത ശേഷം next step:** Product image യഥാർത്ഥത്തിൽ My Orders-ൽ വരാൻ `index.html + Apps Script`-ൽ image save ചെയ്യണം.
