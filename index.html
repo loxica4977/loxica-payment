@@ -1023,21 +1023,27 @@ const product =
     "LOXICA Product";
 
 
-/* OFFER PRICE */
+/* ==================================================
+   OFFER PRICE
+================================================== */
 
 const price =
     params.get("price") ||
     "0";
 
 
-/* ORIGINAL PRICE */
+/* ==================================================
+   ORIGINAL PRICE
+================================================== */
 
 const originalPrice =
     params.get("originalPrice") ||
     price;
 
 
-/* CHECKOUT SESSION */
+/* ==================================================
+   CHECKOUT SESSION
+================================================== */
 
 const checkoutSession =
     params.get("session") ||
@@ -1046,6 +1052,8 @@ const checkoutSession =
 
 /* ==================================================
    MEMBER ID
+   IMPORTANT:
+   ONLY WIX MEMBER ID IS USED
 ================================================== */
 
 let memberId =
@@ -1242,7 +1250,9 @@ function updateColorDisplay(colorValue){
 }
 
 
-/* INITIAL COLOR */
+/* ==================================================
+   INITIAL COLOR
+================================================== */
 
 updateColorDisplay(
     selectedColorFromURL
@@ -1337,6 +1347,11 @@ function restoreCheckout(){
     resetContinueButton();
 
 
+    /*
+     * If there is no session,
+     * start with empty form.
+     */
+
     if(!storageKey){
 
         clearCheckoutForm();
@@ -1356,6 +1371,10 @@ function restoreCheckout(){
 
         clearCheckoutForm();
 
+        /*
+         * URL memberId remains active.
+         */
+
         return;
 
     }
@@ -1369,11 +1388,19 @@ function restoreCheckout(){
             );
 
 
+        /* ==========================================
+           RESTORE NAME
+        ========================================== */
+
         document.getElementById(
             "name"
         ).value =
             data.name || "";
 
+
+        /* ==========================================
+           RESTORE PHONE
+        ========================================== */
 
         document.getElementById(
             "phone"
@@ -1385,11 +1412,19 @@ function restoreCheckout(){
             );
 
 
+        /* ==========================================
+           RESTORE ADDRESS
+        ========================================== */
+
         document.getElementById(
             "address"
         ).value =
             data.address || "";
 
+
+        /* ==========================================
+           RESTORE LANDMARK
+        ========================================== */
 
         document.getElementById(
             "landmark"
@@ -1397,11 +1432,19 @@ function restoreCheckout(){
             data.landmark || "";
 
 
+        /* ==========================================
+           RESTORE CITY
+        ========================================== */
+
         document.getElementById(
             "city"
         ).value =
             data.city || "";
 
+
+        /* ==========================================
+           RESTORE STATE
+        ========================================== */
 
         document.getElementById(
             "state"
@@ -1409,16 +1452,24 @@ function restoreCheckout(){
             data.state || "Kerala";
 
 
+        /* ==========================================
+           RESTORE PINCODE
+        ========================================== */
+
         document.getElementById(
             "pincode"
         ).value =
             data.pincode || "";
 
 
+        /* ==========================================
+           RESTORE MEMBER ID
+        ========================================== */
+
         /*
-         * MEMBER ID
-         *
          * URL memberId has priority.
+         * If URL doesn't contain it,
+         * use the saved memberId.
          */
 
         if(
@@ -1434,9 +1485,9 @@ function restoreCheckout(){
         }
 
 
-        /*
-         * COLOR
-         */
+        /* ==========================================
+           RESTORE COLOR
+        ========================================== */
 
         const savedColor =
             selectedColorFromURL ||
@@ -1448,6 +1499,11 @@ function restoreCheckout(){
             savedColor
         );
 
+
+        console.log(
+            "RESTORED MEMBER ID:",
+            memberId
+        );
 
     }
     catch(error){
@@ -1540,6 +1596,67 @@ document.getElementById(
 
 
         /* ==========================================
+           REQUIRED FIELD CHECK
+        ========================================== */
+
+        const nameValue =
+            document.getElementById(
+                "name"
+            )
+            .value
+            .trim();
+
+
+        const addressValue =
+            document.getElementById(
+                "address"
+            )
+            .value
+            .trim();
+
+
+        const landmarkValue =
+            document.getElementById(
+                "landmark"
+            )
+            .value
+            .trim();
+
+
+        const cityValue =
+            document.getElementById(
+                "city"
+            )
+            .value
+            .trim();
+
+
+        const stateValue =
+            document.getElementById(
+                "state"
+            )
+            .value
+            .trim();
+
+
+        if(
+            !nameValue ||
+            !addressValue ||
+            !landmarkValue ||
+            !cityValue ||
+            !stateValue
+        ){
+
+            alert(
+                "Please fill in all delivery details."
+            );
+
+            return;
+
+        }
+
+
+        /* ==========================================
            PHONE VALIDATION
         ========================================== */
 
@@ -1618,6 +1735,11 @@ document.getElementById(
             selectedColorFromURL;
 
 
+        /*
+         * If URL doesn't contain color,
+         * restore it from session.
+         */
+
         if(
             !colorValue &&
             storageKey
@@ -1642,7 +1764,9 @@ document.getElementById(
                     if(oldData.color){
 
                         colorValue =
-                            oldData.color.trim();
+                            String(
+                                oldData.color
+                            ).trim();
 
                     }
 
@@ -1670,7 +1794,7 @@ document.getElementById(
 
 
         /* ==========================================
-           CURRENT DATA
+           CURRENT ORDER DATA
         ========================================== */
 
         const currentData = {
@@ -1688,11 +1812,7 @@ document.getElementById(
 
 
             name:
-                document.getElementById(
-                    "name"
-                )
-                .value
-                .trim(),
+                nameValue,
 
 
             phone:
@@ -1701,35 +1821,19 @@ document.getElementById(
 
 
             address:
-                document.getElementById(
-                    "address"
-                )
-                .value
-                .trim(),
+                addressValue,
 
 
             landmark:
-                document.getElementById(
-                    "landmark"
-                )
-                .value
-                .trim(),
+                landmarkValue,
 
 
             city:
-                document.getElementById(
-                    "city"
-                )
-                .value
-                .trim(),
+                cityValue,
 
 
             state:
-                document.getElementById(
-                    "state"
-                )
-                .value
-                .trim(),
+                stateValue,
 
 
             pincode:
@@ -1740,9 +1844,11 @@ document.getElementById(
                 colorValue,
 
 
-            /* ======================================
-               WIX MEMBER ID
-            ====================================== */
+            /*
+             * IMPORTANT:
+             * This is the only customer
+             * account identifier.
+             */
 
             memberId:
                 String(
@@ -1781,7 +1887,9 @@ document.getElementById(
                     if(oldData.orderId){
 
                         savedOrderId =
-                            oldData.orderId;
+                            String(
+                                oldData.orderId
+                            ).trim();
 
                     }
 
@@ -1847,6 +1955,10 @@ document.getElementById(
             '<span class="spinner"></span>Processing...';
 
 
+        /* ==========================================
+           DEBUG
+        ========================================== */
+
         console.log(
             "======================================"
         );
@@ -1865,6 +1977,12 @@ document.getElementById(
         console.log(
             "MEMBER ID:",
             currentData.memberId
+        );
+
+
+        console.log(
+            "ORDER ID:",
+            currentData.orderId || "NEW ORDER"
         );
 
 
@@ -1921,8 +2039,10 @@ document.getElementById(
                 ){
 
                     throw new Error(
-                        result.error ||
-                        "Order could not be saved"
+                        result &&
+                        result.error
+                            ? result.error
+                            : "Order could not be saved"
                     );
 
                 }
@@ -1954,7 +2074,9 @@ document.getElementById(
 
 
                 currentData.memberId =
-                    memberId;
+                    String(
+                        memberId
+                    ).trim();
 
 
                 if(storageKey){
@@ -2004,7 +2126,9 @@ document.getElementById(
                     );
 
 
-                /* SESSION */
+                /* ==================================
+                   SESSION
+                ================================== */
 
                 if(checkoutSession){
 
@@ -2017,7 +2141,9 @@ document.getElementById(
                 }
 
 
-                /* COLOR */
+                /* ==================================
+                   COLOR
+                ================================== */
 
                 if(
                     colorValue &&
