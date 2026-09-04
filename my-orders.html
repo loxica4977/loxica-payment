@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>LOXICA - My Orders</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f5f5f5;
+
+    color: #111;
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+
+    background: #050505;
+
+    height: 78px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 6%;
+
+}
+
+
+.logo {
+
+    color: white;
+
+    font-size: 30px;
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+}
+
+
+.logo span {
+
+    color: #b7ff00;
+
+}
+
+
+.back-btn {
+
+    text-decoration: none;
+
+    color: white;
+
+    border:
+        1px solid #333;
+
+    padding:
+        10px 18px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+
+}
+
+
+.back-btn:hover {
+
+    border-color: #b7ff00;
+
+    color: #b7ff00;
+
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container {
+
+    width: 92%;
+
+    max-width: 1100px;
+
+    margin:
+        35px auto 60px;
+
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.page-title {
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    margin-bottom: 8px;
+
+}
+
+
+.subtitle {
+
+    color: #666;
+
+    font-size: 15px;
+
+    margin-bottom: 28px;
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+
+    text-align: center;
+
+    padding: 70px 20px;
+
+    color: #555;
+
+}
+
+
+.loader {
+
+    width: 42px;
+
+    height: 42px;
+
+    border:
+        4px solid #ddd;
+
+    border-top-color: #111;
+
+    border-radius: 50%;
+
+    animation:
+        spin 0.8s linear infinite;
+
+    margin:
+        0 auto 18px;
+
+}
+
+
+@keyframes spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error-box {
+
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 25px
+        rgba(0,0,0,0.06);
+
+}
+
+
+.error-title {
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+
+.error-text {
+
+    color: #666;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================
+   EMPTY ORDERS
+========================= */
+
+.empty-box {
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 70px 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 25px
+        rgba(0,0,0,0.06);
+
+}
+
+
+.empty-icon {
+
+    font-size: 55px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.empty-title {
+
+    font-size: 23px;
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+
+}
+
+
+.empty-text {
+
+    color: #666;
+
+    font-size: 14px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.shop-btn {
+
+    display: inline-block;
+
+    background: #111;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding:
+        13px 25px;
+
+    border-radius: 8px;
+
+    font-weight: 700;
+
+    transition: 0.2s;
+
+}
+
+
+.shop-btn:hover {
+
+    background: #b7ff00;
+
+    color: #111;
+
+}
+
+
+/* =========================
+   ORDER CARD
+========================= */
+
+.order-card {
+
+    background: white;
+
+    border-radius: 16px;
+
+    margin-bottom: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 25px
+        rgba(0,0,0,0.07);
+
+}
+
+
+/* =========================
+   ORDER HEADER
+========================= */
+
+.order-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding:
+        18px 22px;
+
+    background: #fafafa;
+
+    border-bottom:
+        1px solid #eee;
+
+}
+
+
+.order-id {
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+}
+
+
+.order-date {
+
+    font-size: 13px;
+
+    color: #777;
+
+    margin-top: 5px;
+
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status {
+
+    display: inline-block;
+
+    padding:
+        7px 13px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+}
+
+
+.status-paid {
+
+    background: #e8ffd0;
+
+    color: #3c7100;
+
+}
+
+
+.status-pending {
+
+    background: #fff3cd;
+
+    color: #856404;
+
+}
+
+
+.status-processing {
+
+    background: #dceeff;
+
+    color: #145a9e;
+
+}
+
+
+.status-shipped {
+
+    background: #e8ddff;
+
+    color: #5d35a3;
+
+}
+
+
+.status-delivered {
+
+    background: #d9fbe5;
+
+    color: #14733a;
+
+}
+
+
+.status-cancelled {
+
+    background: #ffe0e0;
+
+    color: #a30000;
+
+}
+
+
+/* =========================
+   ORDER CONTENT
+========================= */
+
+.order-content {
+
+    padding: 22px;
+
+}
+
+
+.product-name {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    margin-bottom: 18px;
+
+}
+
+
+/* =========================
+   DETAILS GRID
+========================= */
+
+.details-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+}
+
+
+.detail {
+
+    background: #f8f8f8;
+
+    border-radius: 10px;
+
+    padding: 13px 15px;
+
+}
+
+
+.detail-label {
+
+    font-size: 11px;
+
+    color: #777;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.detail-value {
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================
+   TOTAL
+========================= */
+
+.total-box {
+
+    margin-top: 18px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid #eee;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.total-label {
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+}
+
+
+.total-price {
+
+    font-size: 24px;
+
+    font-weight: 900;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+
+    text-align: center;
+
+    padding:
+        25px;
+
+    color: #888;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .header {
+
+        height: 68px;
+
+        padding:
+            0 5%;
+
+    }
+
+
+    .logo {
+
+        font-size: 24px;
+
+    }
+
+
+    .back-btn {
+
+        padding:
+            8px 12px;
+
+        font-size: 12px;
+
+    }
+
+
+    .container {
+
+        width: 94%;
+
+        margin-top: 25px;
+
+    }
+
+
+    .page-title {
+
+        font-size: 27px;
+
+    }
+
+
+    .details-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .order-header {
+
+        align-items: flex-start;
+
+        gap: 12px;
+
+        flex-direction: column;
+
+    }
+
+
+    .status {
+
+        align-self: flex-start;
+
+    }
+
+
+    .order-content {
+
+        padding: 18px;
+
+    }
+
+
+    .product-name {
+
+        font-size: 18px;
+
+    }
+
+
+    .total-price {
+
+        font-size: 21px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+    <div class="logo">
+        LOXI<span>CA</span>
+    </div>
+
+    <a
+        href="https://loxicos.com"
+        class="back-btn"
+    >
+        ← Back to Store
+    </a>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+    <h1 class="page-title">
+        My Orders
+    </h1>
+
+    <p class="subtitle">
+        View your order history and check the status of your orders.
+    </p>
+
+
+    <!-- LOADING -->
+
+    <div
+        id="loading"
+        class="loading"
+    >
+
+        <div class="loader"></div>
+
+        <p>
+            Loading your orders...
+        </p>
+
+    </div>
+
+
+    <!-- ERROR -->
+
+    <div
+        id="errorBox"
+        class="error-box"
+        style="display:none;"
+    >
+
+        <div class="error-title">
+            Unable to load orders
+        </div>
+
+        <div
+            id="errorText"
+            class="error-text"
+        >
+            Something went wrong.
+        </div>
+
+    </div>
+
+
+    <!-- EMPTY -->
+
+    <div
+        id="emptyBox"
+        class="empty-box"
+        style="display:none;"
+    >
+
+        <div class="empty-icon">
+            🛍️
+        </div>
+
+        <div class="empty-title">
+            No orders yet
+        </div>
+
+        <div class="empty-text">
+            You haven't placed any orders yet.
+        </div>
+
+        <a
+            href="https://loxicos.com"
+            class="shop-btn"
+        >
+            Start Shopping
+        </a>
+
+    </div>
+
+
+    <!-- ORDERS -->
+
+    <div id="ordersContainer"></div>
+
+</main>
+
+
+<footer class="footer">
+
+    © 2026 LOXICA. All rights reserved.
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   APPS SCRIPT URL
+===================================================== */
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
+
+
+/* =====================================================
+   GET MEMBER ID
+===================================================== */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const memberId =
+    (
+        params.get("memberId") ||
+        ""
+    ).trim();
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const loading =
+    document.getElementById("loading");
+
+const errorBox =
+    document.getElementById("errorBox");
+
+const errorText =
+    document.getElementById("errorText");
+
+const emptyBox =
+    document.getElementById("emptyBox");
+
+const ordersContainer =
+    document.getElementById("ordersContainer");
+
+
+/* =====================================================
+   FORMAT PRICE
+===================================================== */
+
+function formatPrice(value) {
+
+    const number =
+        Number(value) || 0;
+
+    return "₹" +
+        number.toLocaleString("en-IN", {
+            maximumFractionDigits: 2
+        });
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(value) {
+
+    if (!value) {
+        return "-";
+    }
+
+    const date =
+        new Date(value);
+
+    if (isNaN(date.getTime())) {
+        return String(value);
+    }
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   STATUS CLASS
+===================================================== */
+
+function getStatusClass(status) {
+
+    const value =
+        String(status || "")
+            .trim()
+            .toLowerCase();
+
+    if (value === "paid") {
+        return "status-paid";
+    }
+
+    if (value === "pending") {
+        return "status-pending";
+    }
+
+    if (value === "processing") {
+        return "status-processing";
+    }
+
+    if (value === "shipped") {
+        return "status-shipped";
+    }
+
+    if (value === "delivered") {
+        return "status-delivered";
+    }
+
+    if (value === "cancelled") {
+        return "status-cancelled";
+    }
+
+    return "status-pending";
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   CREATE ORDER CARD
+===================================================== */
+
+function createOrderCard(order) {
+
+    const orderId =
+        order.orderId || "-";
+
+    const date =
+        order.date || "";
+
+    const product =
+        order.product || "LOXICA Product";
+
+    const price =
+        Number(order.price) || 0;
+
+    const quantity =
+        Math.max(
+            1,
+            Number(order.quantity) || 1
+        );
+
+    let totalPrice =
+        Number(order.totalPrice);
+
+    if (!totalPrice) {
+
+        totalPrice =
+            price * quantity;
+
+    }
+
+    const color =
+        order.color &&
+        order.color !== "-"
+            ? order.color
+            : "";
+
+    const status =
+        order.status || "Pending";
+
+
+    const card =
+        document.createElement("div");
+
+    card.className =
+        "order-card";
+
+
+    card.innerHTML = `
+
+        <div class="order-header">
+
+            <div>
+
+                <div class="order-id">
+                    Order ID: ${escapeHTML(orderId)}
+                </div>
+
+                <div class="order-date">
+                    ${formatDate(date)}
+                </div>
+
+            </div>
+
+
+            <div
+                class="status ${getStatusClass(status)}"
+            >
+                ${escapeHTML(status)}
+            </div>
+
+        </div>
+
+
+        <div class="order-content">
+
+            <div class="product-name">
+                ${escapeHTML(product)}
+            </div>
+
+
+            <div class="details-grid">
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Price
+                    </div>
+
+                    <div class="detail-value">
+                        ${formatPrice(price)}
+                    </div>
+
+                </div>
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Quantity
+                    </div>
+
+                    <div class="detail-value">
+                        ${quantity}
+                    </div>
+
+                </div>
+
+
+                ${
+                    color
+                    ? `
+                    <div class="detail">
+
+                        <div class="detail-label">
+                            Color
+                        </div>
+
+                        <div class="detail-value">
+                            ${escapeHTML(color)}
+                        </div>
+
+                    </div>
+                    `
+                    : ""
+                }
+
+
+                <div class="detail">
+
+                    <div class="detail-label">
+                        Order Status
+                    </div>
+
+                    <div class="detail-value">
+                        ${escapeHTML(status)}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="total-box">
+
+                <div class="total-label">
+                    Total Price
+                </div>
+
+                <div class="total-price">
+                    ${formatPrice(totalPrice)}
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* =====================================================
+   LOAD ORDERS
+===================================================== */
+
+async function loadOrders() {
+
+    try {
+
+        /* =========================
+           MEMBER ID CHECK
+        ========================= */
+
+        if (!memberId) {
+
+            throw new Error(
+                "Member ID is missing. Please login first."
+            );
+
+        }
+
+
+        /* =========================
+           API URL
+        ========================= */
+
+        const requestURL =
+            API_URL +
+            "?action=getOrders" +
+            "&memberId=" +
+            encodeURIComponent(memberId);
+
+
+        console.log(
+            "Loading orders for member:",
+            memberId
+        );
+
+
+        /* =========================
+           FETCH
+        ========================= */
+
+        const response =
+            await fetch(
+                requestURL,
+                {
+                    method: "GET",
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server error: " +
+                response.status
+            );
+
+        }
+
+
+        /* =========================
+           JSON
+        ========================= */
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Orders API response:",
+            data
+        );
+
+
+        if (!data.success) {
+
+            throw new Error(
+                data.error ||
+                "Could not load orders."
+            );
+
+        }
+
+
+        /* =========================
+           HIDE LOADING
+        ========================= */
+
+        loading.style.display =
+            "none";
+
+
+        /* =========================
+           ORDERS
+        ========================= */
+
+        const orders =
+            Array.isArray(data.orders)
+                ? data.orders
+                : [];
+
+
+        if (orders.length === 0) {
+
+            emptyBox.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        /* =========================
+           SORT NEWEST FIRST
+        ========================= */
+
+        orders.sort(
+            function(a, b) {
+
+                const dateA =
+                    new Date(a.date).getTime() || 0;
+
+                const dateB =
+                    new Date(b.date).getTime() || 0;
+
+                return dateB - dateA;
+
+            }
+        );
+
+
+        /* =========================
+           DISPLAY ORDERS
+        ========================= */
+
+        orders.forEach(
+            function(order) {
+
+                const card =
+                    createOrderCard(order);
+
+                ordersContainer.appendChild(card);
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "MY ORDERS ERROR:",
+            error
+        );
+
+
+        loading.style.display =
+            "none";
+
+
+        errorBox.style.display =
+            "block";
+
+
+        errorText.textContent =
+            error.message ||
+            "Unable to load your orders.";
+
+    }
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadOrders();
+
+</script>
+
+
+</body>
+
+</html>
