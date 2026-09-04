@@ -1,5 +1,5 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -138,7 +138,8 @@ label{
 }
 
 input,
-textarea{
+textarea,
+select{
     width:100%;
     padding:12px;
     border:1px solid #a6a6a6;
@@ -150,7 +151,8 @@ textarea{
 }
 
 input:focus,
-textarea:focus{
+textarea:focus,
+select:focus{
     border:2px solid #111;
 }
 
@@ -191,7 +193,48 @@ textarea{
 
 
 /* ==================================================
-   READ ONLY COLOR
+   QUANTITY
+================================================== */
+
+.quantity-box{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width:135px;
+    height:45px;
+    border:1px solid #a6a6a6;
+    border-radius:4px;
+    overflow:hidden;
+    background:#fff;
+    margin-bottom:14px;
+}
+
+.quantity-btn{
+    width:42px;
+    height:45px;
+    border:none;
+    background:#f3f3f3;
+    font-size:22px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.quantity-btn:hover{
+    background:#e5e5e5;
+}
+
+.quantity-value{
+    width:50px;
+    text-align:center;
+    font-size:17px;
+    font-weight:bold;
+}
+
+
+/* ==================================================
+   COLOR
 ================================================== */
 
 .color-box{
@@ -511,7 +554,6 @@ textarea{
 
 <body>
 
-
 <header class="header">
 
 <div class="logo">
@@ -523,7 +565,6 @@ textarea{
 
 <main class="main">
 
-
 <div class="checkout-title">
     Checkout
 </div>
@@ -532,354 +573,423 @@ textarea{
 <div class="checkout-grid">
 
 
-    <!-- ==================================================
-         LEFT SIDE
-    ================================================== -->
+<div class="details-card">
 
-    <div class="details-card">
 
+<!-- PRODUCT DETAILS -->
 
-        <!-- PRODUCT DETAILS -->
+<div class="card">
 
-        <div class="card">
+<div class="card-title">
 
-            <div class="card-title">
+<div class="number">
+1
+</div>
 
-                <div class="number">
-                    1
-                </div>
+Product Details
 
-                Product Details
+</div>
 
-            </div>
 
+<div class="product-box">
 
-            <div class="product-box">
+<div
+class="product-name"
+id="product">
+Product
+</div>
 
-                <div
-                    class="product-name"
-                    id="product">
-                    Product
-                </div>
 
+<div
+class="product-price"
+id="price">
+₹0
+</div>
 
-                <div
-                    class="product-price"
-                    id="price">
-                    ₹0
-                </div>
+</div>
 
-            </div>
 
-        </div>
+<!-- QUANTITY -->
 
+<label>
+Quantity
+</label>
 
+<div class="quantity-box">
 
-        <!-- DELIVERY DETAILS -->
+<button
+type="button"
+class="quantity-btn"
+id="minusBtn">
+−
+</button>
 
-        <div class="card">
+<div
+class="quantity-value"
+id="quantityValue">
+1
+</div>
 
-            <div class="card-title">
+<button
+type="button"
+class="quantity-btn"
+id="plusBtn">
++
+</button>
 
-                <div class="number">
-                    2
-                </div>
+</div>
 
-                Delivery Address
+</div>
 
-            </div>
 
 
-            <form id="orderForm">
+<!-- DELIVERY DETAILS -->
 
+<div class="card">
 
-                <label>
-                    Full Name
-                </label>
+<div class="card-title">
 
-                <input
-                    id="name"
-                    placeholder="Enter your full name"
-                    autocomplete="name"
-                    required>
+<div class="number">
+2
+</div>
 
+Delivery Address
 
+</div>
 
-                <label>
-                    Mobile Number
-                </label>
 
+<form id="orderForm">
 
-                <div class="phone-group">
 
-                    <div class="phone-code">
-                        +91
-                    </div>
+<label>
+Full Name
+</label>
 
+<input
+id="name"
+placeholder="Enter your full name"
+autocomplete="name"
+required>
 
-                    <input
-                        id="phone"
-                        type="tel"
-                        placeholder="10-digit mobile number"
-                        maxlength="10"
-                        inputmode="numeric"
-                        pattern="[0-9]{10}"
-                        autocomplete="tel"
-                        required>
 
-                </div>
 
+<label>
+Mobile Number
+</label>
 
 
-                <label>
-                    Full Address
-                </label>
+<div class="phone-group">
 
+<div class="phone-code">
++91
+</div>
 
-                <textarea
-                    id="address"
-                    placeholder="House / Building / Street / Area"
-                    autocomplete="street-address"
-                    required></textarea>
+<input
+id="phone"
+type="tel"
+placeholder="10-digit mobile number"
+maxlength="10"
+inputmode="numeric"
+pattern="[0-9]{10}"
+autocomplete="tel"
+required>
+
+</div>
+
 
 
+<label>
+Full Address
+</label>
 
-                <label>
-                    Landmark
-                </label>
+<textarea
+id="address"
+placeholder="House / Building / Street / Area"
+autocomplete="street-address"
+required></textarea>
 
 
-                <input
-                    id="landmark"
-                    placeholder="Nearby landmark"
-                    required>
 
+<label>
+Landmark
+</label>
 
+<input
+id="landmark"
+placeholder="Nearby landmark"
+required>
 
-                <div class="two-column">
 
 
-                    <div>
+<div class="two-column">
 
-                        <label>
-                            City
-                        </label>
 
-                        <input
-                            id="city"
-                            placeholder="City"
-                            autocomplete="address-level2"
-                            required>
+<div>
 
-                    </div>
+<label>
+City
+</label>
 
+<input
+id="city"
+placeholder="City"
+autocomplete="address-level2"
+required>
 
-                    <div>
+</div>
 
-                        <label>
-                            State
-                        </label>
 
-                        <input
-                            id="state"
-                            placeholder="State"
-                            value="Kerala"
-                            autocomplete="address-level1"
-                            required>
+<div>
 
-                    </div>
+<label>
+State
+</label>
 
+<select
+id="state"
+autocomplete="address-level1"
+required>
 
-                </div>
+<option value="">
+Select State
+</option>
 
+<option>Andhra Pradesh</option>
+<option>Arunachal Pradesh</option>
+<option>Assam</option>
+<option>Bihar</option>
+<option>Chhattisgarh</option>
+<option>Goa</option>
+<option>Gujarat</option>
+<option>Haryana</option>
+<option>Himachal Pradesh</option>
+<option>Jharkhand</option>
+<option>Karnataka</option>
+<option>Kerala</option>
+<option>Madhya Pradesh</option>
+<option>Maharashtra</option>
+<option>Manipur</option>
+<option>Meghalaya</option>
+<option>Mizoram</option>
+<option>Nagaland</option>
+<option>Odisha</option>
+<option>Punjab</option>
+<option>Rajasthan</option>
+<option>Sikkim</option>
+<option>Tamil Nadu</option>
+<option>Telangana</option>
+<option>Tripura</option>
+<option>Uttar Pradesh</option>
+<option>Uttarakhand</option>
+<option>West Bengal</option>
 
+<option>Andaman and Nicobar Islands</option>
+<option>Chandigarh</option>
+<option>Dadra and Nagar Haveli and Daman and Diu</option>
+<option>Delhi</option>
+<option>Jammu and Kashmir</option>
+<option>Ladakh</option>
+<option>Lakshadweep</option>
+<option>Puducherry</option>
 
-                <label>
-                    Pincode
-                </label>
+</select>
 
+</div>
 
-                <input
-                    id="pincode"
-                    type="tel"
-                    placeholder="6-digit pincode"
-                    maxlength="6"
-                    inputmode="numeric"
-                    pattern="[0-9]{6}"
-                    autocomplete="postal-code"
-                    required>
 
+</div>
 
 
-                <!-- ==================================================
-                     COLOR - READ ONLY
-                ================================================== -->
 
-                <div
-                    id="colorSection"
-                    class="color-box"
-                    style="display:none;">
+<label>
+Pincode
+</label>
 
-                    <label>
-                        Color
-                    </label>
+<input
+id="pincode"
+type="tel"
+placeholder="6-digit pincode"
+maxlength="6"
+inputmode="numeric"
+pattern="[0-9]{6}"
+autocomplete="postal-code"
+required>
 
 
-                    <div
-                        id="selectedColorDisplay"
-                        class="selected-color">
-                        -
-                    </div>
 
-                </div>
+<!-- COLOR -->
 
+<div
+id="colorSection"
+class="color-box"
+style="display:none;">
 
+<label>
+Color
+</label>
 
-                <button
-                    type="submit"
-                    class="continue-btn">
+<div
+id="selectedColorDisplay"
+class="selected-color">
+-
+</div>
 
-                    Continue To Payment 💳
+</div>
 
-                </button>
 
 
-            </form>
+<button
+type="submit"
+class="continue-btn">
 
+Continue To Payment 💳
 
-            <p class="note">
-                Your details are securely saved for this checkout.
-            </p>
+</button>
 
 
-        </div>
+</form>
 
-    </div>
 
+<p class="note">
+Your details are securely saved for this checkout.
+</p>
 
 
-    <!-- ==================================================
-         ORDER SUMMARY
-    ================================================== -->
+</div>
 
-    <aside class="summary">
+</div>
 
-        <h2>
-            Order Summary
-        </h2>
 
 
-        <!-- PRODUCT -->
+<!-- ORDER SUMMARY -->
 
-        <div class="summary-row">
+<aside class="summary">
 
-            <span>
-                Product
-            </span>
+<h2>
+Order Summary
+</h2>
 
 
-            <span
-                class="summary-product"
-                id="summaryProduct">
-                Product
-            </span>
+<div class="summary-row">
 
-        </div>
+<span>
+Product
+</span>
 
+<span
+class="summary-product"
+id="summaryProduct">
+Product
+</span>
 
+</div>
 
-        <!-- COLOR -->
 
-        <div
-            class="summary-row"
-            id="summaryColorRow"
-            style="display:none;">
 
-            <span>
-                Color
-            </span>
+<div
+class="summary-row"
+id="summaryColorRow"
+style="display:none;">
 
+<span>
+Color
+</span>
 
-            <span
-                class="summary-product"
-                id="summaryColor">
-                -
-            </span>
+<span
+class="summary-product"
+id="summaryColor">
+-
+</span>
 
-        </div>
+</div>
 
 
 
-        <!-- PRICE -->
+<!-- QUANTITY SUMMARY -->
 
-        <div class="summary-row">
+<div class="summary-row">
 
-            <span>
-                Price
-            </span>
+<span>
+Quantity
+</span>
 
+<span
+id="summaryQuantity">
+1
+</span>
 
-            <span
-                class="summary-price-box"
-                id="summaryPrice">
+</div>
 
-                <span
-                    class="summary-original-price"
-                    id="summaryOriginalPrice">
-                    ₹0
-                </span>
 
-                <span
-                    class="summary-offer-price"
-                    id="summaryOfferPrice">
-                    ₹0
-                </span>
 
-            </span>
+<!-- PRICE -->
 
-        </div>
+<div class="summary-row">
 
+<span>
+Price
+</span>
 
+<span
+class="summary-price-box"
+id="summaryPrice">
 
-        <!-- TOTAL -->
+<span
+class="summary-original-price"
+id="summaryOriginalPrice">
+₹0
+</span>
 
-        <div class="total">
+<span
+class="summary-offer-price"
+id="summaryOfferPrice">
+₹0
+</span>
 
-            <span>
-                Total
-            </span>
+</span>
 
+</div>
 
-            <span id="summaryTotal">
-                ₹0
-            </span>
 
-        </div>
 
+<!-- TOTAL -->
 
+<div class="total">
 
-        <div class="secure-box">
+<span>
+Total
+</span>
 
-            <i class="fa-solid fa-lock"></i>
+<span id="summaryTotal">
+₹0
+</span>
 
-            Secure checkout
+</div>
 
-            <br>
 
-            <i class="fa-solid fa-shield-halved"></i>
 
-            Your order details are protected.
+<div class="secure-box">
 
-            <br>
+<i class="fa-solid fa-lock"></i>
 
-            <i class="fa-solid fa-truck"></i>
+Secure checkout
 
-            Fast delivery across India.
+<br>
 
-        </div>
+<i class="fa-solid fa-shield-halved"></i>
 
+Your order details are protected.
 
-    </aside>
+<br>
+
+<i class="fa-solid fa-truck"></i>
+
+Fast delivery across India.
+
+</div>
+
+
+</aside>
 
 
 </div>
@@ -888,9 +998,7 @@ textarea{
 
 
 
-<!-- ==================================================
-     FOOTER
-================================================== -->
+<!-- FOOTER -->
 
 <footer class="footer">
 
@@ -898,75 +1006,75 @@ textarea{
 <div class="footer-features">
 
 
-    <div class="feature">
+<div class="feature">
 
-        <div class="feature-icon">
-            <i class="fa-solid fa-truck-fast"></i>
-        </div>
+<div class="feature-icon">
+<i class="fa-solid fa-truck-fast"></i>
+</div>
 
-        <h4>
-            FREE DELIVERY
-        </h4>
+<h4>
+FREE DELIVERY
+</h4>
 
-        <p>
-            Delivered safely to your doorstep.
-        </p>
+<p>
+Delivered safely to your doorstep.
+</p>
 
-    </div>
-
-
-
-    <div class="feature">
-
-        <div class="feature-icon">
-            <i class="fa-solid fa-shield-halved"></i>
-        </div>
-
-        <h4>
-            SECURE PAYMENT
-        </h4>
-
-        <p>
-            Safe & secure UPI payments.
-        </p>
-
-    </div>
+</div>
 
 
 
-    <div class="feature">
+<div class="feature">
 
-        <div class="feature-icon">
-            <i class="fa-solid fa-bolt"></i>
-        </div>
+<div class="feature-icon">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
 
-        <h4>
-            EXPRESS DELIVERY
-        </h4>
+<h4>
+SECURE PAYMENT
+</h4>
 
-        <p>
-            Fast dispatch and quick delivery.
-        </p>
+<p>
+Safe & secure UPI payments.
+</p>
 
-    </div>
+</div>
 
 
 
-    <div class="feature">
+<div class="feature">
 
-        <div class="feature-icon">
-            <i class="fa-solid fa-gem"></i>
-        </div>
+<div class="feature-icon">
+<i class="fa-solid fa-bolt"></i>
+</div>
 
-        <h4>
-            LATEST PRODUCTS
-        </h4>
+<h4>
+EXPRESS DELIVERY
+</h4>
 
-        <p>
-            Discover trending products and collections.
-        </p>
+<p>
+Fast dispatch and quick delivery.
+</p>
 
-    </div>
+</div>
+
+
+
+<div class="feature">
+
+<div class="feature-icon">
+<i class="fa-solid fa-gem"></i>
+</div>
+
+<h4>
+LATEST PRODUCTS
+</h4>
+
+<p>
+Discover trending products and collections.
+</p>
+
+</div>
 
 
 </div>
@@ -975,13 +1083,13 @@ textarea{
 
 <div class="footer-brand">
 
-    <h2>
-        LOXICA
-    </h2>
+<h2>
+LOXICA
+</h2>
 
-    <p>
-        Smart Products. Better Everyday Life.
-    </p>
+<p>
+Smart Products. Better Everyday Life.
+</p>
 
 </div>
 
@@ -989,7 +1097,7 @@ textarea{
 
 <div class="footer-bottom">
 
-    © 2026 LOXICA. All Rights Reserved.
+© 2026 LOXICA. All Rights Reserved.
 
 </div>
 
@@ -999,6 +1107,7 @@ textarea{
 
 
 <script>
+
 
 /* ==================================================
    GOOGLE APPS SCRIPT
@@ -1013,57 +1122,56 @@ const scriptURL =
 ================================================== */
 
 const params =
-    new URLSearchParams(
-        window.location.search
-    );
+new URLSearchParams(
+window.location.search
+);
 
 
 const product =
-    params.get("product") ||
-    "LOXICA Product";
+params.get("product") ||
+"LOXICA Product";
 
-
-/* ==================================================
-   OFFER PRICE
-================================================== */
 
 const price =
-    params.get("price") ||
-    "0";
+params.get("price") ||
+"0";
 
-
-/* ==================================================
-   ORIGINAL PRICE
-================================================== */
 
 const originalPrice =
-    params.get("originalPrice") ||
-    price;
+params.get("originalPrice") ||
+price;
 
-
-/* ==================================================
-   CHECKOUT SESSION
-================================================== */
 
 const checkoutSession =
-    params.get("session") ||
-    "";
+params.get("session") ||
+"";
 
-
-/* ==================================================
-   MEMBER ID
-================================================== */
 
 let memberId =
-    (params.get("memberId") || "").trim();
+(params.get("memberId") || "").trim();
+
+
+const selectedColorFromURL =
+(params.get("color") || "").trim();
 
 
 /* ==================================================
-   SELECTED COLOR
+   QUANTITY
 ================================================== */
 
-const selectedColorFromURL =
-    (params.get("color") || "").trim();
+let quantity =
+parseInt(
+params.get("quantity") || "1",
+10
+);
+
+
+if(
+isNaN(quantity) ||
+quantity < 1
+){
+quantity = 1;
+}
 
 
 /* ==================================================
@@ -1071,10 +1179,21 @@ const selectedColorFromURL =
 ================================================== */
 
 const storageKey =
-    checkoutSession
-        ? "loxicaCheckout_" +
-          checkoutSession
-        : null;
+checkoutSession
+? "loxicaCheckout_" +
+checkoutSession
+: null;
+
+
+/* ==================================================
+   PRICE NUMBERS
+================================================== */
+
+const unitPrice =
+Number(price) || 0;
+
+const unitOriginalPrice =
+Number(originalPrice) || unitPrice;
 
 
 /* ==================================================
@@ -1082,86 +1201,169 @@ const storageKey =
 ================================================== */
 
 document.getElementById(
-    "product"
+"product"
 ).innerText =
-    product;
+product;
 
 
 document.getElementById(
-    "summaryProduct"
+"summaryProduct"
 ).innerText =
-    product;
+product;
 
 
 /* ==================================================
-   DISPLAY PRICE
+   QUANTITY DISPLAY
 ================================================== */
 
+function updateQuantityDisplay(){
+
+document.getElementById(
+"quantityValue"
+).innerText =
+quantity;
+
+document.getElementById(
+"summaryQuantity"
+).innerText =
+quantity;
+
+}
+
+
+/* ==================================================
+   UPDATE PRICES
+================================================== */
+
+function updatePrices(){
+
+const totalPrice =
+unitPrice * quantity;
+
+const totalOriginalPrice =
+unitOriginalPrice * quantity;
+
+
+/* PRODUCT PRICE */
+
 const productPriceElement =
-    document.getElementById(
-        "price"
-    );
+document.getElementById(
+"price"
+);
 
 
 if(
-    originalPrice !== price &&
-    originalPrice !== "0"
+unitOriginalPrice !== unitPrice &&
+unitOriginalPrice > 0
 ){
 
-    productPriceElement.innerHTML =
+productPriceElement.innerHTML =
 
-        '<span class="original-price">₹' +
-        originalPrice +
-        '</span>' +
+'<span class="original-price">₹' +
+totalOriginalPrice +
+'</span>' +
 
-        '<span class="offer-price">₹' +
-        price +
-        '</span>';
+'<span class="offer-price">₹' +
+totalPrice +
+'</span>';
 
 }
 else{
 
-    productPriceElement.innerHTML =
-        '<span class="offer-price">₹' +
-        price +
-        '</span>';
+productPriceElement.innerHTML =
+
+'<span class="offer-price">₹' +
+totalPrice +
+'</span>';
+
+}
+
+
+/* SUMMARY ORIGINAL */
+
+document.getElementById(
+"summaryOriginalPrice"
+).innerText =
+"₹" + totalOriginalPrice;
+
+
+/* SUMMARY OFFER */
+
+document.getElementById(
+"summaryOfferPrice"
+).innerText =
+"₹" + totalPrice;
+
+
+/* TOTAL */
+
+document.getElementById(
+"summaryTotal"
+).innerText =
+"₹" + totalPrice;
+
+
+/* HIDE ORIGINAL IF SAME */
+
+if(
+unitOriginalPrice === unitPrice ||
+unitOriginalPrice === 0
+){
+
+document.getElementById(
+"summaryOriginalPrice"
+).style.display =
+"none";
+
+}
+else{
+
+document.getElementById(
+"summaryOriginalPrice"
+).style.display =
+"block";
+
+}
 
 }
 
 
 /* ==================================================
-   SUMMARY PRICE
+   QUANTITY BUTTONS
 ================================================== */
 
 document.getElementById(
-    "summaryOriginalPrice"
-).innerText =
-    "₹" + originalPrice;
+"minusBtn"
+).addEventListener(
+"click",
+function(){
 
+if(quantity > 1){
 
-document.getElementById(
-    "summaryOfferPrice"
-).innerText =
-    "₹" + price;
+quantity--;
 
-
-document.getElementById(
-    "summaryTotal"
-).innerText =
-    "₹" + price;
-
-
-if(
-    originalPrice === price ||
-    originalPrice === "0"
-){
-
-    document.getElementById(
-        "summaryOriginalPrice"
-    ).style.display =
-        "none";
+updateQuantityDisplay();
+updatePrices();
+autoSaveCheckoutDetails();
 
 }
+
+});
+
+
+document.getElementById(
+"plusBtn"
+).addEventListener(
+"click",
+function(){
+
+quantity++;
+
+updateQuantityDisplay();
+updatePrices();
+autoSaveCheckoutDetails();
+
+});
 
 
 /* ==================================================
@@ -1170,90 +1372,86 @@ if(
 
 function updateColorDisplay(colorValue){
 
-    const color =
-        (colorValue || "").trim();
+const color =
+(colorValue || "").trim();
 
 
-    const colorSection =
-        document.getElementById(
-            "colorSection"
-        );
+const colorSection =
+document.getElementById(
+"colorSection"
+);
 
 
-    const colorDisplay =
-        document.getElementById(
-            "selectedColorDisplay"
-        );
+const colorDisplay =
+document.getElementById(
+"selectedColorDisplay"
+);
 
 
-    const summaryColorRow =
-        document.getElementById(
-            "summaryColorRow"
-        );
+const summaryColorRow =
+document.getElementById(
+"summaryColorRow"
+);
 
 
-    const summaryColor =
-        document.getElementById(
-            "summaryColor"
-        );
+const summaryColor =
+document.getElementById(
+"summaryColor"
+);
 
 
-    if(color){
+if(color){
 
-        colorSection.style.display =
-            "block";
+colorSection.style.display =
+"block";
 
+colorDisplay.innerText =
+color;
 
-        colorDisplay.innerText =
-            color;
+colorDisplay.classList.remove(
+"empty"
+);
 
+summaryColorRow.style.display =
+"flex";
 
-        colorDisplay.classList.remove(
-            "empty"
-        );
+summaryColor.innerText =
+color;
 
+}
+else{
 
-        summaryColorRow.style.display =
-            "flex";
+colorSection.style.display =
+"none";
 
+summaryColorRow.style.display =
+"none";
 
-        summaryColor.innerText =
-            color;
+colorDisplay.innerText =
+"-";
 
-    }
-    else{
+colorDisplay.classList.add(
+"empty"
+);
 
-        colorSection.style.display =
-            "none";
+summaryColor.innerText =
+"-";
 
-
-        summaryColorRow.style.display =
-            "none";
-
-
-        colorDisplay.innerText =
-            "-";
-
-
-        colorDisplay.classList.add(
-            "empty"
-        );
-
-
-        summaryColor.innerText =
-            "-";
-
-    }
+}
 
 }
 
 
 /* ==================================================
-   INITIAL COLOR
+   INITIAL DISPLAY
 ================================================== */
 
+updateQuantityDisplay();
+
+updatePrices();
+
 updateColorDisplay(
-    selectedColorFromURL
+selectedColorFromURL
 );
 
 
@@ -1263,27 +1461,23 @@ updateColorDisplay(
 
 function resetContinueButton(){
 
-    const submitBtn =
-        document.querySelector(
-            ".continue-btn"
-        );
+const submitBtn =
+document.querySelector(
+".continue-btn"
+);
 
+if(!submitBtn){
+return;
+}
 
-    if(!submitBtn){
-        return;
-    }
+submitBtn.disabled =
+false;
 
+submitBtn.style.background =
+"#111";
 
-    submitBtn.disabled =
-        false;
-
-
-    submitBtn.style.background =
-        "#111";
-
-
-    submitBtn.innerHTML =
-        "Continue To Payment 💳";
+submitBtn.innerHTML =
+"Continue To Payment 💳";
 
 }
 
@@ -1294,44 +1488,43 @@ function resetContinueButton(){
 
 function clearCheckoutForm(){
 
-    document.getElementById(
-        "name"
-    ).value = "";
+document.getElementById(
+"name"
+).value = "";
 
+document.getElementById(
+"phone"
+).value = "";
 
-    document.getElementById(
-        "phone"
-    ).value = "";
+document.getElementById(
+"address"
+).value = "";
 
+document.getElementById(
+"landmark"
+).value = "";
 
-    document.getElementById(
-        "address"
-    ).value = "";
+document.getElementById(
+"city"
+).value = "";
 
+document.getElementById(
+"state"
+).value = "";
 
-    document.getElementById(
-        "landmark"
-    ).value = "";
+document.getElementById(
+"pincode"
+).value = "";
 
+quantity = 1;
 
-    document.getElementById(
-        "city"
-    ).value = "";
+updateQuantityDisplay();
 
+updatePrices();
 
-    document.getElementById(
-        "state"
-    ).value = "Kerala";
-
-
-    document.getElementById(
-        "pincode"
-    ).value = "";
-
-
-    updateColorDisplay(
-        selectedColorFromURL
-    );
+updateColorDisplay(
+selectedColorFromURL
+);
 
 }
 
@@ -1342,150 +1535,182 @@ function clearCheckoutForm(){
 
 function restoreCheckout(){
 
-    resetContinueButton();
+resetContinueButton();
 
 
-    if(!storageKey){
+if(!storageKey){
 
-        clearCheckoutForm();
+clearCheckoutForm();
 
-        return;
+return;
 
-    }
-
-
-    const savedDetails =
-        sessionStorage.getItem(
-            storageKey
-        );
+}
 
 
-    if(!savedDetails){
-
-        clearCheckoutForm();
-
-        return;
-
-    }
+const savedDetails =
+sessionStorage.getItem(
+storageKey
+);
 
 
-    try{
+if(!savedDetails){
 
-        const data =
-            JSON.parse(
-                savedDetails
-            );
+clearCheckoutForm();
 
+return;
 
-        /* NAME */
-
-        document.getElementById(
-            "name"
-        ).value =
-            data.name || "";
+}
 
 
-        /* PHONE */
+try{
 
-        document.getElementById(
-            "phone"
-        ).value =
-            (data.phone || "")
-            .replace(
-                /^\+91/,
-                ""
-            );
+const data =
+JSON.parse(
+savedDetails
+);
 
 
-        /* ADDRESS */
+/* NAME */
 
-        document.getElementById(
-            "address"
-        ).value =
-            data.address || "";
-
-
-        /* LANDMARK */
-
-        document.getElementById(
-            "landmark"
-        ).value =
-            data.landmark || "";
+document.getElementById(
+"name"
+).value =
+data.name || "";
 
 
-        /* CITY */
+/* PHONE */
 
-        document.getElementById(
-            "city"
-        ).value =
-            data.city || "";
-
-
-        /* STATE */
-
-        document.getElementById(
-            "state"
-        ).value =
-            data.state || "Kerala";
+document.getElementById(
+"phone"
+).value =
+(data.phone || "")
+.replace(
+/^\+91/,
+""
+);
 
 
-        /* PINCODE */
+/* ADDRESS */
 
-        document.getElementById(
-            "pincode"
-        ).value =
-            data.pincode || "";
-
-
-        /* MEMBER ID */
-
-        if(
-            !memberId &&
-            data.memberId
-        ){
-
-            memberId =
-                String(
-                    data.memberId
-                ).trim();
-
-        }
+document.getElementById(
+"address"
+).value =
+data.address || "";
 
 
-        /* COLOR */
+/* LANDMARK */
 
-        const savedColor =
-            selectedColorFromURL ||
-            data.color ||
-            "";
-
-
-        updateColorDisplay(
-            savedColor
-        );
+document.getElementById(
+"landmark"
+).value =
+data.landmark || "";
 
 
-        console.log(
-            "RESTORED MEMBER ID:",
-            memberId
-        );
+/* CITY */
+
+document.getElementById(
+"city"
+).value =
+data.city || "";
 
 
-        console.log(
-            "CHECKOUT DETAILS RESTORED"
-        );
+/* STATE */
 
-    }
-    catch(error){
+document.getElementById(
+"state"
+).value =
+data.state || "";
 
-        console.log(
-            "Could not restore checkout details:",
-            error
-        );
 
-        clearCheckoutForm();
+/* PINCODE */
 
-    }
+document.getElementById(
+"pincode"
+).value =
+data.pincode || "";
+
+
+/* MEMBER ID */
+
+if(
+!memberId &&
+data.memberId
+){
+
+memberId =
+String(
+data.memberId
+).trim();
+
+}
+
+
+/* QUANTITY */
+
+if(
+data.quantity
+){
+
+quantity =
+parseInt(
+data.quantity,
+10
+);
+
+if(
+isNaN(quantity) ||
+quantity < 1
+){
+
+quantity = 1;
+
+}
+
+}
+
+
+/* COLOR */
+
+const savedColor =
+selectedColorFromURL ||
+data.color ||
+"";
+
+
+updateColorDisplay(
+savedColor
+);
+
+updateQuantityDisplay();
+
+updatePrices();
+
+
+console.log(
+"RESTORED MEMBER ID:",
+memberId
+);
+
+console.log(
+"RESTORED QUANTITY:",
+quantity
+);
+
+console.log(
+"CHECKOUT DETAILS RESTORED"
+);
+
+}
+catch(error){
+
+console.log(
+"Could not restore checkout details:",
+error
+);
+
+clearCheckoutForm();
+
+}
 
 }
 
@@ -1495,137 +1720,135 @@ function restoreCheckout(){
 ================================================== */
 
 window.addEventListener(
-    "pageshow",
-    function(){
+"pageshow",
+function(){
 
-        resetContinueButton();
+resetContinueButton();
 
-        restoreCheckout();
+restoreCheckout();
 
-    }
+}
 );
 
 
 /* ==================================================
    AUTO SAVE FORM DETAILS
-   IMPORTANT:
-   Details are saved while typing.
 ================================================== */
 
 function autoSaveCheckoutDetails(){
 
-    if(!storageKey){
-        return;
-    }
+if(!storageKey){
+return;
+}
 
 
-    const savedData = {
+const savedData = {
 
-        product:
-            product,
+product:
+product,
 
-        price:
-            price,
+price:
+price,
 
-        originalPrice:
-            originalPrice,
+originalPrice:
+originalPrice,
 
-        name:
-            document.getElementById(
-                "name"
-            ).value,
+quantity:
+quantity,
 
-        phone:
-            "+91" +
-            document.getElementById(
-                "phone"
-            ).value,
+name:
+document.getElementById(
+"name"
+).value,
 
-        address:
-            document.getElementById(
-                "address"
-            ).value,
+phone:
+"+91" +
+document.getElementById(
+"phone"
+).value,
 
-        landmark:
-            document.getElementById(
-                "landmark"
-            ).value,
+address:
+document.getElementById(
+"address"
+).value,
 
-        city:
-            document.getElementById(
-                "city"
-            ).value,
+landmark:
+document.getElementById(
+"landmark"
+).value,
 
-        state:
-            document.getElementById(
-                "state"
-            ).value,
+city:
+document.getElementById(
+"city"
+).value,
 
-        pincode:
-            document.getElementById(
-                "pincode"
-            ).value,
+state:
+document.getElementById(
+"state"
+).value,
 
-        color:
-            selectedColorFromURL || "",
+pincode:
+document.getElementById(
+"pincode"
+).value,
 
-        memberId:
-            String(
-                memberId || ""
-            ).trim()
+color:
+selectedColorFromURL || "",
 
-    };
+memberId:
+String(
+memberId || ""
+).trim()
 
-
-    /* ==============================================
-       KEEP EXISTING ORDER ID
-    ============================================== */
-
-    const oldData =
-        sessionStorage.getItem(
-            storageKey
-        );
+};
 
 
-    if(oldData){
+/* KEEP ORDER ID */
 
-        try{
-
-            const old =
-                JSON.parse(
-                    oldData
-                );
+const oldData =
+sessionStorage.getItem(
+storageKey
+);
 
 
-            if(old.orderId){
+if(oldData){
 
-                savedData.orderId =
-                    old.orderId;
+try{
 
-            }
+const old =
+JSON.parse(
+oldData
+);
 
-        }
-        catch(error){
+if(old.orderId){
 
-            console.log(
-                "Could not keep old order ID:",
-                error
-            );
+savedData.orderId =
+old.orderId;
 
-        }
+}
 
-    }
+}
+catch(error){
+
+console.log(
+"Could not keep old order ID:",
+error
+);
+
+}
+
+}
 
 
-    sessionStorage.setItem(
+sessionStorage.setItem(
 
-        storageKey,
+storageKey,
 
-        JSON.stringify(
-            savedData
-        )
+JSON.stringify(
+savedData
+)
 
-    );
+);
 
 }
 
@@ -1635,34 +1858,31 @@ function autoSaveCheckoutDetails(){
 ================================================== */
 
 [
-    "name",
-    "phone",
-    "address",
-    "landmark",
-    "city",
-    "state",
-    "pincode"
+"name",
+"phone",
+"address",
+"landmark",
+"city",
+"state",
+"pincode"
 ].forEach(function(id){
 
-    const input =
-        document.getElementById(id);
+const input =
+document.getElementById(id);
 
+if(!input){
+return;
+}
 
-    if(!input){
-        return;
-    }
+input.addEventListener(
+"input",
+autoSaveCheckoutDetails
+);
 
-
-    input.addEventListener(
-        "input",
-        autoSaveCheckoutDetails
-    );
-
-
-    input.addEventListener(
-        "change",
-        autoSaveCheckoutDetails
-    );
+input.addEventListener(
+"change",
+autoSaveCheckoutDetails
+);
 
 });
 
@@ -1672,20 +1892,19 @@ function autoSaveCheckoutDetails(){
 ================================================== */
 
 document.getElementById(
-    "phone"
+"phone"
 ).addEventListener(
-    "input",
-    function(){
+"input",
+function(){
 
-        this.value =
-            this.value
-            .replace(/\D/g,"")
-            .slice(0,10);
+this.value =
+this.value
+.replace(/\D/g,"")
+.slice(0,10);
 
+autoSaveCheckoutDetails();
 
-        autoSaveCheckoutDetails();
-
-    }
+}
 );
 
 
@@ -1694,20 +1913,19 @@ document.getElementById(
 ================================================== */
 
 document.getElementById(
-    "pincode"
+"pincode"
 ).addEventListener(
-    "input",
-    function(){
+"input",
+function(){
 
-        this.value =
-            this.value
-            .replace(/\D/g,"")
-            .slice(0,6);
+this.value =
+this.value
+.replace(/\D/g,"")
+.slice(0,6);
 
+autoSaveCheckoutDetails();
 
-        autoSaveCheckoutDetails();
-
-    }
+}
 );
 
 
@@ -1716,604 +1934,616 @@ document.getElementById(
 ================================================== */
 
 document.getElementById(
-    "orderForm"
+"orderForm"
 )
 .addEventListener(
-    "submit",
-    function(e){
+"submit",
+function(e){
 
-        e.preventDefault();
+e.preventDefault();
 
 
-        const submitBtn =
-            document.querySelector(
-                ".continue-btn"
-            );
+const submitBtn =
+document.querySelector(
+".continue-btn"
+);
 
 
-        /* ==========================================
-           REQUIRED FIELD CHECK
-        ========================================== */
+/* REQUIRED FIELDS */
 
-        const nameValue =
-            document.getElementById(
-                "name"
-            )
-            .value
-            .trim();
+const nameValue =
+document.getElementById(
+"name"
+)
+.value
+.trim();
 
 
-        const addressValue =
-            document.getElementById(
-                "address"
-            )
-            .value
-            .trim();
+const addressValue =
+document.getElementById(
+"address"
+)
+.value
+.trim();
 
 
-        const landmarkValue =
-            document.getElementById(
-                "landmark"
-            )
-            .value
-            .trim();
+const landmarkValue =
+document.getElementById(
+"landmark"
+)
+.value
+.trim();
 
 
-        const cityValue =
-            document.getElementById(
-                "city"
-            )
-            .value
-            .trim();
+const cityValue =
+document.getElementById(
+"city"
+)
+.value
+.trim();
 
 
-        const stateValue =
-            document.getElementById(
-                "state"
-            )
-            .value
-            .trim();
+const stateValue =
+document.getElementById(
+"state"
+)
+.value
+.trim();
 
 
-        if(
-            !nameValue ||
-            !addressValue ||
-            !landmarkValue ||
-            !cityValue ||
-            !stateValue
-        ){
+if(
+!nameValue ||
+!addressValue ||
+!landmarkValue ||
+!cityValue ||
+!stateValue
+){
 
-            alert(
-                "Please fill in all delivery details."
-            );
+alert(
+"Please fill in all delivery details."
+);
 
-            return;
+return;
 
-        }
+}
 
 
-        /* ==========================================
-           PHONE VALIDATION
-        ========================================== */
+/* PHONE */
 
-        const phoneValue =
-            document.getElementById(
-                "phone"
-            )
-            .value
-            .replace(/\D/g,"")
-            .trim();
+const phoneValue =
+document.getElementById(
+"phone"
+)
+.value
+.replace(/\D/g,"")
+.trim();
 
 
-        if(
-            !/^[0-9]{10}$/.test(
-                phoneValue
-            )
-        ){
+if(
+!/^[0-9]{10}$/.test(
+phoneValue
+)
+){
 
-            alert(
-                "Please enter a valid 10-digit mobile number."
-            );
+alert(
+"Please enter a valid 10-digit mobile number."
+);
 
-            return;
+return;
 
-        }
+}
 
 
-        /* ==========================================
-           PINCODE VALIDATION
-        ========================================== */
+/* PINCODE */
 
-        const pincodeValue =
-            document.getElementById(
-                "pincode"
-            )
-            .value
-            .replace(/\D/g,"")
-            .trim();
+const pincodeValue =
+document.getElementById(
+"pincode"
+)
+.value
+.replace(/\D/g,"")
+.trim();
 
 
-        if(
-            !/^[0-9]{6}$/.test(
-                pincodeValue
-            )
-        ){
+if(
+!/^[0-9]{6}$/.test(
+pincodeValue
+)
+){
 
-            alert(
-                "Please enter a valid 6-digit pincode."
-            );
+alert(
+"Please enter a valid 6-digit pincode."
+);
 
-            return;
+return;
 
-        }
+}
 
 
-        /* ==========================================
-           MEMBER ID CHECK
-        ========================================== */
+/* MEMBER ID */
 
-        if(!memberId){
+if(!memberId){
 
-            alert(
-                "Customer account information is missing. Please go back and try again."
-            );
+alert(
+"Customer account information is missing. Please go back and try again."
+);
 
-            return;
+return;
 
-        }
+}
 
 
-        /* ==========================================
-           COLOR
-        ========================================== */
+/* QUANTITY */
 
-        let colorValue =
-            selectedColorFromURL;
+quantity =
+parseInt(
+quantity,
+10
+);
 
+if(
+isNaN(quantity) ||
+quantity < 1
+){
 
-        if(
-            !colorValue &&
-            storageKey
-        ){
+quantity = 1;
 
-            const savedDetails =
-                sessionStorage.getItem(
-                    storageKey
-                );
+}
 
 
-            if(savedDetails){
+/* COLOR */
 
-                try{
+let colorValue =
+selectedColorFromURL;
 
-                    const oldData =
-                        JSON.parse(
-                            savedDetails
-                        );
 
+if(
+!colorValue &&
+storageKey
+){
 
-                    if(oldData.color){
+const savedDetails =
+sessionStorage.getItem(
+storageKey
+);
 
-                        colorValue =
-                            String(
-                                oldData.color
-                            ).trim();
+if(savedDetails){
 
-                    }
+try{
 
-                }
-                catch(error){
+const oldData =
+JSON.parse(
+savedDetails
+);
 
-                    console.log(
-                        "Could not read saved color:",
-                        error
-                    );
+if(oldData.color){
 
-                }
+colorValue =
+String(
+oldData.color
+).trim();
 
-            }
+}
 
-        }
+}
+catch(error){
 
+console.log(
+"Could not read saved color:",
+error
+);
 
-        if(!colorValue){
+}
 
-            colorValue =
-                "-";
+}
 
-        }
+}
 
 
-        /* ==========================================
-           CURRENT ORDER DATA
-        ========================================== */
+if(!colorValue){
 
-        const currentData = {
+colorValue =
+"-";
 
-            product:
-                product,
+}
 
-            price:
-                price,
 
-            originalPrice:
-                originalPrice,
+/* TOTAL */
 
-            name:
-                nameValue,
+const totalPrice =
+unitPrice * quantity;
 
-            phone:
-                "+91" +
-                phoneValue,
 
-            address:
-                addressValue,
+/* CURRENT ORDER DATA */
 
-            landmark:
-                landmarkValue,
+const currentData = {
 
-            city:
-                cityValue,
+product:
+product,
 
-            state:
-                stateValue,
+price:
+price,
 
-            pincode:
-                pincodeValue,
+originalPrice:
+originalPrice,
 
-            color:
-                colorValue,
+quantity:
+quantity,
 
-            memberId:
-                String(
-                    memberId
-                ).trim()
+totalPrice:
+totalPrice,
 
-        };
+name:
+nameValue,
 
+phone:
+"+91" +
+phoneValue,
 
-        /* ==========================================
-           FIND OLD ORDER ID
-        ========================================== */
+address:
+addressValue,
 
-        let savedOrderId =
-            "";
+landmark:
+landmarkValue,
 
+city:
+cityValue,
 
-        if(storageKey){
+state:
+stateValue,
 
-            const savedDetails =
-                sessionStorage.getItem(
-                    storageKey
-                );
+pincode:
+pincodeValue,
 
+color:
+colorValue,
 
-            if(savedDetails){
+memberId:
+String(
+memberId
+).trim()
 
-                try{
+};
 
-                    const oldData =
-                        JSON.parse(
-                            savedDetails
-                        );
 
+/* FIND OLD ORDER ID */
 
-                    if(oldData.orderId){
+let savedOrderId =
+"";
 
-                        savedOrderId =
-                            String(
-                                oldData.orderId
-                            ).trim();
 
-                    }
+if(storageKey){
 
-                }
-                catch(error){
+const savedDetails =
+sessionStorage.getItem(
+storageKey
+);
 
-                    console.log(
-                        "Could not read previous checkout:",
-                        error
-                    );
+if(savedDetails){
 
-                }
+try{
 
-            }
+const oldData =
+JSON.parse(
+savedDetails
+);
 
-        }
+if(oldData.orderId){
 
+savedOrderId =
+String(
+oldData.orderId
+).trim();
 
-        /* ==========================================
-           SAME ORDER = UPDATE
-        ========================================== */
+}
 
-        if(savedOrderId){
+}
+catch(error){
 
-            currentData.orderId =
-                savedOrderId;
+console.log(
+"Could not read previous checkout:",
+error
+);
 
-        }
+}
 
+}
 
-        /* ==========================================
-           SAVE BEFORE SEND
-        ========================================== */
+}
 
-        if(storageKey){
 
-            sessionStorage.setItem(
+/* SAME ORDER = UPDATE */
 
-                storageKey,
+if(savedOrderId){
 
-                JSON.stringify(
-                    currentData
-                )
+currentData.orderId =
+savedOrderId;
 
-            );
+}
 
-        }
 
+/* SAVE BEFORE SEND */
 
-        /* ==========================================
-           BUTTON LOADING
-        ========================================== */
+if(storageKey){
 
-        submitBtn.disabled =
-            true;
+sessionStorage.setItem(
 
+storageKey,
 
-        submitBtn.style.background =
-            "#2563EB";
+JSON.stringify(
+currentData
+)
 
+);
 
-        submitBtn.innerHTML =
-            '<span class="spinner"></span>Processing...';
+}
 
 
-        /* ==========================================
-           DEBUG
-        ========================================== */
+/* BUTTON LOADING */
 
-        console.log(
-            "======================================"
-        );
+submitBtn.disabled =
+true;
 
-        console.log(
-            "LOXICA FINAL ORDER DATA"
-        );
+submitBtn.style.background =
+"#2563EB";
 
-        console.log(
-            currentData
-        );
+submitBtn.innerHTML =
+'<span class="spinner"></span>Processing...';
 
-        console.log(
-            "MEMBER ID:",
-            currentData.memberId
-        );
 
-        console.log(
-            "ORDER ID:",
-            currentData.orderId ||
-            "NEW ORDER"
-        );
+/* DEBUG */
 
-        console.log(
-            "======================================"
-        );
+console.log(
+"======================================"
+);
 
+console.log(
+"LOXICA FINAL ORDER DATA"
+);
 
-        /* ==========================================
-           SEND TO GOOGLE APPS SCRIPT
-        ========================================== */
+console.log(
+currentData
+);
 
-        fetch(
-            scriptURL,
-            {
+console.log(
+"MEMBER ID:",
+currentData.memberId
+);
 
-                method:
-                    "POST",
+console.log(
+"QUANTITY:",
+currentData.quantity
+);
 
-                headers:{
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
+console.log(
+"TOTAL PRICE:",
+currentData.totalPrice
+);
 
-                body:
-                    JSON.stringify(
-                        currentData
-                    )
+console.log(
+"ORDER ID:",
+currentData.orderId ||
+"NEW ORDER"
+);
 
-            }
-        )
+console.log(
+"======================================"
+);
 
 
-        .then(
-            function(response){
+/* SEND */
 
-                return response.json();
+fetch(
+scriptURL,
+{
 
-            }
-        )
+method:
+"POST",
 
+headers:{
+"Content-Type":
+"text/plain;charset=utf-8"
+},
 
-        .then(
-            function(result){
+body:
+JSON.stringify(
+currentData
+)
 
-                console.log(
-                    "GOOGLE SCRIPT RESPONSE:",
-                    result
-                );
+}
+)
 
 
-                if(
-                    !result ||
-                    !result.success
-                ){
+.then(
+function(response){
 
-                    throw new Error(
-                        result &&
-                        result.error
-                            ? result.error
-                            : "Order could not be saved"
-                    );
+return response.json();
 
-                }
+}
+)
 
 
-                /* ==================================
-                   ORDER ID
-                ================================== */
+.then(
+function(result){
 
-                const orderId =
-                    result.orderId;
+console.log(
+"GOOGLE SCRIPT RESPONSE:",
+result
+);
 
 
-                if(!orderId){
+if(
+!result ||
+!result.success
+){
 
-                    throw new Error(
-                        "Order ID not received."
-                    );
+throw new Error(
+result &&
+result.error
+? result.error
+: "Order could not be saved"
+);
 
-                }
+}
 
 
-                /* ==================================
-                   UPDATE SESSION
-                ================================== */
+/* ORDER ID */
 
-                currentData.orderId =
-                    orderId;
+const orderId =
+result.orderId;
 
 
-                currentData.memberId =
-                    String(
-                        memberId
-                    ).trim();
+if(!orderId){
 
+throw new Error(
+"Order ID not received."
+);
 
-                if(storageKey){
+}
 
-                    sessionStorage.setItem(
 
-                        storageKey,
+/* UPDATE SESSION */
 
-                        JSON.stringify(
-                            currentData
-                        )
+currentData.orderId =
+orderId;
 
-                    );
+currentData.memberId =
+String(
+memberId
+).trim();
 
-                }
 
+if(storageKey){
 
-                /* ==================================
-                   PAYMENT PAGE
-                ================================== */
+sessionStorage.setItem(
 
-                submitBtn.innerHTML =
-                    '<span class="spinner"></span>Opening Payment...';
+storageKey,
 
+JSON.stringify(
+currentData
+)
 
-                let paymentURL =
-                    "payment.html" +
+);
 
-                    "?product=" +
-                    encodeURIComponent(
-                        product
-                    ) +
+}
 
-                    "&price=" +
-                    encodeURIComponent(
-                        price
-                    ) +
 
-                    "&originalPrice=" +
-                    encodeURIComponent(
-                        originalPrice
-                    ) +
+/* PAYMENT PAGE */
 
-                    "&orderId=" +
-                    encodeURIComponent(
-                        orderId
-                    );
+submitBtn.innerHTML =
+'<span class="spinner"></span>Opening Payment...';
 
 
-                /* SESSION */
+let paymentURL =
+"payment.html" +
 
-                if(checkoutSession){
+"?product=" +
+encodeURIComponent(
+product
+) +
 
-                    paymentURL +=
-                        "&session=" +
-                        encodeURIComponent(
-                            checkoutSession
-                        );
+"&price=" +
+encodeURIComponent(
+price
+) +
 
-                }
+"&originalPrice=" +
+encodeURIComponent(
+originalPrice
+) +
 
+"&quantity=" +
+encodeURIComponent(
+quantity
+) +
 
-                /* COLOR */
+"&totalPrice=" +
+encodeURIComponent(
+totalPrice
+) +
 
-                if(
-                    colorValue &&
-                    colorValue !== "-"
-                ){
+"&orderId=" +
+encodeURIComponent(
+orderId
+);
 
-                    paymentURL +=
-                        "&color=" +
-                        encodeURIComponent(
-                            colorValue
-                        );
 
-                }
+/* SESSION */
 
+if(checkoutSession){
 
-                /* MEMBER ID */
+paymentURL +=
+"&session=" +
+encodeURIComponent(
+checkoutSession
+);
 
-                if(memberId){
+}
 
-                    paymentURL +=
-                        "&memberId=" +
-                        encodeURIComponent(
-                            memberId
-                        );
 
-                }
+/* COLOR */
 
+if(
+colorValue &&
+colorValue !== "-"
+){
 
-                console.log(
-                    "PAYMENT URL:",
-                    paymentURL
-                );
+paymentURL +=
+"&color=" +
+encodeURIComponent(
+colorValue
+);
 
+}
 
-                /* REDIRECT */
 
-                window.location.href =
-                    paymentURL;
+/* MEMBER ID */
 
-            }
-        )
+if(memberId){
 
+paymentURL +=
+"&memberId=" +
+encodeURIComponent(
+memberId
+);
 
-        .catch(
-            function(error){
+}
 
-                console.log(
-                    "Order save error:",
-                    error
-                );
 
+console.log(
+"PAYMENT URL:",
+paymentURL
+);
 
-                resetContinueButton();
 
+/* REDIRECT */
 
-                alert(
-                    "Unable to save your order. Please try again."
-                );
+window.location.href =
+paymentURL;
 
-            }
-        );
+}
+)
 
-    }
+
+.catch(
+function(error){
+
+console.log(
+"Order save error:",
+error
+);
+
+resetContinueButton();
+
+alert(
+"Unable to save your order. Please try again."
+);
+
+}
+
+);
+
+}
 );
 
 </script>
@@ -2321,3 +2551,4 @@ document.getElementById(
 </body>
 
 </html>
+```
