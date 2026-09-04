@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +21,6 @@ body{
     background:#f5f5f5;
     color:#111;
 }
-
 
 /* =========================
    HEADER
@@ -61,7 +59,6 @@ body{
     background:#222;
 }
 
-
 /* =========================
    PAGE
 ========================= */
@@ -78,7 +75,6 @@ body{
     font-weight:700;
     margin-bottom:18px;
 }
-
 
 /* =========================
    LOADING
@@ -107,7 +103,6 @@ body{
     }
 }
 
-
 /* =========================
    ERROR
 ========================= */
@@ -120,7 +115,6 @@ body{
     text-align:center;
     color:#555;
 }
-
 
 /* =========================
    ORDER CARD
@@ -139,9 +133,8 @@ body{
     border-color:#aaa;
 }
 
-
 /* =========================
-   COMPACT ORDER ROW
+   ORDER SUMMARY
 ========================= */
 
 .order-summary{
@@ -152,7 +145,6 @@ body{
     cursor:pointer;
     gap:18px;
 }
-
 
 /* =========================
    PRODUCT IMAGE
@@ -185,7 +177,6 @@ body{
     padding:8px;
 }
 
-
 /* =========================
    SUMMARY CONTENT
 ========================= */
@@ -216,7 +207,6 @@ body{
     flex-wrap:wrap;
 }
 
-
 /* =========================
    STATUS
 ========================= */
@@ -246,7 +236,6 @@ body{
     color:#b42318;
 }
 
-
 /* =========================
    ARROW
 ========================= */
@@ -267,7 +256,6 @@ body{
 .order-card.open .expand-icon{
     transform:rotate(180deg);
 }
-
 
 /* =========================
    DETAILS
@@ -316,6 +304,51 @@ body{
     word-break:break-word;
 }
 
+/* =========================
+   TRACKING
+========================= */
+
+.tracking-box{
+    margin-top:12px;
+    background:white;
+    border:1px solid #ddd;
+    border-radius:7px;
+    padding:14px;
+}
+
+.tracking-header{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:8px;
+}
+
+.tracking-icon{
+    font-size:18px;
+}
+
+.tracking-title{
+    font-size:14px;
+    font-weight:700;
+}
+
+.tracking-id{
+    font-size:16px;
+    font-weight:800;
+    letter-spacing:.4px;
+    word-break:break-word;
+}
+
+.tracking-note{
+    margin-top:5px;
+    font-size:11px;
+    color:#777;
+}
+
+/* =========================
+   TOTAL
+========================= */
+
 .total-box{
     margin-top:12px;
     background:white;
@@ -336,7 +369,6 @@ body{
     font-size:18px;
     font-weight:800;
 }
-
 
 /* =========================
    EMPTY
@@ -360,7 +392,6 @@ body{
     color:#777;
     font-size:14px;
 }
-
 
 /* =========================
    MOBILE
@@ -436,12 +467,11 @@ body{
         font-size:16px;
     }
 
+    .tracking-id{
+        font-size:15px;
+    }
+
 }
-
-
-/* =========================
-   EXTRA SMALL
-========================= */
 
 @media(max-width:380px){
 
@@ -464,9 +494,7 @@ body{
 
 </head>
 
-
 <body>
-
 
 <!-- =========================
      HEADER
@@ -474,7 +502,9 @@ body{
 
 <header class="header">
 
-    <div class="logo">LOXICA</div>
+    <div class="logo">
+        LOXICA
+    </div>
 
     <a
         href="https://loxicos.com"
@@ -496,7 +526,6 @@ body{
         My Orders
     </h1>
 
-
     <div id="loading" class="loading">
 
         <div class="spinner"></div>
@@ -504,7 +533,6 @@ body{
         Loading your orders...
 
     </div>
-
 
     <div
         id="ordersContainer"
@@ -515,7 +543,6 @@ body{
 
 
 <script>
-
 
 // =====================================================
 // API
@@ -645,7 +672,7 @@ async function loadOrders(){
 
 
         // =========================
-        // SORT NEWEST FIRST
+        // NEWEST FIRST
         // =========================
 
         orders.sort(function(a,b){
@@ -733,7 +760,7 @@ function renderOrders(orders){
 
 
     // =========================
-    // CLICK TO EXPAND
+    // EXPAND / COLLAPSE
     // =========================
 
     document
@@ -752,7 +779,8 @@ function renderOrders(orders){
                         );
 
 
-                    // Close other orders
+                    // Close other cards
+
                     document
                         .querySelectorAll(
                             ".order-card.open"
@@ -771,6 +799,7 @@ function renderOrders(orders){
 
 
                     // Toggle current
+
                     card.classList.toggle(
                         "open"
                     );
@@ -859,16 +888,70 @@ function createOrderCard(
         );
 
 
+    // =================================================
+    // TRACKING ID
+    // =================================================
+
+    const rawTrackingId =
+        String(
+            order.trackingId ||
+            ""
+        ).trim();
+
+
+    const trackingId =
+        escapeHTML(
+            rawTrackingId
+        );
+
+
+    let trackingHTML = "";
+
+
     /*
-       IMAGE
+       Tracking ID ഉണ്ടെങ്കിൽ മാത്രം
+       Tracking box കാണിക്കും.
 
-       If Apps Script later returns
-       order.image, it will be used.
-
-       Until then, the image box
-       stays clean instead of showing
-       a broken image.
+       Sheet-ലെ T column:
+       Tracking ID
     */
+
+    if(rawTrackingId){
+
+        trackingHTML = `
+
+            <div class="tracking-box">
+
+                <div class="tracking-header">
+
+                    <div class="tracking-icon">
+                        🚚
+                    </div>
+
+                    <div class="tracking-title">
+                        Tracking Information
+                    </div>
+
+                </div>
+
+                <div class="tracking-id">
+                    ${trackingId}
+                </div>
+
+                <div class="tracking-note">
+                    Your tracking ID has been added by LOXICA.
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    // =================================================
+    // IMAGE
+    // =================================================
 
     const imageUrl =
         order.image ||
@@ -912,13 +995,16 @@ function createOrderCard(
     }
 
 
+    // =================================================
+    // COMPLETE CARD
+    // =================================================
+
     return `
 
         <div
             class="order-card"
             data-index="${index}"
         >
-
 
             <!-- SUMMARY -->
 
@@ -939,16 +1025,12 @@ function createOrderCard(
                 <div class="summary-content">
 
                     <div class="product-name">
-
                         ${product}
-
                     </div>
 
 
                     <div class="price">
-
                         ₹${formatMoney(price)}
-
                     </div>
 
 
@@ -957,9 +1039,7 @@ function createOrderCard(
                         <span
                             class="status ${statusClass}"
                         >
-
                             ${escapeHTML(status)}
-
                         </span>
 
                     </div>
@@ -970,9 +1050,7 @@ function createOrderCard(
                 <!-- ARROW -->
 
                 <div class="expand-icon">
-
                     ↓
-
                 </div>
 
 
@@ -984,14 +1062,14 @@ function createOrderCard(
             <div class="order-details">
 
                 <div class="details-title">
-
                     Order Details
-
                 </div>
 
 
                 <div class="detail-grid">
 
+
+                    <!-- ORDER ID -->
 
                     <div class="detail-box">
 
@@ -1006,6 +1084,8 @@ function createOrderCard(
                     </div>
 
 
+                    <!-- DATE -->
+
                     <div class="detail-box">
 
                         <div class="detail-label">
@@ -1018,6 +1098,8 @@ function createOrderCard(
 
                     </div>
 
+
+                    <!-- QUANTITY -->
 
                     <div class="detail-box">
 
@@ -1032,6 +1114,8 @@ function createOrderCard(
                     </div>
 
 
+                    <!-- COLOR -->
+
                     <div class="detail-box">
 
                         <div class="detail-label">
@@ -1045,6 +1129,8 @@ function createOrderCard(
                     </div>
 
 
+                    <!-- UNIT PRICE -->
+
                     <div class="detail-box">
 
                         <div class="detail-label">
@@ -1057,6 +1143,8 @@ function createOrderCard(
 
                     </div>
 
+
+                    <!-- STATUS -->
 
                     <div class="detail-box">
 
@@ -1073,6 +1161,17 @@ function createOrderCard(
 
                 </div>
 
+
+                <!-- =================================
+                     TRACKING INFORMATION
+                ================================== -->
+
+                ${trackingHTML}
+
+
+                <!-- =================================
+                     TOTAL
+                ================================== -->
 
                 <div class="total-box">
 
@@ -1263,4 +1362,3 @@ function showError(message){
 </body>
 
 </html>
-
