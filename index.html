@@ -1052,8 +1052,6 @@ const checkoutSession =
 
 /* ==================================================
    MEMBER ID
-   IMPORTANT:
-   ONLY WIX MEMBER ID IS USED
 ================================================== */
 
 let memberId =
@@ -1347,11 +1345,6 @@ function restoreCheckout(){
     resetContinueButton();
 
 
-    /*
-     * If there is no session,
-     * start with empty form.
-     */
-
     if(!storageKey){
 
         clearCheckoutForm();
@@ -1371,10 +1364,6 @@ function restoreCheckout(){
 
         clearCheckoutForm();
 
-        /*
-         * URL memberId remains active.
-         */
-
         return;
 
     }
@@ -1388,9 +1377,7 @@ function restoreCheckout(){
             );
 
 
-        /* ==========================================
-           RESTORE NAME
-        ========================================== */
+        /* NAME */
 
         document.getElementById(
             "name"
@@ -1398,9 +1385,7 @@ function restoreCheckout(){
             data.name || "";
 
 
-        /* ==========================================
-           RESTORE PHONE
-        ========================================== */
+        /* PHONE */
 
         document.getElementById(
             "phone"
@@ -1412,9 +1397,7 @@ function restoreCheckout(){
             );
 
 
-        /* ==========================================
-           RESTORE ADDRESS
-        ========================================== */
+        /* ADDRESS */
 
         document.getElementById(
             "address"
@@ -1422,9 +1405,7 @@ function restoreCheckout(){
             data.address || "";
 
 
-        /* ==========================================
-           RESTORE LANDMARK
-        ========================================== */
+        /* LANDMARK */
 
         document.getElementById(
             "landmark"
@@ -1432,9 +1413,7 @@ function restoreCheckout(){
             data.landmark || "";
 
 
-        /* ==========================================
-           RESTORE CITY
-        ========================================== */
+        /* CITY */
 
         document.getElementById(
             "city"
@@ -1442,9 +1421,7 @@ function restoreCheckout(){
             data.city || "";
 
 
-        /* ==========================================
-           RESTORE STATE
-        ========================================== */
+        /* STATE */
 
         document.getElementById(
             "state"
@@ -1452,9 +1429,7 @@ function restoreCheckout(){
             data.state || "Kerala";
 
 
-        /* ==========================================
-           RESTORE PINCODE
-        ========================================== */
+        /* PINCODE */
 
         document.getElementById(
             "pincode"
@@ -1462,15 +1437,7 @@ function restoreCheckout(){
             data.pincode || "";
 
 
-        /* ==========================================
-           RESTORE MEMBER ID
-        ========================================== */
-
-        /*
-         * URL memberId has priority.
-         * If URL doesn't contain it,
-         * use the saved memberId.
-         */
+        /* MEMBER ID */
 
         if(
             !memberId &&
@@ -1485,9 +1452,7 @@ function restoreCheckout(){
         }
 
 
-        /* ==========================================
-           RESTORE COLOR
-        ========================================== */
+        /* COLOR */
 
         const savedColor =
             selectedColorFromURL ||
@@ -1505,6 +1470,11 @@ function restoreCheckout(){
             memberId
         );
 
+
+        console.log(
+            "CHECKOUT DETAILS RESTORED"
+        );
+
     }
     catch(error){
 
@@ -1512,7 +1482,6 @@ function restoreCheckout(){
             "Could not restore checkout details:",
             error
         );
-
 
         clearCheckoutForm();
 
@@ -1538,6 +1507,167 @@ window.addEventListener(
 
 
 /* ==================================================
+   AUTO SAVE FORM DETAILS
+   IMPORTANT:
+   Details are saved while typing.
+================================================== */
+
+function autoSaveCheckoutDetails(){
+
+    if(!storageKey){
+        return;
+    }
+
+
+    const savedData = {
+
+        product:
+            product,
+
+        price:
+            price,
+
+        originalPrice:
+            originalPrice,
+
+        name:
+            document.getElementById(
+                "name"
+            ).value,
+
+        phone:
+            "+91" +
+            document.getElementById(
+                "phone"
+            ).value,
+
+        address:
+            document.getElementById(
+                "address"
+            ).value,
+
+        landmark:
+            document.getElementById(
+                "landmark"
+            ).value,
+
+        city:
+            document.getElementById(
+                "city"
+            ).value,
+
+        state:
+            document.getElementById(
+                "state"
+            ).value,
+
+        pincode:
+            document.getElementById(
+                "pincode"
+            ).value,
+
+        color:
+            selectedColorFromURL || "",
+
+        memberId:
+            String(
+                memberId || ""
+            ).trim()
+
+    };
+
+
+    /* ==============================================
+       KEEP EXISTING ORDER ID
+    ============================================== */
+
+    const oldData =
+        sessionStorage.getItem(
+            storageKey
+        );
+
+
+    if(oldData){
+
+        try{
+
+            const old =
+                JSON.parse(
+                    oldData
+                );
+
+
+            if(old.orderId){
+
+                savedData.orderId =
+                    old.orderId;
+
+            }
+
+        }
+        catch(error){
+
+            console.log(
+                "Could not keep old order ID:",
+                error
+            );
+
+        }
+
+    }
+
+
+    sessionStorage.setItem(
+
+        storageKey,
+
+        JSON.stringify(
+            savedData
+        )
+
+    );
+
+}
+
+
+/* ==================================================
+   SAVE WHEN USER TYPES
+================================================== */
+
+[
+    "name",
+    "phone",
+    "address",
+    "landmark",
+    "city",
+    "state",
+    "pincode"
+].forEach(function(id){
+
+    const input =
+        document.getElementById(id);
+
+
+    if(!input){
+        return;
+    }
+
+
+    input.addEventListener(
+        "input",
+        autoSaveCheckoutDetails
+    );
+
+
+    input.addEventListener(
+        "change",
+        autoSaveCheckoutDetails
+    );
+
+});
+
+
+/* ==================================================
    PHONE NUMBER CLEANING
 ================================================== */
 
@@ -1551,6 +1681,9 @@ document.getElementById(
             this.value
             .replace(/\D/g,"")
             .slice(0,10);
+
+
+        autoSaveCheckoutDetails();
 
     }
 );
@@ -1570,6 +1703,9 @@ document.getElementById(
             this.value
             .replace(/\D/g,"")
             .slice(0,6);
+
+
+        autoSaveCheckoutDetails();
 
     }
 );
@@ -1735,11 +1871,6 @@ document.getElementById(
             selectedColorFromURL;
 
 
-        /*
-         * If URL doesn't contain color,
-         * restore it from session.
-         */
-
         if(
             !colorValue &&
             storageKey
@@ -1802,53 +1933,36 @@ document.getElementById(
             product:
                 product,
 
-
             price:
                 price,
-
 
             originalPrice:
                 originalPrice,
 
-
             name:
                 nameValue,
-
 
             phone:
                 "+91" +
                 phoneValue,
 
-
             address:
                 addressValue,
-
 
             landmark:
                 landmarkValue,
 
-
             city:
                 cityValue,
-
 
             state:
                 stateValue,
 
-
             pincode:
                 pincodeValue,
 
-
             color:
                 colorValue,
-
-
-            /*
-             * IMPORTANT:
-             * This is the only customer
-             * account identifier.
-             */
 
             memberId:
                 String(
@@ -1921,7 +2035,7 @@ document.getElementById(
 
 
         /* ==========================================
-           SAVE SESSION BEFORE SEND
+           SAVE BEFORE SEND
         ========================================== */
 
         if(storageKey){
@@ -1963,28 +2077,24 @@ document.getElementById(
             "======================================"
         );
 
-
         console.log(
             "LOXICA FINAL ORDER DATA"
         );
 
-
         console.log(
             currentData
         );
-
 
         console.log(
             "MEMBER ID:",
             currentData.memberId
         );
 
-
         console.log(
             "ORDER ID:",
-            currentData.orderId || "NEW ORDER"
+            currentData.orderId ||
+            "NEW ORDER"
         );
-
 
         console.log(
             "======================================"
@@ -1999,7 +2109,8 @@ document.getElementById(
             scriptURL,
             {
 
-                method:"POST",
+                method:
+                    "POST",
 
                 headers:{
                     "Content-Type":
@@ -2126,9 +2237,7 @@ document.getElementById(
                     );
 
 
-                /* ==================================
-                   SESSION
-                ================================== */
+                /* SESSION */
 
                 if(checkoutSession){
 
@@ -2141,9 +2250,7 @@ document.getElementById(
                 }
 
 
-                /* ==================================
-                   COLOR
-                ================================== */
+                /* COLOR */
 
                 if(
                     colorValue &&
@@ -2159,9 +2266,7 @@ document.getElementById(
                 }
 
 
-                /* ==================================
-                   MEMBER ID
-                ================================== */
+                /* MEMBER ID */
 
                 if(memberId){
 
@@ -2180,9 +2285,7 @@ document.getElementById(
                 );
 
 
-                /* ==================================
-                   REDIRECT
-                ================================== */
+                /* REDIRECT */
 
                 window.location.href =
                     paymentURL;
