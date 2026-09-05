@@ -243,8 +243,6 @@ opacity:.7;
 cursor:not-allowed;
 }
 
-/* ================= I HAVE PAID ================= */
-
 #paid{
 display:none;
 width:100%;
@@ -269,8 +267,6 @@ background:#1d4ed8;
 background:#1e40af;
 }
 
-/* ================= APP MESSAGE ================= */
-
 #appMessage{
 display:none;
 margin-top:12px;
@@ -283,8 +279,6 @@ line-height:1.5;
 color:#555;
 text-align:center;
 }
-
-/* ================= SECURITY ================= */
 
 .security{
 margin-top:18px;
@@ -301,8 +295,6 @@ line-height:1.5;
 color:#0a8f3d;
 margin-right:5px;
 }
-
-/* ================= FOOTER ================= */
 
 .footer{
 width:100%;
@@ -378,8 +370,6 @@ border-top:1px solid #222;
 font-size:10px;
 color:#777;
 }
-
-/* ================= MOBILE ================= */
 
 @media(max-width:450px){
 
@@ -667,8 +657,17 @@ Smart Products. Better Everyday Life.
 
 <script>
 
+/* ==========================================================
+   GOOGLE APPS SCRIPT
+========================================================== */
+
+const scriptURL =
+"https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
+
+
 const params =
 new URLSearchParams(window.location.search);
+
 
 const product =
 params.get("product") || "Product Name";
@@ -676,8 +675,23 @@ params.get("product") || "Product Name";
 const price =
 params.get("price") || "0";
 
-const orderId =
+
+/*
+   IMPORTANT:
+
+   orderId mutable aanu.
+
+   Continue To Payment samayath
+   orderId illayirikkam.
+
+   I Have Paid click cheyyumbol
+   Google Apps Script generate cheytha
+   orderId ivide set cheyyum.
+*/
+
+let orderId =
 params.get("orderId") || "";
+
 
 const color =
 (params.get("color") || "").trim();
@@ -697,11 +711,23 @@ const originalPrice =
 const totalPrice =
 (params.get("totalPrice") || price).trim();
 
+
+/* ==========================================================
+   CHECKOUT SESSION STORAGE KEY
+========================================================== */
+
+const checkoutStorageKey =
+session
+? "loxicaCheckout_" + session
+: null;
+
+
 document.getElementById("product").innerText =
 product;
 
 document.getElementById("price").innerText =
 "₹" + price;
+
 
 let selectedApp = "upi";
 
@@ -713,10 +739,6 @@ let pageWasHidden = false;
 
 let fallbackTimer = null;
 
-
-/* ==========================================================
-   HISTORY FLAGS
-========================================================== */
 
 let goingBackToCheckout = false;
 
@@ -784,10 +806,6 @@ return;
 goingBackToCheckout = true;
 
 
-/*
-   Same session is passed back to index.html.
-*/
-
 let backURL =
 "index.html" +
 "?product=" +
@@ -801,6 +819,7 @@ encodeURIComponent(quantity) +
 "&totalPrice=" +
 encodeURIComponent(totalPrice);
 
+
 if(session){
 
 backURL +=
@@ -808,6 +827,7 @@ backURL +=
 encodeURIComponent(session);
 
 }
+
 
 if(orderId){
 
@@ -817,6 +837,7 @@ encodeURIComponent(orderId);
 
 }
 
+
 if(color){
 
 backURL +=
@@ -824,6 +845,7 @@ backURL +=
 encodeURIComponent(color);
 
 }
+
 
 if(memberId){
 
@@ -834,11 +856,6 @@ encodeURIComponent(memberId);
 }
 
 
-/*
-   Payment state clear cheyyunnu.
-   Checkout session clear cheyyunnilla.
-*/
-
 sessionStorage.removeItem(
 "loxicaPaymentStarted"
 );
@@ -847,10 +864,6 @@ sessionStorage.removeItem(
 "loxicaPaymentReturned"
 );
 
-
-/*
-   Checkout page-il return.
-*/
 
 window.location.replace(backURL);
 
@@ -876,18 +889,6 @@ window.addEventListener(
 "popstate",
 function(){
 
-/*
-   IMPORTANT:
-
-   I Have Paid click cheythappol
-   history.back() call cheyyumbol
-   ee popstate varum.
-
-   Aa samayath checkout-lekku pokaruthu.
-   Original payment history entry replace cheythu
-   Thank You page-il pokanam.
-*/
-
 if(goingToThankYou){
 
 goingToThankYou = false;
@@ -899,13 +900,6 @@ getThankYouURL()
 return;
 
 }
-
-
-/*
-   Normal browser Back:
-
-   Payment → Checkout
-*/
 
 goBackToCheckout();
 
@@ -1229,15 +1223,36 @@ document.getElementById("paymentInstruction")
 
 /* ==========================================================
    I HAVE PAID
-   PAYMENT → THANK YOU
+   SAVE ORDER → GOOGLE SHEET
+   THEN → THANK YOU
 ========================================================== */
 
-function showVerification(){
+async function showVerification(){
 
-if(!orderId){
+const paidBtn =
+document.getElementById("paid");
+
+
+/*
+   Prevent duplicate clicks.
+*/
+
+if(paidBtn.disabled){
+
+return;
+
+}
+
+
+/*
+   Checkout session must exist because
+   delivery details are stored there.
+*/
+
+if(!checkoutStorageKey){
 
 alert(
-"Order ID is missing. Please go back and try again."
+"Checkout session is missing. Please go back and try again."
 );
 
 return;
@@ -1246,8 +1261,338 @@ return;
 
 
 /*
-   Clear payment state.
+   Read checkout details from sessionStorage.
 */
+
+const savedDetails =
+sessionStorage.getItem(checkoutStorageKey);
+
+
+if(!savedDetails){
+
+alert(
+"Checkout details are missing. Please go back and try again."
+);
+
+return;
+
+}
+
+
+let checkoutData;
+
+
+try{
+
+checkoutData =
+JSON.parse(savedDetails);
+
+}
+catch(error){
+
+console.error(
+"CHECKOUT SESSION PARSE ERROR:",
+error
+);
+
+alert(
+"Unable to read checkout details. Please go back and try again."
+);
+
+return;
+
+}
+
+
+/*
+   Member ID:
+
+   Prefer saved checkout memberId.
+   Fallback to URL memberId.
+*/
+
+const finalMemberId =
+String(
+checkoutData.memberId ||
+memberId ||
+""
+).trim();
+
+
+if(!finalMemberId){
+
+alert(
+"Customer account information is missing. Please go back and try again."
+);
+
+return;
+
+}
+
+
+/*
+   Existing orderId undenkil preserve cheyyum.
+*/
+
+if(checkoutData.orderId){
+
+orderId =
+String(
+checkoutData.orderId
+).trim();
+
+}
+
+
+/*
+   Final order data.
+*/
+
+const orderData = {
+
+product:
+checkoutData.product ||
+product,
+
+price:
+Number(
+checkoutData.price ??
+price
+) || 0,
+
+originalPrice:
+Number(
+checkoutData.originalPrice ??
+originalPrice
+) || 0,
+
+quantity:
+parseInt(
+checkoutData.quantity ||
+quantity ||
+"1",
+10
+) || 1,
+
+totalPrice:
+Number(
+checkoutData.totalPrice ??
+totalPrice
+) || 0,
+
+name:
+checkoutData.name ||
+"",
+
+phone:
+checkoutData.phone ||
+"",
+
+address:
+checkoutData.address ||
+"",
+
+landmark:
+checkoutData.landmark ||
+"",
+
+city:
+checkoutData.city ||
+"",
+
+state:
+checkoutData.state ||
+"",
+
+pincode:
+checkoutData.pincode ||
+"",
+
+color:
+checkoutData.color ||
+color ||
+"-",
+
+memberId:
+finalMemberId
+
+};
+
+
+/*
+   Existing order ID send cheyyum.
+   Undenkil Apps Script same row update cheyyum.
+*/
+
+if(orderId){
+
+orderData.orderId =
+orderId;
+
+}
+
+
+/* ==========================================================
+   BUTTON LOCK
+========================================================== */
+
+paidBtn.disabled = true;
+
+
+/*
+   Keep existing button design.
+   Only temporarily change text while saving.
+*/
+
+paidBtn.innerText =
+"Processing...";
+
+
+console.log(
+"========== LOXICA PAYMENT CONFIRM =========="
+);
+
+console.log(
+"ORDER DATA:",
+orderData
+);
+
+console.log(
+"============================================="
+);
+
+
+/* ==========================================================
+   SAVE TO GOOGLE APPS SCRIPT
+========================================================== */
+
+try{
+
+const response =
+await fetch(
+scriptURL,
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"text/plain;charset=utf-8"
+},
+
+body:
+JSON.stringify(
+orderData
+)
+
+}
+);
+
+
+const responseText =
+await response.text();
+
+
+console.log(
+"GOOGLE SCRIPT RAW RESPONSE:",
+responseText
+);
+
+
+let result;
+
+
+try{
+
+result =
+JSON.parse(responseText);
+
+}
+catch(jsonError){
+
+console.error(
+"INVALID JSON FROM GOOGLE SCRIPT:",
+jsonError
+);
+
+throw new Error(
+"Google Apps Script returned an invalid response."
+);
+
+}
+
+
+console.log(
+"GOOGLE SCRIPT RESPONSE:",
+result
+);
+
+
+/* ==========================================================
+   CHECK SUCCESS
+========================================================== */
+
+if(
+!result ||
+result.success !== true
+){
+
+throw new Error(
+result &&
+result.error
+? result.error
+: "Order could not be saved."
+);
+
+}
+
+
+/* ==========================================================
+   GET ORDER ID
+========================================================== */
+
+const returnedOrderId =
+String(
+result.orderId || ""
+).trim();
+
+
+if(!returnedOrderId){
+
+throw new Error(
+"Order ID not received from Google Apps Script."
+);
+
+}
+
+
+/*
+   Set the new Order ID.
+*/
+
+orderId =
+returnedOrderId;
+
+
+/* ==========================================================
+   UPDATE SESSION STORAGE
+========================================================== */
+
+checkoutData.orderId =
+orderId;
+
+checkoutData.memberId =
+finalMemberId;
+
+
+sessionStorage.setItem(
+checkoutStorageKey,
+JSON.stringify(checkoutData)
+);
+
+
+/* ==========================================================
+   CLEAR PAYMENT STATE
+========================================================== */
 
 sessionStorage.removeItem(
 "loxicaPaymentStarted"
@@ -1259,23 +1604,7 @@ sessionStorage.removeItem(
 
 
 /*
-   IMPORTANT:
-
-   Direct replace() cheyyunnilla.
-
-   First dummy history state remove cheyyum.
-   Pinne popstate-il original payment entry
-   Thank You page aayi replace cheyyum.
-
-   Final browser history:
-
-   Product
-       ↓
-   Thank You
-       ↓
-   Home
-
-   Therefore Home Back → Product
+   Existing history behavior preserved.
 */
 
 goingToThankYou = true;
@@ -1283,9 +1612,37 @@ goingToThankYou = true;
 
 /*
    Go one history step back.
+   popstate will replace payment with
+   Thank You page.
 */
 
 history.back();
+
+}
+catch(error){
+
+console.error(
+"LOXICA PAYMENT SAVE ERROR:",
+error
+);
+
+
+/*
+   Allow retry if saving failed.
+*/
+
+paidBtn.disabled = false;
+
+paidBtn.innerText =
+"I Have Paid ✅";
+
+
+alert(
+"Unable to save your order.\n\n" +
+error.message
+);
+
+}
 
 }
 
