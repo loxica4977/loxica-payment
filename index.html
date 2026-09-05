@@ -191,6 +191,8 @@ textarea{
     gap:12px;
 }
 
+/* ================= QUANTITY ================= */
+
 .quantity-box{
     display:flex;
     align-items:center;
@@ -309,6 +311,7 @@ textarea{
 .summary-row{
     display:flex;
     justify-content:space-between;
+    align-items:center;
     gap:15px;
     margin-bottom:14px;
     font-size:14px;
@@ -560,32 +563,6 @@ id="price">
 
 </div>
 
-<label>Quantity</label>
-
-<div class="quantity-box">
-
-<button
-type="button"
-class="quantity-btn"
-id="minusBtn">
-−
-</button>
-
-<div
-class="quantity-value"
-id="quantityValue">
-1
-</div>
-
-<button
-type="button"
-class="quantity-btn"
-id="plusBtn">
-+
-</button>
-
-</div>
-
 </div>
 
 <div class="card">
@@ -785,13 +762,35 @@ id="summaryColor">
 
 </div>
 
+<!-- ================= QUANTITY ================= -->
+
 <div class="summary-row">
 
 <span>Quantity</span>
 
-<span id="summaryQuantity">
+<div class="quantity-box">
+
+<button
+type="button"
+class="quantity-btn"
+id="minusBtn">
+−
+</button>
+
+<div
+class="quantity-value"
+id="quantityValue">
 1
-</span>
+</div>
+
+<button
+type="button"
+class="quantity-btn"
+id="plusBtn">
++
+</button>
+
+</div>
 
 </div>
 
@@ -1018,10 +1017,6 @@ function updateQuantityDisplay(){
 
     document.getElementById(
         "quantityValue"
-    ).innerText = quantity;
-
-    document.getElementById(
-        "summaryQuantity"
     ).innerText = quantity;
 
 }
