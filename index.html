@@ -5,9 +5,7 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>LOXICA Checkout</title>
 
@@ -24,237 +22,497 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 }
 
 body{
-    background:#f5f5f5;
+    background:#eaeded;
     color:#111;
+    min-height:100vh;
 }
-
-/* HEADER */
 
 .header{
-    background:#000;
-    color:#fff;
-    padding:18px 20px;
-    text-align:center;
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:2px;
+    width:100%;
+    background:#111;
+    color:white;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-/* MAIN */
+.logo{
+    font-size:29px;
+    font-weight:800;
+    letter-spacing:1.5px;
+}
 
-.container{
-    max-width:700px;
-    margin:30px auto;
+.main{
+    width:100%;
+    max-width:1100px;
+    margin:25px auto;
     padding:0 15px;
 }
 
-/* PRODUCT BOX */
-
-.product-box{
-    background:#fff;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 4px 20px rgba(0,0,0,.08);
-    margin-bottom:20px;
-}
-
-.product-name{
-    font-size:21px;
-    font-weight:700;
-    margin-bottom:10px;
-}
-
-.price-row{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.original-price{
-    text-decoration:line-through;
-    color:#888;
-    font-size:15px;
-}
-
-.price{
-    font-size:25px;
-    font-weight:800;
-}
-
-/* QUANTITY */
-
-.quantity-box{
-    margin-top:18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.quantity-title{
-    font-weight:700;
-}
-
-.quantity-control{
-    display:flex;
-    align-items:center;
-    border:1px solid #ddd;
-    border-radius:8px;
-    overflow:hidden;
-}
-
-.quantity-control button{
-    width:40px;
-    height:38px;
-    border:none;
-    background:#000;
-    color:#fff;
-    font-size:20px;
-    cursor:pointer;
-}
-
-.quantity-control span{
-    width:45px;
-    text-align:center;
-    font-weight:700;
-}
-
-/* TOTAL */
-
-.total-box{
-    margin-top:18px;
-    padding-top:15px;
-    border-top:1px solid #eee;
-    display:flex;
-    justify-content:space-between;
-    font-size:19px;
-    font-weight:800;
-}
-
-/* FORM */
-
-.form-box{
-    background:#fff;
-    border-radius:15px;
-    padding:20px;
-    box-shadow:0 4px 20px rgba(0,0,0,.08);
-}
-
-.form-title{
-    font-size:21px;
-    font-weight:800;
+.checkout-title{
+    font-size:28px;
+    font-weight:500;
     margin-bottom:18px;
 }
 
-.input-group{
+.checkout-grid{
+    display:grid;
+    grid-template-columns:1fr 350px;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    border-radius:5px;
+    padding:22px;
+    border:1px solid #ddd;
+    margin-bottom:18px;
+}
+
+.card-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:18px;
+}
+
+.number{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:#111;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.product-box{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:18px;
+    border-bottom:1px solid #ddd;
+    margin-bottom:18px;
+}
+
+.product-name{
+    font-size:18px;
+    font-weight:600;
+    max-width:65%;
+}
+
+.product-price{
+    font-size:23px;
+    font-weight:bold;
+    color:#0a8f3d;
+    text-align:right;
+}
+
+.original-price{
+    display:block;
+    font-size:14px;
+    font-weight:normal;
+    color:#777;
+    text-decoration:line-through;
+    margin-bottom:3px;
+}
+
+.offer-price{
+    display:block;
+    font-size:23px;
+    font-weight:bold;
+    color:#0a8f3d;
+}
+
+label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #a6a6a6;
+    border-radius:4px;
+    font-size:15px;
+    outline:none;
+    background:#fff;
     margin-bottom:14px;
 }
 
-.input-group label{
-    display:block;
-    font-size:14px;
-    font-weight:700;
-    margin-bottom:6px;
+input:focus,
+textarea:focus,
+select:focus{
+    border:2px solid #111;
 }
 
-.input-group input,
-.input-group textarea,
-.input-group select{
-    width:100%;
-    padding:13px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    outline:none;
-    font-size:15px;
-}
-
-.input-group textarea{
-    min-height:90px;
+textarea{
+    height:80px;
     resize:vertical;
 }
 
-.input-group input:focus,
-.input-group textarea:focus,
-.input-group select:focus{
-    border-color:#000;
+.phone-group{
+    display:flex;
+    margin-bottom:14px;
 }
 
-/* COLOR */
+.phone-code{
+    width:55px;
+    height:45px;
+    background:#eee;
+    border:1px solid #a6a6a6;
+    border-right:none;
+    border-radius:4px 0 0 4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.phone-group input{
+    height:45px;
+    margin:0;
+    border-radius:0 4px 4px 0;
+}
+
+.two-column{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.quantity-box{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width:135px;
+    height:45px;
+    border:1px solid #a6a6a6;
+    border-radius:4px;
+    overflow:hidden;
+    background:#fff;
+    margin-bottom:14px;
+}
+
+.quantity-btn{
+    width:42px;
+    height:45px;
+    border:none;
+    background:#f3f3f3;
+    font-size:22px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.quantity-btn:hover{
+    background:#e5e5e5;
+}
+
+.quantity-value{
+    width:50px;
+    text-align:center;
+    font-size:17px;
+    font-weight:bold;
+}
 
 .color-box{
-    margin-bottom:15px;
+    margin-top:2px;
+    margin-bottom:14px;
 }
 
-.color-box label{
-    display:block;
-    font-size:14px;
-    font-weight:700;
-    margin-bottom:6px;
-}
-
-.color-box input{
+.selected-color{
     width:100%;
-    padding:13px;
-    border:1px solid #ddd;
-    border-radius:8px;
+    min-height:45px;
+    padding:12px;
+    border:1px solid #a6a6a6;
+    border-radius:4px;
+    background:#f3f3f3;
+    font-size:15px;
+    font-weight:bold;
+    color:#111;
+    display:flex;
+    align-items:center;
 }
 
-/* BUTTON */
+.selected-color.empty{
+    color:#777;
+    font-weight:normal;
+}
 
-.order-btn{
+.continue-btn{
     width:100%;
-    padding:16px;
+    padding:14px;
     border:none;
-    border-radius:10px;
-    background:#000;
-    color:#fff;
+    border-radius:4px;
+    background:#111;
+    color:white;
     font-size:17px;
-    font-weight:800;
+    font-weight:bold;
     cursor:pointer;
-    margin-top:10px;
+    margin-top:4px;
 }
 
-.order-btn:hover{
-    opacity:.9;
+.continue-btn:hover{
+    background:#333;
 }
 
-.order-btn:disabled{
-    opacity:.5;
+.continue-btn:disabled{
+    opacity:.8;
     cursor:not-allowed;
 }
 
-/* LOADING */
-
-.loading{
-    display:none;
-    text-align:center;
-    margin-top:15px;
-    font-size:14px;
-    color:#555;
+.spinner{
+    display:inline-block;
+    width:17px;
+    height:17px;
+    border:3px solid rgba(255,255,255,.4);
+    border-top:3px solid white;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    vertical-align:middle;
+    margin-right:8px;
 }
 
-/* FOOTER */
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.summary{
+    background:white;
+    border:1px solid #ddd;
+    border-radius:5px;
+    padding:20px;
+    height:max-content;
+    position:sticky;
+    top:15px;
+}
+
+.summary h2{
+    font-size:21px;
+    margin-bottom:18px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:14px;
+    font-size:14px;
+}
+
+.summary-product{
+    font-weight:600;
+    line-height:1.4;
+    text-align:right;
+    max-width:65%;
+    word-break:break-word;
+}
+
+.summary-price-box{
+    text-align:right;
+}
+
+.summary-original-price{
+    display:block;
+    color:#777;
+    text-decoration:line-through;
+    font-size:13px;
+    margin-bottom:2px;
+}
+
+.summary-offer-price{
+    display:block;
+    font-weight:bold;
+}
+
+.total{
+    border-top:1px solid #ddd;
+    padding-top:15px;
+    margin-top:8px;
+    display:flex;
+    justify-content:space-between;
+    font-size:21px;
+    font-weight:bold;
+    color:#0a8f3d;
+}
+
+.secure-box{
+    margin-top:20px;
+    padding:14px;
+    background:#f7f7f7;
+    border-radius:4px;
+    font-size:13px;
+    color:#555;
+    line-height:1.5;
+}
+
+.secure-box i{
+    color:#0a8f3d;
+    margin-right:6px;
+}
+
+.note{
+    font-size:12px;
+    color:#666;
+    text-align:center;
+    margin-top:12px;
+}
 
 .footer{
-    text-align:center;
-    margin:30px 0;
-    color:#777;
-    font-size:13px;
+    width:100%;
+    background:#111;
+    color:white;
+    margin-top:30px;
 }
 
-/* MOBILE */
+.footer-features{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
 
-@media(max-width:600px){
+.feature{
+    min-height:145px;
+    padding:20px 12px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border-right:1px solid #292929;
+}
 
-    .container{
-        margin-top:20px;
+.feature:last-child{
+    border-right:none;
+}
+
+.feature-icon{
+    width:45px;
+    height:45px;
+    border:2px solid #0066ff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#0066ff;
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.feature h4{
+    font-size:12px;
+    margin-bottom:6px;
+}
+
+.feature p{
+    font-size:10px;
+    line-height:1.4;
+    color:#aaa;
+}
+
+.footer-brand{
+    text-align:center;
+    padding:22px 15px;
+    border-top:1px solid #292929;
+}
+
+.footer-brand h2{
+    font-size:23px;
+    margin-bottom:5px;
+}
+
+.footer-brand p{
+    font-size:11px;
+    color:#aaa;
+}
+
+.footer-bottom{
+    text-align:center;
+    padding:13px;
+    border-top:1px solid #292929;
+    font-size:10px;
+    color:#777;
+}
+
+@media(max-width:750px){
+
+    .header{
+        height:58px;
+    }
+
+    .main{
+        margin-top:18px;
+    }
+
+    .checkout-title{
+        font-size:23px;
+    }
+
+    .checkout-grid{
+        grid-template-columns:1fr;
+    }
+
+    .summary{
+        position:static;
+        grid-row:1;
+    }
+
+    .details-card{
+        grid-row:2;
+    }
+
+    .footer-features{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .feature{
+        min-height:135px;
+        border-bottom:1px solid #292929;
+    }
+
+}
+
+@media(max-width:430px){
+
+    .main{
+        padding:0 10px;
+    }
+
+    .card,
+    .summary{
+        padding:17px;
+    }
+
+    .two-column{
+        grid-template-columns:1fr;
+        gap:0;
     }
 
     .product-name{
-        font-size:19px;
+        font-size:16px;
     }
 
-    .price{
-        font-size:23px;
+    .product-price{
+        font-size:20px;
+    }
+
+    .offer-price{
+        font-size:20px;
     }
 
 }
@@ -263,471 +521,946 @@ body{
 
 </head>
 
-
 <body>
 
+<header class="header">
+<div class="logo">LOXICA</div>
+</header>
 
-<div class="header">
-    LOXICA
+<main class="main">
+
+<div class="checkout-title">
+Checkout
 </div>
 
+<div class="checkout-grid">
 
-<div class="container">
+<div class="details-card">
 
+<div class="card">
 
-    <!-- PRODUCT -->
+<div class="card-title">
+<div class="number">1</div>
+Product Details
+</div>
 
-    <div class="product-box">
+<div class="product-box">
 
-        <div class="product-name"
-             id="productName">
-            Product
-        </div>
+<div
+class="product-name"
+id="product">
+Product
+</div>
 
-        <div class="price-row">
-
-            <div class="original-price"
-                 id="originalPrice">
-            </div>
-
-            <div class="price"
-                 id="productPrice">
-                ₹0
-            </div>
-
-        </div>
-
-
-        <!-- QUANTITY -->
-
-        <div class="quantity-box">
-
-            <div class="quantity-title">
-                Quantity
-            </div>
-
-            <div class="quantity-control">
-
-                <button
-                    type="button"
-                    onclick="changeQuantity(-1)">
-                    −
-                </button>
-
-                <span id="quantity">
-                    1
-                </span>
-
-                <button
-                    type="button"
-                    onclick="changeQuantity(1)">
-                    +
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- TOTAL -->
-
-        <div class="total-box">
-
-            <span>
-                Total
-            </span>
-
-            <span id="totalPrice">
-                ₹0
-            </span>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- FORM -->
-
-    <div class="form-box">
-
-        <div class="form-title">
-            Delivery Details
-        </div>
-
-
-        <form id="checkoutForm">
-
-
-            <div class="input-group">
-
-                <label>
-                    Full Name
-                </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    required
-                    autocomplete="name"
-                    placeholder="Enter your full name">
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Phone Number
-                </label>
-
-                <input
-                    type="tel"
-                    id="phone"
-                    required
-                    autocomplete="tel"
-                    placeholder="Enter phone number">
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Address
-                </label>
-
-                <textarea
-                    id="address"
-                    required
-                    autocomplete="street-address"
-                    placeholder="House name, place, etc."></textarea>
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Landmark
-                </label>
-
-                <input
-                    type="text"
-                    id="landmark"
-                    autocomplete="off"
-                    placeholder="Nearby landmark">
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    City
-                </label>
-
-                <input
-                    type="text"
-                    id="city"
-                    required
-                    autocomplete="address-level2"
-                    placeholder="City">
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    State
-                </label>
-
-                <select
-                    id="state"
-                    required>
-
-                    <option value="">
-                        Select State
-                    </option>
-
-                    <option>Kerala</option>
-                    <option>Tamil Nadu</option>
-                    <option>Karnataka</option>
-                    <option>Andhra Pradesh</option>
-                    <option>Telangana</option>
-                    <option>Maharashtra</option>
-                    <option>Goa</option>
-                    <option>Gujarat</option>
-                    <option>Rajasthan</option>
-                    <option>Delhi</option>
-                    <option>West Bengal</option>
-                    <option>Uttar Pradesh</option>
-                    <option>Madhya Pradesh</option>
-                    <option>Bihar</option>
-                    <option>Punjab</option>
-                    <option>Haryana</option>
-                    <option>Other</option>
-
-                </select>
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Pincode
-                </label>
-
-                <input
-                    type="text"
-                    id="pincode"
-                    required
-                    inputmode="numeric"
-                    maxlength="6"
-                    autocomplete="postal-code"
-                    placeholder="6 digit pincode">
-
-            </div>
-
-
-            <div class="color-box">
-
-                <label>
-                    Color
-                </label>
-
-                <input
-                    type="text"
-                    id="color"
-                    placeholder="Example: Black">
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="order-btn"
-                id="orderButton">
-
-                Continue to Payment
-
-            </button>
-
-
-            <div
-                class="loading"
-                id="loading">
-
-                Processing your order...
-
-            </div>
-
-
-        </form>
-
-    </div>
-
-
-    <div class="footer">
-
-        Secure Checkout • LOXICA
-
-    </div>
-
+<div
+class="product-price"
+id="price">
+₹0
+</div>
 
 </div>
 
+<label>Quantity</label>
 
+<div class="quantity-box">
+
+<button
+type="button"
+class="quantity-btn"
+id="minusBtn">
+−
+</button>
+
+<div
+class="quantity-value"
+id="quantityValue">
+1
+</div>
+
+<button
+type="button"
+class="quantity-btn"
+id="plusBtn">
++
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">
+<div class="number">2</div>
+Delivery Address
+</div>
+
+<form id="orderForm">
+
+<label>Full Name</label>
+
+<input
+id="name"
+placeholder="Enter your full name"
+autocomplete="name"
+required>
+
+<label>Mobile Number</label>
+
+<div class="phone-group">
+
+<div class="phone-code">
++91
+</div>
+
+<input
+id="phone"
+type="tel"
+placeholder="10-digit mobile number"
+maxlength="10"
+inputmode="numeric"
+pattern="[0-9]{10}"
+autocomplete="tel"
+required>
+
+</div>
+
+<label>Full Address</label>
+
+<textarea
+id="address"
+placeholder="House / Building / Street / Area"
+autocomplete="street-address"
+required></textarea>
+
+<label>Landmark</label>
+
+<input
+id="landmark"
+placeholder="Nearby landmark"
+required>
+
+<div class="two-column">
+
+<div>
+
+<label>City</label>
+
+<input
+id="city"
+placeholder="City"
+autocomplete="address-level2"
+required>
+
+</div>
+
+<div>
+
+<label>State</label>
+
+<select
+id="state"
+autocomplete="address-level1"
+required>
+
+<option value="">Select State</option>
+
+<option>Andhra Pradesh</option>
+<option>Arunachal Pradesh</option>
+<option>Assam</option>
+<option>Bihar</option>
+<option>Chhattisgarh</option>
+<option>Goa</option>
+<option>Gujarat</option>
+<option>Haryana</option>
+<option>Himachal Pradesh</option>
+<option>Jharkhand</option>
+<option>Karnataka</option>
+<option>Kerala</option>
+<option>Madhya Pradesh</option>
+<option>Maharashtra</option>
+<option>Manipur</option>
+<option>Meghalaya</option>
+<option>Mizoram</option>
+<option>Nagaland</option>
+<option>Odisha</option>
+<option>Punjab</option>
+<option>Rajasthan</option>
+<option>Sikkim</option>
+<option>Tamil Nadu</option>
+<option>Telangana</option>
+<option>Tripura</option>
+<option>Uttar Pradesh</option>
+<option>Uttarakhand</option>
+<option>West Bengal</option>
+
+<option>Andaman and Nicobar Islands</option>
+<option>Chandigarh</option>
+<option>Dadra and Nagar Haveli and Daman and Diu</option>
+<option>Delhi</option>
+<option>Jammu and Kashmir</option>
+<option>Ladakh</option>
+<option>Lakshadweep</option>
+<option>Puducherry</option>
+
+</select>
+
+</div>
+
+</div>
+
+<label>Pincode</label>
+
+<input
+id="pincode"
+type="tel"
+placeholder="6-digit pincode"
+maxlength="6"
+inputmode="numeric"
+pattern="[0-9]{6}"
+autocomplete="postal-code"
+required>
+
+<div
+id="colorSection"
+class="color-box"
+style="display:none;">
+
+<label>Color</label>
+
+<div
+id="selectedColorDisplay"
+class="selected-color">
+-
+</div>
+
+</div>
+
+<button
+type="submit"
+class="continue-btn">
+
+Continue To Payment 💳
+
+</button>
+
+</form>
+
+<p class="note">
+Your details are securely saved for this checkout.
+</p>
+
+</div>
+
+</div>
+
+<aside class="summary">
+
+<h2>Order Summary</h2>
+
+<div class="summary-row">
+
+<span>Product</span>
+
+<span
+class="summary-product"
+id="summaryProduct">
+Product
+</span>
+
+</div>
+
+<div
+class="summary-row"
+id="summaryColorRow"
+style="display:none;">
+
+<span>Color</span>
+
+<span
+class="summary-product"
+id="summaryColor">
+-
+</span>
+
+</div>
+
+<div class="summary-row">
+
+<span>Quantity</span>
+
+<span id="summaryQuantity">
+1
+</span>
+
+</div>
+
+<div class="summary-row">
+
+<span>Price</span>
+
+<span
+class="summary-price-box"
+id="summaryPrice">
+
+<span
+class="summary-original-price"
+id="summaryOriginalPrice">
+₹0
+</span>
+
+<span
+class="summary-offer-price"
+id="summaryOfferPrice">
+₹0
+</span>
+
+</span>
+
+</div>
+
+<div class="total">
+
+<span>Total</span>
+
+<span id="summaryTotal">
+₹0
+</span>
+
+</div>
+
+<div class="secure-box">
+
+<i class="fa-solid fa-lock"></i>
+Secure checkout
+
+<br>
+
+<i class="fa-solid fa-shield-halved"></i>
+Your order details are protected.
+
+<br>
+
+<i class="fa-solid fa-truck"></i>
+Fast delivery across India.
+
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+<footer class="footer">
+
+<div class="footer-features">
+
+<div class="feature">
+
+<div class="feature-icon">
+<i class="fa-solid fa-truck-fast"></i>
+</div>
+
+<h4>FREE DELIVERY</h4>
+
+<p>Delivered safely to your doorstep.</p>
+
+</div>
+
+<div class="feature">
+
+<div class="feature-icon">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+
+<h4>SECURE PAYMENT</h4>
+
+<p>Safe & secure UPI payments.</p>
+
+</div>
+
+<div class="feature">
+
+<div class="feature-icon">
+<i class="fa-solid fa-bolt"></i>
+</div>
+
+<h4>EXPRESS DELIVERY</h4>
+
+<p>Fast dispatch and quick delivery.</p>
+
+</div>
+
+<div class="feature">
+
+<div class="feature-icon">
+<i class="fa-solid fa-gem"></i>
+</div>
+
+<h4>LATEST PRODUCTS</h4>
+
+<p>Discover trending products and collections.</p>
+
+</div>
+
+</div>
+
+<div class="footer-brand">
+
+<h2>LOXICA</h2>
+
+<p>Smart Products. Better Everyday Life.</p>
+
+</div>
+
+<div class="footer-bottom">
+
+© 2026 LOXICA. All Rights Reserved.
+
+</div>
+
+</footer>
 
 <script>
 
+/* ==================================================
+   GOOGLE APPS SCRIPT
+================================================== */
 
-/* ======================================
+const scriptURL =
+"https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
+
+
+/* ==================================================
    URL PARAMETERS
-====================================== */
+================================================== */
 
 const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
+new URLSearchParams(
+window.location.search
+);
 
 const product =
-    params.get("product") || "";
-
+(params.get("product") || "LOXICA Product").trim();
 
 const price =
-    Number(
-        params.get("price") || 0
-    );
-
+(params.get("price") || "0").trim();
 
 const originalPrice =
-    Number(
-        params.get("originalPrice") || 0
-    );
+(params.get("originalPrice") || price).trim();
+
+const checkoutSession =
+(params.get("session") || "").trim();
 
 
-const session =
-    params.get("session") || "";
+/*
+==================================================
+IMPORTANT MEMBER ID
+==================================================
+
+Member ID must come from Wix.
+
+Example:
+
+index.html?product=ABC&price=999&memberId=XXXXX
+
+*/
+
+let memberId =
+(params.get("memberId") || "").trim();
 
 
-const memberId =
-    params.get("memberId") || "";
+const selectedColorFromURL =
+(params.get("color") || "").trim();
 
 
-const urlColor =
-    params.get("color") || "";
-
+/* ==================================================
+   QUANTITY
+================================================== */
 
 let quantity =
-    Number(
-        params.get("quantity") || 1
-    );
+parseInt(
+params.get("quantity") || "1",
+10
+);
 
-
-if(quantity < 1){
-    quantity = 1;
+if(
+isNaN(quantity) ||
+quantity < 1
+){
+quantity = 1;
 }
 
 
+/* ==================================================
+   STORAGE
+================================================== */
 
-/* ======================================
-   ELEMENTS
-====================================== */
-
-const productNameElement =
-    document.getElementById("productName");
-
-
-const productPriceElement =
-    document.getElementById("productPrice");
+const storageKey =
+checkoutSession
+? "loxicaCheckout_" + checkoutSession
+: null;
 
 
-const originalPriceElement =
-    document.getElementById("originalPrice");
+/* ==================================================
+   PRICE
+================================================== */
+
+const unitPrice =
+Number(price) || 0;
+
+const unitOriginalPrice =
+Number(originalPrice) || unitPrice;
 
 
-const quantityElement =
-    document.getElementById("quantity");
+/* ==================================================
+   DISPLAY
+================================================== */
+
+document.getElementById("product").innerText =
+product;
+
+document.getElementById("summaryProduct").innerText =
+product;
 
 
-const totalPriceElement =
-    document.getElementById("totalPrice");
+/* ==================================================
+   QUANTITY DISPLAY
+================================================== */
 
+function updateQuantityDisplay(){
 
-const colorElement =
-    document.getElementById("color");
+    document.getElementById(
+        "quantityValue"
+    ).innerText = quantity;
 
-
-/* ======================================
-   PRODUCT DATA
-====================================== */
-
-productNameElement.textContent =
-    product;
-
-
-productPriceElement.textContent =
-    "₹" + price.toLocaleString("en-IN");
-
-
-if(originalPrice > price){
-
-    originalPriceElement.textContent =
-        "₹" +
-        originalPrice.toLocaleString("en-IN");
-
-}else{
-
-    originalPriceElement.style.display =
-        "none";
-
-}
-
-
-if(urlColor){
-
-    colorElement.value =
-        urlColor;
+    document.getElementById(
+        "summaryQuantity"
+    ).innerText = quantity;
 
 }
 
 
-/* ======================================
-   TOTAL
-====================================== */
+/* ==================================================
+   PRICE DISPLAY
+================================================== */
 
-function updateTotal(){
+function updatePrices(){
 
-    quantityElement.textContent =
-        quantity;
+    const totalPrice =
+        unitPrice * quantity;
 
+    const totalOriginalPrice =
+        unitOriginalPrice * quantity;
 
-    const total =
-        price * quantity;
-
-
-    totalPriceElement.textContent =
-        "₹" +
-        total.toLocaleString("en-IN");
-
-}
+    const productPriceElement =
+        document.getElementById("price");
 
 
-updateTotal();
+    if(
+        unitOriginalPrice !== unitPrice &&
+        unitOriginalPrice > 0
+    ){
 
+        productPriceElement.innerHTML =
+            '<span class="original-price">₹' +
+            totalOriginalPrice +
+            '</span>' +
 
+            '<span class="offer-price">₹' +
+            totalPrice +
+            '</span>';
 
-/* ======================================
-   QUANTITY
-====================================== */
+    }else{
 
-function changeQuantity(amount){
-
-    quantity += amount;
-
-
-    if(quantity < 1){
-
-        quantity = 1;
+        productPriceElement.innerHTML =
+            '<span class="offer-price">₹' +
+            totalPrice +
+            '</span>';
 
     }
 
 
-    updateTotal();
+    document.getElementById(
+        "summaryOriginalPrice"
+    ).innerText =
+        "₹" + totalOriginalPrice;
+
+
+    document.getElementById(
+        "summaryOfferPrice"
+    ).innerText =
+        "₹" + totalPrice;
+
+
+    document.getElementById(
+        "summaryTotal"
+    ).innerText =
+        "₹" + totalPrice;
+
+
+    if(
+        unitOriginalPrice === unitPrice ||
+        unitOriginalPrice === 0
+    ){
+
+        document.getElementById(
+            "summaryOriginalPrice"
+        ).style.display = "none";
+
+    }else{
+
+        document.getElementById(
+            "summaryOriginalPrice"
+        ).style.display = "block";
+
+    }
 
 }
 
 
+/* ==================================================
+   QUANTITY BUTTONS
+================================================== */
 
-/* ======================================
-   SESSION STORAGE
-====================================== */
+document.getElementById(
+    "minusBtn"
+).addEventListener(
+    "click",
+    function(){
 
-const storageKey =
-    "loxica_checkout";
+        if(quantity > 1){
+
+            quantity--;
+
+            updateQuantityDisplay();
+            updatePrices();
+            autoSaveCheckoutDetails();
+
+        }
+
+    }
+);
 
 
-function saveCheckoutData(){
+document.getElementById(
+    "plusBtn"
+).addEventListener(
+    "click",
+    function(){
 
-    const data = {
+        quantity++;
+
+        updateQuantityDisplay();
+        updatePrices();
+        autoSaveCheckoutDetails();
+
+    }
+);
+
+
+/* ==================================================
+   COLOR
+================================================== */
+
+function updateColorDisplay(colorValue){
+
+    const color =
+        (colorValue || "").trim();
+
+    const colorSection =
+        document.getElementById("colorSection");
+
+    const colorDisplay =
+        document.getElementById("selectedColorDisplay");
+
+    const summaryColorRow =
+        document.getElementById("summaryColorRow");
+
+    const summaryColor =
+        document.getElementById("summaryColor");
+
+
+    if(color){
+
+        colorSection.style.display = "block";
+
+        colorDisplay.innerText = color;
+
+        colorDisplay.classList.remove("empty");
+
+        summaryColorRow.style.display = "flex";
+
+        summaryColor.innerText = color;
+
+    }else{
+
+        colorSection.style.display = "none";
+
+        summaryColorRow.style.display = "none";
+
+        colorDisplay.innerText = "-";
+
+        colorDisplay.classList.add("empty");
+
+        summaryColor.innerText = "-";
+
+    }
+
+}
+
+
+/* ==================================================
+   INITIAL
+================================================== */
+
+updateQuantityDisplay();
+
+updatePrices();
+
+updateColorDisplay(
+    selectedColorFromURL
+);
+
+
+/* ==================================================
+   RESET BUTTON
+================================================== */
+
+function resetContinueButton(){
+
+    const submitBtn =
+        document.querySelector(".continue-btn");
+
+    if(!submitBtn){
+        return;
+    }
+
+    submitBtn.disabled = false;
+
+    submitBtn.style.background = "#111";
+
+    submitBtn.innerHTML =
+        "Continue To Payment 💳";
+
+}
+
+
+/* ==================================================
+   CLEAR FORM
+================================================== */
+
+function clearCheckoutForm(){
+
+    document.getElementById("name").value = "";
+
+    document.getElementById("phone").value = "";
+
+    document.getElementById("address").value = "";
+
+    document.getElementById("landmark").value = "";
+
+    document.getElementById("city").value = "";
+
+    document.getElementById("state").value = "";
+
+    document.getElementById("pincode").value = "";
+
+    quantity = 1;
+
+    updateQuantityDisplay();
+
+    updatePrices();
+
+    updateColorDisplay(
+        selectedColorFromURL
+    );
+
+}
+
+
+/* ==================================================
+   RESTORE CHECKOUT
+================================================== */
+
+function restoreCheckout(){
+
+    resetContinueButton();
+
+
+    if(!storageKey){
+
+        clearCheckoutForm();
+
+        return;
+
+    }
+
+
+    const savedDetails =
+        sessionStorage.getItem(storageKey);
+
+
+    if(!savedDetails){
+
+        clearCheckoutForm();
+
+        return;
+
+    }
+
+
+    try{
+
+        const data =
+            JSON.parse(savedDetails);
+
+
+        document.getElementById("name").value =
+            data.name || "";
+
+
+        document.getElementById("phone").value =
+            (data.phone || "")
+            .replace(/^\+91/, "");
+
+
+        document.getElementById("address").value =
+            data.address || "";
+
+
+        document.getElementById("landmark").value =
+            data.landmark || "";
+
+
+        document.getElementById("city").value =
+            data.city || "";
+
+
+        document.getElementById("state").value =
+            data.state || "";
+
+
+        document.getElementById("pincode").value =
+            data.pincode || "";
+
+
+        /*
+        RESTORE MEMBER ID
+        */
+
+        if(
+            !memberId &&
+            data.memberId
+        ){
+
+            memberId =
+                String(data.memberId).trim();
+
+        }
+
+
+        /*
+        RESTORE QUANTITY
+        */
+
+        if(data.quantity){
+
+            quantity =
+                parseInt(
+                    data.quantity,
+                    10
+                );
+
+            if(
+                isNaN(quantity) ||
+                quantity < 1
+            ){
+
+                quantity = 1;
+
+            }
+
+        }
+
+
+        /*
+        RESTORE COLOR
+        */
+
+        const savedColor =
+            selectedColorFromURL ||
+            data.color ||
+            "";
+
+
+        updateColorDisplay(savedColor);
+
+        updateQuantityDisplay();
+
+        updatePrices();
+
+
+        console.log(
+            "RESTORED MEMBER ID:",
+            memberId
+        );
+
+        console.log(
+            "RESTORED QUANTITY:",
+            quantity
+        );
+
+    }
+    catch(error){
+
+        console.log(
+            "Could not restore checkout details:",
+            error
+        );
+
+        clearCheckoutForm();
+
+    }
+
+}
+
+
+/* ==================================================
+   PAGE SHOW
+================================================== */
+
+window.addEventListener(
+    "pageshow",
+    function(){
+
+        resetContinueButton();
+
+        restoreCheckout();
+
+    }
+);
+
+
+/* ==================================================
+   AUTO SAVE
+================================================== */
+
+function autoSaveCheckoutDetails(){
+
+    if(!storageKey){
+        return;
+    }
+
+
+    const savedData = {
 
         product: product,
 
         price: price,
 
-        originalPrice:
-            originalPrice,
-
-        session: session,
-
-        memberId: memberId,
-
-        color:
-            colorElement.value,
+        originalPrice: originalPrice,
 
         quantity: quantity,
 
@@ -735,6 +1468,7 @@ function saveCheckoutData(){
             document.getElementById("name").value,
 
         phone:
+            "+91" +
             document.getElementById("phone").value,
 
         address:
@@ -750,236 +1484,197 @@ function saveCheckoutData(){
             document.getElementById("state").value,
 
         pincode:
-            document.getElementById("pincode").value
+            document.getElementById("pincode").value,
+
+        color:
+            selectedColorFromURL || "",
+
+        memberId:
+            String(memberId || "").trim()
 
     };
 
 
-    sessionStorage.setItem(
-        storageKey,
-        JSON.stringify(data)
-    );
+    /*
+    KEEP EXISTING ORDER ID
+    */
 
-}
-
-
-
-/* ======================================
-   RESTORE DATA
-====================================== */
-
-try{
-
-    const saved =
-        sessionStorage.getItem(
-            storageKey
-        );
+    const oldData =
+        sessionStorage.getItem(storageKey);
 
 
-    if(saved){
+    if(oldData){
 
-        const data =
-            JSON.parse(saved);
+        try{
 
+            const old =
+                JSON.parse(oldData);
 
-        if(
-            data.product === product &&
-            Number(data.price) === price
-        ){
+            if(old.orderId){
 
-            if(data.name){
-
-                document.getElementById(
-                    "name"
-                ).value =
-                    data.name;
+                savedData.orderId =
+                    old.orderId;
 
             }
 
+        }
+        catch(error){
 
-            if(data.phone){
-
-                document.getElementById(
-                    "phone"
-                ).value =
-                    data.phone;
-
-            }
-
-
-            if(data.address){
-
-                document.getElementById(
-                    "address"
-                ).value =
-                    data.address;
-
-            }
-
-
-            if(data.landmark){
-
-                document.getElementById(
-                    "landmark"
-                ).value =
-                    data.landmark;
-
-            }
-
-
-            if(data.city){
-
-                document.getElementById(
-                    "city"
-                ).value =
-                    data.city;
-
-            }
-
-
-            if(data.state){
-
-                document.getElementById(
-                    "state"
-                ).value =
-                    data.state;
-
-            }
-
-
-            if(data.pincode){
-
-                document.getElementById(
-                    "pincode"
-                ).value =
-                    data.pincode;
-
-            }
-
-
-            if(data.color){
-
-                colorElement.value =
-                    data.color;
-
-            }
-
-
-            if(data.quantity){
-
-                quantity =
-                    Number(data.quantity);
-
-                updateTotal();
-
-            }
+            console.log(
+                "Could not keep old order ID:",
+                error
+            );
 
         }
 
     }
 
-}catch(error){
 
-    console.log(
-        "Session restore error:",
-        error
+    sessionStorage.setItem(
+        storageKey,
+        JSON.stringify(savedData)
     );
 
 }
 
 
+/* ==================================================
+   SAVE WHEN TYPING
+================================================== */
 
-/* ======================================
-   APPS SCRIPT
-====================================== */
+[
+    "name",
+    "phone",
+    "address",
+    "landmark",
+    "city",
+    "state",
+    "pincode"
+].forEach(function(id){
 
-const scriptURL =
-    "YOUR_APPS_SCRIPT_WEB_APP_URL";
+    const input =
+        document.getElementById(id);
+
+    if(!input){
+        return;
+    }
+
+    input.addEventListener(
+        "input",
+        autoSaveCheckoutDetails
+    );
+
+    input.addEventListener(
+        "change",
+        autoSaveCheckoutDetails
+    );
+
+});
 
 
+/* ==================================================
+   PHONE CLEANING
+================================================== */
 
-/* ======================================
-   CHECKOUT FORM
-====================================== */
+document.getElementById(
+    "phone"
+).addEventListener(
+    "input",
+    function(){
 
-document
-.getElementById("checkoutForm")
-.addEventListener(
+        this.value =
+            this.value
+            .replace(/\D/g,"")
+            .slice(0,10);
+
+        autoSaveCheckoutDetails();
+
+    }
+);
+
+
+/* ==================================================
+   PINCODE CLEANING
+================================================== */
+
+document.getElementById(
+    "pincode"
+).addEventListener(
+    "input",
+    function(){
+
+        this.value =
+            this.value
+            .replace(/\D/g,"")
+            .slice(0,6);
+
+        autoSaveCheckoutDetails();
+
+    }
+);
+
+
+/* ==================================================
+   FORM SUBMIT
+================================================== */
+
+document.getElementById(
+    "orderForm"
+).addEventListener(
     "submit",
-    async function(event){
+    async function(e){
 
-        event.preventDefault();
-
-
-        const button =
-            document.getElementById(
-                "orderButton"
-            );
+        e.preventDefault();
 
 
-        const loading =
-            document.getElementById(
-                "loading"
-            );
+        const submitBtn =
+            document.querySelector(".continue-btn");
 
 
-        const name =
-            document.getElementById(
-                "name"
-            ).value.trim();
+        /* ==========================================
+           DELIVERY DETAILS
+        ========================================== */
+
+        const nameValue =
+            document.getElementById("name")
+            .value
+            .trim();
 
 
-        const phone =
-            document.getElementById(
-                "phone"
-            ).value.trim();
+        const addressValue =
+            document.getElementById("address")
+            .value
+            .trim();
 
 
-        const address =
-            document.getElementById(
-                "address"
-            ).value.trim();
+        const landmarkValue =
+            document.getElementById("landmark")
+            .value
+            .trim();
 
 
-        const landmark =
-            document.getElementById(
-                "landmark"
-            ).value.trim();
+        const cityValue =
+            document.getElementById("city")
+            .value
+            .trim();
 
 
-        const city =
-            document.getElementById(
-                "city"
-            ).value.trim();
+        const stateValue =
+            document.getElementById("state")
+            .value
+            .trim();
 
 
-        const state =
-            document.getElementById(
-                "state"
-            ).value.trim();
-
-
-        const pincode =
-            document.getElementById(
-                "pincode"
-            ).value.trim();
-
-
-        const color =
-            colorElement.value.trim();
-
-
-        /* VALIDATION */
-
-        if(!name ||
-           !phone ||
-           !address ||
-           !city ||
-           !state ||
-           !pincode){
+        if(
+            !nameValue ||
+            !addressValue ||
+            !landmarkValue ||
+            !cityValue ||
+            !stateValue
+        ){
 
             alert(
-                "Please fill all required details."
+                "Please fill in all delivery details."
             );
 
             return;
@@ -987,10 +1682,23 @@ document
         }
 
 
-        if(pincode.length !== 6){
+        /* ==========================================
+           PHONE
+        ========================================== */
+
+        const phoneValue =
+            document.getElementById("phone")
+            .value
+            .replace(/\D/g,"")
+            .trim();
+
+
+        if(
+            !/^[0-9]{10}$/.test(phoneValue)
+        ){
 
             alert(
-                "Please enter a valid 6 digit pincode."
+                "Please enter a valid 10-digit mobile number."
             );
 
             return;
@@ -998,10 +1706,23 @@ document
         }
 
 
-        if(phone.length < 10){
+        /* ==========================================
+           PINCODE
+        ========================================== */
+
+        const pincodeValue =
+            document.getElementById("pincode")
+            .value
+            .replace(/\D/g,"")
+            .trim();
+
+
+        if(
+            !/^[0-9]{6}$/.test(pincodeValue)
+        ){
 
             alert(
-                "Please enter a valid phone number."
+                "Please enter a valid 6-digit pincode."
             );
 
             return;
@@ -1009,121 +1730,349 @@ document
         }
 
 
+        /* ==========================================
+           MEMBER ID
+        ========================================== */
 
-        /* TOTAL */
+        if(!memberId){
+
+            console.error(
+                "MEMBER ID MISSING"
+            );
+
+            alert(
+                "Customer account information is missing. Please go back to the product page and try again."
+            );
+
+            return;
+
+        }
+
+
+        /* ==========================================
+           QUANTITY
+        ========================================== */
+
+        quantity =
+            parseInt(quantity,10);
+
+
+        if(
+            isNaN(quantity) ||
+            quantity < 1
+        ){
+
+            quantity = 1;
+
+        }
+
+
+        /* ==========================================
+           COLOR
+        ========================================== */
+
+        let colorValue =
+            selectedColorFromURL;
+
+
+        if(
+            !colorValue &&
+            storageKey
+        ){
+
+            const savedDetails =
+                sessionStorage.getItem(storageKey);
+
+
+            if(savedDetails){
+
+                try{
+
+                    const oldData =
+                        JSON.parse(savedDetails);
+
+
+                    if(oldData.color){
+
+                        colorValue =
+                            String(
+                                oldData.color
+                            ).trim();
+
+                    }
+
+                }
+                catch(error){
+
+                    console.log(
+                        "Could not read saved color:",
+                        error
+                    );
+
+                }
+
+            }
+
+        }
+
+
+        if(!colorValue){
+
+            colorValue = "-";
+
+        }
+
+
+        /* ==========================================
+           TOTAL
+        ========================================== */
 
         const totalPrice =
-            price * quantity;
+            unitPrice * quantity;
 
 
+        /* ==========================================
+           ORDER DATA
+        ========================================== */
 
-        /* SAVE */
+        const currentData = {
 
-        saveCheckoutData();
+            product: product,
 
-
-
-        /* UI */
-
-        button.disabled =
-            true;
-
-        button.textContent =
-            "Processing...";
-
-        loading.style.display =
-            "block";
-
-
-
-        /* ORDER DATA */
-
-        const orderData = {
-
-            product:
-                product,
-
-            price:
-                price,
+            price: unitPrice,
 
             originalPrice:
-                originalPrice,
+                unitOriginalPrice,
 
-            quantity:
-                quantity,
+            quantity: quantity,
 
-            totalPrice:
-                totalPrice,
+            totalPrice: totalPrice,
 
-            name:
-                name,
+            name: nameValue,
 
             phone:
-                phone,
+                "+91" + phoneValue,
 
-            address:
-                address,
+            address: addressValue,
 
-            landmark:
-                landmark,
+            landmark: landmarkValue,
 
-            city:
-                city,
+            city: cityValue,
 
-            state:
-                state,
+            state: stateValue,
 
-            pincode:
-                pincode,
+            pincode: pincodeValue,
 
-            color:
-                color,
-
-            session:
-                session,
+            color: colorValue,
 
             memberId:
-                memberId
+                String(memberId).trim()
 
         };
 
 
+        /* ==========================================
+           EXISTING ORDER ID
+        ========================================== */
+
+        let savedOrderId = "";
+
+
+        if(storageKey){
+
+            const savedDetails =
+                sessionStorage.getItem(storageKey);
+
+
+            if(savedDetails){
+
+                try{
+
+                    const oldData =
+                        JSON.parse(savedDetails);
+
+
+                    if(oldData.orderId){
+
+                        savedOrderId =
+                            String(
+                                oldData.orderId
+                            ).trim();
+
+                    }
+
+                }
+                catch(error){
+
+                    console.log(
+                        "Could not read previous checkout:",
+                        error
+                    );
+
+                }
+
+            }
+
+        }
+
+
+        /*
+        If an order already exists,
+        update that same order.
+        */
+
+        if(savedOrderId){
+
+            currentData.orderId =
+                savedOrderId;
+
+        }
+
+
+        /* ==========================================
+           SAVE LOCAL SESSION
+        ========================================== */
+
+        if(storageKey){
+
+            sessionStorage.setItem(
+                storageKey,
+                JSON.stringify(currentData)
+            );
+
+        }
+
+
+        /* ==========================================
+           BUTTON
+        ========================================== */
+
+        submitBtn.disabled = true;
+
+        submitBtn.style.background =
+            "#2563EB";
+
+        submitBtn.innerHTML =
+            '<span class="spinner"></span>Processing...';
+
+
+        /* ==========================================
+           DEBUG
+        ========================================== */
+
+        console.log(
+            "========== LOXICA ORDER =========="
+        );
+
+        console.log(
+            "ORDER DATA:",
+            currentData
+        );
+
+        console.log(
+            "MEMBER ID:",
+            currentData.memberId
+        );
+
+        console.log(
+            "TOTAL:",
+            currentData.totalPrice
+        );
+
+        console.log(
+            "==================================="
+        );
+
+
+        /* ==========================================
+           SEND TO GOOGLE APPS SCRIPT
+        ========================================== */
 
         try{
-
 
             const response =
                 await fetch(
                     scriptURL,
                     {
-
                         method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "text/plain;charset=utf-8"
+                        },
 
                         body:
                             JSON.stringify(
-                                orderData
+                                currentData
                             )
-
                     }
                 );
 
 
-            const result =
-                await response.json();
+            /*
+            IMPORTANT:
+            Read text first.
+
+            This prevents JSON parsing errors
+            from hiding the actual Apps Script error.
+            */
+
+            const responseText =
+                await response.text();
 
 
+            console.log(
+                "GOOGLE SCRIPT RAW RESPONSE:",
+                responseText
+            );
 
-            if(
-                !result ||
-                !result.success
-            ){
+
+            let result;
+
+
+            try{
+
+                result =
+                    JSON.parse(responseText);
+
+            }
+            catch(jsonError){
+
+                console.error(
+                    "INVALID JSON FROM GOOGLE SCRIPT:",
+                    jsonError
+                );
 
                 throw new Error(
-                    "Order creation failed"
+                    "Google Apps Script returned an invalid response."
                 );
 
             }
 
+
+            console.log(
+                "GOOGLE SCRIPT RESPONSE:",
+                result
+            );
+
+
+            /* ======================================
+               CHECK RESULT
+            ====================================== */
+
+            if(
+                !result ||
+                result.success !== true
+            ){
+
+                throw new Error(
+                    result &&
+                    result.error
+                    ? result.error
+                    : "Order could not be saved."
+                );
+
+            }
 
 
             /* ======================================
@@ -1131,131 +2080,147 @@ document
             ====================================== */
 
             const orderId =
-                result.orderId || "";
+                String(
+                    result.orderId || ""
+                ).trim();
 
+
+            if(!orderId){
+
+                throw new Error(
+                    "Order ID not received from Google Apps Script."
+                );
+
+            }
+
+
+            /* ======================================
+               UPDATE SESSION
+            ====================================== */
+
+            currentData.orderId =
+                orderId;
+
+
+            currentData.memberId =
+                String(memberId).trim();
+
+
+            if(storageKey){
+
+                sessionStorage.setItem(
+                    storageKey,
+                    JSON.stringify(currentData)
+                );
+
+            }
 
 
             /* ======================================
                PAYMENT URL
             ====================================== */
 
-            const paymentURL =
-                "payment.html?" +
+            submitBtn.innerHTML =
+                '<span class="spinner"></span>Opening Payment...';
 
-                "product=" +
-                encodeURIComponent(
-                    product
-                ) +
+
+            let paymentURL =
+                "payment.html" +
+
+                "?product=" +
+                encodeURIComponent(product) +
 
                 "&price=" +
-                encodeURIComponent(
-                    price
-                ) +
+                encodeURIComponent(unitPrice) +
 
                 "&originalPrice=" +
-                encodeURIComponent(
-                    originalPrice
-                ) +
+                encodeURIComponent(unitOriginalPrice) +
 
                 "&quantity=" +
-                encodeURIComponent(
-                    quantity
-                ) +
+                encodeURIComponent(quantity) +
 
                 "&totalPrice=" +
-                encodeURIComponent(
-                    totalPrice
-                ) +
+                encodeURIComponent(totalPrice) +
 
                 "&orderId=" +
-                encodeURIComponent(
-                    orderId
-                ) +
+                encodeURIComponent(orderId);
 
-                "&color=" +
-                encodeURIComponent(
-                    color
-                ) +
 
+            /* SESSION */
+
+            if(checkoutSession){
+
+                paymentURL +=
+                    "&session=" +
+                    encodeURIComponent(
+                        checkoutSession
+                    );
+
+            }
+
+
+            /* COLOR */
+
+            if(
+                colorValue &&
+                colorValue !== "-"
+            ){
+
+                paymentURL +=
+                    "&color=" +
+                    encodeURIComponent(
+                        colorValue
+                    );
+
+            }
+
+
+            /* MEMBER ID */
+
+            paymentURL +=
                 "&memberId=" +
                 encodeURIComponent(
                     memberId
                 );
 
 
-
-            /* ======================================
-               REDIRECT TO PAYMENT
-
-               IMPORTANT:
-               replace() removes INDEX.HTML
-               from browser history.
-            ====================================== */
-
-            window.location.replace(
+            console.log(
+                "PAYMENT URL:",
                 paymentURL
             );
 
 
-        }catch(error){
+            /* ======================================
+               REDIRECT
+            ====================================== */
+
+            window.location.href =
+                paymentURL;
+
+
+        }
+        catch(error){
 
             console.error(
+                "LOXICA ORDER SAVE ERROR:",
                 error
             );
 
 
+            resetContinueButton();
+
+
             alert(
-                "Something went wrong. Please try again."
+                "Unable to save your order.\n\n" +
+                error.message
             );
-
-
-            button.disabled =
-                false;
-
-
-            button.textContent =
-                "Continue to Payment";
-
-
-            loading.style.display =
-                "none";
 
         }
 
     }
 );
 
-
-
-/* ======================================
-   AUTO SAVE FORM DATA
-====================================== */
-
-const formInputs =
-    document.querySelectorAll(
-        "#checkoutForm input, #checkoutForm textarea, #checkoutForm select"
-    );
-
-
-formInputs.forEach(
-    function(input){
-
-        input.addEventListener(
-            "input",
-            saveCheckoutData
-        );
-
-        input.addEventListener(
-            "change",
-            saveCheckoutData
-        );
-
-    }
-);
-
 </script>
-
 
 </body>
 </html>
-
