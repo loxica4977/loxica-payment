@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LOXICA - My Orders</title>
+<title>My Orders</title>
 
 <style>
 
@@ -24,50 +24,13 @@ body{
 }
 
 /* =========================
-   HEADER
-========================= */
-
-.header{
-    width:100%;
-    background:#111;
-    color:white;
-    height:64px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-}
-
-.logo{
-    font-size:29px;
-    font-weight:800;
-    letter-spacing:1.5px;
-}
-
-.back-btn{
-    position:absolute;
-    right:22px;
-    color:white;
-    text-decoration:none;
-    font-size:14px;
-    font-weight:600;
-    border:1px solid #444;
-    padding:9px 14px;
-    border-radius:6px;
-}
-
-.back-btn:hover{
-    background:#222;
-}
-
-/* =========================
    PAGE
 ========================= */
 
 .container{
     width:100%;
     max-width:900px;
-    margin:28px auto;
+    margin:18px auto;
     padding:0 16px;
 }
 
@@ -403,22 +366,8 @@ body{
 
 @media(max-width:600px){
 
-    .header{
-        height:60px;
-    }
-
-    .logo{
-        font-size:27px;
-    }
-
-    .back-btn{
-        right:10px;
-        padding:7px 9px;
-        font-size:12px;
-    }
-
     .container{
-        margin:20px auto;
+        margin:12px auto;
         padding:0 10px;
     }
 
@@ -477,47 +426,11 @@ body{
 
 }
 
-@media(max-width:380px){
-
-    .back-btn{
-        display:none;
-    }
-
-    .product-image-box{
-        width:72px;
-        height:72px;
-    }
-
-    .order-summary{
-        gap:9px;
-    }
-
-}
-
 </style>
 
 </head>
 
 <body>
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<header class="header">
-
-    <div class="logo">
-        LOXICA
-    </div>
-
-    <a
-        href="https://loxicos.com"
-        class="back-btn"
-    >
-        ← Back to Store
-    </a>
-
-</header>
 
 
 <!-- =========================
@@ -920,13 +833,6 @@ function createOrderCard(
     let trackingHTML = "";
 
 
-    /*
-       T COLUMN = TRACKING ID
-
-       Tracking ID ഇല്ലെങ്കിൽ
-       box കാണിക്കില്ല.
-    */
-
     if(rawTrackingId){
 
         trackingHTML = `
@@ -977,18 +883,6 @@ function createOrderCard(
     let imageHTML = "";
 
 
-    /*
-       IMPORTANT:
-
-       Image available:
-       → Show image
-
-       Image not available:
-       → Completely blank box
-
-       NO "Product Image" TEXT
-    */
-
     if(imageUrl){
 
         imageHTML = `
@@ -1021,9 +915,7 @@ function createOrderCard(
         >
 
 
-            <!-- =========================
-                 ORDER SUMMARY
-            ========================= -->
+            <!-- ORDER SUMMARY -->
 
             <div class="order-summary">
 
@@ -1074,9 +966,7 @@ function createOrderCard(
             </div>
 
 
-            <!-- =========================
-                 ORDER DETAILS
-            ========================= -->
+            <!-- ORDER DETAILS -->
 
             <div class="order-details">
 
@@ -1182,16 +1072,12 @@ function createOrderCard(
                 </div>
 
 
-                <!-- =========================
-                     TRACKING INFORMATION
-                ========================= -->
+                <!-- TRACKING -->
 
                 ${trackingHTML}
 
 
-                <!-- =========================
-                     TOTAL
-                ========================= -->
+                <!-- TOTAL -->
 
                 <div class="total-box">
 
