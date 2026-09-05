@@ -713,6 +713,20 @@ let pageWasHidden = false;
 
 let fallbackTimer = null;
 
+
+/* ==========================================================
+   HISTORY FLAGS
+========================================================== */
+
+let goingBackToCheckout = false;
+
+let goingToThankYou = false;
+
+
+/* ==========================================================
+   SAVED PAYMENT STATE
+========================================================== */
+
 const savedPayment =
 sessionStorage.getItem("loxicaPaymentStarted");
 
@@ -724,26 +738,54 @@ paymentStarted = true;
 
 
 /* ==========================================================
-   BACK BUTTON
-   PAYMENT PAGE → SAME CHECKOUT SESSION
-   ========================================================== */
+   THANK YOU URL
+========================================================== */
 
-let goingBackToCheckout = false;
+function getThankYouURL(){
+
+let thankYouURL =
+"https://loxica4977.github.io/loxica-payment/thankyou.html" +
+
+"?orderId=" +
+encodeURIComponent(orderId) +
+
+"&product=" +
+encodeURIComponent(product) +
+
+"&price=" +
+encodeURIComponent(price);
+
+if(color){
+
+thankYouURL +=
+"&color=" +
+encodeURIComponent(color);
+
+}
+
+return thankYouURL;
+
+}
+
+
+/* ==========================================================
+   BACK BUTTON
+   PAYMENT → CHECKOUT
+========================================================== */
 
 function goBackToCheckout(){
 
 if(goingBackToCheckout){
+
 return;
+
 }
 
 goingBackToCheckout = true;
 
 
 /*
-   IMPORTANT:
    Same session is passed back to index.html.
-   Therefore index.html can restore all saved
-   checkout details from sessionStorage.
 */
 
 let backURL =
@@ -769,11 +811,6 @@ encodeURIComponent(session);
 
 if(orderId){
 
-/*
-   Order ID is also preserved in the URL.
-   Index.html will continue using the same order.
-*/
-
 backURL +=
 "&orderId=" +
 encodeURIComponent(orderId);
@@ -798,8 +835,8 @@ encodeURIComponent(memberId);
 
 
 /*
-   Clear only payment-page state.
-   Checkout session data is NOT cleared.
+   Payment state clear cheyyunnu.
+   Checkout session clear cheyyunnilla.
 */
 
 sessionStorage.removeItem(
@@ -812,7 +849,7 @@ sessionStorage.removeItem(
 
 
 /*
-   Return to the checkout page.
+   Checkout page-il return.
 */
 
 window.location.replace(backURL);
@@ -820,15 +857,9 @@ window.location.replace(backURL);
 }
 
 
-/*
-   Create one history state.
-
-   Because index.html used replace() to open payment.html,
-   normally browser Back could go to the previous product page.
-
-   This dummy history state makes the first Back trigger
-   popstate, then we manually send the customer to checkout.
-*/
+/* ==========================================================
+   CREATE DUMMY HISTORY STATE
+========================================================== */
 
 history.pushState(
 null,
@@ -836,19 +867,61 @@ null,
 window.location.href
 );
 
+
+/* ==========================================================
+   POPSTATE
+========================================================== */
+
 window.addEventListener(
 "popstate",
 function(){
+
+/*
+   IMPORTANT:
+
+   I Have Paid click cheythappol
+   history.back() call cheyyumbol
+   ee popstate varum.
+
+   Aa samayath checkout-lekku pokaruthu.
+   Original payment history entry replace cheythu
+   Thank You page-il pokanam.
+*/
+
+if(goingToThankYou){
+
+goingToThankYou = false;
+
+window.location.replace(
+getThankYouURL()
+);
+
+return;
+
+}
+
+
+/*
+   Normal browser Back:
+
+   Payment → Checkout
+*/
 
 goBackToCheckout();
 
 });
 
 
+/* ==========================================================
+   SELECT PAYMENT APP
+========================================================== */
+
 function selectApp(element,app){
 
 if(paymentStarted || returnedFromUPI){
+
 return;
+
 }
 
 document
@@ -865,10 +938,17 @@ selectedApp = app;
 
 }
 
+
+/* ==========================================================
+   PAY NOW
+========================================================== */
+
 function payNow(){
 
 if(paymentStarted){
+
 return;
+
 }
 
 paymentStarted = true;
@@ -885,6 +965,7 @@ sessionStorage.setItem(
 const upiID =
 "8714917161@fam";
 
+
 const upiLink =
 "upi://pay?pa=" +
 encodeURIComponent(upiID) +
@@ -896,7 +977,9 @@ encodeURIComponent(price) +
 "&tn=" +
 encodeURIComponent(product);
 
+
 let appLink = upiLink;
+
 
 if(selectedApp === "gpay"){
 
@@ -913,6 +996,7 @@ encodeURIComponent(product);
 
 }
 
+
 else if(selectedApp === "phonepe"){
 
 appLink =
@@ -928,6 +1012,7 @@ encodeURIComponent(product);
 
 }
 
+
 const payBtn =
 document.getElementById("payBtn");
 
@@ -936,13 +1021,16 @@ payBtn.disabled = true;
 payBtn.innerText =
 "Opening Payment...";
 
+
 setTimeout(function(){
 
 window.location.href = appLink;
 
 },100);
 
-fallbackTimer = setTimeout(function(){
+
+fallbackTimer =
+setTimeout(function(){
 
 if(
 document.visibilityState === "visible" &&
@@ -961,6 +1049,7 @@ payBtn.disabled = false;
 payBtn.innerText =
 "Pay Now 💳";
 
+
 const message =
 document.getElementById("appMessage");
 
@@ -975,6 +1064,11 @@ message.innerHTML =
 },5000);
 
 }
+
+
+/* ==========================================================
+   VISIBILITY CHANGE
+========================================================== */
 
 document.addEventListener(
 "visibilitychange",
@@ -991,6 +1085,7 @@ pageWasHidden = true;
 return;
 
 }
+
 
 if(
 document.visibilityState === "visible" &&
@@ -1009,17 +1104,27 @@ handleUPIReturn();
 
 });
 
+
+/* ==========================================================
+   HANDLE RETURN FROM UPI
+========================================================== */
+
 function handleUPIReturn(){
 
 if(!paymentStarted){
+
 return;
+
 }
 
 if(returnedFromUPI){
+
 return;
+
 }
 
 returnedFromUPI = true;
+
 
 if(fallbackTimer){
 
@@ -1027,11 +1132,13 @@ clearTimeout(fallbackTimer);
 
 }
 
+
 const payBtn =
 document.getElementById("payBtn");
 
 payBtn.style.display =
 "none";
+
 
 const paidBtn =
 document.getElementById("paid");
@@ -1042,6 +1149,7 @@ paidBtn.style.display =
 paidBtn.disabled =
 false;
 
+
 document
 .querySelectorAll(".upi-option")
 .forEach(function(option){
@@ -1050,13 +1158,16 @@ option.classList.add("disabled");
 
 });
 
+
 document.getElementById("appMessage")
 .style.display =
 "none";
 
+
 document.getElementById("paymentInstruction")
 .innerHTML =
 "Payment initiated. Please click <b>I Have Paid</b> to continue.";
+
 
 sessionStorage.setItem(
 "loxicaPaymentReturned",
@@ -1064,6 +1175,11 @@ sessionStorage.setItem(
 );
 
 }
+
+
+/* ==========================================================
+   PAGE SHOWS AGAIN
+========================================================== */
 
 window.addEventListener(
 "pageshow",
@@ -1077,17 +1193,21 @@ paymentStarted = true;
 
 returnedFromUPI = true;
 
+
 document.getElementById("payBtn")
 .style.display =
 "none";
+
 
 document.getElementById("paid")
 .style.display =
 "block";
 
+
 document.getElementById("paid")
 .disabled =
 false;
+
 
 document
 .querySelectorAll(".upi-option")
@@ -1097,6 +1217,7 @@ option.classList.add("disabled");
 
 });
 
+
 document.getElementById("paymentInstruction")
 .innerHTML =
 "Payment initiated. Please click <b>I Have Paid</b> to continue.";
@@ -1104,6 +1225,12 @@ document.getElementById("paymentInstruction")
 }
 
 });
+
+
+/* ==========================================================
+   I HAVE PAID
+   PAYMENT → THANK YOU
+========================================================== */
 
 function showVerification(){
 
@@ -1117,6 +1244,11 @@ return;
 
 }
 
+
+/*
+   Clear payment state.
+*/
+
 sessionStorage.removeItem(
 "loxicaPaymentStarted"
 );
@@ -1125,29 +1257,35 @@ sessionStorage.removeItem(
 "loxicaPaymentReturned"
 );
 
-let thankYouURL =
-"https://loxica4977.github.io/loxica-payment/thankyou.html" +
 
-"?orderId=" +
-encodeURIComponent(orderId) +
+/*
+   IMPORTANT:
 
-"&product=" +
-encodeURIComponent(product) +
+   Direct replace() cheyyunnilla.
 
-"&price=" +
-encodeURIComponent(price);
+   First dummy history state remove cheyyum.
+   Pinne popstate-il original payment entry
+   Thank You page aayi replace cheyyum.
 
-if(color){
+   Final browser history:
 
-thankYouURL +=
-"&color=" +
-encodeURIComponent(color);
+   Product
+       ↓
+   Thank You
+       ↓
+   Home
 
-}
+   Therefore Home Back → Product
+*/
 
-window.location.replace(
-thankYouURL
-);
+goingToThankYou = true;
+
+
+/*
+   Go one history step back.
+*/
+
+history.back();
 
 }
 
