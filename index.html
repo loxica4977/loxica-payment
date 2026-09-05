@@ -740,7 +740,7 @@ class="selected-color">
 type="submit"
 class="continue-btn">
 
-Continue To Payment 💳
+Continue To Payment
 
 </button>
 
@@ -953,23 +953,8 @@ const originalPrice =
 const checkoutSession =
 (params.get("session") || "").trim();
 
-
-/*
-==================================================
-IMPORTANT MEMBER ID
-==================================================
-
-Member ID must come from Wix.
-
-Example:
-
-index.html?product=ABC&price=999&memberId=XXXXX
-
-*/
-
 let memberId =
 (params.get("memberId") || "").trim();
-
 
 const selectedColorFromURL =
 (params.get("color") || "").trim();
@@ -1065,18 +1050,18 @@ function updatePrices(){
 
         productPriceElement.innerHTML =
             '<span class="original-price">₹' +
-            totalOriginalPrice +
+            totalOriginalPrice.toLocaleString("en-IN") +
             '</span>' +
 
             '<span class="offer-price">₹' +
-            totalPrice +
+            totalPrice.toLocaleString("en-IN") +
             '</span>';
 
     }else{
 
         productPriceElement.innerHTML =
             '<span class="offer-price">₹' +
-            totalPrice +
+            totalPrice.toLocaleString("en-IN") +
             '</span>';
 
     }
@@ -1085,19 +1070,19 @@ function updatePrices(){
     document.getElementById(
         "summaryOriginalPrice"
     ).innerText =
-        "₹" + totalOriginalPrice;
+        "₹" + totalOriginalPrice.toLocaleString("en-IN");
 
 
     document.getElementById(
         "summaryOfferPrice"
     ).innerText =
-        "₹" + totalPrice;
+        "₹" + totalPrice.toLocaleString("en-IN");
 
 
     document.getElementById(
         "summaryTotal"
     ).innerText =
-        "₹" + totalPrice;
+        "₹" + totalPrice.toLocaleString("en-IN");
 
 
     if(
@@ -1242,7 +1227,7 @@ function resetContinueButton(){
     submitBtn.style.background = "#111";
 
     submitBtn.innerHTML =
-        "Continue To Payment 💳";
+        "Continue To Payment";
 
 }
 
@@ -1346,10 +1331,6 @@ function restoreCheckout(){
             data.pincode || "";
 
 
-        /*
-        RESTORE MEMBER ID
-        */
-
         if(
             !memberId &&
             data.memberId
@@ -1360,10 +1341,6 @@ function restoreCheckout(){
 
         }
 
-
-        /*
-        RESTORE QUANTITY
-        */
 
         if(data.quantity){
 
@@ -1384,10 +1361,6 @@ function restoreCheckout(){
 
         }
 
-
-        /*
-        RESTORE COLOR
-        */
 
         const savedColor =
             selectedColorFromURL ||
@@ -1494,10 +1467,6 @@ function autoSaveCheckoutDetails(){
 
     };
 
-
-    /*
-    KEEP EXISTING ORDER ID
-    */
 
     const oldData =
         sessionStorage.getItem(storageKey);
@@ -1916,11 +1885,6 @@ document.getElementById(
         }
 
 
-        /*
-        If an order already exists,
-        update that same order.
-        */
-
         if(savedOrderId){
 
             currentData.orderId =
@@ -2008,14 +1972,6 @@ document.getElementById(
                     }
                 );
 
-
-            /*
-            IMPORTANT:
-            Read text first.
-
-            This prevents JSON parsing errors
-            from hiding the actual Apps Script error.
-            */
 
             const responseText =
                 await response.text();
@@ -2191,11 +2147,15 @@ document.getElementById(
 
 
             /* ======================================
-               REDIRECT
+               IMPORTANT REDIRECT
+
+               replace() removes index.html
+               from browser history.
             ====================================== */
 
-            window.location.href =
-                paymentURL;
+            window.location.replace(
+                paymentURL
+            );
 
 
         }
@@ -2224,3 +2184,4 @@ document.getElementById(
 
 </body>
 </html>
+
