@@ -7,6 +7,7 @@
 <title>LOXICA Cart</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -48,6 +49,73 @@ button{
     cursor:pointer;
 }
 
+.product-card{
+    display:none;
+}
+
+.product-info h2{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.price{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.original-price{
+    color:#888;
+    text-decoration:line-through;
+    margin-left:8px;
+    font-size:15px;
+}
+
+.color{
+    color:#555;
+    margin-bottom:20px;
+}
+
+.quantity-box{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-top:15px;
+}
+
+.quantity-box button{
+    width:35px;
+    height:35px;
+    border-radius:6px;
+    background:#111;
+    color:#fff;
+    font-size:20px;
+}
+
+.quantity{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.total{
+    margin-top:25px;
+    padding-top:20px;
+    border-top:1px solid #ddd;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.checkout-btn{
+    width:100%;
+    margin-top:20px;
+    padding:15px;
+    background:#111;
+    color:#fff;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+}
+
 </style>
 </head>
 
@@ -59,14 +127,336 @@ button{
 
     <div class="cart-box">
 
-        <div class="empty">
+        <!-- EMPTY CART -->
+
+        <div class="empty" id="emptyCart">
+
             <h2>Your cart is empty</h2>
-            <p>Add products to your cart to see them here.</p>
+
+            <p>
+                Add products to your cart to see them here.
+            </p>
+
+        </div>
+
+
+        <!-- PRODUCT -->
+
+        <div class="product-card" id="productCard">
+
+            <div class="product-info">
+
+                <h2 id="productName">
+                    Product Name
+                </h2>
+
+                <div class="price">
+
+                    ₹<span id="productPrice">
+                        0
+                    </span>
+
+                    <span
+                        class="original-price"
+                        id="originalPrice">
+                        ₹0
+                    </span>
+
+                </div>
+
+                <div
+                    class="color"
+                    id="productColor">
+                </div>
+
+
+                <!-- QUANTITY -->
+
+                <div class="quantity-box">
+
+                    <button id="minusBtn">
+                        −
+                    </button>
+
+                    <span
+                        class="quantity"
+                        id="quantity">
+                        1
+                    </span>
+
+                    <button id="plusBtn">
+                        +
+                    </button>
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <div class="total">
+
+                    Total:
+                    ₹<span id="totalPrice">
+                        0
+                    </span>
+
+                </div>
+
+
+                <!-- CHECKOUT -->
+
+                <button
+                    class="checkout-btn"
+                    id="checkoutBtn">
+
+                    Proceed To Checkout
+
+                </button>
+
+            </div>
+
         </div>
 
     </div>
 
 </div>
+
+
+<script>
+
+// =====================================================
+// GET URL DATA
+// =====================================================
+
+const params =
+    new URLSearchParams(window.location.search);
+
+
+const product =
+    params.get("product") || "";
+
+
+const price =
+    Number(params.get("price") || 0);
+
+
+const originalPrice =
+    Number(
+        params.get("originalPrice") || price
+    );
+
+
+const color =
+    params.get("color") || "";
+
+
+const memberId =
+    params.get("memberId") || "";
+
+
+// =====================================================
+// ELEMENTS
+// =====================================================
+
+const emptyCart =
+    document.getElementById("emptyCart");
+
+const productCard =
+    document.getElementById("productCard");
+
+const productName =
+    document.getElementById("productName");
+
+const productPrice =
+    document.getElementById("productPrice");
+
+const originalPriceElement =
+    document.getElementById("originalPrice");
+
+const productColor =
+    document.getElementById("productColor");
+
+const quantityElement =
+    document.getElementById("quantity");
+
+const totalPriceElement =
+    document.getElementById("totalPrice");
+
+const plusBtn =
+    document.getElementById("plusBtn");
+
+const minusBtn =
+    document.getElementById("minusBtn");
+
+const checkoutBtn =
+    document.getElementById("checkoutBtn");
+
+
+// =====================================================
+// QUANTITY
+// =====================================================
+
+let quantity = 1;
+
+
+// =====================================================
+// SHOW PRODUCT
+// =====================================================
+
+if(product){
+
+    emptyCart.style.display = "none";
+
+    productCard.style.display = "block";
+
+    productName.textContent =
+        product;
+
+    productPrice.textContent =
+        price.toLocaleString("en-IN");
+
+    originalPriceElement.textContent =
+        "₹" +
+        originalPrice.toLocaleString("en-IN");
+
+
+    if(color){
+
+        productColor.textContent =
+            "Color: " + color;
+
+    }else{
+
+        productColor.textContent =
+            "";
+
+    }
+
+}
+
+
+// =====================================================
+// UPDATE TOTAL
+// =====================================================
+
+function updateTotal(){
+
+    const total =
+        price * quantity;
+
+    quantityElement.textContent =
+        quantity;
+
+    totalPriceElement.textContent =
+        total.toLocaleString("en-IN");
+
+}
+
+
+// =====================================================
+// PLUS
+// =====================================================
+
+plusBtn.addEventListener(
+    "click",
+    function(){
+
+        quantity++;
+
+        updateTotal();
+
+    }
+);
+
+
+// =====================================================
+// MINUS
+// =====================================================
+
+minusBtn.addEventListener(
+    "click",
+    function(){
+
+        if(quantity > 1){
+
+            quantity--;
+
+            updateTotal();
+
+        }
+
+    }
+);
+
+
+// =====================================================
+// INITIAL TOTAL
+// =====================================================
+
+updateTotal();
+
+
+// =====================================================
+// PROCEED TO CHECKOUT
+// =====================================================
+
+checkoutBtn.addEventListener(
+    "click",
+    function(){
+
+        if(!product){
+
+            return;
+
+        }
+
+
+        let checkoutURL =
+            "index.html" +
+
+            "?product=" +
+            encodeURIComponent(product) +
+
+            "&price=" +
+            encodeURIComponent(price) +
+
+            "&originalPrice=" +
+            encodeURIComponent(originalPrice) +
+
+            "&quantity=" +
+            encodeURIComponent(quantity) +
+
+            "&totalPrice=" +
+            encodeURIComponent(
+                price * quantity
+            );
+
+
+        if(color){
+
+            checkoutURL +=
+                "&color=" +
+                encodeURIComponent(color);
+
+        }
+
+
+        if(memberId){
+
+            checkoutURL +=
+                "&memberId=" +
+                encodeURIComponent(memberId);
+
+        }
+
+
+        window.location.href =
+            checkoutURL;
+
+    }
+);
+
+</script>
 
 </body>
 </html>
