@@ -688,18 +688,26 @@ function continueShopping(){
 
     /*
      * replace() removes the current
-     * Thank You page from the history
+     * Thank You page from browser history.
      *
-     * So:
+     * Final flow:
      *
+     * Wix Product Page
+     *        ↓
+     * GitHub Checkout
+     *        ↓
+     * Payment
+     *        ↓
      * Thank You
-     *      ↓
+     *        ↓
      * Continue Shopping
-     *      ↓
-     * Home
+     *        ↓
+     * Wix Home
      *
-     * Back from Home will NOT return
-     * directly to this Thank You page.
+     * Since replace() is used here,
+     * Back from Wix Home will return
+     * to the Wix Product Page instead
+     * of Thank You / Checkout.
      */
 
     window.location.replace(
@@ -713,3 +721,4 @@ function continueShopping(){
 </body>
 
 </html>
+
