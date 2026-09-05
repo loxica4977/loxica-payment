@@ -682,6 +682,21 @@ params.get("orderId") || "";
 const color =
 (params.get("color") || "").trim();
 
+const session =
+(params.get("session") || "").trim();
+
+const memberId =
+(params.get("memberId") || "").trim();
+
+const quantity =
+(params.get("quantity") || "1").trim();
+
+const originalPrice =
+(params.get("originalPrice") || price).trim();
+
+const totalPrice =
+(params.get("totalPrice") || price).trim();
+
 document.getElementById("product").innerText =
 product;
 
@@ -706,6 +721,129 @@ if(savedPayment === "true"){
 paymentStarted = true;
 
 }
+
+
+/* ==========================================================
+   BACK BUTTON
+   PAYMENT PAGE → SAME CHECKOUT SESSION
+   ========================================================== */
+
+let goingBackToCheckout = false;
+
+function goBackToCheckout(){
+
+if(goingBackToCheckout){
+return;
+}
+
+goingBackToCheckout = true;
+
+
+/*
+   IMPORTANT:
+   Same session is passed back to index.html.
+   Therefore index.html can restore all saved
+   checkout details from sessionStorage.
+*/
+
+let backURL =
+"index.html" +
+"?product=" +
+encodeURIComponent(product) +
+"&price=" +
+encodeURIComponent(price) +
+"&originalPrice=" +
+encodeURIComponent(originalPrice) +
+"&quantity=" +
+encodeURIComponent(quantity) +
+"&totalPrice=" +
+encodeURIComponent(totalPrice);
+
+if(session){
+
+backURL +=
+"&session=" +
+encodeURIComponent(session);
+
+}
+
+if(orderId){
+
+/*
+   Order ID is also preserved in the URL.
+   Index.html will continue using the same order.
+*/
+
+backURL +=
+"&orderId=" +
+encodeURIComponent(orderId);
+
+}
+
+if(color){
+
+backURL +=
+"&color=" +
+encodeURIComponent(color);
+
+}
+
+if(memberId){
+
+backURL +=
+"&memberId=" +
+encodeURIComponent(memberId);
+
+}
+
+
+/*
+   Clear only payment-page state.
+   Checkout session data is NOT cleared.
+*/
+
+sessionStorage.removeItem(
+"loxicaPaymentStarted"
+);
+
+sessionStorage.removeItem(
+"loxicaPaymentReturned"
+);
+
+
+/*
+   Return to the checkout page.
+*/
+
+window.location.replace(backURL);
+
+}
+
+
+/*
+   Create one history state.
+
+   Because index.html used replace() to open payment.html,
+   normally browser Back could go to the previous product page.
+
+   This dummy history state makes the first Back trigger
+   popstate, then we manually send the customer to checkout.
+*/
+
+history.pushState(
+null,
+"",
+window.location.href
+);
+
+window.addEventListener(
+"popstate",
+function(){
+
+goBackToCheckout();
+
+});
+
 
 function selectApp(element,app){
 
