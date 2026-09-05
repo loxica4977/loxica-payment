@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -584,9 +585,9 @@ const price =
 params.get("price") || "";
 
 
-/*
- * COLOR FROM PAYMENT PAGE
- */
+/* =========================================
+   COLOR FROM PAYMENT PAGE
+========================================= */
 
 const color =
 (params.get("color") || "").trim();
@@ -686,40 +687,26 @@ if(price){
 function continueShopping(){
 
     /*
-       Replace Thank You page
-       with LOXICA home page
-    */
+     * replace() removes the current
+     * Thank You page from the history
+     *
+     * So:
+     *
+     * Thank You
+     *      ↓
+     * Continue Shopping
+     *      ↓
+     * Home
+     *
+     * Back from Home will NOT return
+     * directly to this Thank You page.
+     */
 
     window.location.replace(
         "https://theditto1309.wixsite.com/loxica77"
     );
 
 }
-
-
-/* =========================================
-   PREVENT BACK TO THANK YOU PAGE
-========================================= */
-
-history.pushState(
-    null,
-    "",
-    window.location.href
-);
-
-
-window.addEventListener(
-    "popstate",
-    function(){
-
-        history.pushState(
-            null,
-            "",
-            window.location.href
-        );
-
-    }
-);
 
 </script>
 
