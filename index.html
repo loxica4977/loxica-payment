@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -37,10 +37,13 @@ body{
     justify-content:center;
 }
 
+/* LOXICA LOGO IMAGE */
 .logo{
-    font-size:29px;
-    font-weight:800;
-    letter-spacing:1.5px;
+    width:120px;
+    height:auto;
+    max-height:48px;
+    object-fit:contain;
+    display:block;
 }
 
 .main{
@@ -458,6 +461,11 @@ textarea{
         height:58px;
     }
 
+    .logo{
+        width:105px;
+        max-height:44px;
+    }
+
     .main{
         margin-top:18px;
     }
@@ -527,7 +535,12 @@ textarea{
 <body>
 
 <header class="header">
-<div class="logo">LOXICA</div>
+
+<img
+src="logo.png"
+alt="LOXICA"
+class="logo">
+
 </header>
 
 <main class="main">
@@ -742,8 +755,7 @@ Your details are securely saved for this checkout.
 <span
 class="summary-product"
 id="summaryProduct">
-Product
-</span>
+Product </span>
 
 </div>
 
@@ -757,7 +769,8 @@ style="display:none;">
 <span
 class="summary-product"
 id="summaryColor">
--
+------------------
+
 </span>
 
 </div>
@@ -774,8 +787,7 @@ id="summaryColor">
 type="button"
 class="quantity-btn"
 id="minusBtn">
-−
-</button>
+− </button>
 
 <div
 class="quantity-value"
@@ -787,8 +799,7 @@ id="quantityValue">
 type="button"
 class="quantity-btn"
 id="plusBtn">
-+
-</button>
++ </button>
 
 </div>
 
@@ -805,14 +816,12 @@ id="summaryPrice">
 <span
 class="summary-original-price"
 id="summaryOriginalPrice">
-₹0
-</span>
+₹0 </span>
 
 <span
 class="summary-offer-price"
 id="summaryOfferPrice">
-₹0
-</span>
+₹0 </span>
 
 </span>
 
@@ -2179,4 +2188,3 @@ document.getElementById(
 
 </body>
 </html>
-
