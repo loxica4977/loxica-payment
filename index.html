@@ -264,6 +264,15 @@ textarea{
     font-weight:bold;
     cursor:pointer;
     margin-top:4px;
+
+    /* ONLY CHANGE: PIN BUTTON TO BOTTOM */
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:calc(100% - 30px);
+    max-width:1070px;
+    z-index:9999;
 }
 
 .continue-btn:hover{
