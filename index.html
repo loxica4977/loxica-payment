@@ -60,7 +60,7 @@ body{
 
 .checkout-grid{
     display:grid;
-    grid-template-columns:1fr 350px;
+    grid-template-columns:1fr;
     gap:20px;
 }
 
@@ -299,8 +299,7 @@ textarea{
     border-radius:5px;
     padding:20px;
     height:max-content;
-    position:sticky;
-    top:15px;
+    position:static;
 }
 
 .summary h2{
@@ -477,11 +476,6 @@ textarea{
 
     .summary{
         position:static;
-        grid-row:1;
-    }
-
-    .details-card{
-        grid-row:2;
     }
 
     .footer-features{
@@ -550,6 +544,8 @@ Checkout
 
 <div class="details-card">
 
+<!-- PRODUCT DETAILS -->
+
 <div class="card">
 
 <div class="card-title">
@@ -574,6 +570,9 @@ id="price">
 </div>
 
 </div>
+
+
+<!-- DELIVERY ADDRESS -->
 
 <div class="card">
 
@@ -723,14 +722,6 @@ class="selected-color">
 
 </div>
 
-<button
-type="submit"
-class="continue-btn">
-
-Continue To Payment
-
-</button>
-
 </form>
 
 <p class="note">
@@ -740,6 +731,9 @@ Your details are securely saved for this checkout.
 </div>
 
 </div>
+
+
+<!-- ORDER SUMMARY -->
 
 <aside class="summary">
 
@@ -850,6 +844,18 @@ Fast delivery across India.
 </div>
 
 </aside>
+
+
+<!-- CONTINUE BUTTON BELOW ORDER SUMMARY -->
+
+<button
+type="submit"
+form="orderForm"
+class="continue-btn">
+
+Continue To Payment
+
+</button>
 
 </div>
 
