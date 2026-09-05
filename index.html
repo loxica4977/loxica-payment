@@ -37,7 +37,6 @@ body{
     justify-content:center;
 }
 
-/* LOXICA LOGO IMAGE */
 .logo{
     width:120px;
     height:auto;
@@ -193,8 +192,6 @@ textarea{
     grid-template-columns:1fr 1fr;
     gap:12px;
 }
-
-/* ================= QUANTITY ================= */
 
 .quantity-box{
     display:flex;
@@ -775,8 +772,6 @@ id="summaryColor">
 
 </div>
 
-<!-- ================= QUANTITY ================= -->
-
 <div class="summary-row">
 
 <span>Quantity</span>
@@ -932,17 +927,9 @@ Fast delivery across India.
 
 <script>
 
-/* ==================================================
-   GOOGLE APPS SCRIPT
-================================================== */
-
 const scriptURL =
 "https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
 
-
-/* ==================================================
-   URL PARAMETERS
-================================================== */
 
 const params =
 new URLSearchParams(
@@ -968,10 +955,6 @@ const selectedColorFromURL =
 (params.get("color") || "").trim();
 
 
-/* ==================================================
-   QUANTITY
-================================================== */
-
 let quantity =
 parseInt(
 params.get("quantity") || "1",
@@ -986,19 +969,11 @@ quantity = 1;
 }
 
 
-/* ==================================================
-   STORAGE
-================================================== */
-
 const storageKey =
 checkoutSession
 ? "loxicaCheckout_" + checkoutSession
 : null;
 
-
-/* ==================================================
-   PRICE
-================================================== */
 
 const unitPrice =
 Number(price) || 0;
@@ -1007,20 +982,12 @@ const unitOriginalPrice =
 Number(originalPrice) || unitPrice;
 
 
-/* ==================================================
-   DISPLAY
-================================================== */
-
 document.getElementById("product").innerText =
 product;
 
 document.getElementById("summaryProduct").innerText =
 product;
 
-
-/* ==================================================
-   QUANTITY DISPLAY
-================================================== */
 
 function updateQuantityDisplay(){
 
@@ -1030,10 +997,6 @@ function updateQuantityDisplay(){
 
 }
 
-
-/* ==================================================
-   PRICE DISPLAY
-================================================== */
 
 function updatePrices(){
 
@@ -1109,10 +1072,6 @@ function updatePrices(){
 }
 
 
-/* ==================================================
-   QUANTITY BUTTONS
-================================================== */
-
 document.getElementById(
     "minusBtn"
 ).addEventListener(
@@ -1148,10 +1107,6 @@ document.getElementById(
     }
 );
 
-
-/* ==================================================
-   COLOR
-================================================== */
 
 function updateColorDisplay(colorValue){
 
@@ -1200,10 +1155,6 @@ function updateColorDisplay(colorValue){
 }
 
 
-/* ==================================================
-   INITIAL
-================================================== */
-
 updateQuantityDisplay();
 
 updatePrices();
@@ -1212,10 +1163,6 @@ updateColorDisplay(
     selectedColorFromURL
 );
 
-
-/* ==================================================
-   RESET BUTTON
-================================================== */
 
 function resetContinueButton(){
 
@@ -1235,10 +1182,6 @@ function resetContinueButton(){
 
 }
 
-
-/* ==================================================
-   CLEAR FORM
-================================================== */
 
 function clearCheckoutForm(){
 
@@ -1268,10 +1211,6 @@ function clearCheckoutForm(){
 
 }
 
-
-/* ==================================================
-   RESTORE CHECKOUT
-================================================== */
 
 function restoreCheckout(){
 
@@ -1404,10 +1343,6 @@ function restoreCheckout(){
 }
 
 
-/* ==================================================
-   PAGE SHOW
-================================================== */
-
 window.addEventListener(
     "pageshow",
     function(){
@@ -1419,10 +1354,6 @@ window.addEventListener(
     }
 );
 
-
-/* ==================================================
-   AUTO SAVE
-================================================== */
 
 function autoSaveCheckoutDetails(){
 
@@ -1511,10 +1442,6 @@ function autoSaveCheckoutDetails(){
 }
 
 
-/* ==================================================
-   SAVE WHEN TYPING
-================================================== */
-
 [
     "name",
     "phone",
@@ -1545,10 +1472,6 @@ function autoSaveCheckoutDetails(){
 });
 
 
-/* ==================================================
-   PHONE CLEANING
-================================================== */
-
 document.getElementById(
     "phone"
 ).addEventListener(
@@ -1565,10 +1488,6 @@ document.getElementById(
     }
 );
 
-
-/* ==================================================
-   PINCODE CLEANING
-================================================== */
 
 document.getElementById(
     "pincode"
@@ -1589,6 +1508,8 @@ document.getElementById(
 
 /* ==================================================
    FORM SUBMIT
+   ONLY SAVE TO SESSION
+   DO NOT SEND TO GOOGLE SHEET
 ================================================== */
 
 document.getElementById(
@@ -1603,10 +1524,6 @@ document.getElementById(
         const submitBtn =
             document.querySelector(".continue-btn");
 
-
-        /* ==========================================
-           DELIVERY DETAILS
-        ========================================== */
 
         const nameValue =
             document.getElementById("name")
@@ -1655,10 +1572,6 @@ document.getElementById(
         }
 
 
-        /* ==========================================
-           PHONE
-        ========================================== */
-
         const phoneValue =
             document.getElementById("phone")
             .value
@@ -1678,10 +1591,6 @@ document.getElementById(
 
         }
 
-
-        /* ==========================================
-           PINCODE
-        ========================================== */
 
         const pincodeValue =
             document.getElementById("pincode")
@@ -1703,10 +1612,6 @@ document.getElementById(
         }
 
 
-        /* ==========================================
-           MEMBER ID
-        ========================================== */
-
         if(!memberId){
 
             console.error(
@@ -1722,10 +1627,6 @@ document.getElementById(
         }
 
 
-        /* ==========================================
-           QUANTITY
-        ========================================== */
-
         quantity =
             parseInt(quantity,10);
 
@@ -1739,10 +1640,6 @@ document.getElementById(
 
         }
 
-
-        /* ==========================================
-           COLOR
-        ========================================== */
 
         let colorValue =
             selectedColorFromURL;
@@ -1796,17 +1693,9 @@ document.getElementById(
         }
 
 
-        /* ==========================================
-           TOTAL
-        ========================================== */
-
         const totalPrice =
             unitPrice * quantity;
 
-
-        /* ==========================================
-           ORDER DATA
-        ========================================== */
 
         const currentData = {
 
@@ -1844,12 +1733,7 @@ document.getElementById(
         };
 
 
-        /* ==========================================
-           EXISTING ORDER ID
-        ========================================== */
-
-        let savedOrderId = "";
-
+        /* KEEP EXISTING ORDER ID IF PRESENT */
 
         if(storageKey){
 
@@ -1867,7 +1751,7 @@ document.getElementById(
 
                     if(oldData.orderId){
 
-                        savedOrderId =
+                        currentData.orderId =
                             String(
                                 oldData.orderId
                             ).trim();
@@ -1889,16 +1773,9 @@ document.getElementById(
         }
 
 
-        if(savedOrderId){
-
-            currentData.orderId =
-                savedOrderId;
-
-        }
-
-
         /* ==========================================
-           SAVE LOCAL SESSION
+           SAVE ONLY TO SESSION STORAGE
+           NO GOOGLE SHEET SAVE HERE
         ========================================== */
 
         if(storageKey){
@@ -1911,275 +1788,108 @@ document.getElementById(
         }
 
 
-        /* ==========================================
-           BUTTON
-        ========================================== */
-
         submitBtn.disabled = true;
 
         submitBtn.style.background =
             "#2563EB";
 
         submitBtn.innerHTML =
-            '<span class="spinner"></span>Processing...';
+            '<span class="spinner"></span>Opening Payment...';
 
-
-        /* ==========================================
-           DEBUG
-        ========================================== */
 
         console.log(
-            "========== LOXICA ORDER =========="
-        );
-
-        console.log(
-            "ORDER DATA:",
+            "CHECKOUT DETAILS SAVED LOCALLY ONLY:",
             currentData
         );
 
-        console.log(
-            "MEMBER ID:",
-            currentData.memberId
-        );
-
-        console.log(
-            "TOTAL:",
-            currentData.totalPrice
-        );
-
-        console.log(
-            "==================================="
-        );
-
 
         /* ==========================================
-           SEND TO GOOGLE APPS SCRIPT
+           PAYMENT URL
         ========================================== */
 
-        try{
+        let paymentURL =
+            "payment.html" +
 
-            const response =
-                await fetch(
-                    scriptURL,
-                    {
-                        method:"POST",
+            "?product=" +
+            encodeURIComponent(product) +
 
-                        headers:{
-                            "Content-Type":
-                                "text/plain;charset=utf-8"
-                        },
+            "&price=" +
+            encodeURIComponent(unitPrice) +
 
-                        body:
-                            JSON.stringify(
-                                currentData
-                            )
-                    }
-                );
+            "&originalPrice=" +
+            encodeURIComponent(unitOriginalPrice) +
+
+            "&quantity=" +
+            encodeURIComponent(quantity) +
+
+            "&totalPrice=" +
+            encodeURIComponent(totalPrice);
 
 
-            const responseText =
-                await response.text();
+        /*
+           Existing orderId undenkil mathram
+           payment URL-il pass cheyyum.
+        */
 
-
-            console.log(
-                "GOOGLE SCRIPT RAW RESPONSE:",
-                responseText
-            );
-
-
-            let result;
-
-
-            try{
-
-                result =
-                    JSON.parse(responseText);
-
-            }
-            catch(jsonError){
-
-                console.error(
-                    "INVALID JSON FROM GOOGLE SCRIPT:",
-                    jsonError
-                );
-
-                throw new Error(
-                    "Google Apps Script returned an invalid response."
-                );
-
-            }
-
-
-            console.log(
-                "GOOGLE SCRIPT RESPONSE:",
-                result
-            );
-
-
-            /* ======================================
-               CHECK RESULT
-            ====================================== */
-
-            if(
-                !result ||
-                result.success !== true
-            ){
-
-                throw new Error(
-                    result &&
-                    result.error
-                    ? result.error
-                    : "Order could not be saved."
-                );
-
-            }
-
-
-            /* ======================================
-               ORDER ID
-            ====================================== */
-
-            const orderId =
-                String(
-                    result.orderId || ""
-                ).trim();
-
-
-            if(!orderId){
-
-                throw new Error(
-                    "Order ID not received from Google Apps Script."
-                );
-
-            }
-
-
-            /* ======================================
-               UPDATE SESSION
-            ====================================== */
-
-            currentData.orderId =
-                orderId;
-
-
-            currentData.memberId =
-                String(memberId).trim();
-
-
-            if(storageKey){
-
-                sessionStorage.setItem(
-                    storageKey,
-                    JSON.stringify(currentData)
-                );
-
-            }
-
-
-            /* ======================================
-               PAYMENT URL
-            ====================================== */
-
-            submitBtn.innerHTML =
-                '<span class="spinner"></span>Opening Payment...';
-
-
-            let paymentURL =
-                "payment.html" +
-
-                "?product=" +
-                encodeURIComponent(product) +
-
-                "&price=" +
-                encodeURIComponent(unitPrice) +
-
-                "&originalPrice=" +
-                encodeURIComponent(unitOriginalPrice) +
-
-                "&quantity=" +
-                encodeURIComponent(quantity) +
-
-                "&totalPrice=" +
-                encodeURIComponent(totalPrice) +
-
-                "&orderId=" +
-                encodeURIComponent(orderId);
-
-
-            /* SESSION */
-
-            if(checkoutSession){
-
-                paymentURL +=
-                    "&session=" +
-                    encodeURIComponent(
-                        checkoutSession
-                    );
-
-            }
-
-
-            /* COLOR */
-
-            if(
-                colorValue &&
-                colorValue !== "-"
-            ){
-
-                paymentURL +=
-                    "&color=" +
-                    encodeURIComponent(
-                        colorValue
-                    );
-
-            }
-
-
-            /* MEMBER ID */
+        if(currentData.orderId){
 
             paymentURL +=
-                "&memberId=" +
+                "&orderId=" +
                 encodeURIComponent(
-                    memberId
+                    currentData.orderId
                 );
 
-
-            console.log(
-                "PAYMENT URL:",
-                paymentURL
-            );
+        }
 
 
-            /* ======================================
-               IMPORTANT REDIRECT
+        if(checkoutSession){
 
-               replace() removes index.html
-               from browser history.
-            ====================================== */
-
-            window.location.replace(
-                paymentURL
-            );
-
+            paymentURL +=
+                "&session=" +
+                encodeURIComponent(
+                    checkoutSession
+                );
 
         }
-        catch(error){
-
-            console.error(
-                "LOXICA ORDER SAVE ERROR:",
-                error
-            );
 
 
-            resetContinueButton();
+        if(
+            colorValue &&
+            colorValue !== "-"
+        ){
 
-
-            alert(
-                "Unable to save your order.\n\n" +
-                error.message
-            );
+            paymentURL +=
+                "&color=" +
+                encodeURIComponent(
+                    colorValue
+                );
 
         }
+
+
+        paymentURL +=
+            "&memberId=" +
+            encodeURIComponent(
+                memberId
+            );
+
+
+        console.log(
+            "PAYMENT URL:",
+            paymentURL
+        );
+
+
+        /*
+           IMPORTANT REDIRECT
+
+           replace() preserves the existing
+           browser history behavior.
+        */
+
+        window.location.replace(
+            paymentURL
+        );
 
     }
 );
