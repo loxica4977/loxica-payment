@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -553,7 +554,7 @@ Select your preferred payment method and click <b>Pay Now</b> to continue.
 <button
 type="button"
 id="payBtn"
-onclick="payNow()">
+onclick="payNow">
 
 Pay Now 💳
 
@@ -681,8 +682,9 @@ params.get("price") || "0";
 const orderId =
 params.get("orderId") || "";
 
+/* COLOR FIX */
 const color =
-params.get("color") || "";
+(params.get("color") || "").trim();
 
 document.getElementById("product").innerText =
 product;
@@ -969,6 +971,8 @@ document.getElementById("paymentInstruction")
 
 });
 
+/* ================= COLOR + THANK YOU FIX ================= */
+
 function showVerification(){
 
 if(!orderId){
@@ -989,8 +993,7 @@ sessionStorage.removeItem(
 "loxicaPaymentReturned"
 );
 
-window.location.replace(
-
+let thankYouURL =
 "https://loxica4977.github.io/loxica-payment/thankyou.html" +
 
 "?orderId=" +
@@ -1000,11 +1003,20 @@ encodeURIComponent(orderId) +
 encodeURIComponent(product) +
 
 "&price=" +
-encodeURIComponent(price) +
+encodeURIComponent(price);
 
+/* COLOR WILL BE PASSED ONLY WHEN AVAILABLE */
+
+if(color){
+
+thankYouURL +=
 "&color=" +
-encodeURIComponent(color)
+encodeURIComponent(color);
 
+}
+
+window.location.replace(
+thankYouURL
 );
 
 }
@@ -1014,3 +1026,4 @@ encodeURIComponent(color)
 </body>
 
 </html>
+
