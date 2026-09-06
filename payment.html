@@ -1150,9 +1150,7 @@ restorePaymentState();
 
 /* ==========================================================
    EDIT ADDRESS
-   ONLY CHANGE:
-   Edit now goes to index.html.
-   Existing payment state is NOT cleared.
+   PAYMENT STATE IS NOT CLEARED
 ========================================================== */
 
 function editAddress(){
@@ -1202,18 +1200,30 @@ encodeURIComponent(memberId);
 
 }
 
+
+/* ==========================================================
+   PAYMENT STARTED / COMPLETED
+   If user already returned from UPI,
+   index.html will hide quantity box.
+========================================================== */
+
+const paymentState =
+getPaymentState();
+
+if(
+paymentState.returnedFromUPI === true ||
+paymentState.paymentCompleted === true
+){
+
+backURL +=
+"&paid=1";
+
+}
+
+
 /*
  IMPORTANT:
  Do NOT clear paymentState here.
-
- If payment was already initiated,
- loxicaPaymentState_<session> remains saved.
-
- If payment was never initiated,
- there is no returnedFromUPI state,
- so payment page will show Pay Now.
-
- This preserves the correct payment flow.
 */
 
 window.location.replace(backURL);
@@ -1682,20 +1692,19 @@ encodeURIComponent(memberId);
 
 }
 
-/*
- PAYMENT COMPLETED:
- index.html gets paid=1
- so quantity box will be hidden.
 
- PAYMENT NOT COMPLETED:
- no paid=1
- so quantity box will remain visible.
-*/
+/* ==========================================================
+   PAYMENT STARTED / COMPLETED
+   Hide quantity when returning to index.
+========================================================== */
 
 const paymentState =
 getPaymentState();
 
-if(paymentState.paymentCompleted === true){
+if(
+paymentState.returnedFromUPI === true ||
+paymentState.paymentCompleted === true
+){
 
 backURL +=
 "&paid=1";
@@ -2580,7 +2589,7 @@ return;
 
 /* ==========================================================
    PAYMENT COMPLETED
-   Save completed state so index.html receives paid=1
+   Keep payment state so index.html receives paid=1
 ========================================================== */
 
 savePaymentState({
