@@ -835,6 +835,9 @@ const originalPrice =
 const checkoutSession =
 (params.get("session") || "").trim();
 
+const existingOrderId =
+(params.get("orderId") || "").trim();
+
 let memberId =
 (params.get("memberId") || "").trim();
 
@@ -1321,6 +1324,24 @@ function autoSaveCheckoutDetails(){
     }
 
 
+    /*
+       IMPORTANT:
+       Keep orderId from payment page also.
+       This allows the existing Google Sheet row
+       to be updated after editing the details.
+    */
+
+    if(
+        existingOrderId &&
+        !savedData.orderId
+    ){
+
+        savedData.orderId =
+            existingOrderId;
+
+    }
+
+
     sessionStorage.setItem(
         storageKey,
         JSON.stringify(savedData)
@@ -1395,8 +1416,8 @@ document.getElementById(
 
 /* ==================================================
    FORM SUBMIT
-   ONLY SAVE TO SESSION
-   DO NOT SEND TO GOOGLE SHEET
+   UPDATE EXISTING ORDER IN GOOGLE SHEET
+   ONLY WHEN EXISTING ORDER ID IS PRESENT
 ================================================== */
 
 document.getElementById(
@@ -1622,6 +1643,14 @@ document.getElementById(
 
         /* KEEP EXISTING ORDER ID IF PRESENT */
 
+        if(existingOrderId){
+
+            currentData.orderId =
+                existingOrderId;
+
+        }
+
+
         if(storageKey){
 
             const savedDetails =
@@ -1660,17 +1689,191 @@ document.getElementById(
         }
 
 
-        /* ==========================================
-           SAVE ONLY TO SESSION STORAGE
-           NO GOOGLE SHEET SAVE HERE
-        ========================================== */
+        /*
+        ==================================================
+        NEW FIX
 
-        if(storageKey){
+        If this is an existing order, update the same
+        Google Sheet row before opening payment page.
 
-            sessionStorage.setItem(
-                storageKey,
-                JSON.stringify(currentData)
-            );
+        New orders are NOT sent here, so the old flow
+        remains unchanged.
+        ==================================================
+        */
+
+        if(currentData.orderId){
+
+            submitBtn.disabled = true;
+
+            submitBtn.style.background =
+                "#2563EB";
+
+            submitBtn.innerHTML =
+                '<span class="spinner"></span>Updating Order...';
+
+
+            try{
+
+                const updateData =
+                    new URLSearchParams();
+
+
+                updateData.append(
+                    "orderId",
+                    currentData.orderId
+                );
+
+                updateData.append(
+                    "product",
+                    currentData.product
+                );
+
+                updateData.append(
+                    "price",
+                    currentData.price
+                );
+
+                updateData.append(
+                    "originalPrice",
+                    currentData.originalPrice
+                );
+
+                updateData.append(
+                    "quantity",
+                    currentData.quantity
+                );
+
+                updateData.append(
+                    "totalPrice",
+                    currentData.totalPrice
+                );
+
+                updateData.append(
+                    "name",
+                    currentData.name
+                );
+
+                updateData.append(
+                    "phone",
+                    currentData.phone
+                );
+
+                updateData.append(
+                    "address",
+                    currentData.address
+                );
+
+                updateData.append(
+                    "landmark",
+                    currentData.landmark
+                );
+
+                updateData.append(
+                    "city",
+                    currentData.city
+                );
+
+                updateData.append(
+                    "state",
+                    currentData.state
+                );
+
+                updateData.append(
+                    "pincode",
+                    currentData.pincode
+                );
+
+                updateData.append(
+                    "color",
+                    currentData.color
+                );
+
+                updateData.append(
+                    "memberId",
+                    currentData.memberId
+                );
+
+
+                const response =
+                    await fetch(
+                        scriptURL,
+                        {
+                            method:"POST",
+                            body:updateData
+                        }
+                    );
+
+
+                const result =
+                    await response.text();
+
+
+                console.log(
+                    "ORDER UPDATE RESPONSE:",
+                    result
+                );
+
+
+                /*
+                   Save the latest edited details
+                   locally with the same order ID.
+                */
+
+                if(storageKey){
+
+                    sessionStorage.setItem(
+                        storageKey,
+                        JSON.stringify(
+                            currentData
+                        )
+                    );
+
+                }
+
+            }
+            catch(error){
+
+                console.error(
+                    "ORDER UPDATE ERROR:",
+                    error
+                );
+
+                /*
+                   Do not block the existing checkout
+                   flow if Google Sheet update has a
+                   temporary network/CORS issue.
+                */
+
+                if(storageKey){
+
+                    sessionStorage.setItem(
+                        storageKey,
+                        JSON.stringify(
+                            currentData
+                        )
+                    );
+
+                }
+
+            }
+
+        }else{
+
+            /*
+               Original behavior for a new checkout:
+               save only to session storage.
+            */
+
+            if(storageKey){
+
+                sessionStorage.setItem(
+                    storageKey,
+                    JSON.stringify(
+                        currentData
+                    )
+                );
+
+            }
 
         }
 
@@ -1685,7 +1888,7 @@ document.getElementById(
 
 
         console.log(
-            "CHECKOUT DETAILS SAVED LOCALLY ONLY:",
+            "CHECKOUT DETAILS SAVED:",
             currentData
         );
 
