@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -57,7 +58,7 @@ display:block;
 
 .content{
 padding:20px;
-padding-bottom:95px;
+padding-bottom:115px;
 }
 
 .title{
@@ -348,10 +349,28 @@ color:#555;
 text-align:center;
 }
 
+
+/* ==========================================================
+   BOTTOM ACTION SECTION
+========================================================== */
+
+.bottom-action-section{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:100%;
+max-width:430px;
+padding:12px 20px;
+background:#fff;
+border-top:1px solid #ddd;
+box-shadow:0 -4px 15px rgba(0,0,0,.10);
+z-index:1000;
+}
+
 #payBtn{
 display:block;
-width:calc(100% - 40px);
-max-width:390px;
+width:100%;
 padding:15px;
 border:none;
 border-radius:8px;
@@ -361,11 +380,6 @@ font-size:17px;
 font-weight:bold;
 cursor:pointer;
 margin:0;
-position:fixed;
-bottom:18px;
-left:50%;
-transform:translateX(-50%);
-z-index:1000;
 box-shadow:0 4px 15px rgba(0,0,0,.18);
 }
 
@@ -380,8 +394,7 @@ cursor:not-allowed;
 
 #paid{
 display:none;
-width:calc(100% - 40px);
-max-width:390px;
+width:100%;
 padding:15px;
 border:none;
 border-radius:8px;
@@ -391,11 +404,6 @@ font-size:17px;
 font-weight:bold;
 cursor:pointer;
 margin:0;
-position:fixed;
-bottom:18px;
-left:50%;
-transform:translateX(-50%);
-z-index:1000;
 box-shadow:0 4px 15px rgba(0,0,0,.18);
 }
 
@@ -515,7 +523,7 @@ color:#777;
 
 .content{
 padding:18px;
-padding-bottom:95px;
+padding-bottom:115px;
 }
 
 .logo{
@@ -533,6 +541,10 @@ font-size:17px;
 
 .price{
 font-size:24px;
+}
+
+.bottom-action-section{
+padding:12px 18px;
 }
 
 }
@@ -815,6 +827,8 @@ Select your preferred payment method and click <b>Pay Now</b> to continue.
 </div>
 
 
+<div class="bottom-action-section">
+
 <button
 type="button"
 id="payBtn"
@@ -825,9 +839,6 @@ Pay Now
 </button>
 
 
-<div id="appMessage"></div>
-
-
 <button
 type="button"
 id="paid"
@@ -836,6 +847,11 @@ onclick="showVerification()">
 I Have Paid
 
 </button>
+
+</div>
+
+
+<div id="appMessage"></div>
 
 </div>
 
@@ -2740,3 +2756,4 @@ option.classList.remove("disabled");
 </body>
 
 </html>
+
