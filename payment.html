@@ -1159,10 +1159,6 @@ addressParts.join(", ") ||
 "Delivery address not available";
 
 
-/*
-   Fill edit fields.
-*/
-
 document.getElementById("editName").value =
 name;
 
@@ -1668,7 +1664,6 @@ false;
 saveBtn.innerText =
 "Save Address";
 
-
 }
 
 
@@ -1801,15 +1796,6 @@ window.location.href
 window.addEventListener(
 "popstate",
 function(){
-
-/*
-   After returning from UPI,
-   browser back should NOT send
-   the customer back to checkout.
-
-   Payment page stays available with
-   Delivery Address + Edit.
-*/
 
 if(returnedFromUPI){
 
@@ -2208,7 +2194,7 @@ return orderId;
    PAY NOW
 ========================================================== */
 
-function payNow(){
+async function payNow(){
 
 if(paymentStarted){
 
@@ -2216,6 +2202,10 @@ return;
 
 }
 
+
+/*
+   Start payment state.
+*/
 
 paymentStarted = true;
 
@@ -2230,38 +2220,114 @@ sessionStorage.setItem(
 );
 
 
+const payBtn =
+document.getElementById("payBtn");
+
+
+const message =
+document.getElementById("appMessage");
+
+
 /*
-   Save details immediately.
+   Save order FIRST.
+*/
+
+payBtn.disabled =
+true;
+
+payBtn.innerText =
+"Saving Order...";
+
+message.style.display =
+"none";
+
+
+try{
+
+/*
+   IMPORTANT:
+   Google Sheet save must finish BEFORE
+   opening the UPI app.
 */
 
 paymentSavePromise =
-saveOrderToSheet()
+saveOrderToSheet();
 
-.then(function(result){
+
+await paymentSavePromise;
+
 
 console.log(
-"PAYMENT SAVE COMPLETE:",
-result
+"PAYMENT SAVE COMPLETE. ORDER ID:",
+orderId
 );
 
-return result;
 
-})
+/*
+   Make sure Order ID was received.
+*/
 
-.catch(function(error){
+if(!orderId){
+
+throw new Error(
+"Order ID was not received."
+);
+
+}
+
+}
+catch(error){
 
 console.error(
 "PAYMENT SAVE ERROR:",
 error
 );
 
+
+paymentStarted = false;
+
+
+sessionStorage.removeItem(
+"loxicaPaymentStarted"
+);
+
+
 paymentSaveError =
 error;
 
-throw error;
 
-});
+payBtn.disabled =
+false;
 
+payBtn.innerText =
+"Pay Now 💳";
+
+
+message.style.display =
+"block";
+
+
+message.innerHTML =
+"Unable to save your order. Please try again.";
+
+
+alert(
+"Your order could not be saved.\n\n" +
+error.message
+);
+
+
+return;
+
+}
+
+
+/*
+   ========================================================
+   ORDER IS SAVED.
+   NOW OPEN UPI.
+   ========================================================
+*/
 
 const upiID =
 "8714917161@fam";
@@ -2315,13 +2381,9 @@ encodeURIComponent(product);
 }
 
 
-const payBtn =
-document.getElementById("payBtn");
-
-
-payBtn.disabled =
-true;
-
+/*
+   Open payment.
+*/
 
 payBtn.innerText =
 "Opening Payment...";
@@ -2334,6 +2396,10 @@ appLink;
 
 },100);
 
+
+/*
+   Fallback if UPI app does not open.
+*/
 
 fallbackTimer =
 setTimeout(function(){
@@ -2355,10 +2421,6 @@ false;
 
 payBtn.innerText =
 "Pay Now 💳";
-
-
-const message =
-document.getElementById("appMessage");
 
 
 message.style.display =
@@ -2570,7 +2632,8 @@ return;
 
 
 /*
-   Wait for Pay Now save.
+   Wait only for the already-started
+   Pay Now save.
 */
 
 if(paymentSavePromise){
