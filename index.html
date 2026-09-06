@@ -253,6 +253,23 @@ textarea{
     font-weight:normal;
 }
 
+
+/* ONLY CHANGE: CONTINUE BUTTON SECTION */
+
+.bottom-action-section{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:calc(100% - 30px);
+    max-width:1070px;
+    padding:12px 0;
+    background:#fff;
+    border-top:1px solid #ddd;
+    box-shadow:0 -4px 15px rgba(0,0,0,.10);
+    z-index:9999;
+}
+
 .continue-btn{
     width:100%;
     padding:14px;
@@ -263,15 +280,7 @@ textarea{
     font-size:17px;
     font-weight:bold;
     cursor:pointer;
-    margin-top:4px;
-
-    position:fixed;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:calc(100% - 30px);
-    max-width:1070px;
-    z-index:9999;
+    margin-top:0;
 }
 
 .continue-btn:hover{
@@ -448,6 +457,11 @@ textarea{
         font-size:20px;
     }
 
+    .bottom-action-section{
+        width:100%;
+        padding:12px 10px;
+    }
+
 }
 
 </style>
@@ -501,7 +515,6 @@ id="price">
 </div>
 
 </div>
-
 
 <!-- DELIVERY ADDRESS -->
 
@@ -663,7 +676,6 @@ Your details are securely saved for this checkout.
 
 </div>
 
-
 <!-- ORDER SUMMARY -->
 
 <aside class="summary">
@@ -719,7 +731,8 @@ id="quantityValue">
 type="button"
 class="quantity-btn"
 id="plusBtn">
-+ </button>
+
+* </button>
 
 </div>
 
@@ -776,8 +789,9 @@ Fast delivery across India.
 
 </aside>
 
+<!-- CONTINUE BUTTON SECTION -->
 
-<!-- CONTINUE BUTTON BELOW ORDER SUMMARY -->
+<div class="bottom-action-section">
 
 <button
 type="submit"
@@ -787,6 +801,8 @@ class="continue-btn">
 Continue To Payment
 
 </button>
+
+</div>
 
 </div>
 
