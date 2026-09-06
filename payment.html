@@ -676,19 +676,6 @@ const price =
 params.get("price") || "0";
 
 
-/*
-   IMPORTANT:
-
-   orderId mutable aanu.
-
-   Continue To Payment samayath
-   orderId illayirikkam.
-
-   I Have Paid click cheyyumbol
-   Google Apps Script generate cheytha
-   orderId ivide set cheyyum.
-*/
-
 let orderId =
 params.get("orderId") || "";
 
@@ -739,10 +726,23 @@ let pageWasHidden = false;
 
 let fallbackTimer = null;
 
-
 let goingBackToCheckout = false;
 
 let goingToThankYou = false;
+
+
+/*
+   NEW:
+
+   Pay Now click samayath start cheyyunna
+   Google Sheet save promise.
+*/
+
+let paymentSavePromise = null;
+
+let paymentSaveCompleted = false;
+
+let paymentSaveError = null;
 
 
 /* ==========================================================
@@ -934,7 +934,368 @@ selectedApp = app;
 
 
 /* ==========================================================
+   NEW FUNCTION
+   READ CHECKOUT DETAILS
+========================================================== */
+
+function getCheckoutOrderData(){
+
+if(!checkoutStorageKey){
+
+throw new Error(
+"Checkout session is missing."
+);
+
+}
+
+
+const savedDetails =
+sessionStorage.getItem(checkoutStorageKey);
+
+
+if(!savedDetails){
+
+throw new Error(
+"Checkout details are missing."
+);
+
+}
+
+
+let checkoutData;
+
+
+try{
+
+checkoutData =
+JSON.parse(savedDetails);
+
+}
+catch(error){
+
+console.error(
+"CHECKOUT SESSION PARSE ERROR:",
+error
+);
+
+throw new Error(
+"Unable to read checkout details."
+);
+
+}
+
+
+const finalMemberId =
+String(
+checkoutData.memberId ||
+memberId ||
+""
+).trim();
+
+
+if(!finalMemberId){
+
+throw new Error(
+"Customer account information is missing."
+);
+
+}
+
+
+/*
+   Existing orderId undenkil preserve cheyyum.
+*/
+
+if(checkoutData.orderId){
+
+orderId =
+String(
+checkoutData.orderId
+).trim();
+
+}
+
+
+/*
+   Final order data.
+*/
+
+const orderData = {
+
+product:
+checkoutData.product ||
+product,
+
+price:
+Number(
+checkoutData.price ??
+price
+) || 0,
+
+originalPrice:
+Number(
+checkoutData.originalPrice ??
+originalPrice
+) || 0,
+
+quantity:
+parseInt(
+checkoutData.quantity ||
+quantity ||
+"1",
+10
+) || 1,
+
+totalPrice:
+Number(
+checkoutData.totalPrice ??
+totalPrice
+) || 0,
+
+name:
+checkoutData.name ||
+"",
+
+phone:
+checkoutData.phone ||
+"",
+
+address:
+checkoutData.address ||
+"",
+
+landmark:
+checkoutData.landmark ||
+"",
+
+city:
+checkoutData.city ||
+"",
+
+state:
+checkoutData.state ||
+"",
+
+pincode:
+checkoutData.pincode ||
+"",
+
+color:
+checkoutData.color ||
+color ||
+"-",
+
+memberId:
+finalMemberId
+
+};
+
+
+if(orderId){
+
+orderData.orderId =
+orderId;
+
+}
+
+
+return {
+checkoutData:
+checkoutData,
+
+orderData:
+orderData,
+
+finalMemberId:
+finalMemberId
+
+};
+
+}
+
+
+/* ==========================================================
+   NEW FUNCTION
+   SAVE ORDER TO GOOGLE SHEET
+========================================================== */
+
+async function saveOrderToSheet(){
+
+if(paymentSaveCompleted){
+
+return orderId;
+
+}
+
+
+if(paymentSaveError){
+
+throw paymentSaveError;
+
+}
+
+
+const data =
+getCheckoutOrderData();
+
+
+const orderData =
+data.orderData;
+
+const checkoutData =
+data.checkoutData;
+
+const finalMemberId =
+data.finalMemberId;
+
+
+console.log(
+"========== LOXICA PAYMENT SAVE START =========="
+);
+
+console.log(
+"ORDER DATA:",
+orderData
+);
+
+console.log(
+"================================================"
+);
+
+
+const response =
+await fetch(
+scriptURL,
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"text/plain;charset=utf-8"
+},
+
+body:
+JSON.stringify(
+orderData
+)
+
+}
+);
+
+
+const responseText =
+await response.text();
+
+
+console.log(
+"GOOGLE SCRIPT RAW RESPONSE:",
+responseText
+);
+
+
+let result;
+
+
+try{
+
+result =
+JSON.parse(responseText);
+
+}
+catch(jsonError){
+
+console.error(
+"INVALID JSON FROM GOOGLE SCRIPT:",
+jsonError
+);
+
+throw new Error(
+"Google Apps Script returned an invalid response."
+);
+
+}
+
+
+console.log(
+"GOOGLE SCRIPT RESPONSE:",
+result
+);
+
+
+if(
+!result ||
+result.success !== true
+){
+
+throw new Error(
+result &&
+result.error
+? result.error
+: "Order could not be saved."
+);
+
+}
+
+
+const returnedOrderId =
+String(
+result.orderId || ""
+).trim();
+
+
+if(!returnedOrderId){
+
+throw new Error(
+"Order ID not received from Google Apps Script."
+);
+
+}
+
+
+/*
+   Set new Order ID.
+*/
+
+orderId =
+returnedOrderId;
+
+
+/*
+   Update checkout session.
+*/
+
+checkoutData.orderId =
+orderId;
+
+checkoutData.memberId =
+finalMemberId;
+
+
+sessionStorage.setItem(
+checkoutStorageKey,
+JSON.stringify(checkoutData)
+);
+
+
+paymentSaveCompleted = true;
+
+paymentSaveError = null;
+
+
+console.log(
+"LOXICA ORDER SAVED SUCCESSFULLY:",
+orderId
+);
+
+
+return orderId;
+
+}
+
+
+/* ==========================================================
    PAY NOW
+   UPI OPEN + GOOGLE SHEET SAVE
 ========================================================== */
 
 function payNow(){
@@ -955,6 +1316,40 @@ sessionStorage.setItem(
 "loxicaPaymentStarted",
 "true"
 );
+
+
+/*
+   START GOOGLE SHEET SAVE IMMEDIATELY.
+
+   Await cheyyunnilla.
+   Athukond UPI opening delay aakilla.
+*/
+
+paymentSavePromise =
+saveOrderToSheet()
+.then(function(result){
+
+console.log(
+"PAYMENT SAVE COMPLETE:",
+result
+);
+
+return result;
+
+})
+.catch(function(error){
+
+console.error(
+"PAYMENT SAVE ERROR:",
+error
+);
+
+paymentSaveError = error;
+
+throw error;
+
+});
+
 
 const upiID =
 "8714917161@fam";
@@ -1223,7 +1618,8 @@ document.getElementById("paymentInstruction")
 
 /* ==========================================================
    I HAVE PAID
-   SAVE ORDER → GOOGLE SHEET
+   NO NEW SAVE
+   WAIT FOR PAY NOW SAVE IF NEEDED
    THEN → THANK YOU
 ========================================================== */
 
@@ -1245,94 +1641,74 @@ return;
 
 
 /*
-   Checkout session must exist because
-   delivery details are stored there.
+   Pay Now click samayath save start aayittundavum.
+
+   Save complete aakunnath vare wait cheyyum.
 */
 
-if(!checkoutStorageKey){
+if(paymentSavePromise){
 
-alert(
-"Checkout session is missing. Please go back and try again."
-);
+paidBtn.disabled = true;
 
-return;
-
-}
-
-
-/*
-   Read checkout details from sessionStorage.
-*/
-
-const savedDetails =
-sessionStorage.getItem(checkoutStorageKey);
-
-
-if(!savedDetails){
-
-alert(
-"Checkout details are missing. Please go back and try again."
-);
-
-return;
-
-}
-
-
-let checkoutData;
+paidBtn.innerText =
+"Processing...";
 
 
 try{
 
-checkoutData =
-JSON.parse(savedDetails);
+await paymentSavePromise;
 
 }
 catch(error){
 
 console.error(
-"CHECKOUT SESSION PARSE ERROR:",
+"PAYMENT SAVE FAILED:",
 error
 );
 
+paidBtn.disabled = false;
+
+paidBtn.innerText =
+"I Have Paid ✅";
+
+
 alert(
-"Unable to read checkout details. Please go back and try again."
+"Unable to save your order.\n\n" +
+error.message
 );
 
 return;
 
 }
 
-
-/*
-   Member ID:
-
-   Prefer saved checkout memberId.
-   Fallback to URL memberId.
-*/
-
-const finalMemberId =
-String(
-checkoutData.memberId ||
-memberId ||
-""
-).trim();
-
-
-if(!finalMemberId){
-
-alert(
-"Customer account information is missing. Please go back and try again."
-);
-
-return;
-
 }
 
 
 /*
-   Existing orderId undenkil preserve cheyyum.
+   Safety fallback:
+
+   paymentSavePromise illenkil,
+   old session order ID undenkil use cheyyum.
 */
+
+if(
+!orderId &&
+checkoutStorageKey
+){
+
+const savedDetails =
+sessionStorage.getItem(
+checkoutStorageKey
+);
+
+
+if(savedDetails){
+
+try{
+
+const checkoutData =
+JSON.parse(savedDetails);
+
 
 if(checkoutData.orderId){
 
@@ -1343,256 +1719,45 @@ checkoutData.orderId
 
 }
 
-
-/*
-   Final order data.
-*/
-
-const orderData = {
-
-product:
-checkoutData.product ||
-product,
-
-price:
-Number(
-checkoutData.price ??
-price
-) || 0,
-
-originalPrice:
-Number(
-checkoutData.originalPrice ??
-originalPrice
-) || 0,
-
-quantity:
-parseInt(
-checkoutData.quantity ||
-quantity ||
-"1",
-10
-) || 1,
-
-totalPrice:
-Number(
-checkoutData.totalPrice ??
-totalPrice
-) || 0,
-
-name:
-checkoutData.name ||
-"",
-
-phone:
-checkoutData.phone ||
-"",
-
-address:
-checkoutData.address ||
-"",
-
-landmark:
-checkoutData.landmark ||
-"",
-
-city:
-checkoutData.city ||
-"",
-
-state:
-checkoutData.state ||
-"",
-
-pincode:
-checkoutData.pincode ||
-"",
-
-color:
-checkoutData.color ||
-color ||
-"-",
-
-memberId:
-finalMemberId
-
-};
-
-
-/*
-   Existing order ID send cheyyum.
-   Undenkil Apps Script same row update cheyyum.
-*/
-
-if(orderId){
-
-orderData.orderId =
-orderId;
-
 }
-
-
-/* ==========================================================
-   BUTTON LOCK
-========================================================== */
-
-paidBtn.disabled = true;
-
-
-/*
-   Keep existing button design.
-   Only temporarily change text while saving.
-*/
-
-paidBtn.innerText =
-"Processing...";
-
-
-console.log(
-"========== LOXICA PAYMENT CONFIRM =========="
-);
-
-console.log(
-"ORDER DATA:",
-orderData
-);
-
-console.log(
-"============================================="
-);
-
-
-/* ==========================================================
-   SAVE TO GOOGLE APPS SCRIPT
-========================================================== */
-
-try{
-
-const response =
-await fetch(
-scriptURL,
-{
-method:"POST",
-
-headers:{
-"Content-Type":
-"text/plain;charset=utf-8"
-},
-
-body:
-JSON.stringify(
-orderData
-)
-
-}
-);
-
-
-const responseText =
-await response.text();
-
-
-console.log(
-"GOOGLE SCRIPT RAW RESPONSE:",
-responseText
-);
-
-
-let result;
-
-
-try{
-
-result =
-JSON.parse(responseText);
-
-}
-catch(jsonError){
+catch(error){
 
 console.error(
-"INVALID JSON FROM GOOGLE SCRIPT:",
-jsonError
-);
-
-throw new Error(
-"Google Apps Script returned an invalid response."
+"CHECKOUT DATA ERROR:",
+error
 );
 
 }
 
-
-console.log(
-"GOOGLE SCRIPT RESPONSE:",
-result
-);
-
-
-/* ==========================================================
-   CHECK SUCCESS
-========================================================== */
-
-if(
-!result ||
-result.success !== true
-){
-
-throw new Error(
-result &&
-result.error
-? result.error
-: "Order could not be saved."
-);
-
 }
-
-
-/* ==========================================================
-   GET ORDER ID
-========================================================== */
-
-const returnedOrderId =
-String(
-result.orderId || ""
-).trim();
-
-
-if(!returnedOrderId){
-
-throw new Error(
-"Order ID not received from Google Apps Script."
-);
 
 }
 
 
 /*
-   Set the new Order ID.
+   Order ID illenkil Thank You page-il pokaruth.
 */
 
-orderId =
-returnedOrderId;
+if(!orderId){
+
+paidBtn.disabled = false;
+
+paidBtn.innerText =
+"I Have Paid ✅";
 
 
-/* ==========================================================
-   UPDATE SESSION STORAGE
-========================================================== */
-
-checkoutData.orderId =
-orderId;
-
-checkoutData.memberId =
-finalMemberId;
-
-
-sessionStorage.setItem(
-checkoutStorageKey,
-JSON.stringify(checkoutData)
+alert(
+"Order could not be confirmed. Please try again."
 );
 
+return;
 
-/* ==========================================================
-   CLEAR PAYMENT STATE
-========================================================== */
+}
+
+
+/*
+   Clear payment state.
+*/
 
 sessionStorage.removeItem(
 "loxicaPaymentStarted"
@@ -1612,37 +1777,10 @@ goingToThankYou = true;
 
 /*
    Go one history step back.
-   popstate will replace payment with
-   Thank You page.
+   popstate → Thank You page.
 */
 
 history.back();
-
-}
-catch(error){
-
-console.error(
-"LOXICA PAYMENT SAVE ERROR:",
-error
-);
-
-
-/*
-   Allow retry if saving failed.
-*/
-
-paidBtn.disabled = false;
-
-paidBtn.innerText =
-"I Have Paid ✅";
-
-
-alert(
-"Unable to save your order.\n\n" +
-error.message
-);
-
-}
 
 }
 
