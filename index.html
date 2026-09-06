@@ -1712,13 +1712,13 @@ document.getElementById(
 
                             headers:{
                                 "Content-Type":
-                                    "application/json"
+                                    "application/x-www-form-urlencoded;charset=UTF-8"
                             },
 
                             body:
-                                JSON.stringify(
+                                new URLSearchParams(
                                     currentData
-                                )
+                                ).toString()
                         }
                     );
 
