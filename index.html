@@ -819,7 +819,7 @@ window.location.search
 
 
 /* ==================================================
-   PAYMENT COMPLETED FLAG
+   PAYMENT COMPLETED / PAYMENT STARTED FLAG
 ================================================== */
 
 const paymentCompleted =
@@ -827,22 +827,43 @@ const paymentCompleted =
 
 
 /* ==================================================
-   HIDE QUANTITY AFTER PAYMENT
+   HIDE QUANTITY
+   paid=1 means:
+   Pay Now -> UPI -> Back -> Edit
+   OR
+   I Have Paid -> Index
+
+   Otherwise quantity remains visible.
 ================================================== */
 
-if(paymentCompleted){
+function updateQuantityVisibility(){
 
     const quantityRow =
-        document.getElementById("quantityRow");
+        document.getElementById(
+            "quantityRow"
+        );
 
-    if(quantityRow){
+    if(!quantityRow){
+        return;
+    }
+
+    if(paymentCompleted){
 
         quantityRow.style.display =
             "none";
 
+    }else{
+
+        quantityRow.style.display =
+            "flex";
+
     }
 
 }
+
+
+/* Run immediately */
+updateQuantityVisibility();
 
 
 const product =
@@ -1316,6 +1337,8 @@ function restoreCheckout(){
 
         clearCheckoutForm();
 
+        updateQuantityVisibility();
+
         return;
 
     }
@@ -1330,6 +1353,8 @@ function restoreCheckout(){
     if(!savedDetails){
 
         clearCheckoutForm();
+
+        updateQuantityVisibility();
 
         return;
 
@@ -1480,6 +1505,14 @@ function restoreCheckout(){
 
     }
 
+
+    /* IMPORTANT:
+       Restore cannot make quantity visible
+       when paid=1 is present.
+    */
+
+    updateQuantityVisibility();
+
 }
 
 
@@ -1490,6 +1523,8 @@ window.addEventListener(
         resetContinueButton();
 
         restoreCheckout();
+
+        updateQuantityVisibility();
 
     }
 );
