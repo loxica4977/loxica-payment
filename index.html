@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -700,7 +699,9 @@ id="summaryColor">
 
 </div>
 
-<div class="summary-row">
+<div
+class="summary-row"
+id="quantityRow">
 
 <span>Quantity</span>
 
@@ -723,7 +724,7 @@ id="quantityValue">
 type="button"
 class="quantity-btn"
 id="plusBtn">
-*
++
 </button>
 
 </div>
@@ -815,6 +816,33 @@ const params =
 new URLSearchParams(
 window.location.search
 );
+
+
+/* ==================================================
+   PAYMENT COMPLETED FLAG
+================================================== */
+
+const paymentCompleted =
+(params.get("paid") || "").trim() === "1";
+
+
+/* ==================================================
+   HIDE QUANTITY AFTER PAYMENT
+================================================== */
+
+if(paymentCompleted){
+
+    const quantityRow =
+        document.getElementById("quantityRow");
+
+    if(quantityRow){
+
+        quantityRow.style.display =
+            "none";
+
+    }
+
+}
 
 
 const product =
