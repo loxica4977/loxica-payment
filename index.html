@@ -835,14 +835,19 @@ const originalPrice =
 const checkoutSession =
 (params.get("session") || "").trim();
 
-const existingOrderId =
-(params.get("orderId") || "").trim();
-
 let memberId =
 (params.get("memberId") || "").trim();
 
 const selectedColorFromURL =
 (params.get("color") || "").trim();
+
+
+/* ==================================================
+   KEEP EXISTING ORDER ID
+================================================== */
+
+const existingOrderId =
+(params.get("orderId") || "").trim();
 
 
 let quantity =
@@ -1324,17 +1329,7 @@ function autoSaveCheckoutDetails(){
     }
 
 
-    /*
-       IMPORTANT:
-       Keep orderId from payment page also.
-       This allows the existing Google Sheet row
-       to be updated after editing the details.
-    */
-
-    if(
-        existingOrderId &&
-        !savedData.orderId
-    ){
+    if(existingOrderId){
 
         savedData.orderId =
             existingOrderId;
@@ -1416,8 +1411,7 @@ document.getElementById(
 
 /* ==================================================
    FORM SUBMIT
-   UPDATE EXISTING ORDER IN GOOGLE SHEET
-   ONLY WHEN EXISTING ORDER ID IS PRESENT
+   UPDATE EXISTING ORDER / SAVE NEW CHECKOUT
 ================================================== */
 
 document.getElementById(
@@ -1641,7 +1635,7 @@ document.getElementById(
         };
 
 
-        /* KEEP EXISTING ORDER ID IF PRESENT */
+        /* KEEP EXISTING ORDER ID */
 
         if(existingOrderId){
 
@@ -1665,7 +1659,10 @@ document.getElementById(
                         JSON.parse(savedDetails);
 
 
-                    if(oldData.orderId){
+                    if(
+                        !currentData.orderId &&
+                        oldData.orderId
+                    ){
 
                         currentData.orderId =
                             String(
@@ -1689,17 +1686,10 @@ document.getElementById(
         }
 
 
-        /*
-        ==================================================
-        NEW FIX
-
-        If this is an existing order, update the same
-        Google Sheet row before opening payment page.
-
-        New orders are NOT sent here, so the old flow
-        remains unchanged.
-        ==================================================
-        */
+        /* ==========================================
+           UPDATE GOOGLE SHEET
+           ONLY WHEN EXISTING ORDER ID IS PRESENT
+        ========================================== */
 
         if(currentData.orderId){
 
@@ -1714,98 +1704,27 @@ document.getElementById(
 
             try{
 
-                const updateData =
-                    new URLSearchParams();
-
-
-                updateData.append(
-                    "orderId",
-                    currentData.orderId
-                );
-
-                updateData.append(
-                    "product",
-                    currentData.product
-                );
-
-                updateData.append(
-                    "price",
-                    currentData.price
-                );
-
-                updateData.append(
-                    "originalPrice",
-                    currentData.originalPrice
-                );
-
-                updateData.append(
-                    "quantity",
-                    currentData.quantity
-                );
-
-                updateData.append(
-                    "totalPrice",
-                    currentData.totalPrice
-                );
-
-                updateData.append(
-                    "name",
-                    currentData.name
-                );
-
-                updateData.append(
-                    "phone",
-                    currentData.phone
-                );
-
-                updateData.append(
-                    "address",
-                    currentData.address
-                );
-
-                updateData.append(
-                    "landmark",
-                    currentData.landmark
-                );
-
-                updateData.append(
-                    "city",
-                    currentData.city
-                );
-
-                updateData.append(
-                    "state",
-                    currentData.state
-                );
-
-                updateData.append(
-                    "pincode",
-                    currentData.pincode
-                );
-
-                updateData.append(
-                    "color",
-                    currentData.color
-                );
-
-                updateData.append(
-                    "memberId",
-                    currentData.memberId
-                );
-
-
                 const response =
                     await fetch(
                         scriptURL,
                         {
                             method:"POST",
-                            body:updateData
+
+                            headers:{
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    currentData
+                                )
                         }
                     );
 
 
                 const result =
-                    await response.text();
+                    await response.json();
 
 
                 console.log(
@@ -1814,10 +1733,15 @@ document.getElementById(
                 );
 
 
-                /*
-                   Save the latest edited details
-                   locally with the same order ID.
-                */
+                if(!result.success){
+
+                    throw new Error(
+                        result.error ||
+                        "Order update failed"
+                    );
+
+                }
+
 
                 if(storageKey){
 
@@ -1838,31 +1762,25 @@ document.getElementById(
                     error
                 );
 
-                /*
-                   Do not block the existing checkout
-                   flow if Google Sheet update has a
-                   temporary network/CORS issue.
-                */
 
-                if(storageKey){
+                submitBtn.disabled = false;
 
-                    sessionStorage.setItem(
-                        storageKey,
-                        JSON.stringify(
-                            currentData
-                        )
-                    );
+                submitBtn.style.background =
+                    "#111";
 
-                }
+                submitBtn.innerHTML =
+                    "Continue To Payment";
+
+
+                alert(
+                    "Unable to update your order. Please try again."
+                );
+
+                return;
 
             }
 
         }else{
-
-            /*
-               Original behavior for a new checkout:
-               save only to session storage.
-            */
 
             if(storageKey){
 
@@ -1888,7 +1806,7 @@ document.getElementById(
 
 
         console.log(
-            "CHECKOUT DETAILS SAVED:",
+            "CHECKOUT DETAILS:",
             currentData
         );
 
@@ -1915,11 +1833,6 @@ document.getElementById(
             "&totalPrice=" +
             encodeURIComponent(totalPrice);
 
-
-        /*
-           Existing orderId undenkil mathram
-           payment URL-il pass cheyyum.
-        */
 
         if(currentData.orderId){
 
@@ -1969,13 +1882,6 @@ document.getElementById(
             paymentURL
         );
 
-
-        /*
-           IMPORTANT REDIRECT
-
-           replace() preserves the existing
-           browser history behavior.
-        */
 
         window.location.replace(
             paymentURL
