@@ -115,6 +115,132 @@ font-weight:bold;
 color:#0a8f3d;
 }
 
+
+/* ==========================================================
+   DELIVERY ADDRESS BOX
+========================================================== */
+
+.address-card{
+margin-top:14px;
+border:1px solid #ddd;
+border-radius:10px;
+overflow:hidden;
+background:#fff;
+}
+
+.address-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 14px;
+background:#f7f7f7;
+border-bottom:1px solid #ddd;
+}
+
+.address-title{
+font-size:15px;
+font-weight:bold;
+}
+
+.edit-address-btn{
+border:none;
+background:none;
+color:#2563EB;
+font-size:13px;
+font-weight:bold;
+cursor:pointer;
+padding:4px 2px;
+}
+
+.address-view{
+padding:13px 14px;
+}
+
+.address-name{
+font-size:14px;
+font-weight:bold;
+margin-bottom:4px;
+}
+
+.address-phone{
+font-size:12px;
+color:#555;
+margin-bottom:7px;
+}
+
+.address-text{
+font-size:12px;
+line-height:1.5;
+color:#555;
+}
+
+.address-edit{
+display:none;
+padding:13px 14px;
+}
+
+.address-input,
+.address-textarea{
+width:100%;
+border:1px solid #ccc;
+border-radius:7px;
+padding:10px;
+font-size:13px;
+outline:none;
+margin-bottom:9px;
+background:#fff;
+}
+
+.address-textarea{
+min-height:70px;
+resize:vertical;
+}
+
+.address-input:focus,
+.address-textarea:focus{
+border-color:#2563EB;
+}
+
+.address-buttons{
+display:flex;
+gap:8px;
+margin-top:2px;
+}
+
+.save-address-btn{
+flex:1;
+padding:10px;
+border:none;
+border-radius:7px;
+background:#2563EB;
+color:#fff;
+font-size:13px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.cancel-address-btn{
+flex:1;
+padding:10px;
+border:1px solid #ccc;
+border-radius:7px;
+background:#fff;
+color:#333;
+font-size:13px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.save-address-btn:disabled{
+opacity:.7;
+cursor:not-allowed;
+}
+
+
+/* ==========================================================
+   PAYMENT
+========================================================== */
+
 .payment-section{
 margin-top:18px;
 border:1px solid #ddd;
@@ -419,6 +545,7 @@ class="logo">
 Complete Your Payment
 </div>
 
+
 <div class="order-card">
 
 <div class="card-title">
@@ -450,6 +577,136 @@ Total Amount
 </div>
 
 </div>
+
+
+<!-- ========================================================
+     DELIVERY ADDRESS
+========================================================= -->
+
+<div class="address-card">
+
+<div class="address-header">
+
+<div class="address-title">
+Delivery Address
+</div>
+
+<button
+type="button"
+class="edit-address-btn"
+id="editAddressBtn"
+onclick="editAddress()">
+
+Edit
+
+</button>
+
+</div>
+
+
+<div
+class="address-view"
+id="addressView">
+
+<div
+class="address-name"
+id="addressName">
+
+Loading...
+
+</div>
+
+<div
+class="address-phone"
+id="addressPhone">
+
+</div>
+
+<div
+class="address-text"
+id="addressText">
+
+Loading delivery address...
+
+</div>
+
+</div>
+
+
+<div
+class="address-edit"
+id="addressEdit">
+
+<input
+type="text"
+id="editName"
+class="address-input"
+placeholder="Full Name">
+
+<input
+type="tel"
+id="editPhone"
+class="address-input"
+placeholder="Mobile Number"
+maxlength="10">
+
+<textarea
+id="editAddress"
+class="address-textarea"
+placeholder="Full Address"></textarea>
+
+<input
+type="text"
+id="editLandmark"
+class="address-input"
+placeholder="Landmark">
+
+<input
+type="text"
+id="editCity"
+class="address-input"
+placeholder="City">
+
+<input
+type="text"
+id="editState"
+class="address-input"
+placeholder="State">
+
+<input
+type="tel"
+id="editPincode"
+class="address-input"
+placeholder="Pincode"
+maxlength="6">
+
+<div class="address-buttons">
+
+<button
+type="button"
+class="cancel-address-btn"
+onclick="cancelAddressEdit()">
+
+Cancel
+
+</button>
+
+<button
+type="button"
+class="save-address-btn"
+id="saveAddressBtn"
+onclick="saveEditedAddress()">
+
+Save Address
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 
 <div class="payment-section">
 
@@ -483,6 +740,7 @@ Pay using Google Pay
 
 </div>
 
+
 <div class="upi-option"
 data-app="phonepe"
 onclick="selectApp(this,'phonepe')">
@@ -506,6 +764,7 @@ Pay using PhonePe
 </div>
 
 </div>
+
 
 <div class="upi-option selected"
 data-app="upi"
@@ -531,12 +790,15 @@ Use any available UPI app
 
 </div>
 
-<div class="payment-instruction"
+
+<div
+class="payment-instruction"
 id="paymentInstruction">
 
 Select your preferred payment method and click <b>Pay Now</b> to continue.
 
 </div>
+
 
 <button
 type="button"
@@ -547,7 +809,9 @@ Pay Now 💳
 
 </button>
 
+
 <div id="appMessage"></div>
+
 
 <button
 type="button"
@@ -562,6 +826,7 @@ I Have Paid ✅
 
 </div>
 
+
 <div class="security">
 
 <i class="fa-solid fa-shield-halved"></i>
@@ -574,6 +839,7 @@ Never share your UPI PIN or OTP with anyone.
 </div>
 
 </div>
+
 
 <footer class="footer">
 
@@ -593,6 +859,7 @@ Delivered safely to your doorstep.
 
 </div>
 
+
 <div class="feature">
 
 <div class="feature-icon">
@@ -607,6 +874,7 @@ Safe & secure UPI payments.
 
 </div>
 
+
 <div class="feature">
 
 <div class="feature-icon">
@@ -620,6 +888,7 @@ Fast dispatch and quick delivery.
 </p>
 
 </div>
+
 
 <div class="feature">
 
@@ -637,6 +906,7 @@ Discover trending products and collections.
 
 </div>
 
+
 <div class="footer-brand">
 
 <h2>LOXICA</h2>
@@ -647,6 +917,7 @@ Smart Products. Better Everyday Life.
 
 </div>
 
+
 <div class="footer-bottom">
 
 © 2026 LOXICA. All Rights Reserved.
@@ -654,6 +925,7 @@ Smart Products. Better Everyday Life.
 </div>
 
 </footer>
+
 
 <script>
 
@@ -665,42 +937,52 @@ const scriptURL =
 "https://script.google.com/macros/s/AKfycbx61ZbcXj5ySQ0ovhGj-SjnKHpav818Gp4-uUcdBTfpsCd2ZU8B5TxuOWLKklvfnLKj/exec";
 
 
+/* ==========================================================
+   URL PARAMETERS
+========================================================== */
+
 const params =
 new URLSearchParams(window.location.search);
 
 
 const product =
-params.get("product") || "Product Name";
+(params.get("product") || "Product Name").trim();
+
 
 const price =
-params.get("price") || "0";
+(params.get("price") || "0").trim();
 
 
 let orderId =
-params.get("orderId") || "";
+(params.get("orderId") || "").trim();
 
 
 const color =
 (params.get("color") || "").trim();
 
+
 const session =
 (params.get("session") || "").trim();
+
 
 const memberId =
 (params.get("memberId") || "").trim();
 
+
 const quantity =
 (params.get("quantity") || "1").trim();
 
+
 const originalPrice =
 (params.get("originalPrice") || price).trim();
+
 
 const totalPrice =
 (params.get("totalPrice") || price).trim();
 
 
 /* ==========================================================
-   CHECKOUT SESSION STORAGE KEY
+   CHECKOUT STORAGE KEY
 ========================================================== */
 
 const checkoutStorageKey =
@@ -709,12 +991,20 @@ session
 : null;
 
 
+/* ==========================================================
+   DISPLAY PRODUCT
+========================================================== */
+
 document.getElementById("product").innerText =
 product;
 
 document.getElementById("price").innerText =
 "₹" + price;
 
+
+/* ==========================================================
+   PAYMENT STATE
+========================================================== */
 
 let selectedApp = "upi";
 
@@ -731,12 +1021,9 @@ let goingBackToCheckout = false;
 let goingToThankYou = false;
 
 
-/*
-   NEW:
-
-   Pay Now click samayath start cheyyunna
-   Google Sheet save promise.
-*/
+/* ==========================================================
+   PAYMENT SAVE STATE
+========================================================== */
 
 let paymentSavePromise = null;
 
@@ -760,6 +1047,632 @@ paymentStarted = true;
 
 
 /* ==========================================================
+   LOAD DELIVERY ADDRESS
+========================================================== */
+
+function loadDeliveryAddress(){
+
+if(!checkoutStorageKey){
+
+document.getElementById("addressName").innerText =
+"Delivery details unavailable";
+
+document.getElementById("addressPhone").innerText =
+"";
+
+document.getElementById("addressText").innerText =
+"Please return to checkout.";
+
+return;
+
+}
+
+
+const savedDetails =
+sessionStorage.getItem(checkoutStorageKey);
+
+
+if(!savedDetails){
+
+document.getElementById("addressName").innerText =
+"Delivery details unavailable";
+
+document.getElementById("addressPhone").innerText =
+"";
+
+document.getElementById("addressText").innerText =
+"Please return to checkout.";
+
+return;
+
+}
+
+
+try{
+
+const data =
+JSON.parse(savedDetails);
+
+
+const name =
+String(data.name || "").trim();
+
+const phone =
+String(data.phone || "").trim();
+
+const address =
+String(data.address || "").trim();
+
+const landmark =
+String(data.landmark || "").trim();
+
+const city =
+String(data.city || "").trim();
+
+const state =
+String(data.state || "").trim();
+
+const pincode =
+String(data.pincode || "").trim();
+
+
+document.getElementById("addressName").innerText =
+name || "Customer";
+
+
+document.getElementById("addressPhone").innerText =
+phone;
+
+
+let addressParts = [];
+
+if(address){
+addressParts.push(address);
+}
+
+if(landmark){
+addressParts.push(landmark);
+}
+
+let cityState =
+[];
+
+if(city){
+cityState.push(city);
+}
+
+if(state){
+cityState.push(state);
+}
+
+if(cityState.length){
+addressParts.push(cityState.join(", "));
+}
+
+if(pincode){
+addressParts.push(pincode);
+}
+
+
+document.getElementById("addressText").innerText =
+addressParts.join(", ") ||
+"Delivery address not available";
+
+
+/*
+   Fill edit fields.
+*/
+
+document.getElementById("editName").value =
+name;
+
+document.getElementById("editPhone").value =
+phone.replace(/^\+91/,"");
+
+document.getElementById("editAddress").value =
+address;
+
+document.getElementById("editLandmark").value =
+landmark;
+
+document.getElementById("editCity").value =
+city;
+
+document.getElementById("editState").value =
+state;
+
+document.getElementById("editPincode").value =
+pincode;
+
+
+if(data.orderId){
+
+orderId =
+String(data.orderId).trim();
+
+}
+
+}
+catch(error){
+
+console.error(
+"ADDRESS LOAD ERROR:",
+error
+);
+
+}
+
+}
+
+
+/* ==========================================================
+   INITIAL ADDRESS LOAD
+========================================================== */
+
+loadDeliveryAddress();
+
+
+/* ==========================================================
+   EDIT ADDRESS
+========================================================== */
+
+function editAddress(){
+
+document.getElementById("addressView")
+.style.display =
+"none";
+
+
+document.getElementById("addressEdit")
+.style.display =
+"block";
+
+
+document.getElementById("editAddressBtn")
+.style.display =
+"none";
+
+}
+
+
+/* ==========================================================
+   CANCEL ADDRESS EDIT
+========================================================== */
+
+function cancelAddressEdit(){
+
+loadDeliveryAddress();
+
+
+document.getElementById("addressEdit")
+.style.display =
+"none";
+
+
+document.getElementById("addressView")
+.style.display =
+"block";
+
+
+document.getElementById("editAddressBtn")
+.style.display =
+"block";
+
+}
+
+
+/* ==========================================================
+   UPDATE EXISTING ORDER IN GOOGLE SHEET
+========================================================== */
+
+async function updateExistingOrderInSheet(orderData){
+
+if(!orderId){
+
+return true;
+
+}
+
+
+const response =
+await fetch(
+scriptURL,
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"text/plain;charset=utf-8"
+},
+
+body:
+JSON.stringify(orderData)
+
+}
+);
+
+
+const responseText =
+await response.text();
+
+
+console.log(
+"ADDRESS UPDATE RESPONSE:",
+responseText
+);
+
+
+let result;
+
+
+try{
+
+result =
+JSON.parse(responseText);
+
+}
+catch(error){
+
+throw new Error(
+"Google Apps Script returned an invalid response."
+);
+
+}
+
+
+if(
+!result ||
+result.success !== true
+){
+
+throw new Error(
+result &&
+result.error
+? result.error
+: "Address update failed."
+);
+
+}
+
+
+if(result.orderId){
+
+orderId =
+String(result.orderId).trim();
+
+}
+
+
+return true;
+
+}
+
+
+/* ==========================================================
+   SAVE EDITED ADDRESS
+========================================================== */
+
+async function saveEditedAddress(){
+
+if(!checkoutStorageKey){
+
+alert(
+"Checkout session is missing."
+);
+
+return;
+
+}
+
+
+const saveBtn =
+document.getElementById("saveAddressBtn");
+
+
+const name =
+document.getElementById("editName")
+.value
+.trim();
+
+
+const phone =
+document.getElementById("editPhone")
+.value
+.replace(/\D/g,"")
+.trim();
+
+
+const address =
+document.getElementById("editAddress")
+.value
+.trim();
+
+
+const landmark =
+document.getElementById("editLandmark")
+.value
+.trim();
+
+
+const city =
+document.getElementById("editCity")
+.value
+.trim();
+
+
+const state =
+document.getElementById("editState")
+.value
+.trim();
+
+
+const pincode =
+document.getElementById("editPincode")
+.value
+.replace(/\D/g,"")
+.trim();
+
+
+if(!name){
+
+alert(
+"Please enter your name."
+);
+
+return;
+
+}
+
+
+if(!/^[0-9]{10}$/.test(phone)){
+
+alert(
+"Please enter a valid 10-digit mobile number."
+);
+
+return;
+
+}
+
+
+if(!address){
+
+alert(
+"Please enter your delivery address."
+);
+
+return;
+
+}
+
+
+if(!landmark){
+
+alert(
+"Please enter your landmark."
+);
+
+return;
+
+}
+
+
+if(!city){
+
+alert(
+"Please enter your city."
+);
+
+return;
+
+}
+
+
+if(!state){
+
+alert(
+"Please enter your state."
+);
+
+return;
+
+}
+
+
+if(!/^[0-9]{6}$/.test(pincode)){
+
+alert(
+"Please enter a valid 6-digit pincode."
+);
+
+return;
+
+}
+
+
+let oldData = {};
+
+
+try{
+
+oldData =
+JSON.parse(
+sessionStorage.getItem(
+checkoutStorageKey
+) || "{}"
+);
+
+}
+catch(error){
+
+console.error(
+"OLD CHECKOUT DATA ERROR:",
+error
+);
+
+}
+
+
+const updatedData = {
+
+...oldData,
+
+product:
+oldData.product ||
+product,
+
+price:
+oldData.price ??
+Number(price),
+
+originalPrice:
+oldData.originalPrice ??
+Number(originalPrice),
+
+quantity:
+oldData.quantity ||
+parseInt(quantity,10) ||
+1,
+
+totalPrice:
+oldData.totalPrice ??
+Number(totalPrice),
+
+name:
+name,
+
+phone:
+"+91" + phone,
+
+address:
+address,
+
+landmark:
+landmark,
+
+city:
+city,
+
+state:
+state,
+
+pincode:
+pincode,
+
+color:
+oldData.color ||
+color ||
+"-",
+
+memberId:
+String(
+oldData.memberId ||
+memberId ||
+""
+).trim()
+
+};
+
+
+if(orderId){
+
+updatedData.orderId =
+orderId;
+
+}
+
+
+/*
+   Save locally first.
+*/
+
+sessionStorage.setItem(
+checkoutStorageKey,
+JSON.stringify(updatedData)
+);
+
+
+saveBtn.disabled =
+true;
+
+saveBtn.innerText =
+"Saving...";
+
+
+/*
+   If Pay Now has already created
+   an Order ID, update the SAME order
+   in Google Sheet.
+*/
+
+if(orderId){
+
+try{
+
+await updateExistingOrderInSheet(
+updatedData
+);
+
+}
+catch(error){
+
+console.error(
+"ADDRESS UPDATE FAILED:",
+error
+);
+
+saveBtn.disabled =
+false;
+
+saveBtn.innerText =
+"Save Address";
+
+
+alert(
+"Address was saved on this device, but the order sheet could not be updated.\n\n" +
+error.message
+);
+
+return;
+
+}
+
+}
+
+
+/*
+   Refresh address box.
+*/
+
+loadDeliveryAddress();
+
+
+document.getElementById("addressEdit")
+.style.display =
+"none";
+
+
+document.getElementById("addressView")
+.style.display =
+"block";
+
+
+document.getElementById("editAddressBtn")
+.style.display =
+"block";
+
+
+saveBtn.disabled =
+false;
+
+saveBtn.innerText =
+"Save Address";
+
+
+}
+
+
+/* ==========================================================
    THANK YOU URL
 ========================================================== */
 
@@ -777,6 +1690,7 @@ encodeURIComponent(product) +
 "&price=" +
 encodeURIComponent(price);
 
+
 if(color){
 
 thankYouURL +=
@@ -792,7 +1706,6 @@ return thankYouURL;
 
 /* ==========================================================
    BACK BUTTON
-   PAYMENT → CHECKOUT
 ========================================================== */
 
 function goBackToCheckout(){
@@ -871,7 +1784,7 @@ window.location.replace(backURL);
 
 
 /* ==========================================================
-   CREATE DUMMY HISTORY STATE
+   DUMMY HISTORY
 ========================================================== */
 
 history.pushState(
@@ -889,6 +1802,28 @@ window.addEventListener(
 "popstate",
 function(){
 
+/*
+   After returning from UPI,
+   browser back should NOT send
+   the customer back to checkout.
+
+   Payment page stays available with
+   Delivery Address + Edit.
+*/
+
+if(returnedFromUPI){
+
+history.pushState(
+null,
+"",
+window.location.href
+);
+
+return;
+
+}
+
+
 if(goingToThankYou){
 
 goingToThankYou = false;
@@ -900,6 +1835,7 @@ getThankYouURL()
 return;
 
 }
+
 
 goBackToCheckout();
 
@@ -918,6 +1854,7 @@ return;
 
 }
 
+
 document
 .querySelectorAll(".upi-option")
 .forEach(function(option){
@@ -925,6 +1862,7 @@ document
 option.classList.remove("selected");
 
 });
+
 
 element.classList.add("selected");
 
@@ -934,7 +1872,6 @@ selectedApp = app;
 
 
 /* ==========================================================
-   NEW FUNCTION
    READ CHECKOUT DETAILS
 ========================================================== */
 
@@ -1002,10 +1939,6 @@ throw new Error(
 }
 
 
-/*
-   Existing orderId undenkil preserve cheyyum.
-*/
-
 if(checkoutData.orderId){
 
 orderId =
@@ -1015,10 +1948,6 @@ checkoutData.orderId
 
 }
 
-
-/*
-   Final order data.
-*/
 
 const orderData = {
 
@@ -1100,6 +2029,7 @@ orderId;
 
 
 return {
+
 checkoutData:
 checkoutData,
 
@@ -1115,7 +2045,6 @@ finalMemberId
 
 
 /* ==========================================================
-   NEW FUNCTION
    SAVE ORDER TO GOOGLE SHEET
 ========================================================== */
 
@@ -1156,10 +2085,6 @@ console.log(
 console.log(
 "ORDER DATA:",
 orderData
-);
-
-console.log(
-"================================================"
 );
 
 
@@ -1216,12 +2141,6 @@ throw new Error(
 }
 
 
-console.log(
-"GOOGLE SCRIPT RESPONSE:",
-result
-);
-
-
 if(
 !result ||
 result.success !== true
@@ -1252,17 +2171,9 @@ throw new Error(
 }
 
 
-/*
-   Set new Order ID.
-*/
-
 orderId =
 returnedOrderId;
 
-
-/*
-   Update checkout session.
-*/
 
 checkoutData.orderId =
 orderId;
@@ -1295,7 +2206,6 @@ return orderId;
 
 /* ==========================================================
    PAY NOW
-   UPI OPEN + GOOGLE SHEET SAVE
 ========================================================== */
 
 function payNow(){
@@ -1306,11 +2216,13 @@ return;
 
 }
 
+
 paymentStarted = true;
 
 pageWasHidden = false;
 
 returnedFromUPI = false;
+
 
 sessionStorage.setItem(
 "loxicaPaymentStarted",
@@ -1319,14 +2231,12 @@ sessionStorage.setItem(
 
 
 /*
-   START GOOGLE SHEET SAVE IMMEDIATELY.
-
-   Await cheyyunnilla.
-   Athukond UPI opening delay aakilla.
+   Save details immediately.
 */
 
 paymentSavePromise =
 saveOrderToSheet()
+
 .then(function(result){
 
 console.log(
@@ -1337,6 +2247,7 @@ result
 return result;
 
 })
+
 .catch(function(error){
 
 console.error(
@@ -1344,7 +2255,8 @@ console.error(
 error
 );
 
-paymentSaveError = error;
+paymentSaveError =
+error;
 
 throw error;
 
@@ -1367,7 +2279,8 @@ encodeURIComponent(price) +
 encodeURIComponent(product);
 
 
-let appLink = upiLink;
+let appLink =
+upiLink;
 
 
 if(selectedApp === "gpay"){
@@ -1405,7 +2318,10 @@ encodeURIComponent(product);
 const payBtn =
 document.getElementById("payBtn");
 
-payBtn.disabled = true;
+
+payBtn.disabled =
+true;
+
 
 payBtn.innerText =
 "Opening Payment...";
@@ -1413,7 +2329,8 @@ payBtn.innerText =
 
 setTimeout(function(){
 
-window.location.href = appLink;
+window.location.href =
+appLink;
 
 },100);
 
@@ -1433,7 +2350,8 @@ sessionStorage.removeItem(
 "loxicaPaymentStarted"
 );
 
-payBtn.disabled = false;
+payBtn.disabled =
+false;
 
 payBtn.innerText =
 "Pay Now 💳";
@@ -1442,8 +2360,10 @@ payBtn.innerText =
 const message =
 document.getElementById("appMessage");
 
+
 message.style.display =
 "block";
+
 
 message.innerHTML =
 "Didn't open? Please make sure a UPI app is installed.";
@@ -1495,7 +2415,7 @@ handleUPIReturn();
 
 
 /* ==========================================================
-   HANDLE RETURN FROM UPI
+   HANDLE UPI RETURN
 ========================================================== */
 
 function handleUPIReturn(){
@@ -1506,11 +2426,13 @@ return;
 
 }
 
+
 if(returnedFromUPI){
 
 return;
 
 }
+
 
 returnedFromUPI = true;
 
@@ -1525,6 +2447,7 @@ clearTimeout(fallbackTimer);
 const payBtn =
 document.getElementById("payBtn");
 
+
 payBtn.style.display =
 "none";
 
@@ -1532,8 +2455,10 @@ payBtn.style.display =
 const paidBtn =
 document.getElementById("paid");
 
+
 paidBtn.style.display =
 "block";
+
 
 paidBtn.disabled =
 false;
@@ -1563,16 +2488,27 @@ sessionStorage.setItem(
 "true"
 );
 
+
+/*
+   Make sure latest saved address
+   is displayed.
+*/
+
+loadDeliveryAddress();
+
 }
 
 
 /* ==========================================================
-   PAGE SHOWS AGAIN
+   PAGE SHOW
 ========================================================== */
 
 window.addEventListener(
 "pageshow",
 function(){
+
+loadDeliveryAddress();
+
 
 if(
 sessionStorage.getItem("loxicaPaymentReturned") === "true"
@@ -1618,9 +2554,6 @@ document.getElementById("paymentInstruction")
 
 /* ==========================================================
    I HAVE PAID
-   NO NEW SAVE
-   WAIT FOR PAY NOW SAVE IF NEEDED
-   THEN → THANK YOU
 ========================================================== */
 
 async function showVerification(){
@@ -1628,10 +2561,6 @@ async function showVerification(){
 const paidBtn =
 document.getElementById("paid");
 
-
-/*
-   Prevent duplicate clicks.
-*/
 
 if(paidBtn.disabled){
 
@@ -1641,14 +2570,13 @@ return;
 
 
 /*
-   Pay Now click samayath save start aayittundavum.
-
-   Save complete aakunnath vare wait cheyyum.
+   Wait for Pay Now save.
 */
 
 if(paymentSavePromise){
 
-paidBtn.disabled = true;
+paidBtn.disabled =
+true;
 
 paidBtn.innerText =
 "Processing...";
@@ -1666,7 +2594,8 @@ console.error(
 error
 );
 
-paidBtn.disabled = false;
+paidBtn.disabled =
+false;
 
 paidBtn.innerText =
 "I Have Paid ✅";
@@ -1685,10 +2614,7 @@ return;
 
 
 /*
-   Safety fallback:
-
-   paymentSavePromise illenkil,
-   old session order ID undenkil use cheyyum.
+   Safety fallback.
 */
 
 if(
@@ -1734,13 +2660,10 @@ error
 }
 
 
-/*
-   Order ID illenkil Thank You page-il pokaruth.
-*/
-
 if(!orderId){
 
-paidBtn.disabled = false;
+paidBtn.disabled =
+false;
 
 paidBtn.innerText =
 "I Have Paid ✅";
@@ -1768,16 +2691,11 @@ sessionStorage.removeItem(
 );
 
 
-/*
-   Existing history behavior preserved.
-*/
-
 goingToThankYou = true;
 
 
 /*
-   Go one history step back.
-   popstate → Thank You page.
+   Existing Thank You flow.
 */
 
 history.back();
