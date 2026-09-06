@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -9,7 +10,8 @@
 
 <title>LOXICA Secure Payment</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
 
@@ -117,7 +119,7 @@ color:#0a8f3d;
 
 
 /* ==========================================================
-   DELIVERY ADDRESS BOX
+   DELIVERY ADDRESS
 ========================================================== */
 
 .address-card{
@@ -805,7 +807,7 @@ type="button"
 id="payBtn"
 onclick="payNow()">
 
-Pay Now 💳
+Pay Now
 
 </button>
 
@@ -818,7 +820,7 @@ type="button"
 id="paid"
 onclick="showVerification()">
 
-I Have Paid ✅
+I Have Paid
 
 </button>
 
@@ -944,38 +946,29 @@ const scriptURL =
 const params =
 new URLSearchParams(window.location.search);
 
-
 const product =
 (params.get("product") || "Product Name").trim();
-
 
 const price =
 (params.get("price") || "0").trim();
 
-
 let orderId =
 (params.get("orderId") || "").trim();
-
 
 const color =
 (params.get("color") || "").trim();
 
-
 const session =
 (params.get("session") || "").trim();
-
 
 const memberId =
 (params.get("memberId") || "").trim();
 
-
 const quantity =
 (params.get("quantity") || "1").trim();
 
-
 const originalPrice =
 (params.get("originalPrice") || price).trim();
-
 
 const totalPrice =
 (params.get("totalPrice") || price).trim();
@@ -983,12 +976,19 @@ const totalPrice =
 
 /* ==========================================================
    CHECKOUT STORAGE KEY
+   IMPORTANT FIX:
+   PAYMENT STATE IS NOW PER SESSION
 ========================================================== */
 
 const checkoutStorageKey =
 session
 ? "loxicaCheckout_" + session
 : null;
+
+const paymentStateKey =
+session
+? "loxicaPaymentState_" + session
+: "loxicaPaymentState_current";
 
 
 /* ==========================================================
@@ -998,8 +998,18 @@ session
 document.getElementById("product").innerText =
 product;
 
+
+/*
+   Always show the actual checkout total.
+*/
+
+const displayTotal =
+Number(totalPrice) > 0
+? Number(totalPrice)
+: Number(price) || 0;
+
 document.getElementById("price").innerText =
-"₹" + price;
+"₹" + displayTotal;
 
 
 /* ==========================================================
@@ -1020,11 +1030,6 @@ let goingBackToCheckout = false;
 
 let goingToThankYou = false;
 
-
-/* ==========================================================
-   PAYMENT SAVE STATE
-========================================================== */
-
 let paymentSavePromise = null;
 
 let paymentSaveCompleted = false;
@@ -1033,15 +1038,160 @@ let paymentSaveError = null;
 
 
 /* ==========================================================
-   SAVED PAYMENT STATE
+   PAYMENT STATE HELPERS
 ========================================================== */
 
-const savedPayment =
-sessionStorage.getItem("loxicaPaymentStarted");
+function getPaymentState(){
 
-if(savedPayment === "true"){
+try{
+
+return JSON.parse(
+sessionStorage.getItem(paymentStateKey) || "{}"
+);
+
+}
+catch(error){
+
+return {};
+
+}
+
+}
+
+
+function savePaymentState(state){
+
+try{
+
+sessionStorage.setItem(
+paymentStateKey,
+JSON.stringify(state)
+);
+
+}
+catch(error){
+
+console.error(
+"PAYMENT STATE SAVE ERROR:",
+error
+);
+
+}
+
+}
+
+
+function clearPaymentState(){
+
+try{
+
+sessionStorage.removeItem(
+paymentStateKey
+);
+
+}
+catch(error){
+
+console.error(
+"PAYMENT STATE CLEAR ERROR:",
+error
+);
+
+}
+
+}
+
+
+/* ==========================================================
+   RESTORE PAYMENT STATE
+========================================================== */
+
+function restorePaymentState(){
+
+const state =
+getPaymentState();
+
+
+paymentStarted =
+state.paymentStarted === true;
+
+returnedFromUPI =
+state.returnedFromUPI === true;
+
+
+/*
+   IMPORTANT:
+   If there is no returned state,
+   Pay Now must remain visible.
+*/
+
+if(!returnedFromUPI){
+
+paymentStarted = false;
+
+document.getElementById("payBtn")
+.style.display =
+"block";
+
+document.getElementById("payBtn")
+.disabled =
+false;
+
+document.getElementById("payBtn")
+.innerText =
+"Pay Now";
+
+document.getElementById("paid")
+.style.display =
+"none";
+
+document
+.querySelectorAll(".upi-option")
+.forEach(function(option){
+
+option.classList.remove("disabled");
+
+});
+
+document.getElementById("paymentInstruction")
+.innerHTML =
+"Select your preferred payment method and click <b>Pay Now</b> to continue.";
+
+return;
+
+}
+
+
+/*
+   If payment was already initiated
+   for THIS exact session, show I Have Paid.
+*/
 
 paymentStarted = true;
+
+document.getElementById("payBtn")
+.style.display =
+"none";
+
+document.getElementById("paid")
+.style.display =
+"block";
+
+document.getElementById("paid")
+.disabled =
+false;
+
+document
+.querySelectorAll(".upi-option")
+.forEach(function(option){
+
+option.classList.add("disabled");
+
+});
+
+document.getElementById("paymentInstruction")
+.innerHTML =
+"Payment initiated. Please click <b>I Have Paid</b> to continue.";
 
 }
 
@@ -1134,8 +1284,8 @@ if(landmark){
 addressParts.push(landmark);
 }
 
-let cityState =
-[];
+
+let cityState = [];
 
 if(city){
 cityState.push(city);
@@ -1202,10 +1352,12 @@ error
 
 
 /* ==========================================================
-   INITIAL ADDRESS LOAD
+   INITIAL LOAD
 ========================================================== */
 
 loadDeliveryAddress();
+
+restorePaymentState();
 
 
 /* ==========================================================
@@ -1214,15 +1366,20 @@ loadDeliveryAddress();
 
 function editAddress(){
 
+if(paymentStarted && returnedFromUPI){
+
+return;
+
+}
+
+
 document.getElementById("addressView")
 .style.display =
 "none";
 
-
 document.getElementById("addressEdit")
 .style.display =
 "block";
-
 
 document.getElementById("editAddressBtn")
 .style.display =
@@ -1239,16 +1396,13 @@ function cancelAddressEdit(){
 
 loadDeliveryAddress();
 
-
 document.getElementById("addressEdit")
 .style.display =
 "none";
 
-
 document.getElementById("addressView")
 .style.display =
 "block";
-
 
 document.getElementById("editAddressBtn")
 .style.display =
@@ -1596,9 +1750,8 @@ saveBtn.innerText =
 
 
 /*
-   If Pay Now has already created
-   an Order ID, update the SAME order
-   in Google Sheet.
+   Update existing order only if
+   an Order ID already exists.
 */
 
 if(orderId){
@@ -1623,7 +1776,6 @@ false;
 saveBtn.innerText =
 "Save Address";
 
-
 alert(
 "Address was saved on this device, but the order sheet could not be updated.\n\n" +
 error.message
@@ -1636,10 +1788,6 @@ return;
 }
 
 
-/*
-   Refresh address box.
-*/
-
 loadDeliveryAddress();
 
 
@@ -1647,11 +1795,9 @@ document.getElementById("addressEdit")
 .style.display =
 "none";
 
-
 document.getElementById("addressView")
 .style.display =
 "block";
-
 
 document.getElementById("editAddressBtn")
 .style.display =
@@ -1683,7 +1829,7 @@ encodeURIComponent(orderId) +
 encodeURIComponent(product) +
 
 "&price=" +
-encodeURIComponent(price);
+encodeURIComponent(displayTotal);
 
 
 if(color){
@@ -1694,13 +1840,23 @@ encodeURIComponent(color);
 
 }
 
+
+if(quantity){
+
+thankYouURL +=
+"&quantity=" +
+encodeURIComponent(quantity);
+
+}
+
+
 return thankYouURL;
 
 }
 
 
 /* ==========================================================
-   BACK BUTTON
+   BACK TO CHECKOUT
 ========================================================== */
 
 function goBackToCheckout(){
@@ -1764,13 +1920,7 @@ encodeURIComponent(memberId);
 }
 
 
-sessionStorage.removeItem(
-"loxicaPaymentStarted"
-);
-
-sessionStorage.removeItem(
-"loxicaPaymentReturned"
-);
+clearPaymentState();
 
 
 window.location.replace(backURL);
@@ -1779,7 +1929,7 @@ window.location.replace(backURL);
 
 
 /* ==========================================================
-   DUMMY HISTORY
+   HISTORY
 ========================================================== */
 
 history.pushState(
@@ -1853,6 +2003,35 @@ option.classList.remove("selected");
 element.classList.add("selected");
 
 selectedApp = app;
+
+
+/*
+   Update instruction.
+*/
+
+if(app === "gpay"){
+
+document.getElementById("paymentInstruction")
+.innerHTML =
+"Google Pay selected. Click <b>Pay Now</b> to continue.";
+
+}
+
+else if(app === "phonepe"){
+
+document.getElementById("paymentInstruction")
+.innerHTML =
+"PhonePe selected. Click <b>Pay Now</b> to continue.";
+
+}
+
+else{
+
+document.getElementById("paymentInstruction")
+.innerHTML =
+"UPI selected. Click <b>Pay Now</b> to continue.";
+
+}
 
 }
 
@@ -1935,6 +2114,40 @@ checkoutData.orderId
 }
 
 
+const finalQuantity =
+Math.max(
+1,
+parseInt(
+checkoutData.quantity ||
+quantity ||
+"1",
+10
+) || 1
+);
+
+
+const finalPrice =
+Number(
+checkoutData.price ??
+price
+) || 0;
+
+
+let finalTotalPrice =
+Number(
+checkoutData.totalPrice
+) || 0;
+
+
+if(finalTotalPrice <= 0){
+
+finalTotalPrice =
+finalPrice *
+finalQuantity;
+
+}
+
+
 const orderData = {
 
 product:
@@ -1942,30 +2155,19 @@ checkoutData.product ||
 product,
 
 price:
-Number(
-checkoutData.price ??
-price
-) || 0,
+finalPrice,
 
 originalPrice:
 Number(
 checkoutData.originalPrice ??
 originalPrice
-) || 0,
+) || finalPrice,
 
 quantity:
-parseInt(
-checkoutData.quantity ||
-quantity ||
-"1",
-10
-) || 1,
+finalQuantity,
 
 totalPrice:
-Number(
-checkoutData.totalPrice ??
-totalPrice
-) || 0,
+finalTotalPrice,
 
 name:
 checkoutData.name ||
@@ -2168,15 +2370,29 @@ checkoutData.memberId =
 finalMemberId;
 
 
+/*
+   Keep the final calculated values
+   in checkout storage.
+*/
+
+checkoutData.quantity =
+orderData.quantity;
+
+checkoutData.totalPrice =
+orderData.totalPrice;
+
+
 sessionStorage.setItem(
 checkoutStorageKey,
 JSON.stringify(checkoutData)
 );
 
 
-paymentSaveCompleted = true;
+paymentSaveCompleted =
+true;
 
-paymentSaveError = null;
+paymentSaveError =
+null;
 
 
 console.log(
@@ -2191,10 +2407,101 @@ return orderId;
 
 
 /* ==========================================================
+   BUILD UPI LINK
+========================================================== */
+
+function buildUPILink(){
+
+const data =
+getCheckoutOrderData();
+
+
+const amount =
+Number(
+data.orderData.totalPrice
+) || 0;
+
+
+if(amount <= 0){
+
+throw new Error(
+"Invalid payment amount."
+);
+
+}
+
+
+const upiID =
+"8714917161@fam";
+
+
+const commonParams =
+"?pa=" +
+encodeURIComponent(upiID) +
+
+"&pn=" +
+encodeURIComponent("LOXICA") +
+
+"&am=" +
+encodeURIComponent(
+amount.toFixed(2)
+) +
+
+"&cu=INR" +
+
+"&tn=" +
+encodeURIComponent(product);
+
+
+/*
+   Google Pay
+*/
+
+if(selectedApp === "gpay"){
+
+return (
+"tez://upi/pay" +
+commonParams
+);
+
+}
+
+
+/*
+   PhonePe
+*/
+
+if(selectedApp === "phonepe"){
+
+return (
+"phonepe://pay" +
+commonParams
+);
+
+}
+
+
+/*
+   Other UPI apps
+*/
+
+return (
+"upi://pay" +
+commonParams
+);
+
+}
+
+
+/* ==========================================================
    PAY NOW
 ========================================================== */
 
 async function payNow(){
+
+/*
+   Prevent double click.
+*/
 
 if(paymentStarted){
 
@@ -2204,33 +2511,36 @@ return;
 
 
 /*
-   Start payment state.
+   Reset temporary payment state.
 */
 
-paymentStarted = true;
+pageWasHidden =
+false;
 
-pageWasHidden = false;
+returnedFromUPI =
+false;
 
-returnedFromUPI = false;
+paymentStarted =
+true;
 
 
-sessionStorage.setItem(
-"loxicaPaymentStarted",
-"true"
-);
+savePaymentState({
+
+paymentStarted:
+true,
+
+returnedFromUPI:
+false
+
+});
 
 
 const payBtn =
 document.getElementById("payBtn");
 
-
 const message =
 document.getElementById("appMessage");
 
-
-/*
-   Save order FIRST.
-*/
 
 payBtn.disabled =
 true;
@@ -2242,13 +2552,13 @@ message.style.display =
 "none";
 
 
-try{
-
 /*
-   IMPORTANT:
-   Google Sheet save must finish BEFORE
-   opening the UPI app.
+   ========================================================
+   SAVE ORDER FIRST
+   ========================================================
 */
+
+try{
 
 paymentSavePromise =
 saveOrderToSheet();
@@ -2257,16 +2567,6 @@ saveOrderToSheet();
 await paymentSavePromise;
 
 
-console.log(
-"PAYMENT SAVE COMPLETE. ORDER ID:",
-orderId
-);
-
-
-/*
-   Make sure Order ID was received.
-*/
-
 if(!orderId){
 
 throw new Error(
@@ -2274,6 +2574,12 @@ throw new Error(
 );
 
 }
+
+
+console.log(
+"PAYMENT SAVE COMPLETE. ORDER ID:",
+orderId
+);
 
 }
 catch(error){
@@ -2284,13 +2590,10 @@ error
 );
 
 
-paymentStarted = false;
+paymentStarted =
+false;
 
-
-sessionStorage.removeItem(
-"loxicaPaymentStarted"
-);
-
+clearPaymentState();
 
 paymentSaveError =
 error;
@@ -2300,12 +2603,11 @@ payBtn.disabled =
 false;
 
 payBtn.innerText =
-"Pay Now 💳";
+"Pay Now";
 
 
 message.style.display =
 "block";
-
 
 message.innerHTML =
 "Unable to save your order. Please try again.";
@@ -2316,6 +2618,50 @@ alert(
 error.message
 );
 
+return;
+
+}
+
+
+/*
+   ========================================================
+   CREATE UPI LINK
+   ========================================================
+*/
+
+let appLink;
+
+
+try{
+
+appLink =
+buildUPILink();
+
+}
+catch(error){
+
+console.error(
+"UPI LINK ERROR:",
+error
+);
+
+
+paymentStarted =
+false;
+
+clearPaymentState();
+
+
+payBtn.disabled =
+false;
+
+payBtn.innerText =
+"Pay Now";
+
+
+alert(
+error.message
+);
 
 return;
 
@@ -2324,81 +2670,43 @@ return;
 
 /*
    ========================================================
-   ORDER IS SAVED.
-   NOW OPEN UPI.
+   OPEN UPI
    ========================================================
-*/
-
-const upiID =
-"8714917161@fam";
-
-
-const upiLink =
-"upi://pay?pa=" +
-encodeURIComponent(upiID) +
-"&pn=" +
-encodeURIComponent("LOXICA") +
-"&am=" +
-encodeURIComponent(price) +
-"&cu=INR" +
-"&tn=" +
-encodeURIComponent(product);
-
-
-let appLink =
-upiLink;
-
-
-if(selectedApp === "gpay"){
-
-appLink =
-"tez://upi/pay?pa=" +
-encodeURIComponent(upiID) +
-"&pn=" +
-encodeURIComponent("LOXICA") +
-"&am=" +
-encodeURIComponent(price) +
-"&cu=INR" +
-"&tn=" +
-encodeURIComponent(product);
-
-}
-
-
-else if(selectedApp === "phonepe"){
-
-appLink =
-"phonepe://pay?pa=" +
-encodeURIComponent(upiID) +
-"&pn=" +
-encodeURIComponent("LOXICA") +
-"&am=" +
-encodeURIComponent(price) +
-"&cu=INR" +
-"&tn=" +
-encodeURIComponent(product);
-
-}
-
-
-/*
-   Open payment.
 */
 
 payBtn.innerText =
 "Opening Payment...";
 
 
+/*
+   Give browser a moment to finish
+   the click event before navigation.
+*/
+
 setTimeout(function(){
+
+try{
 
 window.location.href =
 appLink;
+
+}
+catch(error){
+
+console.error(
+"UPI OPEN ERROR:",
+error
+);
+
+}
 
 },100);
 
 
 /*
-   Fallback if UPI app does not open.
+   ========================================================
+   FALLBACK
+   ========================================================
 */
 
 fallbackTimer =
@@ -2410,25 +2718,24 @@ document.visibilityState === "visible" &&
 !returnedFromUPI
 ){
 
-paymentStarted = false;
+paymentStarted =
+false;
 
-sessionStorage.removeItem(
-"loxicaPaymentStarted"
-);
+clearPaymentState();
+
 
 payBtn.disabled =
 false;
 
 payBtn.innerText =
-"Pay Now 💳";
+"Pay Now";
 
 
 message.style.display =
 "block";
 
-
 message.innerHTML =
-"Didn't open? Please make sure a UPI app is installed.";
+"Payment app did not open. Please select a UPI app and try again.";
 
 }
 
@@ -2445,11 +2752,14 @@ document.addEventListener(
 "visibilitychange",
 function(){
 
-if(document.visibilityState === "hidden"){
+if(
+document.visibilityState === "hidden"
+){
 
 if(paymentStarted){
 
-pageWasHidden = true;
+pageWasHidden =
+true;
 
 }
 
@@ -2496,14 +2806,31 @@ return;
 }
 
 
-returnedFromUPI = true;
+returnedFromUPI =
+true;
 
 
 if(fallbackTimer){
 
-clearTimeout(fallbackTimer);
+clearTimeout(
+fallbackTimer
+);
+
+fallbackTimer =
+null;
 
 }
+
+
+savePaymentState({
+
+paymentStarted:
+true,
+
+returnedFromUPI:
+true
+
+});
 
 
 const payBtn =
@@ -2521,9 +2848,11 @@ document.getElementById("paid");
 paidBtn.style.display =
 "block";
 
-
 paidBtn.disabled =
 false;
+
+paidBtn.innerText =
+"I Have Paid";
 
 
 document
@@ -2545,17 +2874,6 @@ document.getElementById("paymentInstruction")
 "Payment initiated. Please click <b>I Have Paid</b> to continue.";
 
 
-sessionStorage.setItem(
-"loxicaPaymentReturned",
-"true"
-);
-
-
-/*
-   Make sure latest saved address
-   is displayed.
-*/
-
 loadDeliveryAddress();
 
 }
@@ -2572,44 +2890,11 @@ function(){
 loadDeliveryAddress();
 
 
-if(
-sessionStorage.getItem("loxicaPaymentReturned") === "true"
-){
+/*
+   Restore only this checkout session.
+*/
 
-paymentStarted = true;
-
-returnedFromUPI = true;
-
-
-document.getElementById("payBtn")
-.style.display =
-"none";
-
-
-document.getElementById("paid")
-.style.display =
-"block";
-
-
-document.getElementById("paid")
-.disabled =
-false;
-
-
-document
-.querySelectorAll(".upi-option")
-.forEach(function(option){
-
-option.classList.add("disabled");
-
-});
-
-
-document.getElementById("paymentInstruction")
-.innerHTML =
-"Payment initiated. Please click <b>I Have Paid</b> to continue.";
-
-}
+restorePaymentState();
 
 });
 
@@ -2632,8 +2917,7 @@ return;
 
 
 /*
-   Wait only for the already-started
-   Pay Now save.
+   Make sure the order save has finished.
 */
 
 if(paymentSavePromise){
@@ -2657,11 +2941,12 @@ console.error(
 error
 );
 
+
 paidBtn.disabled =
 false;
 
 paidBtn.innerText =
-"I Have Paid ✅";
+"I Have Paid";
 
 
 alert(
@@ -2677,7 +2962,8 @@ return;
 
 
 /*
-   Safety fallback.
+   Safety fallback:
+   recover Order ID from checkout storage.
 */
 
 if(
@@ -2723,13 +3009,17 @@ error
 }
 
 
+/*
+   Final Order ID check.
+*/
+
 if(!orderId){
 
 paidBtn.disabled =
 false;
 
 paidBtn.innerText =
-"I Have Paid ✅";
+"I Have Paid";
 
 
 alert(
@@ -2742,8 +3032,40 @@ return;
 
 
 /*
-   Clear payment state.
+   Clear only this session's payment state.
 */
+
+clearPaymentState();
+
+
+goingToThankYou =
+true;
+
+
+/*
+   Use direct Thank You navigation.
+*/
+
+window.location.replace(
+getThankYouURL()
+);
+
+}
+
+
+/* ==========================================================
+   INITIAL PAYMENT UI SAFETY
+========================================================== */
+
+(function(){
+
+/*
+   Never allow stale global payment keys
+   from the previous version to control
+   this page.
+*/
+
+try{
 
 sessionStorage.removeItem(
 "loxicaPaymentStarted"
@@ -2753,20 +3075,71 @@ sessionStorage.removeItem(
 "loxicaPaymentReturned"
 );
 
+}
+catch(error){
 
-goingToThankYou = true;
+console.error(
+"OLD PAYMENT STATE CLEANUP ERROR:",
+error
+);
+
+}
 
 
 /*
-   Existing Thank You flow.
+   Fresh page starts with Pay Now enabled
+   unless this exact checkout session has
+   genuinely returned from UPI.
 */
 
-history.back();
+const state =
+getPaymentState();
+
+
+if(state.returnedFromUPI === true){
+
+restorePaymentState();
 
 }
+else{
+
+paymentStarted =
+false;
+
+returnedFromUPI =
+false;
+
+document.getElementById("payBtn")
+.style.display =
+"block";
+
+document.getElementById("payBtn")
+.disabled =
+false;
+
+document.getElementById("payBtn")
+.innerText =
+"Pay Now";
+
+document.getElementById("paid")
+.style.display =
+"none";
+
+document
+.querySelectorAll(".upi-option")
+.forEach(function(option){
+
+option.classList.remove("disabled");
+
+});
+
+}
+
+})();
 
 </script>
 
 </body>
 
 </html>
+
