@@ -865,6 +865,7 @@ let paymentSaveCompleted = false;
 
 let paymentSaveError = null;
 
+
 function getPaymentState(){
 
 try{
@@ -1147,19 +1148,75 @@ loadDeliveryAddress();
 restorePaymentState();
 
 
+/* ==========================================================
+   EDIT ADDRESS
+   ONLY CHANGE:
+   Edit now goes to index.html.
+   Existing payment state is NOT cleared.
+========================================================== */
+
 function editAddress(){
 
-document.getElementById("addressView")
-.style.display =
-"none";
+let backURL =
+"index.html" +
+"?product=" +
+encodeURIComponent(product) +
+"&price=" +
+encodeURIComponent(price) +
+"&originalPrice=" +
+encodeURIComponent(originalPrice) +
+"&quantity=" +
+encodeURIComponent(quantity) +
+"&totalPrice=" +
+encodeURIComponent(totalPrice);
 
-document.getElementById("addressEdit")
-.style.display =
-"block";
+if(session){
 
-document.getElementById("editAddressBtn")
-.style.display =
-"none";
+backURL +=
+"&session=" +
+encodeURIComponent(session);
+
+}
+
+if(orderId){
+
+backURL +=
+"&orderId=" +
+encodeURIComponent(orderId);
+
+}
+
+if(color){
+
+backURL +=
+"&color=" +
+encodeURIComponent(color);
+
+}
+
+if(memberId){
+
+backURL +=
+"&memberId=" +
+encodeURIComponent(memberId);
+
+}
+
+/*
+ IMPORTANT:
+ Do NOT clear paymentState here.
+
+ If payment was already initiated,
+ loxicaPaymentState_<session> remains saved.
+
+ If payment was never initiated,
+ there is no returnedFromUPI state,
+ so payment page will show Pay Now.
+
+ This preserves the correct payment flow.
+*/
+
+window.location.replace(backURL);
 
 }
 
