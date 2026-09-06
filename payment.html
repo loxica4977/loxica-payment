@@ -1682,6 +1682,26 @@ encodeURIComponent(memberId);
 
 }
 
+/*
+ PAYMENT COMPLETED:
+ index.html gets paid=1
+ so quantity box will be hidden.
+
+ PAYMENT NOT COMPLETED:
+ no paid=1
+ so quantity box will remain visible.
+*/
+
+const paymentState =
+getPaymentState();
+
+if(paymentState.paymentCompleted === true){
+
+backURL +=
+"&paid=1";
+
+}
+
 clearPaymentState();
 
 window.location.replace(backURL);
@@ -2557,7 +2577,24 @@ return;
 
 }
 
-clearPaymentState();
+
+/* ==========================================================
+   PAYMENT COMPLETED
+   Save completed state so index.html receives paid=1
+========================================================== */
+
+savePaymentState({
+
+paymentStarted:
+true,
+
+returnedFromUPI:
+true,
+
+paymentCompleted:
+true
+
+});
 
 goingToThankYou =
 true;
