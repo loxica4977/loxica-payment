@@ -29,6 +29,8 @@ align-items:center;
 min-height:100vh;
 }
 
+/* ================= MAIN CONTAINER ================= */
+
 .container{
 width:100%;
 max-width:430px;
@@ -151,28 +153,47 @@ line-height:1.6;
 margin-bottom:5px;
 }
 
+/* ==================================================
+   BOTTOM ACTION SECTION
+   SAME MODEL AS INDEX.HTML
+================================================== */
+
+.bottom-action-section{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:calc(100% - 30px);
+max-width:1070px;
+padding:12px 0;
+background:#fff;
+border-top:1px solid #ddd;
+box-shadow:0 -4px 15px rgba(0,0,0,.10);
+z-index:9999;
+}
+
 /* ================= CONTINUE BUTTON ================= */
 
-button{
+.continue-btn{
 width:100%;
-padding:15px;
-margin-top:18px;
-background:#111;
-color:#fff;
+padding:14px;
 border:none;
-border-radius:10px;
+border-radius:4px;
+background:#111;
+color:white;
 font-size:17px;
 font-weight:bold;
 cursor:pointer;
-transition:background .2s ease;
+margin-top:0;
 }
 
-button:hover{
+.continue-btn:hover{
 background:#333;
 }
 
-button:active{
-background:#2563EB;
+.continue-btn:disabled{
+opacity:.8;
+cursor:not-allowed;
 }
 
 /* ================= FOOTER ================= */
@@ -291,6 +312,13 @@ font-size:14px;
 
 .footer-features{
 grid-template-columns:1fr 1fr;
+}
+
+/* SAME BOTTOM SECTION MODEL */
+
+.bottom-action-section{
+width:100%;
+padding:12px 10px;
 }
 
 }
@@ -423,14 +451,23 @@ Our team will verify your payment and confirm your order.
 </p>
 
 
-<!-- ================= CONTINUE SHOPPING ================= -->
+</div>
 
-<button onclick="continueShopping()">
+
+<!-- ==================================================
+     BOTTOM ACTION
+================================================== -->
+
+<div class="bottom-action-section">
+
+<button
+type="button"
+class="continue-btn"
+onclick="continueShopping()">
 
 Continue Shopping 🛍️
 
 </button>
-
 
 </div>
 
