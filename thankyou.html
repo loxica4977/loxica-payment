@@ -36,21 +36,29 @@ width:100%;
 max-width:430px;
 background:#fff;
 border-radius:18px 18px 0 0;
-padding:30px 25px 25px;
+padding:0 25px 25px;
 box-shadow:0 10px 30px rgba(0,0,0,.15);
 text-align:center;
 }
 
-/* ================= LOGO ================= */
+/* ================= LOGO SECTION ================= */
+
+.logo-section{
+width:100vw;
+margin-left:calc(50% - 50vw);
+background:#111;
+padding:22px 20px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
 
 .logo{
-width:100%;
-max-width:100%;
+width:150px;
 height:auto;
-max-height:none;
-object-fit:contain;
+max-width:100%;
 display:block;
-margin:0 auto 18px;
+object-fit:contain;
 }
 
 /* ================= PENDING ICON ================= */
@@ -295,14 +303,17 @@ font-size:10px;
 
 .container{
 border-radius:0;
-padding:25px 20px 22px;
+padding:0 20px 22px;
+}
+
+.logo-section{
+padding:20px 15px;
 }
 
 .logo{
-width:100%;
+width:140px;
 max-width:100%;
 height:auto;
-max-height:none;
 }
 
 h2{
@@ -336,10 +347,16 @@ padding:12px 10px;
 
 <div class="container">
 
+<!-- ================= LOXICA LOGO SECTION ================= -->
+
+<div class="logo-section">
+
 <img
 src="LOXICA-Logo-Header.png"
 alt="LOXICA"
 class="logo">
+
+</div>
 
 <!-- ================= PENDING ================= -->
 
