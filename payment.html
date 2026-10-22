@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LOXICA Secure Payment</title>
+<title>MANYZA Secure Payment</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -484,8 +484,8 @@ padding:12px 18px;
 <div class="header">
 
 <img
-src="LOXICA-Logo-Header.png"
-alt="LOXICA"
+src="MANYZA-Logo-Header.png"
+alt="MANYZA"
 class="logo">
 
 </div>
@@ -826,13 +826,13 @@ const totalPrice =
 
 const checkoutStorageKey =
 session
-? "loxicaCheckout_" + session
+? "MANYZACheckout_" + session
 : null;
 
 const paymentStateKey =
 session
-? "loxicaPaymentState_" + session
-: "loxicaPaymentState_current";
+? "MANYZAPaymentState_" + session
+: "MANYZAPaymentState_current";
 
 document.getElementById("product").innerText =
 product;
@@ -1605,7 +1605,7 @@ saveBtn.innerText =
 function getThankYouURL(){
 
 let thankYouURL =
-"https://loxica4977.github.io/loxica-payment/thankyou.html" +
+"https://MANYZA4977.github.io/MANYZA-payment/thankyou.html" +
 
 "?orderId=" +
 encodeURIComponent(orderId) +
@@ -1986,7 +1986,7 @@ const finalMemberId =
 data.finalMemberId;
 
 console.log(
-"========== LOXICA PAYMENT SAVE START =========="
+"========== MANYZA PAYMENT SAVE START =========="
 );
 
 console.log(
@@ -2096,7 +2096,7 @@ paymentSaveError =
 null;
 
 console.log(
-"LOXICA ORDER SAVED SUCCESSFULLY:",
+"MANYZA ORDER SAVED SUCCESSFULLY:",
 orderId
 );
 
@@ -2131,7 +2131,7 @@ const commonParams =
 encodeURIComponent(upiID) +
 
 "&pn=" +
-encodeURIComponent("LOXICA") +
+encodeURIComponent("MANYZA") +
 
 "&am=" +
 encodeURIComponent(
@@ -2624,11 +2624,11 @@ getThankYouURL()
 try{
 
 sessionStorage.removeItem(
-"loxicaPaymentStarted"
+"MANYZAPaymentStarted"
 );
 
 sessionStorage.removeItem(
-"loxicaPaymentReturned"
+"MANYZAPaymentReturned"
 );
 
 }
