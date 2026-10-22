@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LOXICA Checkout</title>
+<title>MANYZA Checkout</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -470,8 +470,8 @@ textarea{
 <header class="header">
 
 <img
-src="LOXICA-Logo-Header.png"
-alt="LOXICA"
+src="MANYZA-Logo-Header.png"
+alt="MANYZA"
 class="logo">
 
 </header>
@@ -802,7 +802,7 @@ Continue To Payment
 </main>
 
 <div class="copyright">
-© 2025 LOXICA
+© 2025 MANYZA
 </div>
 
 
@@ -867,7 +867,7 @@ updateQuantityVisibility();
 
 
 const product =
-(params.get("product") || "LOXICA Product").trim();
+(params.get("product") || "MANYZA Product").trim();
 
 
 const price =
@@ -918,7 +918,7 @@ quantity < 1
 
 const storageKey =
 checkoutSession
-? "loxicaCheckout_" + checkoutSession
+? "MANYZACheckout_" + checkoutSession
 : null;
 
 
@@ -2122,7 +2122,7 @@ document.getElementById(
 
 
             updateForm.target =
-                "loxicaUpdateFrame";
+                "MANYZAUpdateFrame";
 
 
             updateForm.style.display =
@@ -2412,8 +2412,8 @@ function openPaymentPage(
 ================================================== -->
 
 <iframe
-name="loxicaUpdateFrame"
-id="loxicaUpdateFrame"
+name="MANYZAUpdateFrame"
+id="MANYZAUpdateFrame"
 style="display:none;">
 </iframe>
 
