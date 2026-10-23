@@ -39,20 +39,24 @@ box-shadow:0 5px 25px rgba(0,0,0,.12);
 
 .header{
 padding:0;
-border-bottom:1px solid #ddd;
-background:#111;
-height:64px;
+border-bottom:none;
+background:#000;
+height:88px;
+width:100vw;
+margin-left:calc(50% - 50vw);
 display:flex;
 align-items:center;
 justify-content:center;
 }
 
 .logo{
-width:120px;
-height:auto;
-max-height:48px;
+width:190px;
+height:76px;
+max-height:none;
 object-fit:contain;
+object-position:center;
 display:block;
+background:transparent;
 }
 
 .content{
@@ -451,8 +455,9 @@ padding-bottom:115px;
 }
 
 .logo{
-width:105px;
-max-height:44px;
+width:165px;
+height:70px;
+max-height:none;
 }
 
 .title{
@@ -2611,8 +2616,6 @@ true;
 window.location.replace(
 getThankYouURL()
 );
-
-}
 
 
 /* ==========================================================
