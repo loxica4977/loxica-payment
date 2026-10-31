@@ -431,6 +431,67 @@ color:#555;
 text-align:center;
 }
 
+/* UPI PAYER NAME POPUP */
+.payer-modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.55);
+z-index:2000;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+.payer-modal.show{
+display:flex;
+}
+.payer-modal-card{
+width:100%;
+max-width:360px;
+background:#fff;
+border-radius:12px;
+padding:22px;
+box-shadow:0 10px 35px rgba(0,0,0,.25);
+}
+.payer-modal-title{
+font-size:18px;
+font-weight:bold;
+margin-bottom:8px;
+}
+.payer-modal-note{
+font-size:13px;
+line-height:1.5;
+color:#666;
+margin-bottom:16px;
+}
+#upiPayerName{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px;
+outline:none;
+margin-bottom:12px;
+}
+#upiPayerName:focus{
+border-color:#2563EB;
+}
+#payerNameDone{
+width:100%;
+padding:13px;
+border:0;
+border-radius:8px;
+background:#2563EB;
+color:#fff;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+#payerNameDone:disabled{
+opacity:.7;
+cursor:not-allowed;
+}
+
 .security{
 margin-top:18px;
 padding:13px;
@@ -792,6 +853,22 @@ Never share your UPI PIN or OTP with anyone.
 
 “Shop smart. Live better.”
 
+</div>
+
+<!-- UPI PAYER NAME POPUP -->
+<div class="payer-modal" id="payerNameModal">
+<div class="payer-modal-card">
+<div class="payer-modal-title">Enter UPI Payer Name</div>
+<div class="payer-modal-note">Enter the name shown in the UPI app used to make this payment.</div>
+<input
+type="text"
+id="upiPayerName"
+placeholder="UPI payer name"
+autocomplete="name"
+maxlength="100">
+<button type="button" id="payerNameDone" onclick="submitPayerName()">Done</button>
+<div id="payerNameMessage" style="display:none;margin-top:10px;font-size:12px;color:#b91c1c;text-align:center;"></div>
+</div>
 </div>
 
 <script>
@@ -2611,11 +2688,150 @@ true
 });
 
 goingToThankYou =
-true;
+false;
+
+/* Show payer-name popup before moving to Thank You page */
+const payerModal =
+document.getElementById("payerNameModal");
+
+payerModal.classList.add("show");
+
+const payerNameInput =
+document.getElementById("upiPayerName");
+
+payerNameInput.value = "";
+
+document.getElementById("payerNameMessage")
+.style.display = "none";
+
+setTimeout(function(){
+payerNameInput.focus();
+},100);
+
+}
+
+/* Save payer name to the existing order row, then continue */
+async function submitPayerName(){
+
+const input =
+document.getElementById("upiPayerName");
+
+const doneBtn =
+document.getElementById("payerNameDone");
+
+const message =
+document.getElementById("payerNameMessage");
+
+const payerName =
+input.value.trim();
+
+if(!payerName){
+
+message.innerText =
+"Please enter the UPI payer name.";
+
+message.style.display =
+"block";
+
+input.focus();
+
+return;
+
+}
+
+if(!orderId){
+
+message.innerText =
+"Order ID is missing. Please contact MANYZA.";
+
+message.style.display =
+"block";
+
+return;
+
+}
+
+doneBtn.disabled = true;
+doneBtn.innerText = "Saving...";
+
+message.style.display = "none";
+
+try{
+
+const response =
+await fetch(scriptURL,{
+method:"POST",
+headers:{
+"Content-Type":"text/plain;charset=utf-8"
+},
+body:JSON.stringify({
+action:"updatePayerName",
+orderId:orderId,
+upiPayerName:payerName
+})
+});
+
+const responseText =
+await response.text();
+
+let result;
+
+try{
+result = JSON.parse(responseText);
+}
+catch(error){
+throw new Error("Invalid response from Google Apps Script.");
+}
+
+if(!result || result.success !== true){
+throw new Error(
+result && result.error
+? result.error
+: "Payer name could not be saved."
+);
+}
+
+/* Save locally as well for this order session */
+try{
+const savedDetails =
+sessionStorage.getItem(checkoutStorageKey);
+
+if(savedDetails){
+const checkoutData = JSON.parse(savedDetails);
+checkoutData.upiPayerName = payerName;
+sessionStorage.setItem(
+checkoutStorageKey,
+JSON.stringify(checkoutData)
+);
+}
+}
+catch(storageError){
+console.error("PAYER NAME LOCAL SAVE ERROR:",storageError);
+}
+
+goingToThankYou = true;
 
 window.location.replace(
-getThankYouURL()
+getThankYouURL() +
+"&upiPayerName=" +
+encodeURIComponent(payerName)
 );
+
+}
+catch(error){
+
+console.error("UPI PAYER NAME SAVE ERROR:",error);
+
+message.innerText =
+"Could not save the payer name. Please try again.";
+
+message.style.display =
+"block";
+
+doneBtn.disabled = false;
+doneBtn.innerText = "Done";
+
+}
 
 }
 
