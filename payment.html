@@ -581,6 +581,30 @@ Product Name
 <div class="price-row">
 
 <div class="total-label">
+Product Amount
+</div>
+
+<div class="price" id="productAmount">
+₹0
+</div>
+
+</div>
+
+<div class="price-row" style="margin-top:10px;padding-top:10px;">
+
+<div class="total-label" style="font-size:14px;font-weight:normal;">
+Shipping Fee
+</div>
+
+<div style="font-size:15px;font-weight:bold;">
+₹49
+</div>
+
+</div>
+
+<div class="price-row" style="margin-top:10px;padding-top:12px;">
+
+<div class="total-label">
 Total Amount
 </div>
 
@@ -906,6 +930,9 @@ const originalPrice =
 const totalPrice =
 (params.get("totalPrice") || price).trim();
 
+/* Fixed shipping fee added only on the payment page */
+const SHIPPING_FEE = 49;
+
 const checkoutStorageKey =
 session
 ? "MANYZACheckout_" + session
@@ -919,13 +946,19 @@ session
 document.getElementById("product").innerText =
 product;
 
-const displayTotal =
-Number(totalPrice) > 0
+const productSubtotal =
+(Number(totalPrice) > 0
 ? Number(totalPrice)
-: Number(price) || 0;
+: (Number(price) || 0) * (Number(quantity) || 1));
+
+const displayTotal =
+productSubtotal + SHIPPING_FEE;
+
+document.getElementById("productAmount").innerText =
+"₹" + productSubtotal.toLocaleString("en-IN");
 
 document.getElementById("price").innerText =
-"₹" + displayTotal;
+"₹" + displayTotal.toLocaleString("en-IN");
 
 let selectedApp = "upi";
 
@@ -1696,7 +1729,10 @@ encodeURIComponent(orderId) +
 encodeURIComponent(product) +
 
 "&price=" +
-encodeURIComponent(displayTotal);
+encodeURIComponent(displayTotal) +
+
+"&shippingFee=" +
+encodeURIComponent(SHIPPING_FEE);
 
 if(color){
 
@@ -1978,7 +2014,13 @@ quantity:
 finalQuantity,
 
 totalPrice:
+finalTotalPrice + SHIPPING_FEE,
+
+productTotal:
 finalTotalPrice,
+
+shippingFee:
+SHIPPING_FEE,
 
 name:
 checkoutData.name ||
@@ -2163,8 +2205,10 @@ finalMemberId;
 checkoutData.quantity =
 orderData.quantity;
 
+/* Keep the product subtotal in session storage.
+   Shipping is added once when building the payment amount. */
 checkoutData.totalPrice =
-orderData.totalPrice;
+orderData.productTotal;
 
 sessionStorage.setItem(
 checkoutStorageKey,
