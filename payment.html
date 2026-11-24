@@ -824,6 +824,25 @@ Use any available UPI app
 
 </div>
 
+<div class="upi-option"
+data-app="cod"
+id="codOption"
+style="display:none;"
+onclick="selectApp(this,'cod')">
+
+<div class="radio"></div>
+
+<div class="app-icon">
+<i class="fa-solid fa-truck"></i>
+</div>
+
+<div>
+<div class="app-name">Cash on Delivery</div>
+<div class="app-sub">Pay when your order is delivered</div>
+</div>
+
+</div>
+
 <div
 class="payment-instruction"
 id="paymentInstruction">
@@ -926,6 +945,9 @@ const quantity =
 
 const originalPrice =
 (params.get("originalPrice") || price).trim();
+
+const codAvailable =
+params.get("cod") === "1";
 
 const totalPrice =
 (params.get("totalPrice") || price).trim();
@@ -1261,6 +1283,10 @@ error
 loadDeliveryAddress();
 
 restorePaymentState();
+
+if(codAvailable){
+  document.getElementById("codOption").style.display = "flex";
+}
 
 
 /* ==========================================================
@@ -1874,6 +1900,9 @@ selectedApp = app;
 
 if(app === "gpay"){
 
+document.getElementById("payBtn").innerText =
+"Pay Now";
+
 document.getElementById("paymentInstruction")
 .innerHTML =
 "Google Pay selected. Click <b>Pay Now</b> to continue.";
@@ -1882,9 +1911,23 @@ document.getElementById("paymentInstruction")
 
 else if(app === "phonepe"){
 
+document.getElementById("payBtn").innerText =
+"Pay Now";
+
 document.getElementById("paymentInstruction")
 .innerHTML =
 "PhonePe selected. Click <b>Pay Now</b> to continue.";
+
+}
+
+else if(app === "cod"){
+
+document.getElementById("paymentInstruction")
+.innerHTML =
+"Cash on Delivery selected. Click <b>Place COD Order</b> to confirm your order.";
+
+document.getElementById("payBtn").innerText =
+"Place COD Order";
 
 }
 
@@ -1893,6 +1936,9 @@ else{
 document.getElementById("paymentInstruction")
 .innerHTML =
 "UPI selected. Click <b>Pay Now</b> to continue.";
+
+document.getElementById("payBtn").innerText =
+"Pay Now";
 
 }
 
@@ -2056,7 +2102,10 @@ color ||
 "-",
 
 memberId:
-finalMemberId
+finalMemberId,
+
+paymentMethod:
+selectedApp === "cod" ? "COD" : "UPI"
 
 };
 
@@ -2356,6 +2405,22 @@ console.log(
 "PAYMENT SAVE COMPLETE. ORDER ID:",
 orderId
 );
+
+if(selectedApp === "cod"){
+
+savePaymentState({
+paymentStarted:false,
+returnedFromUPI:false,
+paymentCompleted:false
+});
+
+window.location.replace(
+getThankYouURL() + "&paymentMethod=COD"
+);
+
+return;
+
+}
 
 }
 catch(error){
