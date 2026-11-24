@@ -893,6 +893,10 @@ const selectedColorFromURL =
 (params.get("color") || "").trim();
 
 
+const codAvailable =
+(params.get("cod") || "").trim() === "1";
+
+
 /* ==================================================
    IMPORTANT:
    GET ORDER ID FROM URL OR SESSION
@@ -2392,6 +2396,11 @@ function openPaymentPage(
         encodeURIComponent(
             memberId
         );
+
+
+    paymentURL +=
+        "&cod=" +
+        (codAvailable ? "1" : "0");
 
 
     console.log(
