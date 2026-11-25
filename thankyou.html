@@ -68,6 +68,11 @@ background:transparent;
 
 /* ================= PENDING ICON ================= */
 
+ .pending.success{
+background:#e8f8ee;
+color:#159447;
+}
+
 .pending{
 width:75px;
 height:75px;
@@ -366,15 +371,15 @@ class="logo">
 
 <!-- ================= PENDING ================= -->
 
-<div class="pending">
+<div class="pending" id="statusIcon">
 ⏳
 </div>
 
-<h2>
+<h2 id="statusTitle">
 Please Wait for Order Confirmation
 </h2>
 
-<p class="message">
+<p class="message" id="statusMessage">
 
 Your payment is being verified.<br>
 
@@ -459,7 +464,7 @@ id="price">
 
 <!-- ================= INFORMATION ================= -->
 
-<p class="info">
+<p class="info" id="statusInfo">
 
 Please do not make another payment for this order.<br>
 
@@ -528,7 +533,7 @@ Free shipping on all orders across India.
 Secure Payment
 </h4>
 
-<p>
+<p id="securePaymentText">
 Safe & secure UPI payments.
 </p>
 
@@ -629,6 +634,36 @@ params.get("product") || "";
 const price =
 params.get("price") || "";
 
+const paymentMethod =
+(params.get("paymentMethod") || "").toUpperCase();
+
+const isCOD = paymentMethod === "COD";
+
+/* =========================================
+   COD / UPI THANK YOU MESSAGE
+========================================= */
+
+if(isCOD){
+
+    document.getElementById("statusIcon").innerText = "✓";
+    document.getElementById("statusIcon").classList.add("success");
+
+    document.getElementById("statusTitle").innerText =
+        "Order Placed Successfully!";
+
+    document.getElementById("statusMessage").innerHTML =
+        "Your order has been placed successfully.<br>" +
+        "Please pay cash when your order is delivered.<br>" +
+        "You will receive your order confirmation message on WhatsApp shortly.";
+
+    document.getElementById("statusInfo").innerHTML =
+        "Your order is confirmed for Cash on Delivery.<br>" +
+        "Please keep the payment amount ready when your order arrives.";
+
+    document.getElementById("securePaymentText").innerText =
+        "Pay safely when your order is delivered.";
+
+}
 
 /* =========================================
    COLOR FROM PAYMENT PAGE
